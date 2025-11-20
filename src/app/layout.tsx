@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
-import { openSans } from "@/fonts/fonts";
 import { Suspense } from "react";
 import { Toaster } from "sonner";
 import ReduxProvider from "@/redux/Provider";
 import Loading from "@/components/Others/Loading";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const rubik = Rubik({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={openSans.variable}>
+      <body suppressHydrationWarning={true}  className={rubik.className}>
         <ReduxProvider>
           <Toaster position="top-center" expand={true} richColors />
           <Suspense fallback={<Loading />}>{children}</Suspense>
