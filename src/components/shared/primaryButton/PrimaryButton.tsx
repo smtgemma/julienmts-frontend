@@ -27,7 +27,7 @@ const PrimaryButton = ({
       type={type}
       disabled={loading}
       onClick={onClick}
-      className="px-3 py-2 w-full text-center rounded-full bg-primary/80 transition-all duration-300 text-white hover:bg-primary shadow cursor-pointer"
+      className="px-3 py-2 w-full text-center rounded-[8px] bg-authBackgroundButton transition-all duration-300 text-white hover:bg-primary shadow cursor-pointer"
     >
       <div className={`flex items-center justify-center gap-2`}>
         <LuLoader
