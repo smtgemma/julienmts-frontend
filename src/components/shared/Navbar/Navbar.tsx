@@ -4,9 +4,9 @@ import ActiveNavigation from './activeNavigation';
 const Navbar = () => {
     return (
         <div
-            className='pt-6'
+            className='py-6'
             style={{
-                backgroundImage: "url('/navbarImage/navbarBackground.png')",
+                backgroundImage: "url('/navbarIamge/navbarBackground.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
