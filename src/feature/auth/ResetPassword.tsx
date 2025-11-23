@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useResetPasswordMutation } from "@/redux/api/auth/authApi";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -76,47 +78,59 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="w-full lg:min-w-[500px]">
-      <div className="flex flex-col items-center mb-8">
-        <h1 className="text-2xl font-bold mb-2">Change New Password!!</h1>
-        <p className="text-gray-500 text-sm text-center">
-          Welcome to Website Name <br />
-          Enter a different password with the previous!
-        </p>
+    <AuthBackground>
+      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+        <div className="flex flex-col mt-8 mb-8">
+          <div className="flex items-center gap-4">
+            <Link href="/signIn" className="mb-4">
+              <img src="/authImage/arrowIcon.png" alt="icon" className="w-4 h-4" />
+            </Link>
+            <h3 className="font-bold text-3xl mb-6 text-[#2D2D2D]">Enter OTP Code</h3>
+          </div>
+          <p className="text-gray-500 text-center text-[18px]">
+            Please create a new password to continue.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
+          {/* Password Input */}
+          <CustomInput
+            id="password"
+            type="password"
+            label="Password"
+            placeholder="Enter your password"
+            showPasswordToggle={true}
+            error={errors.password?.message}
+            leftIcon={<img src="/authImage/passwordIcon.png" alt="icon" className="w-5 h-5" />}
+            {...register("password")}
+          />
+
+          {/* Confirm Password Input */}
+          <CustomInput
+            id="confirmPassword"
+            type="password"
+            label="Confirm Password"
+            placeholder="Enter your password"
+            showPasswordToggle={true}
+            error={
+              typeof errors.confirmPassword?.message === "string"
+                ? errors.confirmPassword.message
+                : "Password confirmation does not match the password."
+            }
+            leftIcon={<img src="/authImage/passwordIcon.png" alt="icon" className="w-5 h-5" />}
+            {...register("confirmPassword")}
+          />
+
+          {/* Sign Up Button */}
+          <PrimaryButton type="submit" loading={isLoading} text="Reset Password" />
+        </form>
+        <div className="text-center mb-3 mt-3 text-[16px] text-gray-600">
+          Remember your password? Sign in{" "}
+          <Link href="/signIn" className="text-[#00695C] text-[16px] font-semibold hover:underline">
+            Sign in
+          </Link>
+        </div>
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
-        {/* Password Input */}
-        <CustomInput
-          id="password"
-          type="password"
-          label="Password"
-          placeholder="••••••••••"
-          showPasswordToggle={true}
-          error={errors.password?.message}
-          {...register("password")}
-        />
-
-        {/* Confirm Password Input */}
-        <CustomInput
-          id="confirmPassword"
-          type="password"
-          label="Confirm Password"
-          placeholder="••••••••••"
-          showPasswordToggle={true}
-          error={
-            typeof errors.confirmPassword?.message === "string"
-              ? errors.confirmPassword.message
-              : "Password confirmation does not match the password."
-          }
-          {...register("confirmPassword")}
-        />
-
-        {/* Sign Up Button */}
-        <PrimaryButton type="submit" loading={isLoading}>
-          Reset
-        </PrimaryButton>
-      </form>
-    </div>
+    </AuthBackground>
   );
 }

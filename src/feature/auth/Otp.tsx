@@ -12,6 +12,8 @@ import {
 import { toast } from "sonner";
 import { LuCheck } from "react-icons/lu";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
+import Link from "next/link";
 
 interface OtpFormValues {
   otp: string[];
@@ -144,31 +146,32 @@ export default function OtpVerification() {
   };
 
   return (
-    <div className="">
-      <div className="w-full max-w-md space-y-8 text-center">
-        <div className="space-y-4 flex flex-col items-center">
-          <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-blue-500">
-            <LuCheck className="h-20 w-20 text-white" />
+    <AuthBackground>
+      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+        <div className="flex flex-col mt-8">
+          <div className="flex items-center gap-4">
+            <Link href="/signIn" className="mb-4">
+              <img src="/authImage/arrowIcon.png" alt="icon" className="w-4 h-4" />
+            </Link>
+            <h3 className="font-bold text-3xl mb-6 text-[#2D2D2D]">Enter OTP Code</h3>
           </div>
-          <h1 className="text-2xl font-semibold text-gray-900">Success</h1>
-          <p className="text-sm text-gray-600">
-            Please Check Your Email For Verification Code
+          <p className="text-gray-500 text-[18px]">
+            Please enter the 6-digit verification code sent to your email.
           </p>
+          <p className="my-3 text-[#2D2D2D] text-[16px]">OTP</p>
         </div>
-
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-between">
             {[0, 1, 2, 3, 4, 5].map((index) => (
               <input
                 key={index}
                 type="text"
                 inputMode="numeric"
                 maxLength={1}
-                className={`h-14 w-14 rounded-md border border-gray-300 text-center text-xl focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
-                  activeInput === index
-                    ? "border-blue-500 ring-1 ring-blue-500"
-                    : ""
-                }`}
+                className={`h-12 w-12 rounded-md border border-gray-300 text-center text-xl focus:border-[#00695C] focus:outline-none focus:ring-0.5 focus:[#00695C] ${activeInput === index
+                  ? "border-[#00695C] ring-0.5 ring-[#00695C]"
+                  : ""
+                  }`}
                 {...register(`otp.${index}`, {
                   required: true,
                   pattern: /^[0-9]$/,
@@ -186,6 +189,13 @@ export default function OtpVerification() {
 
           <PrimaryButton type="submit" loading={isLoading} text="Submit" />
         </form>
+
+        <div className="text-center mb-3 mt-3 text-[16px] text-gray-600">
+          Remember your password? Sign in{" "}
+          <Link href="/signIn" className="text-[#00695C] text-[16px] font-semibold hover:underline">
+            Sign in
+          </Link>
+        </div>
 
         {/* Resend OTP Section */}
         <div className="text-center mt-4">
@@ -206,6 +216,6 @@ export default function OtpVerification() {
           )}
         </div>
       </div>
-    </div>
+    </AuthBackground>
   );
 }

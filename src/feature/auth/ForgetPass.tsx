@@ -1,5 +1,6 @@
 "use client";
 
+import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import Logo from "@/components/shared/Logo";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useForgetPasswordMutation } from "@/redux/api/auth/authApi";
@@ -53,36 +54,44 @@ export default function ForgetPassPage() {
   };
 
   return (
-    <div className="w-full lg:min-w-[500px] ">
-      <div className="flex flex-col items-center mb-8">
-        <h1 className="text-2xl font-bold mb-2">Forget Password!</h1>
-        <p className="text-gray-500 text-sm">
-          Enter your registered email below
-        </p>
+    <AuthBackground>
+      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+        <div className="flex flex-col mb-8">
+          <div className="flex items-center gap-4">
+            <Link href="/signIn" className="mb-4">
+              <img src="/authImage/arrowIcon.png" alt="icon" className="w-4 h-4" />
+            </Link>
+            <h3 className="font-bold text-3xl mb-6 text-[#2D2D2D]">Reset Password</h3>
+          </div>
+          <p className="text-gray-500 text-[16px] text-center">
+            Enter your email address, and we’ll send you a one-time password (OTP) to reset your password.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
+          {/* Email Input */}
+          <CustomInput
+            id="email"
+            type="email"
+            label="Email Address"
+            placeholder="Enter your email"
+            error={errors.email?.message}
+            leftIcon={<img src="/authImage/mailIcon.png" alt="icon" className="w-5 h-5" />}
+            {...register("email")}
+          />
+
+          {/* Login Button */}
+          <PrimaryButton type="submit" loading={isLoading} text="Send Otp" />
+        </form>
+
+        {/* Register Link */}
+        <div className="text-center mb-3 mt-3 text-[16px] text-gray-600">
+          Remember your password?{" "}
+          <Link href="/signIn" className="text-[#00695C] text-[16px] font-semibold hover:underline">
+            Sign in
+          </Link>
+        </div>
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
-        {/* Email Input */}
-        <CustomInput
-          id="email"
-          type="email"
-          label="Email Address"
-          placeholder="example@company.com"
-          error={errors.email?.message}
-          {...register("email")}
-        />
-
-        {/* Login Button */}
-        <PrimaryButton type="submit" loading={isLoading} text="Send Otp" />
-      </form>
-
-      {/* Register Link */}
-      <div className="text-center mb-3 mt-3 text-sm text-gray-600">
-        Remembered the Account?{" "}
-        <Link href="/signIn" className="text-primary hover:underline">
-          Sign In
-        </Link>
-      </div>
-    </div>
+    </AuthBackground>
   );
 }

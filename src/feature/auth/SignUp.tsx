@@ -73,7 +73,7 @@ export default function SignUpPage() {
 
   return (
     <AuthBackground>
-      <div className="w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
         <h3 className="font-bold text-3xl mb-6 text-[#2D2D2D]">Create a new account</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
           <div className="flex items-center gap-4">
@@ -129,7 +129,7 @@ export default function SignUpPage() {
           <Link href="/signIn" className="text-[#00695C] text-[16px] font-semibold hover:underline">
             Sign in
           </Link>
-          <div className="flex items-center gap-4 w-[80%] mx-auto my-6">
+          <div className="flex items-center gap-4 w-[80%] mx-auto my-3">
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
             <span className="text-[16px] text-authBackgroundButton">or</span>
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
