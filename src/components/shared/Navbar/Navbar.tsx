@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import ActiveNavigation from './activeNavigation';
 
 const Navbar = () => {
     return (
@@ -13,15 +13,9 @@ const Navbar = () => {
             }}
         >
             <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-6 px-3 backdrop-blur-[2px] flex items-center justify-between">
-                <h3 className='text-xl text-[#000000] italic'>SalesMind</h3>
+                <Link href="/" className='text-xl text-[#000000] italic'>SalesMind</Link>
                 {/* center Menu */}
-                <div className="flex items-center gap-12 text-#000000 text-[16px] font-medium">
-                    <Link href="/">Home</Link>
-                    <Link href="/about">About</Link>
-                    <Link href="/pricing">Pricing</Link>
-                    <Link href="/contact">Contact</Link>
-                </div>
-
+                <ActiveNavigation/>
                 {/* Right Section */}
                 <div className="flex items-center gap-6">
                     <Link href="/signIn" className='text-[18px] text-[#2D2D2D]'>Login</Link>
