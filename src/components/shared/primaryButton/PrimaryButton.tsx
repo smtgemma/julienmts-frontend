@@ -18,7 +18,7 @@ const PrimaryButton = ({
   return children ? (
     <div
       onClick={onClick}
-      className="px-2 cursor-pointer text-center py-2 rounded-full bg-primary/80 transition-all duration-300 text-white hover:bg-primary shadow"
+      className="px-2 cursor-pointer text-center py-2 bg-primary/80 transition-all duration-300 text-white hover:bg-primary shadow"
     >
       {children}
     </div>

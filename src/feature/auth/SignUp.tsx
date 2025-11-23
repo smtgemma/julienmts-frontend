@@ -83,7 +83,7 @@ export default function SignUpPage() {
               label="First Name"
               placeholder="Enter first name"
               error={errors.firstName?.message}
-              leftIcon={<FiUser size={18} />}
+              leftIcon={<img src="/authImage/humanIcon.png" alt="icon" className="w-5 h-5" />}
               {...register("firstName")}
             />
             {/* last Name Input */}
@@ -92,7 +92,7 @@ export default function SignUpPage() {
               label="Last Name"
               placeholder="Enter last name"
               error={errors.lastName?.message}
-              leftIcon={<FiUser size={18} />}
+              leftIcon={<img src="/authImage/humanIcon.png" alt="icon" className="w-5 h-5" />}
               {...register("lastName")}
             />
           </div>
@@ -103,7 +103,7 @@ export default function SignUpPage() {
             label="Email"
             placeholder="Enter your email"
             error={errors.email?.message}
-            leftIcon={<FiUser size={18} />}
+            leftIcon={<img src="/authImage/mailIcon.png" alt="icon" className="w-5 h-5" />}
             {...register("email")}
           />
 
@@ -116,7 +116,7 @@ export default function SignUpPage() {
             placeholder="Enter your password"
             showPasswordToggle={true}
             error={errors.password?.message}
-            leftIcon={<FiUser size={18} />}
+            leftIcon={<img src="/authImage/passwordIcon.png" alt="icon" className="w-5 h-5" />}
             {...register("password")}
           />
           {/* Sign Up Button */}
@@ -134,6 +134,17 @@ export default function SignUpPage() {
             <span className="text-[16px] text-authBackgroundButton">or</span>
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
           </div>
+          <button
+            className="w-full flex items-center justify-center gap-3 border border-[#D1D6DB] rounded-md py-2.5 transition"
+          >
+            <img
+              src="/authImage/googleIcon.png"
+              alt="google icon"
+              className="w-5 h-5"
+            />
+            <span className="text-[#2D2D2D] font-medium text-[16px]">Sign in with Google</span>
+          </button>
+
         </div>
       </div>
     </AuthBackground>
