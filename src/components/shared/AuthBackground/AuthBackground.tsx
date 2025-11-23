@@ -9,7 +9,7 @@ export default function AuthBackground({
         <div
             className="min-h-screen bg-cover bg-center flex items-center justify-center"
             style={{
-                backgroundImage: "url('/auth-bg.png')",
+                backgroundImage: "url('/authImage/auth-bg.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

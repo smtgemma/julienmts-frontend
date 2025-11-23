@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
+import { FiUser } from "react-icons/fi";
 
 // Define Zod schema for validation
 const formSchema = z
@@ -24,14 +25,7 @@ const formSchema = z
       .string()
       .min(6, { message: "Password should be at least 6 characters long" })
       .min(1, { message: "Password is required" }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: "Confirm Password is required" }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -51,16 +45,14 @@ export default function SignUpPage() {
       lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      // confirmPassword: "",
     },
   });
 
   const onSubmit = async (data: FormValues) => {
     localStorage.setItem("email", data.email);
     console.log("Form Data:", data);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { confirmPassword, ...rest } = data;
+    const { ...rest } = data;
 
     // Add role to the payload
     const payload = {
@@ -81,36 +73,37 @@ export default function SignUpPage() {
 
   return (
     <AuthBackground>
-      <div className="w-[540px] h-[630px] mx-auto bg-[#FFF] p-6 rounded-2xl">
-        <h3>Create a new account</h3>
+      <div className="w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+        <h3 className="font-bold text-3xl mb-6 text-[#2D2D2D]">Create a new account</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
           <div className="flex items-center gap-4">
             {/* First Name Input */}
             <CustomInput
               id="firstName"
               label="First Name"
-              placeholder="John"
+              placeholder="Enter first name"
               error={errors.firstName?.message}
+              leftIcon={<FiUser size={18} />}
               {...register("firstName")}
             />
-
-            {/* Last Name Input */}
+            {/* last Name Input */}
             <CustomInput
               id="lastName"
               label="Last Name"
-              placeholder="Doe"
+              placeholder="Enter last name"
               error={errors.lastName?.message}
+              leftIcon={<FiUser size={18} />}
               {...register("lastName")}
             />
           </div>
-
           {/* Company Email Input */}
           <CustomInput
             id="email"
             type="email"
-            label="Email Address"
-            placeholder="example@company.com"
+            label="Email"
+            placeholder="Enter your email"
             error={errors.email?.message}
+            leftIcon={<FiUser size={18} />}
             {...register("email")}
           />
 
@@ -119,33 +112,28 @@ export default function SignUpPage() {
             id="password"
             type="password"
             label="Password"
-            placeholder="••••••••••"
+            // placeholder="••••••••••"
+            placeholder="Enter your password"
             showPasswordToggle={true}
             error={errors.password?.message}
+            leftIcon={<FiUser size={18} />}
             {...register("password")}
           />
-
-          {/* Confirm Password Input */}
-          <CustomInput
-            id="confirmPassword"
-            type="password"
-            label="Confirm Password"
-            placeholder="••••••••••"
-            showPasswordToggle={true}
-            error={errors.confirmPassword?.message}
-            {...register("confirmPassword")}
-          />
-
           {/* Sign Up Button */}
-          <PrimaryButton type="submit" loading={isLoading} text="Sign Up" />
+          <PrimaryButton type="submit" loading={isLoading} text="Create Account" />
         </form>
 
         {/* Login Link */}
-        <div className="text-center mb-3 mt-3 text-sm text-gray-600">
-          Are you an individual?{" "}
-          <Link href="/signIn" className="text-primary hover:underline">
-            Sign In as an Individual!
+        <div className="text-center mb-3 mt-3 text-[16px] text-gray-600">
+          Already have an account?{" "}
+          <Link href="/signIn" className="text-[#00695C] text-[16px] font-semibold hover:underline">
+            Sign in
           </Link>
+          <div className="flex items-center gap-4 w-[80%] mx-auto my-6">
+            <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
+            <span className="text-[16px] text-authBackgroundButton">or</span>
+            <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
+          </div>
         </div>
       </div>
     </AuthBackground>
