@@ -25,10 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}  className={rubik.className}>
-        <ReduxProvider>
+        <div className="bg-[#FFFFFF]">
+          <ReduxProvider>
           <Toaster position="top-center" expand={true} richColors />
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </ReduxProvider>
+        </div>
       </body>
     </html>
   );
