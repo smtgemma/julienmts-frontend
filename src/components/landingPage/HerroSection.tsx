@@ -33,7 +33,7 @@ function HerroSection() {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap items-center justify-center gap-4 mb-20">
+                        <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
                             <Link href="" className="group">
                                 <div className="p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
                                     <div
