@@ -1,10 +1,9 @@
-import HerroSection from "@/components/landingPage/HerroSection";
+import InfoCounter from "@/components/landingPage/InfoCounter";
 
 const page = () => {
   return (
     <div className="max-w-[1440px] mx-auto">
-      {/* <HerroSection/> */}
-      <h3>home page</h3>
+      <InfoCounter/>
     </div>
   );
 };

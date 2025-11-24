@@ -1,66 +1,67 @@
 import Container from "@/lib/Container"
-import { FiArrowRight } from "react-icons/fi"
+import Link from "next/link"
+import { GoArrowRight, GoArrowUpRight } from "react-icons/go";
 
 function HerroSection() {
     return (
         <Container>
-            <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+            <div>
                 {/* Hero Section */}
-                <main className="px-6 py-20">
-                    <div className="max-w-5xl mx-auto">
+                <main className="px-6">
+                    <div className="">
                         {/* Top Banner */}
-                        <div className="flex items-center justify-center gap-2 mb-8">
-                            <div className="bg-white rounded-full px-4 py-2 shadow-sm flex items-center gap-2">
-                                <div className="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center">
-                                    <span className="text-white text-xs">🎯</span>
+                        <div className="flex items-center justify-center gap-2 mb-6 mt-16">
+                            <div className="bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] backdrop-blur-[2px] rounded-full px-2 md:px-4 py-2 border border-white flex items-center gap-2">
+                                <div className="w-5 h-5 rounded-full flex items-center justify-center">
+                                    <img src="/heroSection/starIcon.png" alt="" />
                                 </div>
-                                <span className="text-sm font-medium">Get Pro 15%</span>
-                                <span className="text-sm text-gray-600">Join the waitlist for an instant offer</span>
+                                <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Get Pro 15%</span>
+                                <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Join the waitlist for an instant offer</span>
                             </div>
                         </div>
 
                         {/* Main Heading */}
-                        <h1 className="text-5xl md:text-6xl font-bold text-center text-gray-900 mb-6 leading-tight">
+                        <h1 className="text-4xl md:text-6xl font-bold text-center text-[#2D2D2D] mb-5 leading-tight">
                             Prepare for Every Sales Meeting<br />
                             Like a Top 1% Sales Rep.
                         </h1>
 
                         {/* Subheading */}
-                        <p className="text-center text-gray-600 text-lg mb-10 max-w-3xl mx-auto">
+                        <p className="text-center text-[#636F85] text-[16px] mb-5 max-w-2xl mx-auto">
                             AI-powered pre-call research, realistic meeting simulations, and instant coaching — so
                             you walk into every conversation confident, informed, and ready to win.
                         </p>
 
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap items-center justify-center gap-4 mb-20">
-                            <button className="bg-purple-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-800 transition flex items-center gap-2 shadow-lg">
-                                Prepare My Meeting
-                                <FiArrowRight className="w-4 h-4" />
-                            </button>
-                            <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition flex items-center gap-2 border border-gray-200 shadow-sm">
-                                <FiArrowRight className="w-4 h-4" />
-                                See How It Works
-                            </button>
-                        </div>
+                            <Link href="" className="group">
+                                <div className="p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
+                                    <div
+                                        className="bg-white px-6 py-3 rounded-lg font-medium transition flex items-center gap-2 shadow-sm
+                                        group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0]"
+                                    >
+                                        <span className="bg-gradient-to-b from-[#6E51E0] to-[#000000] text-transparent bg-clip-text group-hover:text-white">
+                                            Prepare My Meeting
+                                        </span>
+                                        <GoArrowRight className="w-5 h-5 group-hover:text-white" />
+                                    </div>
+                                </div>
+                            </Link>
 
-                        {/* Stats Section */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-purple-100">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">100k+</div>
-                                <div className="text-sm text-gray-600">User</div>
-                            </div>
-                            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-purple-100">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">10,000+</div>
-                                <div className="text-sm text-gray-600">Meetings Prepared</div>
-                            </div>
-                            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-purple-100">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">95%</div>
-                                <div className="text-sm text-gray-600">Success Rate</div>
-                            </div>
-                            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 text-center border border-purple-100">
-                                <div className="text-4xl font-bold text-gray-900 mb-2">10 min</div>
-                                <div className="text-sm text-gray-600">Average Prep Time</div>
-                            </div>
+                            <Link href="" className="group">
+                                <div className="p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
+                                    <div
+                                        className="bg-white px-6 py-3 rounded-lg font-medium transition flex items-center gap-2 shadow-sm
+                                         group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0]"
+                                    >
+                                        <span className="bg-gradient-to-b from-[#6E51E0] to-[#000000] text-transparent bg-clip-text group-hover:text-white">
+                                            See How It Works
+                                        </span>
+                                        <GoArrowUpRight className="w-5 h-5 group-hover:text-white" />
+                                    </div>
+                                </div>
+                            </Link>
+
                         </div>
                     </div>
                 </main>

@@ -1,7 +1,11 @@
+"use client"
 import Link from 'next/link';
 import ActiveNavigation from './activeNavigation';
+import HerroSection from '@/components/landingPage/HerroSection';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+    const pathName = usePathname()
     return (
         <div
             className='py-6'
@@ -15,7 +19,7 @@ const Navbar = () => {
             <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-6 px-3 backdrop-blur-[2px] flex items-center justify-between">
                 <Link href="/" className='text-xl text-[#000000] italic'>SalesMind</Link>
                 {/* center Menu */}
-                <ActiveNavigation/>
+                <ActiveNavigation />
                 {/* Right Section */}
                 <div className="flex items-center gap-6">
                     <Link href="/signIn" className='text-[18px] text-[#2D2D2D]'>Login</Link>
@@ -24,6 +28,11 @@ const Navbar = () => {
                     </Link>
                 </div>
             </div>
+            {
+                pathName === "/" && (
+                    <HerroSection />
+                )
+            }
         </div>
     );
 };
