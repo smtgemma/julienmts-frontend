@@ -1,11 +1,13 @@
 import DashboardSection from "@/components/landingPage/dashboardSection";
 import InfoCounter from "@/components/landingPage/InfoCounter";
+import MarqueeSection from "@/components/landingPage/marqueeSection";
 
 const page = () => {
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <div>
       <InfoCounter />
       <DashboardSection/>
+      <MarqueeSection/>
     </div>
   );
 };
