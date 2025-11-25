@@ -17,9 +17,9 @@ function ThreeStep() {
                 </p>
             </div>
             <div
-                className="mt-8 mb-20 w-full h-[600px] relative
+                className="mt-8 mb-20 w-full lg:h-[600px] relative
                              bg-none
-                             lg:bg-[url('/landingPage/threeStepBackgroundImage.png')]
+                             lg:bg-[url('/landingPage/threeStepSection/threeStepBackgroundImage.png')]
                              lg:bg-cover
                              lg:bg-no-repeat
                              lg:bg-[position:100%_100%]
