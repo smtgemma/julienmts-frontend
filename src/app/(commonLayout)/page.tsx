@@ -1,3 +1,4 @@
+import BussinessSection from "@/components/landingPage/bussinessSection";
 import DashboardSection from "@/components/landingPage/dashboardSection";
 import FeatureSection from "@/components/landingPage/FeatureSection";
 import InfoCounter from "@/components/landingPage/InfoCounter";
@@ -8,10 +9,11 @@ const page = () => {
   return (
     <div>
       <InfoCounter />
-      <DashboardSection/>
-      <MarqueeSection/>
-      <ThreeStep/>
-      <FeatureSection/>
+      <DashboardSection />
+      <MarqueeSection />
+      <ThreeStep />
+      <FeatureSection />
+      <BussinessSection />
     </div>
   );
 };
