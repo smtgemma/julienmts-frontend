@@ -42,7 +42,7 @@ function BussinessSection() {
             </div>
             {/* -------------------- CONDITIONAL CARDS -------------------- */}
             {on ? (
-                < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20'>
+                < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 justify-items-center'>
                     <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
@@ -197,7 +197,7 @@ function BussinessSection() {
                     </div>
                 </div>
             ) : (
-                < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20'>
+                < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 justify-items-center'>
                     <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
