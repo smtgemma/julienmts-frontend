@@ -1,6 +1,6 @@
 
 import DashboardSection from "@/components/landingPage/BashboardSection";
-import BussinessSection from "@/components/landingPage/BussinessSection";
+import BussinessSection from "@/components/landingPage/bussinessSection";
 import Faq from "@/components/landingPage/Faq";
 import FeatureSection from "@/components/landingPage/FeatureSection";
 import InfoCounter from "@/components/landingPage/InfoCounter";
