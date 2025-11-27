@@ -108,7 +108,7 @@ function TestimonialSection() {
       name: "AR Shakir",
       position: "CEO GetNextDesign",
       rating: 5,
-      humanImage: "landingPage/faq/human1.jpg",
+      humanImage: "landingPage/faq/human2.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
@@ -126,7 +126,7 @@ function TestimonialSection() {
       name: "Sarah Johnson",
       position: "Founder & CEO",
       rating: 5,
-      humanImage: "landingPage/faq/human1.jpg",
+      humanImage: "landingPage/faq/human2.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
@@ -144,7 +144,7 @@ function TestimonialSection() {
       name: "Emily Davis",
       position: "Operations Head",
       rating: 5,
-      humanImage: "landingPage/faq/human1.jpg",
+      humanImage: "landingPage/faq/human2.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
@@ -194,20 +194,25 @@ function TestimonialSection() {
           >
             {/* Centered Carousel */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[85%]">
-              <Slider ref={sliderRef} {...settings}>
-                {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="px-2">
-                    <div className="flex flex-col justify-center"> <div>
-                      <img
-                        src={testimonial.humanImage}
-                        alt="humanImage"
-                      />
+              <div className=''>
+                <Slider ref={sliderRef} {...settings}>
+                  {testimonials.map((testimonial) => (
+                    <div key={testimonial.id} className="px-2">
+                      <div className="flex flex-col justify-center">
+                        <div>
+                          <img
+                            src={testimonial.humanImage}
+                            alt="humanImage"
+                            className='w-full h-full'
+                          />
+                        </div>
+                      </div>
                     </div>
-                    </div>
-                  </div>
-                ))}
-              </Slider>
+                  ))}
+                </Slider>
+              </div>
             </div>
+
 
             {/* Green Arrow Navigation Buttons */}
             <button
