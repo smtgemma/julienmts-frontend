@@ -10,7 +10,7 @@ function HerroSection() {
                 <main className="px-6">
                     <div className="">
                         {/* Top Banner */}
-                        <div className="flex items-center justify-center gap-2 mb-6 mt-16">
+                        {/* <div className="flex items-center justify-center gap-2 mb-6 mt-16">
                             <div className="bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] backdrop-blur-[2px] rounded-full px-2 md:px-4 py-2 border border-white flex items-center gap-2">
                                 <div className="w-5 h-5 rounded-full flex items-center justify-center">
                                     <img src="/landingPage/heroSection/starIcon.png" alt="" />
@@ -18,7 +18,7 @@ function HerroSection() {
                                 <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Get Pro 15%</span>
                                 <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Join the waitlist for an instant offer</span>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Main Heading */}
                         <h1 className="text-4xl md:text-6xl font-bold text-center text-[#2D2D2D] mb-5 leading-tight">
