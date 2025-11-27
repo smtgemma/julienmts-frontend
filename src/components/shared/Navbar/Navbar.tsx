@@ -8,13 +8,14 @@ const Navbar = () => {
     const pathName = usePathname()
     return (
         <div
-            className='py-6'
-        // style={{
-        //     backgroundImage: "url('/navbar/navbarBackground.png')",
-        //     backgroundSize: "cover",
-        //     backgroundPosition: "center",
-        //     backgroundRepeat: "no-repeat",
-        // }}
+            className='py-6 '
+        style={{
+            // backgroundImage: "url('/navbar/navbarBackground.png')",
+            // backgroundSize: "cover",
+            // backgroundPosition: "center",
+            // backgroundRepeat: "no-repeat",
+             background: "linear-gradient(to right, #FBCFE8, #EDE9FE, #BFDBFE)",
+        }}
         >
             <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-6 px-3 backdrop-blur-[2px] flex items-center justify-between">
                 <Link href="/" className='text-xl text-[#000000]'>

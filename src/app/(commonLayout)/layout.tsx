@@ -8,9 +8,11 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+     <div className="flex flex-col min-h-screen">
       <Navbar />
-      {children}
+      <main className="flex-grow">
+        {children}
+      </main>
       <Footer />
     </div>
   );
