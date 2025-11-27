@@ -3,7 +3,8 @@ import React from "react";
 
 function About() {
   return (
-    <div>
+    <div className="reletive">
+      <div></div>
       <section>
         <div className="bg-white/60 flex w-full px-[120px] py-[80px] justify-between items-center">
           <Container className="flex w-full justify-between items-center gap-8">
