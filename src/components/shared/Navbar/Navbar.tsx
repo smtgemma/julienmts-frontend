@@ -78,6 +78,7 @@
 
 
 "use client"
+import Container from '@/lib/Container';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -86,7 +87,7 @@ const Navbar = () => {
     return (
         <div
             // className='py-6 mb-30'
-            className='py-6'
+            className='pt-6'
             style={{
                 backgroundImage: `
                   linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0)),
@@ -98,7 +99,7 @@ const Navbar = () => {
                 width: "100%"
             }}
         >
-            <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-6 px-3 backdrop-blur-[2px] flex items-center justify-between">
+            <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
                 <Link href="/" className='text-xl text-[#000000]'>
                     <img src="/navbar/logo.png" alt="" />
                 </Link>
@@ -142,6 +143,18 @@ const Navbar = () => {
                             <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Get Pro 15%</span>
                             <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Join the waitlist for an instant offer</span>
                         </div>
+                    </div>
+                )
+            }
+            {
+                pathName === "/about" && (
+                    <div className='bg-white py-20 mt-6'>
+                        <Container>
+                        <div className='flex justify-between items-center'>
+                            <h3>About Us</h3>
+                            <Link href="/">Home/About Us</Link>
+                        </div>
+                    </Container>
                     </div>
                 )
             }
