@@ -104,56 +104,56 @@ function TestimonialSection() {
   const testimonials = [
     {
       id: 1,
-      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.=======================",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "AR Shakir",
       position: "CEO GetNextDesign",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human1.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
       id: 2,
-      quote: "Outstanding service and exceptional quality. The team delivered beyond our expectations and transformed our digital presence completely.",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "John Smith",
       position: "Marketing Director",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human2.png",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
       id: 3,
-      quote: "Professional, creative, and responsive. Working with this team has been an absolute pleasure from start to finish.",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "Sarah Johnson",
       position: "Founder & CEO",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human1.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
       id: 4,
-      quote: "The attention to detail and commitment to excellence is remarkable. Highly recommend their services to anyone.",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "Michael Brown",
       position: "Product Manager",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human2.png",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
       id: 5,
-      quote: "Innovative solutions and excellent customer service. They truly understand what businesses need in today's digital world.",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "Emily Davis",
       position: "Operations Head",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human1.jpg",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     },
     {
       id: 6,
-      quote: "Best decision we made was partnering with this team. Our ROI has increased significantly since the collaboration.",
+      quote: "Is be upon sang fond must shew. Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now.",
       name: "David Wilson",
       position: "Business Owner",
       rating: 5,
-      humanImage: "landingPage/faq/human2.jpg",
+      humanImage: "landingPage/testimonialSection/human2.png",
       company: "landingPage/testimonialSection/segmaTextImage.png"
     }
   ];
@@ -183,9 +183,9 @@ function TestimonialSection() {
 
       <div className='flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-20'>
         {/* Left Side - Background Image with Carousel */}
-        <div className="w-full lg:w-[486px] relative">
+        <div className="w-full lg:w-[480px] relative">
           <div
-            className="w-full h-[606px] bg-center bg-no-repeat relative"
+            className="w-[480px] mx-auto h-[606px] bg-center bg-no-repeat relative"
             style={{
               backgroundImage: "url('/landingPage/testimonialSection/testimonialLeftImage.png')",
               backgroundSize: '100% 100%',
@@ -197,13 +197,13 @@ function TestimonialSection() {
               <div className=''>
                 <Slider ref={sliderRef} {...settings}>
                   {testimonials.map((testimonial) => (
-                    <div key={testimonial.id} className="px-2">
+                    <div key={testimonial.id}>
                       <div className="flex flex-col justify-center">
-                        <div>
+                        <div className='w-[390px] h-[479px]'>
                           <img
                             src={testimonial.humanImage}
                             alt="humanImage"
-                            className='w-full h-full'
+                            className='w-full h-full overflow-hidden object-cover'
                           />
                         </div>
                       </div>
@@ -217,13 +217,13 @@ function TestimonialSection() {
             {/* Green Arrow Navigation Buttons */}
             <button
               onClick={() => sliderRef.current?.slickPrev()}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-t from-[#000000] to-[#6E51E0] hover:from-[#000000] z-10 rounded-full flex items-center justify-center"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-t from-[#000000] to-[#6E51E0] hover:from-[#000000] z-10 rounded-full flex items-center justify-center"
             >
               <IoChevronBackOutline className="w-6 h-6 text-white" />
             </button>
             <button
               onClick={() => sliderRef.current?.slickNext()}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-t from-[#000000] to-[#6E51E0] hover:from-[#000000] z-10 rounded-full flex items-center justify-center"
+              className="absolute right-7 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-t from-[#000000] to-[#6E51E0] hover:from-[#000000] z-10 rounded-full flex items-center justify-center"
             >
               <IoChevronForwardOutline className="w-6 h-6 text-white" />
             </button>
