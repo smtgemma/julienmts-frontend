@@ -13,7 +13,7 @@ function HerroSection() {
                         <div className="flex items-center justify-center gap-2 mb-6 mt-16">
                             <div className="bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] backdrop-blur-[2px] rounded-full px-2 md:px-4 py-2 border border-white flex items-center gap-2">
                                 <div className="w-5 h-5 rounded-full flex items-center justify-center">
-                                    <img src="/heroSection/starIcon.png" alt="" />
+                                    <img src="/landingPage/heroSection/starIcon.png" alt="" />
                                 </div>
                                 <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Get Pro 15%</span>
                                 <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">Join the waitlist for an instant offer</span>
@@ -27,13 +27,13 @@ function HerroSection() {
                         </h1>
 
                         {/* Subheading */}
-                        <p className="text-center text-[#636F85] text-[16px] mb-5 max-w-2xl mx-auto">
+                        <p className="text-center text-[#636F85] text-[16px] mb-7 max-w-2xl mx-auto">
                             AI-powered pre-call research, realistic meeting simulations, and instant coaching — so
                             you walk into every conversation confident, informed, and ready to win.
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap items-center justify-center gap-4 mb-">
+                        <div className="flex flex-wrap items-center justify-center gap-4 mb-3">
                             <Link href="" className="group">
                                 <div className="p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
                                     <div
