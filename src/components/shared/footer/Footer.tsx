@@ -66,9 +66,9 @@ export default function Footer() {
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-1 px-4 py-2 bg-white text-[#2D2D2D] rounded-l text-sm focus:outline-none"
+                                className="flex-1 px-2 md:px-4 py-2 bg-white text-[#2D2D2D] rounded-l text-sm focus:outline-none"
                             />
-                            <button className="bg-[#6E51E0] hover:bg-[#6E51E0] px-4 py-3 rounded-r text-sm font-medium transition-colors">
+                            <button className="bg-[#6E51E0] hover:bg-[#6E51E0] px-2 md:px-4 py-3 rounded-r text-sm font-medium transition-colors">
                                 Subscribe
                             </button>
                         </div>
