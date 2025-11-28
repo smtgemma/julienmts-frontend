@@ -185,7 +185,7 @@ function TestimonialSection() {
         {/* Left Side - Background Image with Carousel */}
         <div className="w-full lg:w-[480px] relative">
           <div
-            className="w-[480px] mx-auto h-[606px] bg-center bg-no-repeat relative"
+            className="max-w-[480px] mx-auto h-[606px] bg-center bg-no-repeat relative"
             style={{
               backgroundImage: "url('/landingPage/testimonialSection/testimonialLeftImage.png')",
               backgroundSize: '100% 100%',
@@ -199,7 +199,7 @@ function TestimonialSection() {
                   {testimonials.map((testimonial) => (
                     <div key={testimonial.id}>
                       <div className="flex flex-col justify-center">
-                        <div className='w-[390px] h-[479px]'>
+                        <div className='max-w-[390px] h-[479px]'>
                           <img
                             src={testimonial.humanImage}
                             alt="humanImage"
