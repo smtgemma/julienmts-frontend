@@ -186,19 +186,21 @@ import {
 
 import * as React from "react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
+import Container from '@/lib/Container';
 
 const Navbar = () => {
     const pathName = usePathname()
 
     return (
-        <div className='pt-6'>
-            <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
-
+        <div className='pt-6 px-3 md:px-0'>
+            <Container className="bg-[#F8F5FA] border-4 border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className='text-xl text-[#000000]'>
-                    <img src="/navbar/logo.png" alt="logo" />
+                <Link href="/" className="text-xl text-[#000000]">
+                    <div className="flex items-center gap-2">
+                        <img src="/navbar/logo.png" alt="logo" className='w-8 md:w-12 h-8 md:h-12' />
+                        <h3 className='text-2xl text-[#6E51E0] font-semibold'>phora</h3>
+                    </div>
                 </Link>
-
                 {/* Center Menu */}
                 <div className="hidden md:flex items-center md:gap-6 lg:gap-12 text-[#000000] text-[16px] font-medium">
                     <Link href="/" className={pathName === "/" ? "text-[#563FB1] font-semibold" : ""}>Home</Link>
@@ -208,16 +210,16 @@ const Navbar = () => {
                 </div>
 
                 {/* Right Section for large device */}
-                <div className="hidden md:flex items-center gap-3">
+                <div className="hidden md:flex items-center gap-2 lg:gap-3">
 
                     <Link href="/signIn" className="group">
-                        <span className="px-5 py-3 rounded-[6px] font-medium transition group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0] hover:text-white text-[#2D2D2D]">
+                        <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
                             Login
                         </span>
                     </Link>
 
                     <Link href="/signUp" className="group">
-                        <span className="px-5 py-3 rounded-[6px] font-medium transition group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0] hover:text-white text-[#2D2D2D]">
+                        <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
                             Get Start
                         </span>
                     </Link>
@@ -271,7 +273,7 @@ const Navbar = () => {
                     </DropdownMenu>
                 </div>
 
-            </div>
+            </Container>
         </div>
     );
 };
