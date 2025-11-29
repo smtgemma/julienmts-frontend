@@ -26,8 +26,8 @@ function BussinessSection() {
                     <p className='text-[16px] text-[#2D2D2D]'>Monthly</p>
                     <button
                         onClick={() => setOn(!on)}
-                        className={`w-14 h-8 rounded-full relative flex items-center p-1 transition-all
-                           ${on ? "bg-gradient-to-b from-[#6E51E0] to-[#000000]" : "bg-gradient-to-b from-[#6E51E0] to-[#000000]"}
+                        className={`w-14 h-8 rounded-full relative flex items-center p-1 transition-all cursor-pointer
+                           ${on ? "bg-primaryBgColor" : "bg-primaryBgColor"}
                          `}
                     >
                         <span
@@ -47,7 +47,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -80,7 +80,7 @@ function BussinessSection() {
                         </div>
 
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>
@@ -91,7 +91,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -136,7 +136,7 @@ function BussinessSection() {
                         </div>
 
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>
@@ -147,7 +147,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -188,7 +188,7 @@ function BussinessSection() {
                         </div>
                         {/* Button */}
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>
@@ -202,7 +202,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -235,7 +235,7 @@ function BussinessSection() {
                         </div>
 
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>
@@ -246,7 +246,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -291,7 +291,7 @@ function BussinessSection() {
                         </div>
 
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>
@@ -302,7 +302,7 @@ function BussinessSection() {
                         style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
                     >
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
-                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white">Basic</span>
+                            <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
                                 The Slate necessities. Every thing you need to get up and running.
                             </p>
@@ -343,7 +343,7 @@ function BussinessSection() {
                         </div>
                         {/* Button */}
                         <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                         hover:bg-gradient-to-t hover:from-[#000000] hover:to-[#6E51E0] hover:text-white"
+                                         hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
                             <span>Get Started</span>

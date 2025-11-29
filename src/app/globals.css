@@ -17,7 +17,7 @@ body {
 
 @theme {
   --color-authBackgroundButton: #151515;
-  --color-primary: #fff;
+  --color-primaryBgColor:#6E51E0;
   --color-secondary: #168B86;
   --color-accent: #E5E5FF;
   --color-surface: #FFEDE2;

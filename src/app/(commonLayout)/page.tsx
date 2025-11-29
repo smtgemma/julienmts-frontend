@@ -6,9 +6,9 @@ import FeatureSection from "@/components/landingPage/FeatureSection";
 import HerroSection from "@/components/landingPage/HerroSection";
 import InfoCounter from "@/components/landingPage/InfoCounter";
 import MarqueeSection from "@/components/landingPage/marqueeSection";
+import MeetingSuccess from "@/components/landingPage/meetingSuccess.tsx/page";
 import NextMeeting from "@/components/landingPage/nextMeeting";
 import TestimonialSection from "@/components/landingPage/TestimonialSection";
-import ThreeStep from "@/components/landingPage/threeStep";
 
 const page = () => {
   return (
@@ -17,7 +17,7 @@ const page = () => {
       <InfoCounter />
       <DashboardSection />
       <MarqueeSection />
-      <ThreeStep />
+      <MeetingSuccess/>
       <FeatureSection />
       <BussinessSection />
       <TestimonialSection />

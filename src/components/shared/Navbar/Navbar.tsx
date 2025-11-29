@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
         <div className='pt-6 px-3 md:px-0'>
-            <Container className="bg-[#F8F5FA] border-4 border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
+            <Container className="bg-[#f5faf6] border border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="text-xl text-[#000000]">
                     <div className="flex items-center gap-2">
@@ -54,7 +54,7 @@ const Navbar = () => {
                 {/* 🔽 Dropdown Menu Added for mobile device */}
                 <div className="md:hidden">
                     <DropdownMenu>
-                        <DropdownMenuTrigger >
+                        <DropdownMenuTrigger>
                             <Button variant="outline">Menu</Button>
                         </DropdownMenuTrigger>
 
