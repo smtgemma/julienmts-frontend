@@ -19,18 +19,18 @@ function HerroSection() {
                                         'inset 0 2px 8px rgba(2, 2, 2, 0.2), inset 0 -1px 2px rgba(255, 255, 255, 0.5)',
                                 }}
                             >
-                                <div className="flex items-center justify-center gap-2 bg-white rounded-full p-2">
+                                <div className="flex items-center justify-center gap-2 bg-white rounded-full p-1 md:p-2">
                                     <img
                                         src="/landingPage/heroSection/starIcon.png"
                                         alt=""
-                                        className="w-5 h-5"
+                                        className="w-4 md:w-5 h-4 md:h-5"
                                     />
-                                    <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">
+                                    <span className="text-xs md:text-sm md:text-[16px] font-medium text-[#2D2D2D]">
                                         Get Pro 15%
                                     </span>
                                 </div>
 
-                                <span className="text-sm md:text-[16px] font-medium text-[#2D2D2D]">
+                                <span className="text-xs md:text-sm md:text-[16px] font-medium text-[#2D2D2D]">
                                     Join the waitlist for an instant offer
                                 </span>
                             </div>
