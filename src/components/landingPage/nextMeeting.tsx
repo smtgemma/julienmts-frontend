@@ -14,35 +14,28 @@ function NextMeeting() {
             </h3>
 
             {/* buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-
-              {/* button 1 */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-10 mb-12">
               <Link href="">
-                <div className="group p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
-                  <div
-                    className="bg-white px-6 py-3 rounded-lg font-medium transition flex items-center gap-2 shadow-sm
-                                group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0]"
-                  >
-                    <span className="bg-gradient-to-b from-[#6E51E0] to-[#000000] text-transparent bg-clip-text group-hover:text-white">
-                      Prepare My Meeting
-                    </span>
-                    <GoArrowRight className="w-5 h-5 group-hover:text-white" />
-                  </div>
+                <div
+                  className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
+                                         border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px]"
+                >
+                  <span className="">
+                    Prepare My Meeting
+                  </span>
+                  <GoArrowRight className="w-5 h-5" />
                 </div>
               </Link>
 
-              {/* button 2 */}
-              <Link href="">
-                <div className="group p-[2px] rounded-lg bg-gradient-to-b from-[#6E51E0] to-[#000000]">
-                  <div
-                    className="bg-white px-6 py-3 rounded-lg font-medium transition flex items-center gap-2 shadow-sm
-                                group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0]"
-                  >
-                    <span className="bg-gradient-to-b from-[#6E51E0] to-[#000000] text-transparent bg-clip-text group-hover:text-white">
-                      Try it Free
-                    </span>
-                    <GoArrowRight className="w-5 h-5 group-hover:text-white" />
-                  </div>
+              <Link href="" className="">
+                <div
+                  className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
+                                         border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px]"
+                >
+                  <span className="">
+                    Try it Free
+                  </span>
+                  <GoArrowRight className="w-5 h-5" />
                 </div>
               </Link>
 
