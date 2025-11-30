@@ -22,7 +22,7 @@ export default function DashboardLayout({
       <AppSidebar/>
       <div className="flex flex-1 flex-col">
         <SiteHeader />
-        <main className="flex-1 bg-[#F9FAFB]">
+        <main className="flex-1 bg-[#F9FAFB] px-6">
           {children}
         </main>
       </div>

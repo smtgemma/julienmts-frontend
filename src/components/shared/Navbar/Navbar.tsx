@@ -33,6 +33,7 @@ const Navbar = () => {
                     <Link href="/about" className={pathName === "/about" ? "text-[#563FB1] font-semibold" : ""}>About</Link>
                     <Link href="/pricing" className={pathName === "/pricing" ? "text-[#563FB1] font-semibold" : ""}>Pricing</Link>
                     <Link href="/contact" className={pathName === "/contact" ? "text-[#563FB1] font-semibold" : ""}>Contact</Link>
+                    <Link href="/dashboard" className={pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}>Dashboard</Link>
                 </div>
 
                 {/* Right Section for large device */}
