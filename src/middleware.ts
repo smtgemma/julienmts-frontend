@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
 
   // Restrict access to admin paths if user is not an ADMIN
   if (
-    currentPath.startsWith("/dashboard") &&
+    currentPath.startsWith("/dashboard2") &&
     userInfo?.role !== "SUPER_ADMIN"
   ) {
     return NextResponse.redirect(new URL("/signIn", request.url));
@@ -38,5 +38,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"], // Apply middleware to all routes
+  matcher: ["/dashboard2"], // Apply middleware to all routes
 };
