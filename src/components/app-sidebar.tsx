@@ -44,7 +44,7 @@ export default function AppSidebar() {
                 <div className="space-y-2">
                   {/* navigation  */}
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -55,7 +55,7 @@ export default function AppSidebar() {
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -66,7 +66,7 @@ export default function AppSidebar() {
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -77,7 +77,7 @@ export default function AppSidebar() {
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -92,7 +92,7 @@ export default function AppSidebar() {
                   </div>
 
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -103,7 +103,7 @@ export default function AppSidebar() {
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-1.5 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
@@ -119,11 +119,11 @@ export default function AppSidebar() {
           </SidebarGroup>
         </div>
         <SidebarMenu>
-          <div className="bg-[#FBE7E8] px-2 py-1.5 rounded-sm cursor-pointer mb-20">
+          <div className="bg-[#FBE7E8] px-2 py-2 rounded-sm cursor-pointer mb-20">
             <button className="flex items-center gap-1 w-full text-[#D00E11]">
-            <IoIosLogOut size={22} />
-            <span className="text-[16px]">Logout</span>
-          </button>
+              <IoIosLogOut size={22} />
+              <span className="text-[16px]">Logout</span>
+            </button>
           </div>
         </SidebarMenu>
       </SidebarContent>

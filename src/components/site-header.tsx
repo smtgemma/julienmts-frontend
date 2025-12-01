@@ -259,6 +259,34 @@ export function SiteHeader() {
       time: '1 day ago',
       read: true,
     },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+    },
   ];
 
   return (
