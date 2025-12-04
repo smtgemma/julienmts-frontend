@@ -1,55 +1,108 @@
-"use client"
-import Link from 'next/link';
-import ActiveNavigation from './activeNavigation';
-import HerroSection from '@/components/landingPage/HerroSection';
-import { usePathname } from 'next/navigation';
+
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { Button } from "@/components/ui/button"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import * as React from "react"
+import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
+import Container from '@/lib/Container';
 
 const Navbar = () => {
     const pathName = usePathname()
+
     return (
-        <div
-            className='py-6 '
-        style={{
-            // backgroundImage: "url('/navbar/navbarBackground.png')",
-            // backgroundSize: "cover",
-            // backgroundPosition: "center",
-            // backgroundRepeat: "no-repeat",
-             background: "linear-gradient(to right, #FBCFE8, #EDE9FE, #BFDBFE)",
-        }}
-        >
-            <div className="max-w-[1200px] mx-auto bg-gradient-to-r from-[#F7F8FC] to-[#E6EEFF] border border-white rounded-2xl py-6 px-3 backdrop-blur-[2px] flex items-center justify-between">
-                <Link href="/" className='text-xl text-[#000000]'>
-                <img src="/navbar/logo.png" alt="" />
+        <div className='pt-6 px-3 md:px-0'>
+            <Container className="bg-[#f5faf6] border border-white rounded-2xl py-2 px-3 backdrop-blur-[2px] flex items-center justify-between">
+                {/* Logo */}
+                <Link href="/" className="text-xl text-[#000000]">
+                    <div className="flex items-center gap-2">
+                        <img src="/navbar/logo.png" alt="logo" className='w-8 md:w-12 h-8 md:h-12' />
+                        <h3 className='text-2xl text-[#6E51E0] font-semibold'>phora</h3>
+                    </div>
                 </Link>
-                {/* center Menu */}
-                <ActiveNavigation />
-                {/* Right Section */}
-                <div className="flex items-center">
+                {/* Center Menu */}
+                <div className="hidden md:flex items-center md:gap-6 lg:gap-12 text-[#000000] text-[16px] font-medium">
+                    <Link href="/" className={pathName === "/" ? "text-[#563FB1] font-semibold" : ""}>Home</Link>
+                    <Link href="/about" className={pathName === "/about" ? "text-[#563FB1] font-semibold" : ""}>About</Link>
+                    <Link href="/pricing" className={pathName === "/pricing" ? "text-[#563FB1] font-semibold" : ""}>Pricing</Link>
+                    <Link href="/contact" className={pathName === "/contact" ? "text-[#563FB1] font-semibold" : ""}>Contact</Link>
+                    <Link href="/dashboard" className={pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}>Dashboard</Link>
+                </div>
+
+                {/* Right Section for large device */}
+                <div className="hidden md:flex items-center gap-2 lg:gap-3">
+
                     <Link href="/signIn" className="group">
-                        <span
-                            className="px-5 py-3 rounded-[6px] font-medium transition
-                                         group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0] hover:text-white text-[#2D2D2D]"
-                        >
+                        <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
                             Login
                         </span>
                     </Link>
+
                     <Link href="/signUp" className="group">
-                        <span
-                            className="px-5 py-3 rounded-[6px] font-medium transition
-                                         group-hover:bg-gradient-to-t group-hover:from-[#000000] group-hover:to-[#6E51E0] hover:text-white text-[#2D2D2D]"
-                        >
+                        <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
                             Get Start
                         </span>
                     </Link>
                 </div>
-            </div>
-            {
-                pathName === "/" && (
-                    <HerroSection />
-                )
-            }
+
+                {/* 🔽 Dropdown Menu Added for mobile device */}
+                <div className="md:hidden">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <Button variant="outline">Menu</Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent className="w-56 md:hidden">
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/"
+                                    className={`${pathName === "/" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    Home
+                                </Link>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/about"
+                                    className={`${pathName === "/about" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    About
+                                </Link>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/pricing"
+                                    className={`${pathName === "/pricing" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    Pricing
+                                </Link>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/contact"
+                                    className={`w-full ${pathName === "/contact" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    Contact
+                                </Link>
+                            </DropdownMenuItem>
+
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+
+            </Container>
         </div>
     );
 };
 
-export default Navbar
+export default Navbar;
