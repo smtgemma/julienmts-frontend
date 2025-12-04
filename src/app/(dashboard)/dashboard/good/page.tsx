@@ -2,7 +2,7 @@ import React from 'react'
 
 function good() {
   return (
-    <div className='bg-black'>good</div>
+    <div className='bg-green-500'>good</div>
   )
 }
 
