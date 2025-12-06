@@ -32,16 +32,16 @@ export default function Footer() {
               <PiGlobeLight size={20} className="text-[#6B7280]" />
 
               {/* Placeholder with black color */}
-              <SelectValue placeholder="English" className="text-black" />
+              <SelectValue placeholder="Eng" className="text-black" />
 
             </SelectTrigger>
 
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Bangla">Bangla</SelectItem>
-                <SelectItem value="Arabic">Arabic</SelectItem>
-                <SelectItem value="Hindi">Hindi</SelectItem>
+                <SelectItem value="English">Eng</SelectItem>
+                <SelectItem value="Bangla">Bang</SelectItem>
+                <SelectItem value="Arabic">Ara</SelectItem>
+                <SelectItem value="Hindi">Hin</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
