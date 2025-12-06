@@ -51,7 +51,7 @@ export default function Footer() {
             <p className="text-[#2D2D2D] text-[16px] font-medium">
               Every Emirate. Every Plate. Always Premium.
             </p>
-            <div className="flex items-center justify-center gap-8 p-8 bg-white">
+            <div className="flex items-center gap-8 py-8 bg-white">
               <a href="#" className="text-primaryBgColor hover:text-primaryBgColor transition-colors border p-2 rounded-full"
                 style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
               >

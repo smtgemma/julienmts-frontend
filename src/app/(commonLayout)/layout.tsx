@@ -7,7 +7,7 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen relative overflow-hidden">
       {/* // right side blur divs */}
 
       <div className="xl:w-[640px] lg:w-[440px]  md:w-[340px] sm:w-[240px] w-[140px] xl:h-[640px] lg:h-[440px] md:h-[340px] sm:h-[240px] h-[140px ] aspect-square rounded-full bg-[#DBDBFF] blur-[210px] absolute lg:top-[-280px] top-0 lg:-left-10 right-0 flex flex-col gap-40 -z-0" />

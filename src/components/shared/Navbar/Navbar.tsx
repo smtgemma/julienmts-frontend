@@ -50,8 +50,8 @@ const Navbar = () => {
                     </Link>
 
                     <Link href="/signUp" className="group">
-                        <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
-                            Get Start
+                        <span className="px-5 py-3 rounded-[6px] font-medium transition bg-[#6E51E0] text-white">
+                            Get Started
                         </span>
                     </Link>
                 </div>
