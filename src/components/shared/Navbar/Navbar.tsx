@@ -9,10 +9,19 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 import * as React from "react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Container from '@/lib/Container';
+import { PiGlobeLight } from "react-icons/pi";
 
 const Navbar = () => {
     const pathName = usePathname()
@@ -42,6 +51,27 @@ const Navbar = () => {
 
                 {/* Right Section for large device */}
                 <div className="hidden md:flex items-center gap-2 lg:gap-3">
+                    <Select>
+                        <SelectTrigger className="flex items-center gap-2 border border-[#D1D6DB] px-4 py-2 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
+      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+
+                            {/* Globe icon on left */}
+                            <PiGlobeLight size={20} className="text-[#6B7280]" />
+
+                            {/* Placeholder with black color */}
+                            <SelectValue placeholder="Eng" className="text-black" />
+
+                        </SelectTrigger>
+
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectItem value="English">Eng</SelectItem>
+                                <SelectItem value="Bangla">Bang</SelectItem>
+                                <SelectItem value="Arabic">Ara</SelectItem>
+                                <SelectItem value="Hindi">Hin</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
                     <Link href="/signIn" className="group">
                         <span className="px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
