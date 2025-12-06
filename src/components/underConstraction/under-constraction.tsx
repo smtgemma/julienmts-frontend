@@ -5,7 +5,7 @@ const UnderConstruction = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-10 rounded-2xl shadow-lg text-center max-w-lg">
-        <h1 className="text-4xl font-bold text-orange-500 mb-4">
+        <h1 className="text-4xl font-bold text-primaryBgColor mb-4">
           🚧 Under Construction
         </h1>
 
@@ -18,7 +18,7 @@ const UnderConstruction = () => {
 
         <Link
           href="/"
-          className="inline-block bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition"
+          className="inline-block bg-primaryBgColor text-white px-6 py-2 rounded-lg hover:bg-primaryBgColor transition"
         >
           Go Back Home
         </Link>
