@@ -29,7 +29,7 @@ function FeatureSection() {
             <Container className="mt-[60px] px-4 lg:px-0">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -52,7 +52,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -74,7 +74,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -96,7 +96,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -116,7 +116,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -139,7 +139,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -161,7 +161,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
@@ -183,7 +183,7 @@ function FeatureSection() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-6 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
