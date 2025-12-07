@@ -53,7 +53,7 @@ const Navbar = () => {
                 <div className="hidden md:flex items-center gap-2 lg:gap-3">
                     <Select>
                         <SelectTrigger className="flex items-center gap-2 border border-[#D1D6DB] px-1 lg:px-4 py-2 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
-      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+                      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
 
                             {/* Globe icon on left */}
                             <PiGlobeLight size={20} className="text-[#6B7280]" />
