@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import { IoNotificationsOutline } from "react-icons/io5"
+import { Bell } from "lucide-react";
 
 export function SiteHeader() {
   const notifications = [
@@ -17,6 +18,7 @@ export function SiteHeader() {
       description: 'John sent you a message',
       time: '5 min ago',
       read: false,
+      date: "23-04-2-25",
     },
     {
       id: 2,
@@ -24,6 +26,7 @@ export function SiteHeader() {
       description: 'Your project has been approved',
       time: '1 hour ago',
       read: false,
+      date: "23-04-2-25",
     },
     {
       id: 3,
@@ -31,6 +34,7 @@ export function SiteHeader() {
       description: 'Team meeting starts in 30 minutes',
       time: '2 hours ago',
       read: true,
+      date: "23-04-2-25",
     },
     {
       id: 4,
@@ -38,6 +42,7 @@ export function SiteHeader() {
       description: 'Design review task marked as done',
       time: '1 day ago',
       read: true,
+      date: "23-04-2-25",
     },
     {
       id: 4,
@@ -45,6 +50,7 @@ export function SiteHeader() {
       description: 'Design review task marked as done',
       time: '1 day ago',
       read: true,
+      date: "23-04-2-25",
     },
     {
       id: 4,
@@ -52,6 +58,7 @@ export function SiteHeader() {
       description: 'Design review task marked as done',
       time: '1 day ago',
       read: true,
+      date: "23-04-2-25",
     },
     {
       id: 4,
@@ -59,6 +66,7 @@ export function SiteHeader() {
       description: 'Design review task marked as done',
       time: '1 day ago',
       read: true,
+      date: "23-04-2-25",
     },
     {
       id: 4,
@@ -66,6 +74,39 @@ export function SiteHeader() {
       description: 'Design review task marked as done',
       time: '1 day ago',
       read: true,
+      date: "23-04-2-25",
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+      date: "23-04-2-25",
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+      date: "23-04-2-25",
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+      date: "23-04-2-25",
+    },
+    {
+      id: 4,
+      title: 'Task completed',
+      description: 'Design review task marked as done',
+      time: '1 day ago',
+      read: true,
+      date: "23-04-2-25",
     },
   ];
 
@@ -89,27 +130,36 @@ export function SiteHeader() {
                 </div>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent className="w-96 border border-gray-50 p-5">
-                {notifications?.map((notification) => (
-                  <div
-                    className="rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent"
-                    key={notification.id}
-                  >
-                    <div className="relative flex items-start gap-3 pe-3">
-                      <div className="flex-1 space-y-1">
-                        <button
-                          className="text-left text-foreground/80 after:absolute after:inset-0"
-                          type="button"
-                        >
-                          <span className="font-medium text-foreground hover:underline">
-                            {notification.title}
-                          </span>{" "}
-                          {notification.description}{" "}
-                        </button>
-                      </div>
+              <DropdownMenuContent className="w-96 h-95 border border-gray-50">
+                  {notifications.map((notification) => (
+                    <div
+                      key={notification.id}
+                      className="hover:bg-gray-100 transition-shadow px-4 py-3"
+                    >
+                      <button
+                        type="button"
+                        className="w-full text-left flex items-start gap-4"
+                      >
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                            <Bell className="w-5 h-5 text-white" />
+                          </div>
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-gray-900 mb-1 text-base">
+                            {/* {notification.title} */}
+                          </h3>
+                          <p className="text-[#2D2D2D] text-sm">
+                            {notification.description}
+                          </p>
+                          <time className="text-[#2D2D2D] text-sm">
+                            {notification.date}
+                          </time>
+                        </div>
+                      </button>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

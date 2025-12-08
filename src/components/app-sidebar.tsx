@@ -44,12 +44,12 @@ export default function AppSidebar() {
                 <div className="space-y-2">
                   {/* navigation  */}
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/home"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/home" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <GrHomeRounded size={16} />
                       <span className="text-[16px]">Home</span>
                     </Link>
