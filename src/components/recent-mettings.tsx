@@ -34,7 +34,7 @@ export default function RecentMeetings() {
                     {meetings.map((meeting, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200"
+                            className=" rounded-xl border border-[#D1D6DB] p-6 hover:shadow-sm transition-shadow duration-200"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <div className="flex-1">
@@ -52,23 +52,23 @@ export default function RecentMeetings() {
                                     </div>
                                 </div>
 
-                                <div className={`px-3 py-1 rounded-lg font-semibold text-sm ${getScoreColor(meeting.score)}`}>
+                                <div className={`px-3 py-1 rounded-sm font-semibold text-sm ${getScoreColor(meeting.score)}`}>
                                     {meeting.score}/100
                                 </div>
                             </div>
 
                             <div className="flex gap-3 mt-6">
-                                <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
+                                <button className="flex items-center gap-2 px-4 py-2 border border-[#D1D6DB] rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
                                     <FileText className="w-4 h-4" />
                                     View Summary
                                 </button>
 
-                                <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
+                                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
                                     <Play className="w-4 h-4" />
                                     Replay
                                 </button>
 
-                                <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
+                                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors">
                                     <TrendingUp className="w-4 h-4" />
                                     Insights
                                 </button>
