@@ -218,7 +218,7 @@ function Contact() {
                 onClick={handleSubmit(onSubmit)}
                 className="p-3 bg-primaryBgColor hover:bg-bg-primaryBgColor text-[#FFFFFF] font-medium rounded-[6px] transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer"
               >
-                SEND MESSAGE
+                Send Message
               </button>
             </div>
           </div>
