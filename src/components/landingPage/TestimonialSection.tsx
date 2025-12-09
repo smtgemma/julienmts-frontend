@@ -170,7 +170,7 @@ function TestimonialSection() {
   };
 
   return (
-    <Container className='my-20'>
+    <Container className='my-20 px-3 md:px-0'>
       {/* Header Section */}
       <div className="text-center px-3 md:px-0 mb-16">
         <p className="text-[#6E51E0] font-semibold text-[16px] mb-3">
