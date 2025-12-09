@@ -13,7 +13,7 @@ const HeaderBanner: React.FC<HeaderBannerProps> = ({
   breadcrumb = "Home / About Us",
 }) => {
   return (
-    <div className="bg-[rgba(255,255,255,0.6)] w-full md:mt-10  mt-4 z-10">
+    <div className="bg-[rgba(255,255,255,0.6)] w-full md:mt-10  mt-4 z-10 px-3 lg:px-0">
       <Container className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-8  py-10 sm:py-12">
         <h2 className="text-[var(--Font-Colors-Tittle,#2D2D2D)] font-rubik text-3xl sm:text-4xl md:text-5xl font-medium text-center sm:text-left leading-normal">
           {title}

@@ -1,20 +1,11 @@
-// import React from 'react'
-
-// function Pricing() {
-//   return (
-//     <div>This is Pricing page</div>
-//   )
-// }
-
-// export default Pricing
-
-import UnderConstraction from '@/components/underConstraction/under-constraction'
-import React from 'react'
+import BussinessSection from '@/components/landingPage/bussinessSection'
+import HeaderBanner from '@/components/ui/banner/HeaderBanner'
 
 function Pricing() {
   return (
-    <div>
-      <UnderConstraction/>
+    <div className='relative'>
+      <HeaderBanner title="Pricing" breadcrumb="Home / Pricing" />
+      <BussinessSection/>
     </div>
   )
 }
