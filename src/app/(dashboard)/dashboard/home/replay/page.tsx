@@ -10,7 +10,7 @@ function Replay() {
     const [showControls, setShowControls] = useState(true);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const formatTime = (seconds : any) => {
+    const formatTime = (seconds: any) => {
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -28,7 +28,7 @@ function Replay() {
         setCurrentTime(Math.min(duration, currentTime + 10));
     };
 
-    const handleSeek = (e : any) => {
+    const handleSeek = (e: any) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const percentage = x / rect.width;
@@ -171,6 +171,208 @@ function Replay() {
                             <button className="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-slate-100 transition-colors">
                                 <Maximize2 className="w-5 h-5 text-slate-700" />
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* transcript part  */}
+            <div className="bg-gray-50 pb-8">
+                <div className="bg-white rounded-lg">
+                    <div className="border-b border-gray-200 px-6 py-7">
+                        <h1 className="text-xl font-semibold text-[#0A0A0A]">Transcript</h1>
+                    </div>
+
+                    <div className="px-6 py-6">
+                        {/* Message 1 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div>
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">
+                                    00:00
+                                </span>
+                            </div>
+
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className="rounded-full" />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">You</span>
+                                </div>
+
+                                <p className="text-sm text-[#364153]">
+                                    Hi Sarah, thanks so much for taking the time to meet with me today. How are you doing?
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 2 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">00:05</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">Mike</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    I'm doing well, thank you! Excited to learn more about what you have to offer.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 3 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">00:12</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">You</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    Great! Before we dive in, I'd love to understand a bit more about your current situation. Can you tell me about the biggest challenges your team is facing right now?
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 4 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">00:25</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">Sarah Miller</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    Absolutely. Our biggest pain point right now is manual reporting. Our sales team spends about 15 hours a week just pulling together reports and data from different systems. It's incredibly time-consuming and taking them away from actual selling.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 5 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">00:55</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">Mike</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    It's definitely affecting our numbers. We're missing opportunities because reps don't have real-time visibility into their pipeline. By the time they get the reports, the data is already outdated.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 6 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">01:12</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">You</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    I can see how that would be problematic. What have you tried so far to solve this issue?
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 7 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">00:12</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">Sarah Miller</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    We've looked at a couple of basic tools, but they don't integrate well with our existing CRM. We need something that works seamlessly with Salesforce and can automate most of this work.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Message 8 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">01:30</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">You</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    That makes sense. If you could solve this problem, what would the ideal outcome look like for you?</p>
+                            </div>
+                        </div>
+                        {/* Message 9 */}
+                        <div
+                            className="flex gap-2 border-l-4 border-transparent rounded-lg
+                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             transition-all duration-300 ease-in-out px-1 py-3"
+                        >
+                            <div className="">
+                                <span className="text-xs text-gray-500 font-medium border rounded-lg px-2 py-1">01:30</span>
+                            </div>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-8 h-8">
+                                        <img src="/dashboardImage/profileImage.svg" alt="" className='rounded-full' />
+                                    </div>
+                                    <span className="text-[16px] font-medium text-[#0A0A0A]">Mike</span>
+                                </div>
+                                <p className="text-sm text-[#364153]">
+                                    Ideal would be real-time dashboards that update automatically, so our reps can see their pipeline status at any moment. And we'd like to cut that 15 hours down to maybe 2-3 hours max.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
