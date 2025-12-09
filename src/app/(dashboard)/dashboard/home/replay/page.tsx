@@ -186,7 +186,7 @@ function Replay() {
                         {/* Message 1 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div>
@@ -211,7 +211,7 @@ function Replay() {
                         {/* Message 2 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -232,7 +232,7 @@ function Replay() {
                         {/* Message 3 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -253,7 +253,7 @@ function Replay() {
                         {/* Message 4 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -274,7 +274,7 @@ function Replay() {
                         {/* Message 5 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -295,7 +295,7 @@ function Replay() {
                         {/* Message 6 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -316,7 +316,7 @@ function Replay() {
                         {/* Message 7 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -337,7 +337,7 @@ function Replay() {
                         {/* Message 8 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
@@ -357,7 +357,7 @@ function Replay() {
                         {/* Message 9 */}
                         <div
                             className="flex gap-2 border-l-4 border-transparent rounded-lg
-                             hover:border-[#4A6CF7] hover:bg-gray-100
+                             hover:border-[#4A6CF7] hover:bg-[#EFF6FF]
                              transition-all duration-300 ease-in-out px-1 py-3"
                         >
                             <div className="">
