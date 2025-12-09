@@ -23,7 +23,7 @@ style={{
 borderRadius: "6px",
 padding: "13px 12px",
 }}
-className={`bg-gradient-to-b from-[#6E51E0] to-black
+className={`bg-[#6E51E0]
       flex items-center justify-center gap-1.5 text-white ${className}`}
 >
 {children} </button>
