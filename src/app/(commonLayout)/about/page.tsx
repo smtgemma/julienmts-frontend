@@ -34,7 +34,9 @@ function About() {
         <StatsSection />
         <TestimonialSection/>
         <NextMeeting/>
-        <MarqueeSection/>
+        <div className="py-20">
+          <MarqueeSection/>
+        </div>
       </section>
     </div>
   );
