@@ -1,5 +1,6 @@
 import React from 'react';
 import { Target, Lightbulb, MessageSquare } from 'lucide-react';
+import Link from 'next/link';
 
 export default function InsightsCard() {
     const stats = [
@@ -30,33 +31,37 @@ export default function InsightsCard() {
     ];
 
     return (
-        <div className="flex gap-4 p-6">
-            {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                    <div
-                        key={index}
-                        className="flex-1 bg-white rounded-lg p-5 hover:shadow-md transition-shadow"
-                    >
-                        <div className="flex items-start gap-[18px]">
-                            <div className={`${stat.iconBg} p-3 rounded-[10px]`}>
-                                <Icon className={`w-6 h-6 ${stat.iconColor}`} />
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="text-[#636F85] font-medium text-[16px] mb-2">
-                                    {stat.title}
-                                </h3>
-                                <p className="text-3xl font-medium text-[#2D2D2D] mb-1">
-                                    {stat.value}
+        <div>
+            <Link href='/dashboard/home/questionsAsk'>
+                <div className="flex gap-4 p-6 cursor-pointer">
+                    {stats.map((stat, index) => {
+                        const Icon = stat.icon;
+                        return (
+                            <div
+                                key={index}
+                                className="flex-1 bg-white rounded-lg p-5 hover:shadow-md transition-shadow"
+                            >
+                                <div className="flex items-start gap-[18px]">
+                                    <div className={`${stat.iconBg} p-3 rounded-[10px]`}>
+                                        <Icon className={`w-6 h-6 ${stat.iconColor}`} />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="text-[#636F85] font-medium text-[16px] mb-2">
+                                            {stat.title}
+                                        </h3>
+                                        <p className="text-3xl font-medium text-[#2D2D2D] mb-1">
+                                            {stat.value}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-[#636F85] text-left">
+                                    {stat.subtitle}
                                 </p>
                             </div>
-                        </div>
-                        <p className="text-sm text-[#636F85] text-left">
-                            {stat.subtitle}
-                        </p>
-                    </div>
-                );
-            })}
+                        );
+                    })}
+                </div>
+            </Link>
         </div>
     );
 }
