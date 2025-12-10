@@ -235,6 +235,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { X, Plus } from "lucide-react";
 import { useState } from "react";
+import StepTitle from "./stepTitle";
 
 // Define types for participants and form
 type Participant = {
@@ -308,12 +309,8 @@ export default function Step2() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold text-[#2D2D2D]">
-          Who Are You Meeting?
-        </h2>
-        <p className="text-[16px] text-[#636F85] mb-4">
-          Add information about meeting participants
-        </p>
+        {/* header  */}
+        <StepTitle title="Who Are You Meeting?" subtitle="Add information about meeting participants"/>
 
         {fields.map((item, index) => (
           <div

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Upload } from 'lucide-react';
+import StepTitle from './stepTitle';
 
 const Step1 = () => {
     const [formData, setFormData] = useState({
@@ -75,10 +76,7 @@ const Step1 = () => {
         <div className="bg-white rounded-xl p-6 w-full border border-[#D1D6DB]">
 
             {/* Header */}
-            <div className="mb-5">
-                <h2 className="text-xl font-semibold text-[#2D2D2D] mb-[6px]">What Are You Selling?</h2>
-                <p className="text-[16px] text-[#636F85]">Provide details about your product or service</p>
-            </div>
+            <StepTitle title='What Are You Selling?' subtitle='Provide details about your product or service' />
 
             {/* Product Name */}
             <div className="mb-4">
