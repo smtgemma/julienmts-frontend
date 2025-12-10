@@ -1,6 +1,9 @@
-import ChartBarDefault from '@/components/insights/barchart';
-import TalkTimeDistribution from '@/components/insights/piechart';
-import { Award } from 'lucide-react';
+import ChartBarDefault from '@/components/insights/ChartBarDefault';
+import InsightsCard from '@/components/insights/insightsCard';
+import RisksOpportunities from '@/components/insights/RisksOpportunities';
+import TalkTimeDistribution from '@/components/insights/TalkTimeDistribution';
+import TopicsDiscussed from '@/components/insights/topicDiscus';
+import { Award, BarChart3, Play } from 'lucide-react';
 import Link from 'next/link'
 import React from 'react'
 import { GoArrowLeft } from 'react-icons/go'
@@ -17,7 +20,7 @@ function Insights() {
   return (
     <div>
       {/* title part  */}
-      <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6">
+      <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <Link href="/dashboard/home" className="flex-1">
             <h3 className='flex items-center gap-2 text-[16px] text-[#2D2D2D]'><GoArrowLeft /> Back to Dashboard</h3>
@@ -37,7 +40,7 @@ function Insights() {
       </div>
       {/* engagement score part  */}
       <div className="w-full">
-        <div className="bg-white rounded-xl border border-[#6E51E0] p-6">
+        <div className="bg-white rounded-xl border border-[#6E51E0] p-6 hover:shadow-md transition-shadow">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <h2 className="text-[#2D2D2D] text-2xl font-medium mb-2">
@@ -90,13 +93,27 @@ function Insights() {
         </div>
       </div>
       {/* chart part  */}
-      <div className="flex items-center gap-6 py-6">
+      <div className="lg:flex items-center gap-6 py-6">
         <div className="w-full lg:w-1/2">
           <ChartBarDefault />
         </div>
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
           <TalkTimeDistribution />
         </div>
+      </div>
+      <InsightsCard />
+      <TopicsDiscussed />
+      <RisksOpportunities />
+      {/* button part  */}
+      <div className="flex gap-6 mb-6 px-6">
+        <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
+          <Play className="w-5 h-5" />
+          Watch Replay
+        </button>
+        <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
+          <BarChart3 className="w-5 h-5" />
+          View Insights
+        </button>
       </div>
     </div>
   )

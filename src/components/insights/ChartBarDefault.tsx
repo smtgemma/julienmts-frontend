@@ -37,7 +37,7 @@ export default function SentimentAnalysis() {
     return (
         <div>
             {/* bar chart */}
-            <Card>
+            <Card className="hover:shadow-md transition-shadow">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-lg font-semibold">
                         <TrendingUp className="h-6 w-6 text-[#00A63E]" />
