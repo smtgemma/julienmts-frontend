@@ -34,7 +34,7 @@ const StartNewMeeting = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="py-6">
             <div className="stepper-wrapper">
                 {/* Step circles with arrow */}
                 <div className="steps-row">
