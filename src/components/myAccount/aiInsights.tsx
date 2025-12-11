@@ -46,7 +46,7 @@ export default function AIInsights() {
     ];
 
     return (
-        <div className="w-full max-w-md mx-auto p-6 bg-white">
+        <div className="w-full max-w-md mx-auto py-6 bg-white">
             {/* Header */}
             <div className="mb-6">
                 <h2 className="text-xl font-semibold text-[#2D2D2D] flex items-center gap-2">
