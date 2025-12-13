@@ -22,7 +22,7 @@ function MeetingSuccess() {
                 {/* Steps Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div
-                        className="bg-white rounded-2xl p-8 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-8 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step Number */}
                         <div className="inline-block bg-[#F1EEFC] rounded-full px-3 py-2 mb-6">
@@ -43,7 +43,7 @@ function MeetingSuccess() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-8 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-8 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step Number */}
                         <div className="inline-block bg-[#F1EEFC] rounded-full px-3 py-2 mb-6">
@@ -64,7 +64,7 @@ function MeetingSuccess() {
                         </p>
                     </div>
                     <div
-                        className="bg-white rounded-2xl p-8 transition-shadow duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                        className="bg-white rounded-2xl p-8 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step Number */}
                         <div className="inline-block bg-[#F1EEFC] rounded-full px-3 py-2 mb-6">

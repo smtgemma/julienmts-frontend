@@ -3,7 +3,7 @@ import { LuUsers } from "react-icons/lu";
 export function SectionCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition">
+      <div className="bg-white rounded-2xl p-4 shadow-sm border border- hover:shadow-md transition">
 
         {/* Header */}
         <div className="flex justify-between">

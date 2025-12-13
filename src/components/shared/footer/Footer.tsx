@@ -32,16 +32,16 @@ export default function Footer() {
               <PiGlobeLight size={20} className="text-[#6B7280]" />
 
               {/* Placeholder with black color */}
-              <SelectValue placeholder="English" className="text-black" />
+              <SelectValue placeholder="Eng" className="text-black" />
 
             </SelectTrigger>
 
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Bangla">Bangla</SelectItem>
-                <SelectItem value="Arabic">Arabic</SelectItem>
-                <SelectItem value="Hindi">Hindi</SelectItem>
+                <SelectItem value="English">Eng</SelectItem>
+                <SelectItem value="Bangla">Bang</SelectItem>
+                <SelectItem value="Arabic">Ara</SelectItem>
+                <SelectItem value="Hindi">Hin</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -51,19 +51,19 @@ export default function Footer() {
             <p className="text-[#2D2D2D] text-[16px] font-medium">
               Every Emirate. Every Plate. Always Premium.
             </p>
-            <div className="flex items-center justify-center gap-8 p-8 bg-white">
-              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor transition-colors border p-2 rounded-full"
-                style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
+            <div className="flex items-center gap-8 py-8 bg-white">
+              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor border p-2 rounded-full transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
+              // style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
               >
                 <FaTwitter className="w-6 h-6" />
               </a>
-              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor transition-colors border p-2 rounded-full"
-                style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
+              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor border p-2 rounded-full transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
+              // style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
               >
                 <FaFacebookF className="w-6 h-6" />
               </a>
-              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor transition-colors border p-2 rounded-full"
-                style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
+              <a href="#" className="text-primaryBgColor hover:text-primaryBgColor border p-2 rounded-full transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
+              // style={{ boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.2)' }}
               >
                 <FaInstagram className="w-6 h-6" />
               </a>
