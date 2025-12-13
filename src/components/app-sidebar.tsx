@@ -44,45 +44,45 @@ export default function AppSidebar() {
                 <div className="space-y-2">
                   {/* navigation  */}
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/home"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/home" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <GrHomeRounded size={16} />
                       <span className="text-[16px]">Home</span>
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/dashboard/startNewMeeting"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/startNewMeeting" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <RiIdCardLine size={20} />
                       <span className="text-[16px]">Start a New Meeting</span>
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/dashboard/myAccount"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/myAccount" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <MdManageAccounts size={22} />
                       <span className="text-[16px]">My Accounts</span>
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/dashboard/dashboard"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/dashboard" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <RxDashboard size={20} />
                       <span className="text-[16px]">Dashboard</span>
                     </Link>
@@ -92,23 +92,23 @@ export default function AppSidebar() {
                   </div>
 
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/dashboard/settingPage"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/settingPage" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <IoSettingsOutline size={20} />
                       <span className="text-[16px]">Setting</span>
                     </Link>
                   </button>
                   <button
-                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/"
+                    className={`flex items-center w-full gap-2 rounded-sm px-2 py-2 transition-colors bg-[#F5F6F7] text-[16px] text-[#636F85] hover:text-white ${pathname === "/dashboard/help"
                       ? "bg-[#F7F7F81A] text-white"
                       : "text-[#D5D6E2] hover:bg-primaryBgColor hover:text-white focus:bg-[#F7F7F81A] focus:text-white"
                       }`}
                   >
-                    <Link href="/" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
+                    <Link href="/dashboard/help" className="flex items-center gap-1 w-full text-[#636F85] hover:text-white">
                       <TfiHelpAlt size={18} />
                       <span className="text-[16px]">Help</span>
                     </Link>

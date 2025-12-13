@@ -12,6 +12,7 @@ interface AboutSectionProps {
   image: StaticImageData;
   buttonText?: string;
   reverse?: boolean;
+  showButton?: boolean;
 }
 
 const AboutSection: React.FC<AboutSectionProps> = ({
@@ -21,13 +22,13 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   image,
   buttonText = "GET STARTED",
   reverse = false,
+  showButton = false || true,
 }) => {
   return (
-    <div className=" w-full py-4 md:py-8 xl:py-12 z-10">
+    <div className=" w-full py-4 md:py-8 xl:py-12 z-10 px-3 lg:px-0">
       <Container
-        className={`flex flex-col ${
-          reverse ? "md:flex-row-reverse" : "md:flex-row"
-        } items-center gap-8 xl:gap-32`}
+        className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"
+          } items-center gap-8 xl:gap-32`}
       >
         <div className="w-full md:w-1/2">
           <Image
@@ -49,9 +50,13 @@ const AboutSection: React.FC<AboutSectionProps> = ({
           <p className="text-[var(--Font-Colors-Body,#636F85)] font-rubik text-sm sm:text-[16px] font-normal leading-6 md:text-left text-center sm:leading-[30px] mb-6">
             {description}
           </p>
-          <GradientButton className="mx-auto xl:mx-0">
-            {buttonText}
-          </GradientButton>
+          {
+            showButton && (
+              <GradientButton className="mx-auto xl:mx-0">
+                Get Start
+              </GradientButton>
+            )
+          }
         </div>
       </Container>
     </div>

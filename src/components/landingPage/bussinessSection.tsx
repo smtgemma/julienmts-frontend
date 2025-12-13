@@ -11,15 +11,15 @@ function BussinessSection() {
         <div className='max-w-[1040px] mx-auto'>
             <div className='pt-6 md:pt-14'>
                 < div className="text-center px-3 md:px-0" >
-                    <h3 className="text-4xl md:text-5xl font-medium text-[#2D2D2D]">
+                    <h3 className="text-3xl md:text-5xl font-medium text-[#2D2D2D]">
                         Our Plans scale
                     </h3>
                     <div className='flex items-center justify-center gap-2'>
-                        <h3 className="text-4xl md:text-5xl font-medium text-[#2D2D2D] mb-3">
+                        <h3 className="text-3xl md:text-5xl font-medium text-[#2D2D2D] mb-3">
                             with your
                         </h3>
-                        <button className='text-4xl md:text-5xl text-[#6E51E0] font-medium bg-[#FCF1FE] px-[10px] py-[14px] rounded-sm'>Business</button>
-                        <img src="/landingPage/bussinessSection/bussinessSectionImage.png" alt="" />
+                        <button className='text-3xl md:text-5xl text-[#6E51E0] font-medium bg-[#FCF1FE] px-2 py-1 md:px-[10px] md:py-[14px] rounded-sm'>Business</button>
+                        <img src="/landingPage/bussinessSection/bussinessSectionImage.png" alt="" className='hidden md:flex'/>
                     </div>
                 </div >
                 <div className='my-12 flex items-center justify-center gap-4'>
@@ -43,9 +43,7 @@ function BussinessSection() {
             {/* -------------------- CONDITIONAL CARDS -------------------- */}
             {on ? (
                 < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 justify-items-center'>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -79,7 +77,7 @@ function BussinessSection() {
                             </div>
                         </div>
 
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
@@ -87,9 +85,7 @@ function BussinessSection() {
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -135,7 +131,7 @@ function BussinessSection() {
                             </div>
                         </div>
 
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
@@ -143,9 +139,7 @@ function BussinessSection() {
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -187,7 +181,7 @@ function BussinessSection() {
                             </div>
                         </div>
                         {/* Button */}
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
@@ -198,9 +192,7 @@ function BussinessSection() {
                 </div>
             ) : (
                 < div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 justify-items-center'>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -234,7 +226,7 @@ function BussinessSection() {
                             </div>
                         </div>
 
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
@@ -242,9 +234,7 @@ function BussinessSection() {
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -290,7 +280,7 @@ function BussinessSection() {
                             </div>
                         </div>
 
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
@@ -298,9 +288,7 @@ function BussinessSection() {
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </div>
                     </div>
-                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col"
-                        style={{ boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)' }}
-                    >
+                    <div className="bg-white rounded-[16px] max-w-sm w-full p-6 flex flex-col transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105">
                         <div className="bg-[#F6F6F6] rounded-2xl p-6 mb-6">
                             <span className="text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer">Basic</span>
                             <p className="text-[#3C4049] text-sm mb-4 mt-6">
@@ -342,7 +330,7 @@ function BussinessSection() {
                             </div>
                         </div>
                         {/* Button */}
-                        <div className="w-full py-1.5 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                        <div className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
                                          hover:bg-primaryBgColor hover:text-white"
                             style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                         >
