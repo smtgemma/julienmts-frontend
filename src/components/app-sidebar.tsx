@@ -212,15 +212,15 @@ export default function AppSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {/* Logo */}
-                <div className="flex justify-center items-center mb-3">
-                  <Link href="/" className="flex items-center gap-2">
+                <div className="flex justify-start items-center mb-10 mt-2">
+                  <Link href="/" className="flex items-center gap-2 ml-4">
                     <img
                       src="/navbar/logo.png"
                       alt="logo"
-                      className="w-10 h-10"
+                      className="w-14 h-14"
                     />
-                    <h3 className="text-2xl text-[#6E51E0] font-semibold">
-                      phora
+                    <h3 className="text-3xl text-[#6E51E0] font-semibold">
+                      Phora
                     </h3>
                   </Link>
                 </div>
@@ -264,8 +264,8 @@ export default function AppSidebar() {
 
         {/* Logout */}
         <SidebarMenu>
-          <div className="bg-[#FBE7E8] px-2 py-2 rounded-sm mb-20">
-            <button className="flex items-center gap-1 w-full text-[#D00E11]">
+          <div className="bg-[#FBE7E8] px-4 py-3 cursor-pointer rounded-sm mb-6">
+            <button className="flex items-center cursor-pointer gap-1 w-full text-[#D00E11]">
               <IoIosLogOut size={22} />
               <span className="text-[16px]">Logout</span>
             </button>
