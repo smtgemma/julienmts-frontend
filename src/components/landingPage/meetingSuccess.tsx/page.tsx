@@ -33,13 +33,12 @@ function MeetingSuccess() {
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Paste the Company <br />
-                            Name or URL
+                            Prepare Instantly with AI Research
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            We work closely with talented ceramic artists to bring you exclusive and one-of-a-kind designs.
+                            Your meeting inputs (participants, company, product, goals) are transformed into a complete brief, with company insights, stakeholder profiles, and smart questions tailored to the sales methodology you use.
                         </p>
                     </div>
                     <div
@@ -54,13 +53,12 @@ function MeetingSuccess() {
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Get Instant Smart <br />
-                            Insights
+                            Start your meeting confidently
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            We work closely with talented ceramic artists to bring you exclusive and one-of-a-kind designs.
+                            Run a live, voice-enabled simulation with one or more AI personas that reflect the real people you’ll meet. Practice your discovery, objections, and pitch in a safe, hyper-realistic environment.
                         </p>
                     </div>
                     <div
@@ -75,12 +73,12 @@ function MeetingSuccess() {
 
                         {/* Title */}
                         <h3 className="text-2xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Start Your Meeting <br /> Confidently
+                            Improve Fast with Instant Coaching
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            We work closely with talented ceramic artists to bring you exclusive and one-of-a-kind designs.
+                            Right after the simulation, you get clear, actionable feedback on what worked, what to improve, the key questions you missed, and a CRM-ready call summary.
                         </p>
                     </div>
                 </div>

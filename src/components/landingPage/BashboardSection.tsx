@@ -10,17 +10,17 @@
 //                 className="w-full h-auto object-cover"
 //             />
 
-//             {/* Overlay Box */}
-//             <div
-//                 className="
-//       absolute bottom-2 lg:bottom-14 left-1/2 -translate-x-1/2 
-//       bg-white
-//       w-full
-//       p-4 md:p-8 lg:p-11
-//       text-center
-//     "
-//             >
-//             </div>
+    //         {/* Overlay Box */}
+    //         <div
+    //             className="
+    //   absolute bottom-2 lg:bottom-14 left-1/2 -translate-x-1/2 
+    //   bg-white
+    //   w-full
+    //   p-4 md:p-8 lg:p-11
+    //   text-center
+    // "
+    //         >
+    //         </div>
 //         </div>
 //     )
 // }

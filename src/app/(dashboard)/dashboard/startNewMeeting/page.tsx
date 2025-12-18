@@ -7,90 +7,93 @@ import Step5 from '@/components/startNewMeeting/Step5';
 import React, { useState } from 'react';
 
 const StartNewMeeting = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(1);
 
-    const steps = [
-        { id: 1, title: 'Step 1', component: <Step1 /> },
-        { id: 2, title: 'Step 2', component: <Step2 /> },
-        { id: 3, title: 'Step 3', component: <Step3 /> },
-        { id: 4, title: 'Step 4', component: <Step4 /> },
-        { id: 5, title: 'Step 5', component: <Step5 /> },
-    ];
+  const steps = [
+    { id: 1, title: 'Step 1', component: <Step1 /> },
+    { id: 2, title: 'Step 2', component: <Step2 /> },
+    { id: 3, title: 'Step 3', component: <Step3 /> },
+    { id: 4, title: 'Step 4', component: <Step4 /> },
+    { id: 5, title: 'Step 5', component: <Step5 /> },
+  ];
 
-    const handleNext = () => {
-        if (currentStep < steps.length) {
-            setCurrentStep(currentStep + 1);
-        }
-    };
+  const handleNext = () => {
+    if (currentStep < steps.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
 
-    const handlePrev = () => {
-        if (currentStep > 1) {
-            setCurrentStep(currentStep - 1);
-        }
-    };
+  const handlePrev = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
 
-    const handleStepClick = (stepId: any) => {
-        setCurrentStep(stepId);
-    };
+  // const handleStepClick = (stepId: any) => {
+  //   setCurrentStep(stepId);
+  // };
 
-    return (
-        <div className="py-6">
-            <div className="stepper-wrapper">
-                {/* Step circles with arrow */}
-                <div className="steps-row">
-                    {steps.map((step, index) => (
-                        <div key={step.id} className="step-item">
-                            <div
-                                className={`step-circle ${currentStep >= step.id ? 'active' : 'inactive'
-                                    }`}
-                                onClick={() => handleStepClick(step.id)}
-                            >
-                                {step.id}
-                            </div>
-                            {/* Arrow between current and next step */}
-                            {currentStep === step.id && index < steps.length - 1 && (
-                                <div className="arrow-between">
-                                    <svg width="150" height="20" viewBox="0 0 150 20" fill="none">
+  return (
+    <div className="py-6">
+      <div className="stepper-wrapper">
+        {/* Step circles with arrow */}
+        <div className="steps-row">
+          {steps.map((step, index) => (
+            <div key={step.id} className="step-item">
+              <div
+                className={`step-circle ${currentStep >= step.id ? 'active' : 'inactive'
+                  }`}
+                // onClick={() => handleStepClick(step.id)}
+              >
+                {step.id}
+              </div>
+              {/* Arrow between current and next step */}
+              {currentStep === step.id && index < steps.length - 1 && (
+                <div className="arrow-between">
+                  {/* <svg width="150" height="20" viewBox="0 0 150 20" fill="none">
                                         <line x1="0" y1="10" x2="140" y2="10" stroke="#5b51d4" strokeWidth="2" />
                                         <path d="M140 10L130 4L130 16L140 10Z" fill="#5b51d4" />
-                                    </svg>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                                    </svg> */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="101" height="15" viewBox="0 0 101 15" fill="none">
+                    <path d="M100.707 8.07088C101.098 7.68035 101.098 7.04719 100.707 6.65666L94.3431 0.292702C93.9526 -0.0978227 93.3195 -0.0978227 92.9289 0.292702C92.5384 0.683226 92.5384 1.31639 92.9289 1.70692L98.5858 7.36377L92.9289 13.0206C92.5384 13.4111 92.5384 14.0443 92.9289 14.4348C93.3195 14.8254 93.9526 14.8254 94.3431 14.4348L100.707 8.07088ZM0 7.36377V8.36377H100V7.36377V6.36377H0V7.36377Z" fill="#6E51E0" />
+                  </svg>
                 </div>
+              )}
+            </div>
+          ))}
+        </div>
 
-                {/* Progress bar below */}
-                <div className="progress-section">
-                    <div className="progress-bar-bg" />
-                    <div
-                        className="progress-bar-active"
-                        style={{ width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` }}
-                    />
-                </div>
-            </div>
-            {/* show all compnents here  */}
-            <div className="current-step-content">
-                {steps.find(step => step.id === currentStep)?.component}
-            </div>
+        {/* Progress bar below */}
+        <div className="progress-section">
+          <div className="progress-bar-bg" />
+          <div
+            className="progress-bar-active"
+            style={{ width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` }}
+          />
+        </div>
+      </div>
+      {/* show all compnents here  */}
+      <div className="current-step-content">
+        {steps.find(step => step.id === currentStep)?.component}
+      </div>
 
-            <div className="button-group">
-                <button
-                    onClick={handlePrev}
-                    disabled={currentStep === 1}
-                    className="nav-button"
-                >
-                    Previous
-                </button>
-                <button
-                    onClick={handleNext}
-                    disabled={currentStep === steps.length}
-                    className="nav-button"
-                >
-                    Next
-                </button>
-            </div>
-            <style jsx>{`
+      <div className="button-group">
+        <button
+          onClick={handlePrev}
+          disabled={currentStep === 1}
+          className="nav-button"
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNext}
+          disabled={currentStep === steps.length}
+          className="nav-button"
+        >
+          Next
+        </button>
+      </div>
+      <style jsx>{`
         .stepper-wrapper {
           position: relative;
           margin-bottom: 40px;
@@ -212,8 +215,8 @@ const StartNewMeeting = () => {
           box-shadow: none;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default StartNewMeeting;
