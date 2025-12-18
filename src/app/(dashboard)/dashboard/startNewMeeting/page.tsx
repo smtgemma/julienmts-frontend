@@ -4,10 +4,12 @@ import Step2 from '@/components/startNewMeeting/Step2';
 import Step3 from '@/components/startNewMeeting/Step3';
 import Step4 from '@/components/startNewMeeting/Step4';
 import Step5 from '@/components/startNewMeeting/Step5';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const StartNewMeeting = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const router = useRouter()
 
   const steps = [
     { id: 1, title: 'Step 1', component: <Step1 /> },
@@ -20,12 +22,14 @@ const StartNewMeeting = () => {
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
+      router.push(`/dashboard/startNewMeeting?step=${currentStep + 1}`)
     }
   };
 
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      router.push(`/dashboard/startNewMeeting?step=${currentStep - 1}`)
     }
   };
 
@@ -43,7 +47,7 @@ const StartNewMeeting = () => {
               <div
                 className={`step-circle ${currentStep >= step.id ? 'active' : 'inactive'
                   }`}
-                // onClick={() => handleStepClick(step.id)}
+              // onClick={() => handleStepClick(step.id)}
               >
                 {step.id}
               </div>
