@@ -33,22 +33,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon1.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon1.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Instantly understand
-                            your business
+                            Instant, accurate pre-call research
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Make faster, smarter
-                            decisions with Al-powered
-                            insights that give you a full
-                            cockpit view of your
-                            business.
+                            Get instant insights on every account and stakeholder - instantly.
                         </p>
                     </div>
                     <div
@@ -56,21 +51,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon2.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon2.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Save hours with
-                            automatic analysis
+                            Hyper-realistic meeting simulations
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            No more spreadsheets. Your data is analyzed
-                            automatically—so you can
-                            focus on growth, not admin
-                            tasks.
+                            Practice with AI personas that replicate the actual people you'll meet, not generic role-plays.
                         </p>
                     </div>
                     <div
@@ -78,21 +69,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon3.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon3.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Predict problems <br />
-                            before they happen
+                            Smarter discovery, every time
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Spot trends and risks early with real—time Al alerts
-                            before they impact your
-                            business.
-
+                            Ask better questions and uncover real buying signals.
                         </p>
                     </div>
                     <div
@@ -100,19 +87,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon4.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon4.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Actionable Al tips for <br /> growth
+                            95% better-qualified pipelines
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Get clear, actionable suggestions from Al to boost performance every single
-                            day.
-
+                            Live frameworks (MEDDIC, BANT, SPIN…) fill themselves in as you practice.
                         </p>
                     </div>
                     <div
@@ -120,22 +105,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon1.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon1.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Instantly understand
-                            your business
+                            Coaching that drives immediate improvement
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Make faster, smarter
-                            decisions with Al-powered
-                            insights that give you a full
-                            cockpit view of your
-                            business.
+                            Fast, actionable feedback after every session.
                         </p>
                     </div>
                     <div
@@ -143,21 +123,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon2.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon2.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Save hours with
-                            automatic analysis
+                            All account intelligence in one place
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            No more spreadsheets. Your data is analyzed
-                            automatically—so you can
-                            focus on growth, not admin
-                            tasks.
+                            All meetings, notes, insights, and deal context stay organized under each account.
                         </p>
                     </div>
                     <div
@@ -165,21 +141,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon3.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon3.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Predict problems <br />
-                            before they happen
+                            Sales excellence that scales
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Spot trends and risks early with real—time Al alerts
-                            before they impact your
-                            business.
-
+                            Enable every rep to perform like your top 1%.
                         </p>
                     </div>
                     <div
@@ -187,19 +159,17 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon4.png" alt="" className="w-5 h-5" />
+                            <img src="/landingPage/featureSection/featureIcon4.svg" alt="" className="w-5 h-5" />
                         </div>
 
                         {/* Title */}
                         <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Actionable Al tips for <br /> growth
+                            More wins with less prep time
                         </h3>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Get clear, actionable suggestions from Al to boost performance every single
-                            day.
-
+                            Walk into real meetings confident, informed, and ready to close
                         </p>
                     </div>
                 </div>
