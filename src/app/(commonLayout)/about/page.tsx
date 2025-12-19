@@ -13,14 +13,28 @@ function About() {
   return (
     <div className="relative">
       <section>
-        <HeaderBanner title="About Our Company" breadcrumb="Home / About Us" />
-        <AboutSection
+        <HeaderBanner title="About Our Company" subTitle="At Phora we believe the best sales conversations don’t start in the meeting -
+ they start with better preparation." breadcrumb="Home / About Us" />
+
+        {/* Problem Statement */}
+        <section className="border-b border-border mb-3 px-3">
+          <div className="text-center max-w-5xl mx-auto pt-6 md:pt-8 pb-3">
+            <p className="text-[#2D2D2D] text-[16px]">
+              Sales teams today are overwhelmed with information, meetings, tools, and expectations.
+              Yet one of the most critical moments in any sales cycle - the first conversation - is often approached with limited context, rushed research, and guesswork.
+            </p>
+            <p className="mt-3 text-[#2D2D2D] text-2xl font-semibold">We’re here to change that.</p>
+          </div>
+        </section>
+
+        {/* <AboutSection
           title="Management"
           subtitle="About"
           description="Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web."
           image={ralationship}
           showButton={true}
         />
+
         <AboutSection
           title="Mission and Vision"
           subtitle="Our Company"
@@ -30,13 +44,16 @@ function About() {
           image={idea}
           reverse={true}
           showButton={false}
-        />
+        /> */}
+
+        <AboutSection />
+
         <StatsSection />
-        <TestimonialSection/>
-        <NextMeeting/>
-        <div className="py-20">
-          <MarqueeSection/>
-        </div>
+        <TestimonialSection />
+        <NextMeeting />
+        {/* <div className="py-20">
+          <MarqueeSection />
+        </div> */}
       </section>
     </div>
   );
