@@ -3,6 +3,7 @@ import { SectionCards } from "@/components/section-cards"
 import RecentMeetings from "@/components/recent-mettings"
 import { ExternalLink, Lightbulb } from "lucide-react"
 import HomeAiInsights from "@/components/home/HomeAiInsights"
+import Link from "next/link"
 
 export default function Page() {
     return (
@@ -26,10 +27,12 @@ export default function Page() {
                         </div>
 
                         {/* Button */}
-                        <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
-                            <ExternalLink size={14} />
-                            Open Account
-                        </button>
+                        <Link href="/dashboard/myAccount">
+                            <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
+                                <ExternalLink size={14} />
+                                Open Account
+                            </button>
+                        </Link>
                     </div>
                     <div className="flex flex-col border border-[#D1D6DB] p-5 rounded-xl hover:shadow-sm bg-white">
                         {/* Avatar and Company Name */}
@@ -44,10 +47,12 @@ export default function Page() {
                         </div>
 
                         {/* Button */}
-                        <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
-                            <ExternalLink size={14} />
-                            Open Account
-                        </button>
+                        <Link href="/dashboard/myAccount">
+                            <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
+                                <ExternalLink size={14} />
+                                Open Account
+                            </button>
+                        </Link>
                     </div>
                     <div className="flex flex-col border border-[#D1D6DB] p-5 rounded-xl hover:shadow-sm bg-white">
                         {/* Avatar and Company Name */}
@@ -62,10 +67,12 @@ export default function Page() {
                         </div>
 
                         {/* Button */}
-                        <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
-                            <ExternalLink size={14} />
-                            Open Account
-                        </button>
+                        <Link href="/dashboard/myAccount">
+                            <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
+                                <ExternalLink size={14} />
+                                Open Account
+                            </button>
+                        </Link>
                     </div>
                     <div className="flex flex-col border border-[#D1D6DB] p-5 rounded-xl hover:shadow-sm bg-white">
                         {/* Avatar and Company Name */}
@@ -80,15 +87,17 @@ export default function Page() {
                         </div>
 
                         {/* Button */}
-                        <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
-                            <ExternalLink size={14} />
-                            Open Account
-                        </button>
+                        <Link href="/dashboard/myAccount">
+                            <button className="shadow-sm flex items-center justify-center gap-2 w-full py-2 border border-[#D1D6DB] rounded-md text-sm font-medium text-[#0A0A0A] hover:bg-gray-50 transition-colors cursor-pointer">
+                                <ExternalLink size={14} />
+                                Open Account
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
             {/* ai insights  */}
-            <HomeAiInsights/>
+            <HomeAiInsights />
         </div>
     )
 }

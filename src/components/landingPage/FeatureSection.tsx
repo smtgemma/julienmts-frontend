@@ -1,4 +1,5 @@
 import Container from "@/lib/Container"
+import { Layers, MessageSquareText, Target, TrendingUp } from "lucide-react"
 
 
 function FeatureSection() {
@@ -100,12 +101,14 @@ function FeatureSection() {
                             Live frameworks (MEDDIC, BANT, SPIN…) fill themselves in as you practice.
                         </p>
                     </div>
+
                     <div
                         className="bg-white rounded-2xl p-6 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon1.svg" alt="" className="w-5 h-5" />
+                            {/* <img src="/landingPage/featureSection/featureIcon1.svg" alt="" className="w-5 h-5" /> */}
+                            <MessageSquareText className="w-5 h-5 text-[#6E51E0]" />
                         </div>
 
                         {/* Title */}
@@ -123,7 +126,8 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon2.svg" alt="" className="w-5 h-5" />
+                            {/* <img src="/landingPage/featureSection/featureIcon2.svg" alt="" className="w-5 h-5" /> */}
+                            <Layers className="w-5 h-5 text-[#6E51E0]" />
                         </div>
 
                         {/* Title */}
@@ -141,7 +145,8 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon3.svg" alt="" className="w-5 h-5" />
+                            {/* <img src="/landingPage/featureSection/featureIcon3.svg" alt="" className="w-5 h-5" /> */}
+                            <TrendingUp className="w-5 h-5 text-[#6E51E0]" />
                         </div>
 
                         {/* Title */}
@@ -159,7 +164,8 @@ function FeatureSection() {
                     >
                         {/* Step icon */}
                         <div className="inline-block bg-[#E0E0FC] rounded-lg px-3 py-3 mb-6">
-                            <img src="/landingPage/featureSection/featureIcon4.svg" alt="" className="w-5 h-5" />
+                            {/* <img src="/landingPage/featureSection/featureIcon4.svg" alt="" className="w-5 h-5" /> */}
+                            <Target className="w-5 h-5 text-[#6E51E0]" />
                         </div>
 
                         {/* Title */}

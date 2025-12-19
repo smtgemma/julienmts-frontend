@@ -51,9 +51,7 @@ function About() {
         <StatsSection />
         <TestimonialSection />
         <NextMeeting />
-        {/* <div className="py-20">
           <MarqueeSection />
-        </div> */}
       </section>
     </div>
   );

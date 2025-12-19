@@ -6,7 +6,7 @@ export default function Step5() {
         goal: 'Book a Demo',
         methodology: 'SPIN',
         duration: '30 minutes',
-        participants: '2'
+        participantsName: 'Mikkle'
     };
 
     const handleBack = () => {
@@ -62,8 +62,8 @@ export default function Step5() {
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <span className="text-[#636F85] text-4">Participants:</span>
-                            <span className="text-[#2D2D2D] text-[16px]">{meetingData.participants}</span>
+                            <span className="text-[#636F85] text-4">ParticipantsName:</span>
+                            <span className="text-[#2D2D2D] text-[16px]">{meetingData.participantsName}</span>
                         </div>
                     </div>
                 </div>
