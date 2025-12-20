@@ -34,13 +34,13 @@ export default function HelpFaq() {
   };
 
   return (
-    <div className="py-6">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="pb-6">
+      <div className="bg-white rounded-lg shadow-sm border border-[#D1D6DB] p-6">
         <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-1">
+          <h2 className="text-2xl font-medium text-[#2D2D2D] mb-1">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[#636F85]">
             Quick answers to common questions
           </p>
         </div>
@@ -49,25 +49,25 @@ export default function HelpFaq() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              // className="border border-gray-200 rounded-lg overflow-hidden"
+              className="hover:bg-[#6E51E008] rounded"
             >
               <button
                 onClick={() => toggleAccordion(index)}
-                className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between p-4 text-left transition-colors"
               >
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-[16px] font-medium text-[#2D2D2D]">
                   {faq.question}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0 ml-4" />
+                  <ChevronUp className="w-5 h-5 text-[#64748B] flex-shrink-0 ml-4" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0 ml-4" />
+                  <ChevronDown className="w-5 h-5 text-[#64748B] flex-shrink-0 ml-4" />
                 )}
               </button>
               
               {openIndex === index && (
                 <div className="px-4 pb-4 pt-0">
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-[#000000] leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>

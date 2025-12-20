@@ -45,10 +45,10 @@ export default function HelpForm() {
         <div className="py-6">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div className="mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-1">
+                    <h2 className="text-2xl font-semibold text-[#2D2D2D] mb-1">
                         Contact Support
                     </h2>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-[#636F85]">
                         Can't find what you're for? Send us message.
                     </p>
                 </div>
@@ -57,7 +57,7 @@ export default function HelpForm() {
                     <div>
                         <label
                             htmlFor="subject"
-                            className="block text-sm font-medium text-gray-900 mb-2"
+                            className="block text-[16px] font-medium text-[#2D2D2D] mb-2"
                         >
                             Subject
                         </label>
@@ -69,14 +69,14 @@ export default function HelpForm() {
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
                             placeholder="Briefly describe your issue"
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-400"
+                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent placeholder-gray-400"
                         />
                     </div>
 
                     <div>
                         <label
                             htmlFor="message"
-                            className="block text-sm font-medium text-gray-900 mb-2"
+                            className="block text-[16px] font-medium text-[#2D2D2D] mb-2"
                         >
                             Message
                         </label>
@@ -88,7 +88,7 @@ export default function HelpForm() {
                             onKeyDown={handleKeyDown}
                             placeholder="Briefly describe your issue"
                             rows={5}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-400 resize-none"
+                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent placeholder-gray-400 resize-none"
                         />
                     </div>
 
