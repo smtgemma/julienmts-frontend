@@ -69,7 +69,7 @@ function Replay() {
             <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6">
                 <div className="flex items-center justify-between">
                     <div className="flex-1">
-                        <h1 className="text-3xl font-medium text-[#2D2D2D] mb-4">
+                        <h1 className="text-2xl font-medium text-[#2D2D2D] mb-4">
                             Discovery Call with CMO
                         </h1>
                         <p className='text-[#4A5565] text-[16px]'>FastGrowth Inc. • Jan 23 • 42 minutes</p>
