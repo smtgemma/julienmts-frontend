@@ -33,7 +33,7 @@ import React from 'react'
 
 function DashboardSection() {
     return (
-        <div className="max-w-[1200px] mx-auto mt-14">
+        <div className="max-w-[1200px] mx-auto mt-14 px-3 md:px-0">
             <img
                 src="/landingPage/dashboardSection/dashboardImage.png"
                 alt="Dashboard"

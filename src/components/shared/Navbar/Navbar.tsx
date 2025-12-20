@@ -22,6 +22,7 @@ import * as React from "react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Container from '@/lib/Container';
 import { PiGlobeLight } from "react-icons/pi";
+import { IoIosMenu } from "react-icons/io";
 
 const Navbar = () => {
     const pathName = usePathname()
@@ -37,7 +38,7 @@ const Navbar = () => {
                     </div>
                 </Link>
                 {/* Center Menu */}
-                <div className="hidden md:flex items-center md:gap-6 lg:gap-12 text-[#000000] text-[16px] font-medium">
+                <div className="hidden lg:flex items-center md:gap-6 lg:gap-12 text-[#000000] text-[16px] font-medium">
                     <Link href="/" className={pathName === "/" ? "text-[#563FB1] font-semibold" : ""}>Home</Link>
                     <Link href="/about" className={pathName === "/about" ? "text-[#563FB1] font-semibold" : ""}>About</Link>
                     <Link href="/pricing" className={pathName === "/pricing" ? "text-[#563FB1] font-semibold" : ""}>Pricing</Link>
@@ -86,7 +87,9 @@ const Navbar = () => {
                 <div className="md:hidden">
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Button variant="outline">Menu</Button>
+                            <Button variant="outline">
+                                <IoIosMenu />
+                            </Button>
                         </DropdownMenuTrigger>
 
                         <DropdownMenuContent className="w-56 md:hidden">
@@ -127,10 +130,26 @@ const Navbar = () => {
                             </DropdownMenuItem>
                             <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
                                 <Link
-                                    href="//dashboard"
-                                    className={`w-full ${pathName === "//dashboard" ? "text-[#563FB1] font-semibold" : ""}`}
+                                    href="/dashboard"
+                                    className={`w-full ${pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}`}
                                 >
                                     Start Meeting
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/login"
+                                    className={`w-full ${pathName === "/login" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    Login
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                <Link
+                                    href="/signUp"
+                                    className={`w-full ${pathName === "/signUp" ? "text-[#563FB1] font-semibold" : ""}`}
+                                >
+                                    Get Started
                                 </Link>
                             </DropdownMenuItem>
 

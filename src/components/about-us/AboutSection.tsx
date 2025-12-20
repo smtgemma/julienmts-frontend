@@ -73,6 +73,7 @@ import Image from "next/image";
 import Container from "@/lib/Container";
 import relationship from "@/assets/about_us/relationship.svg";
 import idea from "@/assets/about_us/idea.svg";
+import vision from "@/assets/about_us/vision.svg";
 import { Heart, Users } from "lucide-react";
 
 export default function AboutSection() {
@@ -139,9 +140,9 @@ export default function AboutSection() {
 
         {/* ================= VISION ================= */}
         <section className="group flex flex-col md:flex-row items-center gap-10 lg:gap-16 xl:gap-28">
-          <div className="w-full md:w-1/2 overflow-hidden rounded-2xl">
+          <div className="w-full md:w-1/2 rounded-2xl">
             <Image
-              src={idea}
+              src={vision}
               alt="Our vision"
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
             />

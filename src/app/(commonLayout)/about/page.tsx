@@ -1,6 +1,4 @@
 
-import ralationship from "@/assets/about_us/relationship.png";
-import idea from "@/assets/about_us/idea.png";
 import React from "react";
 import AboutSection from "@/components/about-us/AboutSection";
 import HeaderBanner from "@/components/ui/banner/HeaderBanner";
