@@ -347,7 +347,7 @@ export default function MeetingPrepForm() {
                     <SelectItem value="MEDDIC">MEDDIC</SelectItem>
                     <SelectItem value="challenger">CHALLENGER SALES</SelectItem>
                     <SelectItem value="bant">BANT</SelectItem>
-                    <SelectItem value="spin">SPIN</SelectItem>
+                    <SelectItem value="spin">SPIN Selling</SelectItem>
                     <SelectItem value="meddpicc">MEDDPICC</SelectItem>
                   </SelectContent>
                 </Select>

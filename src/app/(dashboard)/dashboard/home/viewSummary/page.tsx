@@ -5,19 +5,34 @@ function ViewSummary() {
     const qualifications = [
         {
             number: 1,
-            title: "Budget Authority Confirmed",
+            title: "Metrics",
             description: "Sarah Miller has $150K allocated for Q1 and can make final approval decisions without additional stakeholders."
         },
         {
             number: 2,
-            title: "Current Pain Point Identified",
+            title: "Economic Buyer",
             description: "Manual reporting processes are taking 15+ hours per week and causing delays in decision-making across the sales team."
         },
         {
             number: 3,
-            title: "Timeline Urgency",
+            title: "Decision Criteria",
             description: "Need to implement a solution before end of Q1 to meet board-mandated efficiency targets. Timeline is aggressive but achievable."
-        }
+        },
+        {
+            number: 4,
+            title: "Decision Process",
+            description: "Need to implement a solution before end of Q1 to meet board-mandated efficiency targets. Timeline is aggressive but achievable."
+        },
+        {
+            number: 5,
+            title: "Identify Pain",
+            description: "Need to implement a solution before end of Q1 to meet board-mandated efficiency targets. Timeline is aggressive but achievable."
+        },
+        {
+            number: 6,
+            title: "Champion",
+            description: "Need to implement a solution before end of Q1 to meet board-mandated efficiency targets. Timeline is aggressive but achievable."
+        },
     ];
     const nextSteps = [
         {
@@ -47,7 +62,7 @@ function ViewSummary() {
             <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6">
                 <div className="flex items-center justify-between">
                     <div className="flex-1">
-                        <h1 className="text-3xl font-medium text-[#2D2D2D] mb-4">
+                        <h1 className="text-2xl font-medium text-[#2D2D2D] mb-4">
                             Discovery Call with CMO
                         </h1>
 
@@ -80,7 +95,8 @@ function ViewSummary() {
             <div className="bg-white rounded-[12px] p-6 mb-6">
                 <div className="flex items-center gap-2 mb-3">
                     <Lightbulb className="w-6 h-6 text-[#D08700]" />
-                    <h2 className="text-xl font-semibold text-[#2D2D2D]">Deal Qualification</h2>
+                    {/* <h2 className="text-xl font-semibold text-[#2D2D2D]">Deal Qualification</h2> */}
+                    <h2 className="text-xl font-semibold text-[#2D2D2D]">MEDDIC </h2>
                 </div>
                 <div className="space-y-3">
                     {qualifications.map((item) => (
@@ -93,9 +109,9 @@ function ViewSummary() {
                                     <h3 className="text-[#101010] text-[16px] font-medium mb-1">
                                         {item.title}
                                     </h3>
-                                    <p className="text-sm text-[#636F85] leading-relaxed">
+                                    {/* <p className="text-sm text-[#636F85] leading-relaxed">
                                         {item.description}
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
                         </div>
