@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <div>
       <StatsCards/>
-      <div className='flex items-center justify-between gap-6'>
+      <div className='lg:flex items-center justify-between gap-6'>
         {/* chart part  */}
        <div className='flex-1'>
          <QualificationTrendChart/>

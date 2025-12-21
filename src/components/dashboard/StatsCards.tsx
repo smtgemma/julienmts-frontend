@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3, Target, MessageSquare, TrendingUp } from 'lucide-react';
+import { BarChart3, Target, MessageSquare, TrendingUp, CheckCircle } from 'lucide-react';
 
 export default function StatsCards() {
     const stats = [
@@ -11,43 +11,54 @@ export default function StatsCards() {
             icon: BarChart3,
             iconBg: 'bg-blue-50',
             iconColor: 'text-blue-600',
-            subtitleColor: 'text-[#34A853]'
+            subtitleColor: 'text-[#34A853]',
         },
         {
             id: 2,
-            title: 'Qualification Rate',
-            value: '72%',
-            subtitle: '5% from last month',
+            title: 'People Met',
+            value: '42',
+            subtitle: 'This month',
             icon: Target,
             iconBg: 'bg-green-50',
             iconColor: 'text-green-600',
-            subtitleColor: 'text-[#34A853]'
+            subtitleColor: 'text-[#34A853]',
         },
         {
             id: 3,
+            title: 'Success Rate',
+            value: '72%',
+            subtitle: '5% from last month',
+            icon: CheckCircle,
+            iconBg: 'bg-emerald-50',
+            iconColor: 'text-emerald-600',
+            subtitleColor: 'text-[#34A853]',
+        },
+        {
+            id: 4,
             title: 'Talk-to-Listen Ratio',
             value: '48/52',
             subtitle: 'Ideal range',
             icon: MessageSquare,
             iconBg: 'bg-purple-50',
             iconColor: 'text-purple-600',
-            subtitleColor: 'text-[#34A853]'
+            subtitleColor: 'text-[#34A853]',
         },
         {
-            id: 4,
-            title: 'Avg Preparation',
+            id: 5,
+            title: 'Everage Preparation Time',
             value: '84',
             subtitle: 'Score out of 100',
             icon: TrendingUp,
             iconBg: 'bg-orange-50',
             iconColor: 'text-orange-600',
-            subtitleColor: 'text-[#34A853]'
-        }
+            subtitleColor: 'text-[#34A853]',
+        },
     ];
+
 
     return (
         <div className="w-full py-6 bg-gray-50">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 {stats.map((stat) => {
                     const Icon = stat.icon;
                     return (
