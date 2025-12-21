@@ -5,7 +5,7 @@ import { MdSlowMotionVideo } from "react-icons/md";
 
 function MeetingSuccess() {
     return (
-        <Container>
+        <Container className=' mb-16'>
             {/* Header Section */}
             <div className="text-center mt-20 mb-3">
                 <p className="text-[#6E51E0] font-semibold text-[16px] mb-3">
@@ -45,7 +45,7 @@ function MeetingSuccess() {
                         className="bg-white rounded-2xl p-8 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step Number */}
-                        <div className="inline-block bg-[#F1EEFC] rounded-full px-3 py-2 mb-6">
+                        <div className="inline-block bg-[#F1EEFC] rounded-full px-2.5 py-2 mb-6">
                             <span className="text-xl text-primaryBgColor font-semibold">
                                 02
                             </span>
@@ -65,14 +65,14 @@ function MeetingSuccess() {
                         className="bg-white rounded-2xl p-8 transition-transform duration-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:scale-105"
                     >
                         {/* Step Number */}
-                        <div className="inline-block bg-[#F1EEFC] rounded-full px-3 py-2 mb-6">
+                        <div className="inline-block bg-[#F1EEFC] rounded-full px-2.5 py-2 mb-6">
                             <span className="text-xl text-primaryBgColor font-semibold">
                                 03
                             </span>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl font-medium text-[#2D2D2D] mb-4 leading-tight">
+                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
                             Improve Fast with Instant Coaching
                         </h3>
 
@@ -84,7 +84,7 @@ function MeetingSuccess() {
                 </div>
             </div>
             {/* See How It Works Button */}
-            <div className='flex justify-center items-center mb-20' >
+            {/* <div className='flex justify-center items-center' >
                 <Link href="">
                     <button
                         className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
@@ -96,7 +96,7 @@ function MeetingSuccess() {
                         <MdSlowMotionVideo className="w-5 h-5" />
                     </button>
                 </Link>
-            </div>
+            </div> */}
 
         </Container>
     )
