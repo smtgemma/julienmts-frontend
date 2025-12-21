@@ -66,6 +66,9 @@ const Navbar = () => {
                                 <SelectItem value="Bangla">Bang</SelectItem>
                                 <SelectItem value="Arabic">Ara</SelectItem>
                                 <SelectItem value="Hindi">Hin</SelectItem>
+                                <SelectItem value="French">Fren</SelectItem>
+                                <SelectItem value="Spanish">Span</SelectItem>
+                                <SelectItem value="Italian">Itali</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

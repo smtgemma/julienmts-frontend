@@ -32,7 +32,7 @@ function Contact() {
   };
   return (
     <div className='relative'>
-      <HeaderBanner title="Contact Us" breadcrumb="Home / Contact" />
+      <HeaderBanner title="Contact Us"/>
       <Container>
         <div className="flex flex-col md:flex-row items-center rounded-lg my-14 px-2 lg:px-0">
           {/* Map Section */}

@@ -1,4 +1,5 @@
 
+
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Plus, X } from 'lucide-react';
 import {
@@ -13,7 +14,7 @@ import StepTitle from './stepTitle';
 export default function MeetingPrepForm() {
   const { register, control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      meetingGoal: 'Book a Demo',
+      meetingGoal: 'Discovery',
       questions: [
         { value: 'What are your current biggest challenges?' },
         { value: 'How do you measure success?' },
@@ -49,18 +50,27 @@ export default function MeetingPrepForm() {
       <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" />
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-6">
+        <div className='mb-6'>
           <label className="block text-sm font-medium text-[#2D2D2D] mb-2.5">
             Meeting Goal
           </label>
-          <input
-            type="text"
-            {...register('meetingGoal', { required: 'Meeting goal is required' })}
-            className="w-full px-3 py-2.5 text-[#636F85] text-sm border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-[#6E51E0] focus:border-transparent"
+          <Controller
+            name="meetingGoal"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Discovery" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Discovery">Discovery</SelectItem>
+                  <SelectItem value="Follow">Follow up Meeting </SelectItem>
+                  <SelectItem value="Demo">Demo</SelectItem>
+                  <SelectItem value="Closing">Closing </SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           />
-          {errors.meetingGoal && (
-            <p className="mt-1 text-sm text-red-600">{errors.meetingGoal.message}</p>
-          )}
         </div>
 
         <div className="mb-6">
@@ -202,7 +212,7 @@ export default function MeetingPrepForm() {
             />
           </div>
         </div>
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <button
             type="button"
             onClick={handleBack}
@@ -216,7 +226,7 @@ export default function MeetingPrepForm() {
           >
             Next Step
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

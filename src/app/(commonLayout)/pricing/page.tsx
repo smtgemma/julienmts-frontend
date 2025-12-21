@@ -4,7 +4,7 @@ import HeaderBanner from '@/components/ui/banner/HeaderBanner'
 function Pricing() {
   return (
     <div className='relative'>
-      <HeaderBanner title="Pricing" breadcrumb="Home / Pricing" />
+      <HeaderBanner title="Pricing" />
       <BussinessSection/>
     </div>
   )

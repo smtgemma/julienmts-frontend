@@ -6,13 +6,13 @@ import React from "react";
 interface HeaderBannerProps {
   title?: string;
   subTitle?: string;
-  breadcrumb?: string;
+  // breadcrumb?: string;
 }
 
 const HeaderBanner: React.FC<HeaderBannerProps> = ({
   title = "About Us",
   subTitle = "",
-  breadcrumb = "Home / About Us",
+  // breadcrumb = "Home / About Us",
 }) => {
   return (
     <div className="bg-[rgba(255,255,255,0.6)] w-full mt-4 md:mt-10 z-10 px-3 sm:px-6 lg:px-0">
@@ -36,7 +36,7 @@ const HeaderBanner: React.FC<HeaderBannerProps> = ({
         <p className="bg-gradient-to-b from-[#6E51E0] to-black bg-clip-text text-transparent 
       font-rubik text-sm sm:text-base md:text-lg 
       text-center sm:text-right">
-          {breadcrumb}
+          {/* {breadcrumb} */}
         </p>
 
       </Container>

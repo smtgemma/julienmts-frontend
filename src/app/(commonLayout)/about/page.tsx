@@ -12,7 +12,7 @@ function About() {
     <div className="relative">
       <section>
         <HeaderBanner title="About Our Company" subTitle="At Phora we believe the best sales conversations don’t start in the meeting -
- they start with better preparation." breadcrumb="Home / About Us" />
+ they start with better preparation." />
 
         {/* Problem Statement */}
         <section className="border-b border-border mb-3 px-3">
