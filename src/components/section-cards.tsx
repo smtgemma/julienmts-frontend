@@ -32,7 +32,7 @@ export function SectionCards() {
         {/* Header */}
         <div className="flex justify-between">
           <div>
-            <p className="text-[#636F85] text-[16px]">Completed Meetings</p>
+            <p className="text-[#636F85] text-[16px]">People Met</p>
             {/* Number */}
             <h2 className="text-2xl font-semibold text-[#2D2D2D] my-2">25</h2>
           </div>
@@ -53,7 +53,7 @@ export function SectionCards() {
         {/* Header */}
         <div className="flex justify-between">
           <div>
-            <p className="text-[#636F85] text-[16px]">Performance</p>
+            <p className="text-[#636F85] text-[16px]">Meeting Success Rate</p>
             {/* Number */}
             <h2 className="text-2xl font-semibold text-[#2D2D2D] my-2">78.5%</h2>
           </div>

@@ -1,6 +1,13 @@
+"use client"
 import { Building2, FileText, Play, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { CgMenuGridR } from "react-icons/cg";
+import { FaListUl } from "react-icons/fa6"
+
 function TotalMeeting() {
+    const [list, setList] = useState<boolean>(false)
+    console.log(list)
     const meetings = [
         { title: "Discovery Call with CMO", company: "FastGrowth Inc.", date: "Jan 23", duration: "42 min", score: 76 },
         { title: "Demo Preparation – VP Sales", company: "BlueWave Retail", date: "Jan 22", duration: "35 min", score: 85 },
@@ -41,65 +48,148 @@ function TotalMeeting() {
     };
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 my-8">
-                Total Meetings
-            </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {meetings.map((meeting, index) => (
-                    <div
-                        key={index}
-                        className=" rounded-xl border border-[#D1D6DB] p-6 hover:shadow-sm transition-shadow duration-200"
-                    >
-                        <div className="flex items-start justify-between mb-4">
-                            <div className="flex-1">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-3">
-                                    {meeting.title}
-                                </h2>
-
-                                <div className="flex items-center gap-2 text-gray-600 mb-2">
-                                    <Building2 className="w-4 h-4" />
-                                    <span className="text-sm">{meeting.company}</span>
-                                </div>
-
-                                <div className="text-sm text-gray-500">
-                                    {meeting.date} — {meeting.duration}
-                                </div>
-                            </div>
-
-                            <div
-                                className={`px-3 py-1 rounded-sm font-semibold text-sm ${getScoreColor(
-                                    meeting.score
-                                )}`}
+            <div className="my-8 flex items-center justify-between gap-3">
+                <h1 className="text-3xl font-bold text-[#2D2D2D]">
+                    Total Meetings
+                </h1>
+                <div>
+                    {
+                        list ? (<button
+                            onClick={() => setList(false)}
+                            className="border border-[#D1D6DB] cursor-pointer p-2 rounded"
+                        >
+                            <FaListUl size={22} />
+                        </button>) : (
+                            <button
+                                onClick={() => setList(true)}
+                                className="border border-[#D1D6DB] cursor-pointer p-1 rounded"
                             >
-                                {meeting.score}/100
-                            </div>
-                        </div>
-
-                        <div className="sm:flex  gap-3  mt-6">
-                            <Link href="/dashboard/home/viewSummary">
-                                <button className="flex items-center gap-2 px-4 py-2 border border-[#D1D6DB] rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
-                                    <FileText className="w-4 h-4" />
-                                    View Summary
-                                </button>
-                            </Link>
-
-                            <Link href="/dashboard/home/replay">
-                                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
-                                    <Play className="w-4 h-4" />
-                                    Replay
-                                </button>
-                            </Link>
-
-                            <Link href="/dashboard/home/insights">
-                                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
-                                    <TrendingUp className="w-4 h-4" />
-                                    Insights
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                ))}
+                                <CgMenuGridR size={30} />
+                            </button>
+                        )
+                    }
+                </div>
             </div>
+            {
+                list ? (
+                    <div className="space-y-6">
+                        {meetings.map((meeting, index) => (
+                            <div
+                                key={index}
+                                className="rounded-xl border border-[#D1D6DB] p-6 hover:shadow-sm transition-shadow duration-200"
+                            >
+                                <div className="flex items-start justify-between">
+                                    <div className="flex-1">
+                                        <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                                            {meeting.title}
+                                        </h2>
+                                    </div>
+
+                                    <div
+                                        className={`px-3 py-1 rounded-sm font-semibold text-sm ${getScoreColor(
+                                            meeting.score
+                                        )}`}
+                                    >
+                                        {meeting.score}/100
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <div className="flex items-center gap-2 text-gray-600 mb-2">
+                                            <Building2 className="w-4 h-4" />
+                                            <span className="text-sm">{meeting.company}</span>
+                                        </div>
+
+                                        <div className="text-sm text-gray-500">
+                                            {meeting.date} — {meeting.duration}
+                                        </div>
+                                    </div>
+                                    <div className="sm:flex gap-3 mt-6">
+                                        <Link href="/dashboard/home/viewSummary">
+                                            <button className="flex items-center gap-2 px-3 py-1.5 border border-[#D1D6DB] rounded-sm text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                                <FileText className="w-4 h-4" />
+                                                View Summary
+                                            </button>
+                                        </Link>
+
+                                        <Link href="/dashboard/home/replay">
+                                            <button className="my-3 md:my-0 flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-sm text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                                <Play className="w-4 h-4" />
+                                                Replay
+                                            </button>
+                                        </Link>
+
+                                        <Link href="/dashboard/home/insights">
+                                            <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-sm text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                                <TrendingUp className="w-4 h-4" />
+                                                Insights
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {meetings.map((meeting, index) => (
+                            <div
+                                key={index}
+                                className="rounded-xl border border-[#D1D6DB] p-6 hover:shadow-sm transition-shadow duration-200"
+                            >
+                                <div className="flex items-start justify-between mb-4">
+                                    <div className="flex-1">
+                                        <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                                            {meeting.title}
+                                        </h2>
+
+                                        <div className="flex items-center gap-2 text-gray-600 mb-2">
+                                            <Building2 className="w-4 h-4" />
+                                            <span className="text-sm">{meeting.company}</span>
+                                        </div>
+
+                                        <div className="text-sm text-gray-500">
+                                            {meeting.date} — {meeting.duration}
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        className={`px-3 py-1 rounded-sm font-semibold text-sm ${getScoreColor(
+                                            meeting.score
+                                        )}`}
+                                    >
+                                        {meeting.score}/100
+                                    </div>
+                                </div>
+
+                                <div className="sm:flex gap-3 mt-6">
+                                    <Link href="/dashboard/home/viewSummary">
+                                        <button className="flex items-center gap-2 px-4 py-2 border border-[#D1D6DB] rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                            <FileText className="w-4 h-4" />
+                                            View Summary
+                                        </button>
+                                    </Link>
+
+                                    <Link href="/dashboard/home/replay">
+                                        <button className="my-3 md:my-0 flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                            <Play className="w-4 h-4" />
+                                            Replay
+                                        </button>
+                                    </Link>
+
+                                    <Link href="/dashboard/home/insights">
+                                        <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                                            <TrendingUp className="w-4 h-4" />
+                                            Insights
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
         </div>
     )
 }

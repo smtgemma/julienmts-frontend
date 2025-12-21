@@ -45,12 +45,12 @@ function HerroSection() {
 
                         {/* Subheading */}
                         <p className="text-center text-[#636F85] text-[16px] mb-7 max-w-2xl mx-auto">
-                            AI-powered pre-call research, realistic meeting simulations, and instant coaching — so
+                            AI-powered pre-call research, realistic meeting simulations, and instant coaching - so
                             you walk into every conversation confident, informed, and ready to win.
                         </p>
 
                         {/* CTA Buttons */}
-                        {/* <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
+                        <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
                             <Link href="">
                                 <div
                                     className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
@@ -75,7 +75,7 @@ function HerroSection() {
                                 </div>
                             </Link>
 
-                        </div> */}
+                        </div>
                     </div>
                 </main>
             </div>
