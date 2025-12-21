@@ -165,6 +165,7 @@ export default function MeetingPrepForm() {
                     <SelectItem value="bant">BANT</SelectItem>
                     <SelectItem value="spin">SPIN Selling</SelectItem>
                     <SelectItem value="meddpicc">MEDDPICC</SelectItem>
+                    <SelectItem value="value selling">Value Selling</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -201,7 +202,7 @@ export default function MeetingPrepForm() {
             />
           </div>
         </div>
-        {/* <div className="flex justify-between">
+        <div className="flex justify-between">
           <button
             type="button"
             onClick={handleBack}
@@ -215,7 +216,7 @@ export default function MeetingPrepForm() {
           >
             Next Step
           </button>
-        </div> */}
+        </div>
       </form>
     </div>
   );
