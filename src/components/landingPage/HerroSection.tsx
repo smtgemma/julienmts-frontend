@@ -5,7 +5,7 @@ import { MdSlowMotionVideo } from "react-icons/md";
 
 function HerroSection() {
     return (
-        <Container className="relative">
+        <Container className="relative mb-12">
             <div className="z-50">
                 {/* Hero Section */}
                 <main className="px-6">
@@ -50,7 +50,7 @@ function HerroSection() {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap items-center justify-center gap-4 mt-10 mb-12">
+                        {/* <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
                             <Link href="">
                                 <div
                                     className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
@@ -75,7 +75,7 @@ function HerroSection() {
                                 </div>
                             </Link>
 
-                        </div>
+                        </div> */}
                     </div>
                 </main>
             </div>
