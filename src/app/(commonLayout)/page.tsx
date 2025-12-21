@@ -22,7 +22,7 @@ const page = () => {
       <HerroSection/>
       <InfoCounter />
       <DashboardSection />
-      <MarqueeSection />
+      {/* <MarqueeSection /> */}
       <MeetingSuccess/>
       <FeatureSection />
       <BussinessSection />
