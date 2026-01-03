@@ -5,7 +5,7 @@ import HeaderBanner from "@/components/ui/banner/HeaderBanner";
 import StatsSection from "@/components/about-us/StatsSection";
 import TestimonialSection from "@/components/landingPage/TestimonialSection";
 import NextMeeting from "@/components/landingPage/nextMeeting";
-import MarqueeSection from "@/components/landingPage/marqueeSection";
+// import MarqueeSection from "@/components/landingPage/marqueeSection";
 
 function About() {
   return (
@@ -49,7 +49,7 @@ function About() {
         <StatsSection />
         <TestimonialSection />
         <NextMeeting />
-          <MarqueeSection />
+          {/* <MarqueeSection /> */}
       </section>
     </div>
   );

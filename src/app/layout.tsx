@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}  className={rubik.className}>
+      <body suppressHydrationWarning={true}  className={rubik.variable}>
         <div className="bg-[#FFFFFF]">
           <ReduxProvider>
           <Toaster position="top-center" expand={true} richColors />
