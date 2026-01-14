@@ -9,31 +9,50 @@ import React, { useEffect, useState } from 'react';
 
 const StartNewMeeting = () => {
   const router = useRouter();
-  const serchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-  const stepFromUrl = Number(serchParams.get('step')) || 1;
+  const stepFromUrl = Number(searchParams.get('step')) || 1;
   const [currentStep, setCurrentStep] = useState(stepFromUrl);
+
+  console.log(currentStep, "==================")
 
   // sync state when url changes
   useEffect(() => {
     setCurrentStep(stepFromUrl);
   }, [stepFromUrl]);
 
-  const goToStep = (step: number) => {
-    setCurrentStep(step);
-    router.push(`/dashboard/startNewMeeting?step=${step}`);
-  }
+  // const goToStep = (step: number) => {
+  //   setCurrentStep(step);
+  //   router.push(`/dashboard/startNewMeeting?step=${step}`);
+  // }
 
+  // const handleNext = () => {
+  //   if (currentStep < steps.length) {
+  //     goToStep(currentStep + 1);
+  //   }
+  // }
+  // const handlePrev = () => {
+  //   if (currentStep < steps.length) {
+  //     goToStep(currentStep - 1);
+  //   }
+  // }
   const handleNext = () => {
-    if (currentStep < steps.length) {
-      goToStep(currentStep + 1);
+    const stepFromUrl = Number(searchParams.get('step')) || 1;
+    const nextStep = stepFromUrl + 1;
+
+    if (nextStep <= steps.length) {
+      router.push(`/dashboard/startNewMeeting?step=${nextStep}`);
     }
-  }
+  };
   const handlePrev = () => {
-    if (currentStep < steps.length) {
-      goToStep(currentStep - 1);
+    const stepFromUrl = Number(searchParams.get('step')) || 1; // get step from URL
+    const prevStep = stepFromUrl - 1;
+
+    if (prevStep >= 1) {
+      router.push(`/dashboard/startNewMeeting?step=${prevStep}`);
     }
-  }
+  };
+
 
   const steps = [
     { id: 1, title: 'Step 1', component: <Step1 handleNext={handleNext} /> },
