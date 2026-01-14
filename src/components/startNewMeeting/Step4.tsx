@@ -11,7 +11,9 @@ import {
 } from '@/components/ui/select';
 import StepTitle from './stepTitle';
 
-export default function MeetingPrepForm() {
+export default function MeetingPrepForm(
+  { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
+) {
   const { register, control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       meetingGoal: 'Discovery',
@@ -37,11 +39,13 @@ export default function MeetingPrepForm() {
   const onSubmit = (data: any) => {
     console.log('Form Data:', data);
     // Handle form submission here
+    handleNext();
   };
 
   const handleBack = () => {
     console.log('Back clicked');
     // Handle back navigation
+    handlePrev();
   };
 
   return (
@@ -212,7 +216,7 @@ export default function MeetingPrepForm() {
             />
           </div>
         </div>
-        {/* <div className="flex justify-between">
+        <div className="flex justify-between">
           <button
             type="button"
             onClick={handleBack}
@@ -226,7 +230,7 @@ export default function MeetingPrepForm() {
           >
             Next Step
           </button>
-        </div> */}
+        </div>
       </form>
     </div>
   );

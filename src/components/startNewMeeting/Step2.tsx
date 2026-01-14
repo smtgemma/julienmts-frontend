@@ -24,7 +24,9 @@ type FormValues = {
   participants: Participant[];
 };
 
-export default function Step2() {
+export default function Step2(
+  { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
+) {
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       participants: [
@@ -47,6 +49,7 @@ export default function Step2() {
 
   const onSubmit = (data: FormValues) => {
     console.log("Form Data:", data);
+    handleNext();
   };
 
   return (
@@ -176,8 +179,9 @@ export default function Step2() {
         </button>
 
         {/* Footer Buttons */}
-        {/* <div className="flex justify-between mt-8">
+        <div className="flex justify-between mt-8">
           <button
+          onClick={handlePrev}
             type="button"
             className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors"
           >
@@ -190,7 +194,7 @@ export default function Step2() {
           >
             Next Step
           </button>
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Play } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Step5() {
+export default function Step5({ handlePrev }: { handlePrev: () => void }) {
     const meetingData = {
         goal: 'Book a Demo',
         methodology: 'SPIN',
@@ -12,6 +12,7 @@ export default function Step5() {
     const handleBack = () => {
         console.log('Back clicked');
         // Handle back navigation
+        handlePrev();
     };
 
     const handleStartMeeting = () => {
@@ -70,12 +71,12 @@ export default function Step5() {
 
                 {/* Action Buttons */}
                 <div className="flex justify-center gap-4">
-                    {/* <button
-            onClick={handleBack}
-            className="px-8 py-3 text-gray-700 bg-white border border-hover:bg-[#6E51E0] rounded-md hover:bg-gray-50 transition-colors font-medium"
-          >
-            Back
-          </button> */}
+                    <button
+                        onClick={handleBack}
+                        className="px-8 py-3 text-gray-700 bg-white border border-hover:bg-[#6E51E0] rounded-md hover:bg-gray-50 transition-colors font-medium"
+                    >
+                        Back
+                    </button>
                     <Link href="/dashboard/startNewMeeting/startAiMeeting">
                         <button
                             onClick={handleStartMeeting}

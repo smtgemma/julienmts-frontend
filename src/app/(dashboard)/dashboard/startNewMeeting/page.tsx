@@ -11,14 +11,6 @@ const StartNewMeeting = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter()
 
-  const steps = [
-    { id: 1, title: 'Step 1', component: <Step1 /> },
-    { id: 2, title: 'Step 2', component: <Step2 /> },
-    { id: 3, title: 'Step 3', component: <Step3 /> },
-    { id: 4, title: 'Step 4', component: <Step4 /> },
-    { id: 5, title: 'Step 5', component: <Step5 /> },
-  ];
-
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
@@ -32,6 +24,14 @@ const StartNewMeeting = () => {
       router.push(`/dashboard/startNewMeeting?step=${currentStep - 1}`)
     }
   };
+
+  const steps = [
+    { id: 1, title: 'Step 1', component: <Step1 handleNext={handleNext} /> },
+    { id: 2, title: 'Step 2', component: <Step2 handleNext={handleNext} handlePrev={handlePrev} /> },
+    { id: 3, title: 'Step 3', component: <Step3 handleNext={handleNext} handlePrev={handlePrev} /> },
+    { id: 4, title: 'Step 4', component: <Step4 handleNext={handleNext} handlePrev={handlePrev} /> },
+    { id: 5, title: 'Step 5', component: <Step5 handlePrev={handlePrev} /> },
+  ];
 
   // const handleStepClick = (stepId: any) => {
   //   setCurrentStep(stepId);
@@ -82,7 +82,7 @@ const StartNewMeeting = () => {
       </div>
 
       <div className="button-group">
-        <button
+        {/* <button
           onClick={handlePrev}
           disabled={currentStep === 1}
           className="nav-button"
@@ -95,7 +95,7 @@ const StartNewMeeting = () => {
           className="nav-button"
         >
           Next
-        </button>
+        </button> */}
       </div>
       <style jsx>{`
         .stepper-wrapper {

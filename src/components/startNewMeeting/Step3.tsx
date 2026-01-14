@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import StepTitle from './stepTitle';
 
-export default function Step3() {
+export default function Step3(
+  { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
+) {
   const [companyUrl, setCompanyUrl] = useState('https://fastgrowth.com');
 
   return (
@@ -113,14 +115,18 @@ export default function Step3() {
       </div>
 
       {/* Navigation Buttons */}
-      {/* <div className="flex justify-between">
-        <button className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+      <div className="flex justify-between">
+        <button
+          onClick={handlePrev}
+          className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
           Back
         </button>
-        <button className="px-6 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
+        <button
+          onClick={handleNext}
+          className="px-6 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
           Next Step
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }

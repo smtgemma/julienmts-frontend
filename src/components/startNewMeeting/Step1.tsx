@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Upload } from 'lucide-react';
 import StepTitle from './stepTitle';
 
-const Step1 = () => {
+const Step1 = (
+    { handleNext }: { handleNext: () => void }
+) => {
     const [formData, setFormData] = useState({
         productName: '',
         description: ''
@@ -70,6 +72,7 @@ const Step1 = () => {
     const handleSubmit = () => {
         console.log('Form Data:', formData);
         console.log('Uploaded File:', uploadedFile);
+        handleNext();
     };
 
     return (
@@ -149,14 +152,14 @@ const Step1 = () => {
             </div>
 
             {/* Button Footer */}
-            {/* <div className="flex justify-end mt-8">
+            <div className="flex justify-end mt-8">
                 <button
                     onClick={handleSubmit}
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition"
+                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition cursor-pointer"
                 >
                     Next Step
                 </button>
-            </div> */}
+            </div>
 
         </div>
     );
