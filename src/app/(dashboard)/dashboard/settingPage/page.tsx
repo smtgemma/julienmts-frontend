@@ -22,6 +22,7 @@ type FormData = {
   preferences: {
     salesMethodology: string;
     difficultyLevel: string;
+    coreSystemPrompt: string;
   };
 };
 
@@ -39,6 +40,7 @@ export default function SettingPage() {
       preferences: {
         salesMethodology: "SPIN Selling",
         difficultyLevel: "Intermediate",
+        coreSystemPrompt: "",
       },
     },
   });
@@ -230,6 +232,18 @@ export default function SettingPage() {
               )}
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-[#2D2D2D] mb-2.5">
+              Core System Prompt
+            </label>
+            <textarea
+              {...register("preferences.coreSystemPrompt")}
+              rows={3}
+              placeholder="Enter core system instructions for AI behavior..."
+              className="w-full border border-[#D1D6DB] rounded-lg px-3 py-2 text-[#636F85] focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
+            />
+          </div>
+
         </div>
 
         <button
