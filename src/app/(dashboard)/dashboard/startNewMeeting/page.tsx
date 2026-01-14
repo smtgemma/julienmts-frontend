@@ -4,26 +4,36 @@ import Step2 from '@/components/startNewMeeting/Step2';
 import Step3 from '@/components/startNewMeeting/Step3';
 import Step4 from '@/components/startNewMeeting/Step4';
 import Step5 from '@/components/startNewMeeting/Step5';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const StartNewMeeting = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const router = useRouter()
+  const router = useRouter();
+  const serchParams = useSearchParams();
+
+  const stepFromUrl = Number(serchParams.get('step')) || 1;
+  const [currentStep, setCurrentStep] = useState(stepFromUrl);
+
+  // sync state when url changes
+  useEffect(() => {
+    setCurrentStep(stepFromUrl);
+  }, [stepFromUrl]);
+
+  const goToStep = (step: number) => {
+    setCurrentStep(step);
+    router.push(`/dashboard/startNewMeeting?step=${step}`);
+  }
 
   const handleNext = () => {
     if (currentStep < steps.length) {
-      setCurrentStep(currentStep + 1);
-      router.push(`/dashboard/startNewMeeting?step=${currentStep + 1}`)
+      goToStep(currentStep + 1);
     }
-  };
-
+  }
   const handlePrev = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-      router.push(`/dashboard/startNewMeeting?step=${currentStep - 1}`)
+    if (currentStep < steps.length) {
+      goToStep(currentStep - 1);
     }
-  };
+  }
 
   const steps = [
     { id: 1, title: 'Step 1', component: <Step1 handleNext={handleNext} /> },

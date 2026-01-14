@@ -183,14 +183,14 @@ export default function Step2(
           <button
           onClick={handlePrev}
             type="button"
-            className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
           >
             Back
           </button>
 
           <button
             onClick={handleSubmit(onSubmit)}
-            className="bg-[#6E51E0] text-white px-6 py-3 rounded-lg hover:bg-[#5940c7] transition-colors"
+            className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer"
           >
             Next Step
           </button>

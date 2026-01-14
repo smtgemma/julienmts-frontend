@@ -155,7 +155,7 @@ const Step1 = (
             <div className="flex justify-end mt-8">
                 <button
                     onClick={handleSubmit}
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition cursor-pointer"
+                    className="bg-primaryBgColor text-white px-6 py-3 rounded-lg shadow hover:bg-primaryBgColor transition cursor-pointer"
                 >
                     Next Step
                 </button>

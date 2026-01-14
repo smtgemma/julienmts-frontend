@@ -1,7 +1,9 @@
 import { Play } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Step5({ handlePrev }: { handlePrev: () => void }) {
+export default function Step5(
+    { handlePrev }: { handlePrev: () => void }
+) {
     const meetingData = {
         goal: 'Book a Demo',
         methodology: 'SPIN',
@@ -72,8 +74,9 @@ export default function Step5({ handlePrev }: { handlePrev: () => void }) {
                 {/* Action Buttons */}
                 <div className="flex justify-center gap-4">
                     <button
+                        type="button"
                         onClick={handleBack}
-                        className="px-8 py-3 text-gray-700 bg-white border border-hover:bg-[#6E51E0] rounded-md hover:bg-gray-50 transition-colors font-medium"
+                        className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
                     >
                         Back
                     </button>

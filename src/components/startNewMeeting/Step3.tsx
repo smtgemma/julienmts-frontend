@@ -118,12 +118,12 @@ export default function Step3(
       <div className="flex justify-between">
         <button
           onClick={handlePrev}
-          className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+          className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer">
           Back
         </button>
         <button
           onClick={handleNext}
-          className="px-6 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
+          className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer">
           Next Step
         </button>
       </div>
