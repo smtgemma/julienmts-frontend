@@ -96,19 +96,19 @@ export default function AboutSection() {
               Why We Built Phora
             </h6>
 
-            <h2 className="text-[#2D2D2D] text-sm sm:text-base lg:text-lg leading-7 mb-4">
+            <h2 className="text-[#2D2D2D] text-[16px] mb-4">
               Most sales tools focus on during or after the call.
               But world-class sellers know:
-              <span className="text-[16]">the real difference is made before the meeting even begins</span> - when you understand the buyer, the company, the context, the challenges, and the right questions to ask.
+              <span>the real difference is made before the meeting even begins</span> - when you understand the buyer, the company, the context, the challenges, and the right questions to ask.
             </h2>
 
             <div className="space-y-3 text-[#2D2D2D] text-sm sm:text-base flex flex-col">
-              <p className="text-[16px]">Phora was built to solve three major gaps:</p>
-              <span className="font-bold text-[#2D2D2D] text-sm sm:text-base lg:text-lg">1. Too much time spent researching accounts manually</span>
-              <span className="font-bold text-[#2D2D2D] text-sm sm:text-base lg:text-lg">2. Generic role-plays that don’t reflect real buyer conversations</span>
-              <span className="font-bold text-[#2D2D2D] text-sm sm:text-base lg:text-lg">3. Feedback that comes too late to make a difference</span>
+              <p className="text-[16px] font-bold">Phora was built to solve three major gaps:</p>
+              <span className="text-[#2D2D2D] text-[16px]">1. Too much time spent researching accounts manually</span>
+              <span className="text-[#2D2D2D] text-[16px]">2. Generic role-plays that don’t reflect real buyer conversations</span>
+              <span className="text-[#2D2D2D] text-[16px]">3. Feedback that comes too late to make a difference</span>
             </div>
-            <p className="text-[#2D2D2D] text-sm sm:text-base lg:text-lg leading-7 mt-3">We built a new category: the <span className="font-bold">Pre-Call Intelligence Layer</span> between your CRM and your first discovery call.</p>
+            <p className="text-[#2D2D2D] text-[16px] mt-3">We built a new category: the <span className="">Pre-Call Intelligence Layer</span> between your CRM and your first discovery call.</p>
           </div>
         </section>
 
@@ -127,13 +127,13 @@ export default function AboutSection() {
               Our Mission
             </h6>
 
-            <p className="text-[#2D2D2D] text-sm sm:text-base lg:text-lg leading-7 mb-4">
-              To help every sales professional walk into every meeting <span className="font-bold text-[16]">confident, informed, and ready to win</span> -
+            <p className="text-[#2D2D2D] text-[16px] mb-4">
+              To help every sales professional walk into every meeting <span className="text-[#2D2D2D] text-[16px]">confident, informed, and ready to win</span> -
               by combining AI research, realistic simulations, and instant coaching in one seamless platform.
             </p>
 
-            <p className="text-[#2D2D2D] text-sm sm:text-base leading-7">
-              We exist to make <span className="font-bold text-[16]">preparation</span> a competitive advantage, not a burden.
+            <p className="text-[#2D2D2D] text-[16px]">
+              We exist to make <span className="text-[#2D2D2D] text-[16px]">preparation</span> a competitive advantage, not a burden.
             </p>
           </div>
         </section>
@@ -153,13 +153,13 @@ export default function AboutSection() {
               Our Vision
             </h6>
 
-            <p className="text-[#2D2D2D] text-sm sm:text-base lg:text-lg leading-7 mb-4">
-              To become the go-to <span className="font-bold text-[16]">Sales Copilot</span> that elevates every sales professional to top-performer level - not by replacing the human, but by empowering them with intelligence, clarity, and confidence before every call.
+            <p className="text-[#2D2D2D] text-[16px] mb-4">
+              To become the go-to <span className="text-[#2D2D2D] text-[16px]">Sales Copilot</span> that elevates every sales professional to top-performer level - not by replacing the human, but by empowering them with intelligence, clarity, and confidence before every call.
 
             </p>
 
-            <div className="space-y-3 text-[#2D2D2D] text-sm sm:text-base flex flex-col">
-              <p className="text-[16px]">We imagine a world where:</p>
+            <div className="space-y-3 text-[#2D2D2D] text-[16px] flex flex-col">
+              <p className="text-[#2D2D2D] text-[16px] font-bold">We imagine a world where:</p>
               <span>. reps never walk into meetings unprepared</span>
               <span>. every discovery call is structured and high-value</span>
               <span>. companies build consistent, repeatable sales excellence</span>
@@ -198,7 +198,7 @@ export default function AboutSection() {
         </section>
 
         {/* ================= WHO WE SERVE ================= */}
-        <section className="rounded-2xl p-8 lg:p-16 text-center">
+        <section className="rounded-2xl p-8 lg:p-6 text-center">
           <Users className="mx-auto mb-4 h-8 w-8 text-[#6E51E0]" />
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
             Who We Serve
@@ -245,7 +245,7 @@ export default function AboutSection() {
             And great salespeople are made - not born.
           </p>
 
-          <p className="text-xl font-semibold">
+          <p className="text-[#2D2D2D] text-lg font-bold">
             We’re here to support them every step of the way.
           </p>
         </section>

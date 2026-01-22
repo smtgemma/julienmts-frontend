@@ -55,7 +55,7 @@ const statsData = [
 
 const StatsSection: React.FC = () => {
   return (
-    <div className="py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-28">
+    <div className="pb-4 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-28">
       <Container>
         <div
           className="
