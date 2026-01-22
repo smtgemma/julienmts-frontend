@@ -12,10 +12,12 @@ function MeetingSuccess() {
                     How It Works
                 </p>
                 <h1 className="text-3xl md:text-4xl font-medium text-[#2D2D2D] mb-3">
-                    Three Simple Steps to Meeting <br /> Success
+                    {/* Three Simple Steps to Meeting <br /> Success */}
+                    Walk Into Every Meeting Fully <br /> Prepared - In Minutes
                 </h1>
                 <p className="text-[#636F85] text-[16px] mb-6">
-                    Go from zero to fully prepared in minutes with our AI-powered platform
+                    {/* Go from zero to fully prepared in minutes with our AI-powered platform */}
+                    Instant research, realistic practice, and AI coaching so you br show up <br /> confident and in control.
                 </p>
             </div>
             <div className="flex items-center justify-center px-6 pt-6">
@@ -32,13 +34,15 @@ function MeetingSuccess() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Prepare Instantly with AI Research
+                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-1 leading-tight">
+                            {/* Prepare Instantly with AI Research */}
+                            Know Your Buyer Before the Call Starts
                         </h3>
+                        <p className='mb-4'> AI-powered research, done instantly.</p>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Your meeting inputs (participants, company, product, goals) are transformed into a complete brief, with company insights, stakeholder profiles, and smart questions tailored to the sales methodology you use.
+                            Turn basic meeting details into a complete prep brief - company insights, stakeholder profiles, tailored questions, and sales-methodology–aligned talking points. No manual research. No guesswork.
                         </p>
                     </div>
                     <div
@@ -52,13 +56,13 @@ function MeetingSuccess() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Start your meeting confidently
+                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-1 leading-tight">
+                            Practice the Real Conversation - Not a Script
                         </h3>
-
+                        <p className='mb-4'> Live, voice-based AI simulations.</p>
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Run a live, voice-enabled simulation with one or more AI personas that reflect the real people you’ll meet. Practice your discovery, objections, and pitch in a safe, hyper-realistic environment.
+                            Run realistic meeting simulations with AI personas that mirror the people you’ll actually meet. Practice discovery, handle objections, and refine your pitch in a safe, hyper-realistic environment.
                         </p>
                     </div>
                     <div
@@ -72,13 +76,14 @@ function MeetingSuccess() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-4 leading-tight">
-                            Improve Fast with Instant Coaching
+                        <h3 className="text-xl font-medium text-[#2D2D2D] mb-1 leading-tight">
+                            Get Coached on What Actually Moves the Deal Forward
                         </h3>
+                        <p className='mb-4'> Instant, actionable feedback.</p>
 
                         {/* Description */}
                         <p className="text-[#636F85] text-sm leading-relaxed">
-                            Right after the simulation, you get clear, actionable feedback on what worked, what to improve, the key questions you missed, and a CRM-ready call summary.
+                            Immediately after your simulation, receive clear coaching on what worked, what didn’t, the questions you missed, and a CRM-ready summary - so every meeting makes you better.
                         </p>
                     </div>
                 </div>
