@@ -4,7 +4,8 @@ import Cookies from "js-cookie";
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_URL}`,
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
+    // baseUrl: "http://88.222.241.83:5400/api/v1",
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = Cookies?.get("token");

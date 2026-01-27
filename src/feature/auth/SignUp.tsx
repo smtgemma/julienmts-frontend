@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
-import { FiUser } from "react-icons/fi";
 
 // Define Zod schema for validation
 const formSchema = z
@@ -56,14 +55,18 @@ export default function SignUpPage() {
 
     // Add role to the payload
     const payload = {
-      ...rest,
-      role: "INDIVIDUAL",
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
     };
+
+    console.log(payload, "payload")
 
     try {
       const response = await signUp(payload).unwrap();
       if (response?.success) {
-        router.push("/otp");
+        router.push("/dashboard");
       }
     } catch (error: any) {
       console.error("Error during sign up:", error);
