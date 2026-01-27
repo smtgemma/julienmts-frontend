@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { LuEye, LuEyeOff } from "react-icons/lu";
 import { toast } from "sonner";
 import * as z from "zod";
 

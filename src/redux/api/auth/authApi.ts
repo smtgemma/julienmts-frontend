@@ -29,17 +29,19 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-
-
-
-
     verifyEmail: builder.mutation({
       query: (body) => ({
-        url: "/auth/verify-otp",
+        url: "/user/reset-password-otp",
         method: "POST",
         body,
       }),
     }),
+
+
+
+
+
+    
     resendCode: builder.mutation({
       query: (body) => ({
         url: "/auth/send-otp",
