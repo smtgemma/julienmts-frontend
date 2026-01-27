@@ -66,7 +66,7 @@ export default function SignUpPage() {
     try {
       const response = await signUp(payload).unwrap();
       if (response?.success) {
-        router.push("/dashboard");
+        router.push("/dashboard/home");
       }
     } catch (error: any) {
       console.error("Error during sign up:", error);

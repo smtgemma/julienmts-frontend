@@ -2,7 +2,6 @@
 "use client";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import Container from "@/lib/Container";
 import { useSignInMutation } from "@/redux/api/auth/authApi";
 import { setUser } from "@/redux/features/user/userSlice";
 import CustomInput from "@/ui/CustomeInput";
@@ -10,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
@@ -50,22 +48,16 @@ export default function SignInPage() {
   const dispatch = useDispatch();
 
   const onSubmit = async (data: FormValues) => {
-    console.log("Form Data:", data)
     try {
       const response = await signIn(data).unwrap();
       if (response?.success) {
-        if (response.data.verify) {
-          Cookies.set("token", response.data.accessToken);
-          dispatch(
-            setUser({
-              token: response.data.accessToken,
-            })
-          );
-          toast.success("Login successful");
-          router.push("/");
-        } else {
-          router.push("/otp");
-        }
+        dispatch(
+          setUser({
+            token: response.data.accessToken,
+          })
+        );
+        toast.success("Login successful");
+        router.push("/dashboard/home");
       }
     } catch (error: any) {
       console.log("Error during sign-in:", error);

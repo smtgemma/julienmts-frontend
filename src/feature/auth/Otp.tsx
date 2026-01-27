@@ -10,7 +10,6 @@ import {
   useVerifyEmailMutation,
 } from "@/redux/api/auth/authApi";
 import { toast } from "sonner";
-import { LuCheck } from "react-icons/lu";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import Link from "next/link";

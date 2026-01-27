@@ -1,7 +1,6 @@
 "use client";
 
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
-import Logo from "@/components/shared/Logo";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useForgetPasswordMutation } from "@/redux/api/auth/authApi";
 import CustomInput from "@/ui/CustomeInput";
@@ -42,9 +41,8 @@ export default function ForgetPassPage() {
     try {
       const response = await forgetPassword(data).unwrap();
       if (response?.success) {
-        console.log("OTP sent successfully");
         toast.success("OTP sent successfully to your email");
-        router.push("/signIn");
+        router.push("/otp");
       }
       // router.push("/otp")
     } catch (error) {
