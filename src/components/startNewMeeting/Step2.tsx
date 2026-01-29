@@ -3,6 +3,8 @@
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { X, Plus } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setProductValue } from "@/redux/features/startMeeting/startMeetingSlice";
 // import {
 //   Select,
 //   SelectContent,
@@ -27,6 +29,7 @@ type FormValues = {
 export default function Step2(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
+  const dispatch = useDispatch()
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       participants: [
@@ -49,6 +52,8 @@ export default function Step2(
 
   const onSubmit = (data: FormValues) => {
     console.log("Form Data:", data);
+    const fromSecondStepData = data;
+    dispatch(setProductValue(fromSecondStepData))
     handleNext();
   };
 
@@ -181,7 +186,7 @@ export default function Step2(
         {/* Footer Buttons */}
         <div className="flex justify-between mt-8">
           <button
-          onClick={handlePrev}
+            onClick={handlePrev}
             type="button"
             className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
           >

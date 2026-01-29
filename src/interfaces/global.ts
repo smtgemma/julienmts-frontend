@@ -12,9 +12,25 @@ export type ErrorTypes = {
   message: string;
 };
 
-// for start meeting flow 
+// first step
 export interface ProductValue {
   productName : string;
   description: string;
   uploadProduct: File | null;
 }
+
+// second step 
+export interface Participant {
+  name: string;
+  role: string;
+  note: string;
+  decisionMaker: boolean;
+  linkedin: string;
+};
+
+// Full meeting state (IMPORTANT)
+export interface StartMeetingState {
+  product: ProductValue | null;
+  participants: Participant[];
+}
+
