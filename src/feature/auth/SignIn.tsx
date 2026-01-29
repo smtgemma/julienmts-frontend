@@ -191,6 +191,7 @@ export default function SignInPage() {
         dispatch(
           setUser({
             token: response.data.accessToken,
+            userInfo: response.data,
           })
         );
         toast.success("Login successful");
@@ -294,7 +295,7 @@ export default function SignInPage() {
             <span className="text-[16px] text-authBackgroundButton">or</span>
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
           </div>
-          <button
+          {/* <button
             className="w-full flex items-center justify-center gap-3 border border-[#D1D6DB] rounded-md py-2.5 transition"
           >
             <img
@@ -303,7 +304,7 @@ export default function SignInPage() {
               className="w-5 h-5"
             />
             <span className="text-[#2D2D2D] font-medium text-[16px]">Sign in with Google</span>
-          </button>
+          </button> */}
           <div>
             <GoogleLogin
               size="large"
