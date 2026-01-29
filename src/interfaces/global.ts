@@ -13,8 +13,8 @@ export type ErrorTypes = {
 };
 
 // for start meeting flow 
-export interface startMeeting {
+export interface ProductValue {
   productName : string;
   description: string;
-  uploadProduct: string;
+  uploadProduct: File | null;
 }

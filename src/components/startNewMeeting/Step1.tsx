@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Upload } from 'lucide-react';
 import StepTitle from './stepTitle';
+import { useDispatch } from 'react-redux';
+import { setProductValue } from '@/redux/features/startMeeting/startMeetingSlice';
 
 const Step1 = (
     { handleNext }: { handleNext: () => void }
@@ -11,6 +13,7 @@ const Step1 = (
     });
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [dragActive, setDragActive] = useState(false);
+    const dispatch = useDispatch()
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -72,6 +75,12 @@ const Step1 = (
     const handleSubmit = () => {
         console.log('Form Data:', formData);
         console.log('Uploaded File:', uploadedFile);
+        const payload = {
+            formData,
+            uploadedFile,
+        }
+        dispatch(setProductValue(payload))
+
         handleNext();
     };
 

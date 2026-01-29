@@ -1,22 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { startMeeting } from "@/interfaces/global";
+import { ProductValue } from "@/interfaces/global";
 
 
 const initialState: {
-    stateMeeting: startMeeting | null
+    stateMeeting: ProductValue | {}
 } = {
-    stateMeeting: null
+    stateMeeting: {}
 }
  
 const StartMeetingSlice = createSlice({
     name: "startMeeting",
     initialState,
     reducers: {
-        firstStep: (state, action) => {
-            state.stateMeeting = action.payload.startMeeting
+        // first step 
+        setProductValue: (state, action) => {
+            console.log(action, "=======================")
+            state.stateMeeting = action.payload
         }
     }
 })
 
-export const {firstStep} = StartMeetingSlice.actions;
+export const {setProductValue} = StartMeetingSlice.actions;
 export default StartMeetingSlice.reducer;

@@ -12,6 +12,7 @@ import {
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import userReducer from "./features/user/userSlice";
+import startMeetingReducer from "./features/startMeeting/startMeetingSlice";
 import baseApi from "./api/baseApi";
 
 // Create a noop storage for SSR
@@ -41,6 +42,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
+  startMeeting: startMeetingReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 
