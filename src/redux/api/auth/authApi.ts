@@ -40,38 +40,38 @@ export const authApi = baseApi.injectEndpoints({
 
 
 
-
     
-    resendCode: builder.mutation({
-      query: (body) => ({
-        url: "/auth/send-otp",
-        method: "POST",
-        body,
-      }),
-    }),
+    // resendCode: builder.mutation({
+    //   query: (body) => ({
+    //     url: "/auth/send-otp",
+    //     method: "POST",
+    //     body,
+    //   }),
+    // }),
 
-    logout: builder.mutation({
-      query: () => ({
-        url: "/auth/logout",
-        method: "POST",
-      }),
-    }),
-    resetPassword: builder.mutation({
-      query: ({ userId, password }) => ({
-        url: `/auth/reset-password`,
-        method: "POST",
-        body: { userId, password },
-      }),
-    }),
+    // logout: builder.mutation({
+    //   query: () => ({
+    //     url: "/auth/logout",
+    //     method: "POST",
+    //   }),
+    // }),
+
+    // resetPassword: builder.mutation({
+    //   query: ({ userId, password }) => ({
+    //     url: `/auth/reset-password`,
+    //     method: "POST",
+    //     body: { userId, password },
+    //   }),
+    // }),
   }),
 });
 
 export const {
   useSignInMutation,
   useSignUpMutation,
-  useLogoutMutation,
+  // useLogoutMutation,
   useVerifyEmailMutation,
-  useResendCodeMutation,
+  // useResendCodeMutation,
   useForgetPasswordMutation,
-  useResetPasswordMutation,
+  // useResetPasswordMutation,
 } = authApi;
