@@ -1,11 +1,16 @@
 
 import React, { useState } from 'react';
 import StepTitle from './stepTitle';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 export default function Step3(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
   const [companyUrl, setCompanyUrl] = useState('https://fastgrowth.com');
+
+  const allData = useSelector((state: RootState) => state.startMeeting) 
+  console.log(allData, "==================allData")
 
   return (
     <div className="p-6 bg-white rounded-lg border border-[#D1D6DB]">
