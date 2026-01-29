@@ -11,3 +11,10 @@ export type ErrorTypes = {
   success: boolean;
   message: string;
 };
+
+// for start meeting flow 
+export interface startMeeting {
+  productName : string;
+  description: string;
+  uploadProduct: string;
+}

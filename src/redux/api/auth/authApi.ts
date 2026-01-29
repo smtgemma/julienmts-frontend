@@ -49,12 +49,12 @@ export const authApi = baseApi.injectEndpoints({
     //   }),
     // }),
 
-    logout: builder.mutation({
-      query: () => ({
-        url: "/auth/logout",
-        method: "POST",
-      }),
-    }),
+    // logout: builder.mutation({
+    //   query: () => ({
+    //     url: "/auth/logout",
+    //     method: "POST",
+    //   }),
+    // }),
 
     // resetPassword: builder.mutation({
     //   query: ({ userId, password }) => ({
