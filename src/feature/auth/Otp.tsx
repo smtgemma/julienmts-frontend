@@ -241,7 +241,7 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import {
-  useResendCodeMutation,
+  // useResendCodeMutation,
   useVerifyEmailMutation,
 } from "@/redux/api/auth/authApi";
 import { toast } from "sonner";
@@ -268,7 +268,7 @@ export default function OtpVerification() {
   const [activeInput, setActiveInput] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
-  const [resendCode] = useResendCodeMutation();
+  // const [resendCode] = useResendCodeMutation();
 
   // Resend OTP Timer - Initialize from localStorage or default to 300 seconds
   const [timeLeft, setTimeLeft] = useState(() => {
@@ -305,7 +305,7 @@ export default function OtpVerification() {
     localStorage.setItem("otpTimer", "300"); // Reset timer in localStorage
     setTimeLeft(300); // Reset timer in state
     console.log("Resending OTP...");
-    resendCode({ email });
+    // resendCode({ email });
   };
 
   // Focus the first input on mount
