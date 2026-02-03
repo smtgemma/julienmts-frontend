@@ -73,8 +73,8 @@ const Step1 = (
     };
 
     const handleSubmit = () => {
-        console.log('Form Data:', formData);
-        console.log('Uploaded File:', uploadedFile);
+        // console.log('Form Data:', formData);
+        // console.log('Uploaded File:', uploadedFile);
         const fromFristStepData = {
             formData,
             uploadedFile,

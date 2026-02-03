@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductValue, Participant, StartMeetingState } from "@/interfaces/global";
+import { StartMeetingState } from "@/interfaces/global";
 
 
 
@@ -27,5 +27,5 @@ const StartMeetingSlice = createSlice({
     }
 })
 
-export const { setProductValue } = StartMeetingSlice.actions;
+export const { setProductValue, setParticipantsValue } = StartMeetingSlice.actions;
 export default StartMeetingSlice.reducer;

@@ -4,7 +4,7 @@
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { X, Plus } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setProductValue } from "@/redux/features/startMeeting/startMeetingSlice";
+import { setParticipantsValue, setProductValue } from "@/redux/features/startMeeting/startMeetingSlice";
 // import {
 //   Select,
 //   SelectContent,
@@ -53,7 +53,7 @@ export default function Step2(
   const onSubmit = (data: FormValues) => {
     console.log("Form Data:", data);
     const fromSecondStepData = data;
-    dispatch(setProductValue(fromSecondStepData))
+    dispatch(setParticipantsValue(fromSecondStepData))
     handleNext();
   };
 
