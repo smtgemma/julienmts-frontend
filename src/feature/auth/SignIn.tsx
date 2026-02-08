@@ -138,7 +138,7 @@
 "use client";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useSignInMutation } from "@/redux/api/auth/authApi";
+import { useGoogleSignInMutation, useSignInMutation } from "@/redux/api/auth/authApi";
 import { setUser } from "@/redux/features/user/userSlice";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -150,6 +150,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import * as z from "zod";
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 // Define Zod schema for validation
 const formSchema = z.object({
@@ -166,6 +167,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function SignInPage() {
+  const dispath = useDispatch();
   // Use React Hook Form with Zod resolver
   const {
     register,
@@ -180,6 +182,7 @@ export default function SignInPage() {
   });
 
   const [signIn, { isLoading }] = useSignInMutation();
+  const [googleSignIn] = useGoogleSignInMutation();
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -208,34 +211,38 @@ export default function SignInPage() {
     // console.log("yesTonek= ", credentialResponse);
     try {
       const googleToken = {
-        googleToken: credentialResponse.credential,
+        token: credentialResponse.credential,
+        provider: "google"
       };
-      console.log(googleToken, "==============google token")
 
-      // const response = await googleSignIn(googleToken).unwrap();
+      const response = await googleSignIn(googleToken).unwrap();
       // console.log("response", response);
 
-      // if (response?.success) {
-      //   // localStorage.setItem("accessToken", response?.data?.accessToken);
-      //   Cookies.set("accessToken", response?.data?.accessToken);
-      //   const decoded = jwtDecode<AccessTokenPayload>(
-      //     response?.data?.accessToken,
-      //   );
+      if (response?.success) {
+        // localStorage.setItem("accessToken", response?.data?.accessToken);
+        // Cookies.set("accessToken", response?.data?.accessToken);
+        // const decoded = jwtDecode(response?.data?.accessToken);
 
-      //   const email = decoded.email;
-      //   console.log("Google Email:", email);
+        // const email = decoded.email;
+        // console.log("Google Email:", email);
 
-      //   // console.log(response?.data?.userData?.role);
-      //   dispath(setUserData(response?.data?.userData));
-      //   toast.success(response?.message);
-      //   if (response?.data?.teeRegistration === null) {
-      //     router.push(`/role?email=${email}`);
-      //   } else {
-      //     router.push("/new-project");
-      //   }
-      // }
+        // console.log(response?.data?.userData?.role);
 
-      // console.log("Login successful", response.data);
+        dispatch(
+          setUser({
+            token: response.data.accessToken,
+          }),
+        );
+        toast.success(response?.message);
+        router.push("/dashboard/home");
+        // if (response?.data?.teeRegistration === null) {
+        //   router.push(`/role?email=${email}`);
+        // } else {
+        //   router.push("/new-project");
+        // }
+      }
+
+      console.log("Login successful", response.data);
       // Handle successful login (store tokens, redirect, etc.)
     } catch (error) {
       console.error("Login failed", error);

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useSignUpMutation } from "@/redux/api/auth/authApi";
+import { useGoogleSignInMutation, useSignUpMutation } from "@/redux/api/auth/authApi";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
+import { GoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/features/user/userSlice";
 
 // Define Zod schema for validation
 const formSchema = z
@@ -30,7 +33,9 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function SignUpPage() {
   const [signUp, { isLoading }] = useSignUpMutation();
+  const [googleSignIn] = useGoogleSignInMutation();
   const router = useRouter();
+  const dispatch = useDispatch()
 
   // Use React Hook Form with Zod resolver
   const {
@@ -72,6 +77,52 @@ export default function SignUpPage() {
       console.error("Error during sign up:", error);
       toast(error?.data?.message || "Sign up failed");
     }
+  };
+
+  const handleSuccess = async (credentialResponse: any) => {
+    // console.log("yesTonek= ", credentialResponse);
+    try {
+      const googleToken = {
+        token: credentialResponse.credential,
+        provider: "google"
+      };
+
+      const response = await googleSignIn(googleToken).unwrap();
+      // console.log("response", response);
+
+      if (response?.success) {
+        // localStorage.setItem("accessToken", response?.data?.accessToken);
+        // Cookies.set("accessToken", response?.data?.accessToken);
+        // const decoded = jwtDecode(response?.data?.accessToken);
+
+        // const email = decoded.email;
+        // console.log("Google Email:", email);
+
+        // console.log(response?.data?.userData?.role);
+
+        dispatch(
+          setUser({
+            token: response.data.accessToken,
+          }),
+        );
+        toast.success(response?.message);
+        router.push("/dashboard/home");
+        // if (response?.data?.teeRegistration === null) {
+        //   router.push(`/role?email=${email}`);
+        // } else {
+        //   router.push("/new-project");
+        // }
+      }
+
+      console.log("Login successful", response.data);
+      // Handle successful login (store tokens, redirect, etc.)
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
+  const handleError = () => {
+    console.log("Login Failed");
   };
 
   return (
@@ -137,7 +188,7 @@ export default function SignUpPage() {
             <span className="text-[16px] text-authBackgroundButton">or</span>
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
           </div>
-          <button
+          {/* <button
             className="w-full flex items-center justify-center gap-3 border border-[#D1D6DB] rounded-md py-2.5 transition"
           >
             <img
@@ -146,8 +197,14 @@ export default function SignUpPage() {
               className="w-5 h-5"
             />
             <span className="text-[#2D2D2D] font-medium text-[16px]">Sign in with Google</span>
-          </button>
-
+          </button> */}
+          <div>
+            <GoogleLogin
+              size="large"
+              onSuccess={handleSuccess}
+              onError={handleError}
+            />
+          </div>
         </div>
       </div>
     </AuthBackground>

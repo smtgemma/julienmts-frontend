@@ -37,6 +37,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
+    googleSignIn: builder.mutation({
+      query: (body) => ({
+        url:"/auth/social-login",
+        method: "POST",
+        body,
+      })
+    })
+
 
 
 
@@ -74,4 +82,5 @@ export const {
   // useResendCodeMutation,
   useForgetPasswordMutation,
   // useResetPasswordMutation,
+  useGoogleSignInMutation,
 } = authApi;
