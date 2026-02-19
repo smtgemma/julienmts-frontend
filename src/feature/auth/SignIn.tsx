@@ -52,8 +52,9 @@ export default function SignInPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const domain = window.location.origin;
-  
+  // const domain = window.location.origin;
+  // console.log(domain, "=================domin===============")
+
   const onSubmit = async (data: FormValues) => {
     try {
       const response = await signIn(data).unwrap();
@@ -65,14 +66,13 @@ export default function SignInPage() {
           })
         );
         toast.success("Login successful");
-        router.push("/dashboard/home");
         console.log("Login successful", response?.data?.user?.role);
-        if(response?.data?.user?.role === "admin"){
-          router.push("/admin/dashboard");
+        if (response?.data?.user?.role === "admin") {
+          router.push("http://localhost:3011");
         } else {
-          router.push("/dashboard/home"); 
+          router.push("http://localhost:3054/dashboard/home");
+        }
       }
-    }
     } catch (error: any) {
       console.log("Error during sign-in:", error);
       return toast.error(error?.data?.message || "Login failed");
