@@ -4,11 +4,12 @@ import Cookies from "js-cookie";
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
-    // baseUrl: "http://206.162.244.131:5400/api/v1",
+    // baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
+    baseUrl: "http://206.162.244.131:5400/api/v1",
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = Cookies?.get("token");
+      console.log("Token from prepareHeaders:", token);
       if (token) {
         headers.set("Authorization", `${token}`);
       }
