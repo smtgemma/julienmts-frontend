@@ -54,10 +54,17 @@ const StartNewMeeting = () => {
   };
 
 
+  // const steps = [
+  //   { id: 1, title: 'Step 1', component: <Step1 handleNext={handleNext} /> },
+  //   { id: 2, title: 'Step 2', component: <Step2 handleNext={handleNext} handlePrev={handlePrev} /> },
+  //   { id: 3, title: 'Step 3', component: <Step3 handleNext={handleNext} handlePrev={handlePrev} /> },
+  //   { id: 4, title: 'Step 4', component: <Step4 handleNext={handleNext} handlePrev={handlePrev} /> },
+  //   { id: 5, title: 'Step 5', component: <Step5 handlePrev={handlePrev} /> },
+  // ];
   const steps = [
     { id: 1, title: 'Step 1', component: <Step1 handleNext={handleNext} /> },
-    { id: 2, title: 'Step 2', component: <Step2 handleNext={handleNext} handlePrev={handlePrev} /> },
-    { id: 3, title: 'Step 3', component: <Step3 handleNext={handleNext} handlePrev={handlePrev} /> },
+    { id: 2, title: 'Step 3', component: <Step3 handleNext={handleNext} handlePrev={handlePrev} /> },
+    { id: 3, title: 'Step 2', component: <Step2 handleNext={handleNext} handlePrev={handlePrev} /> },
     { id: 4, title: 'Step 4', component: <Step4 handleNext={handleNext} handlePrev={handlePrev} /> },
     { id: 5, title: 'Step 5', component: <Step5 handlePrev={handlePrev} /> },
   ];
