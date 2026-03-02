@@ -66,16 +66,21 @@ export default function SignUpPage() {
       password: data.password,
     };
 
-    console.log(payload, "payload")
-
     try {
       const response = await signUp(payload).unwrap();
       if (response?.success) {
-        router.push("/dashboard/home");
+        router.push("/otp");
       }
     } catch (error: any) {
-      console.error("Error during sign up:", error);
-      toast(error?.data?.message || "Sign up failed");
+      const errorMessages = error?.data?.errorMessages;
+
+      if (Array.isArray(errorMessages)) {
+        errorMessages.forEach((err: any) => {
+          toast.error(err.message);
+        });
+      } else {
+        console.error("Something went wrong");
+      }
     }
   };
 

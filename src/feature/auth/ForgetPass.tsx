@@ -42,7 +42,7 @@ export default function ForgetPassPage() {
       const response = await forgetPassword(data).unwrap();
       if (response?.success) {
         toast.success("OTP sent successfully to your email");
-        router.push("/otp");
+        router.push("/verify-forget-password");
       }
       // router.push("/otp")
     } catch (error) {

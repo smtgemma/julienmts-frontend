@@ -2,7 +2,7 @@
 "use client";
 import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-// import { useResetPasswordMutation } from "@/redux/api/auth/authApi";
+import { useResetPasswordMutation } from "@/redux/api/auth/authApi";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -33,10 +33,10 @@ type FormValues = z.infer<typeof formSchema>;
 export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
-  // const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const router = useRouter();
   const userId = searchParams.get("userId") || "";
-  const token = searchParams.get("token") || "";
+  // const token = searchParams.get("token") || "";
 
   // Use React Hook Form with Zod resolver
   const {
@@ -50,26 +50,26 @@ export default function ResetPasswordPage() {
       confirmPassword: "",
     },
   });
-  console.log(userId, token);
+  // console.log(userId, token);
   const onSubmit = async (data: FormValues) => {
-    // try {
-    //   const response = await resetPassword({
-    //     userId,
-    //     password: data.password,
-    //     token,
-    //   }).unwrap();
+    const resetToken = localStorage.getItem("resetToken");
+    try {
+      const response = await resetPassword({
+        // userId,
+        resetToken,
+        newPassword: data.password,
+      }).unwrap();
 
-    //   if (response?.success) {
-    //     console.log("Password reset successfully");
-    //     toast.success("Password reset successfully");
-    //     router.push("/signIn");
-    //   } else {
-    //     console.error("Failed to reset password");
-    //   }
-    // } catch (error: any) {
-    //   console.error("Error:", error);
-    //   toast.error(error?.data?.message || "Failed to reset password");
-    // }
+      if (response?.success) {
+        toast.success("Password reset successfully");
+        router.push("/signIn");
+      } else {
+        console.error("Failed to reset password");
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast.error(error?.data?.message || "Failed to reset password");
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -121,7 +121,7 @@ export default function ResetPasswordPage() {
           />
 
           {/* Sign Up Button */}
-          {/* <PrimaryButton type="submit" loading={isLoading} text="Reset Password" /> */}
+          <PrimaryButton type="submit" loading={isLoading} text="Reset Password" />
         </form>
         <div className="text-center mb-3 mt-3 text-[16px] text-gray-600">
           Remember your password? Sign in{" "}

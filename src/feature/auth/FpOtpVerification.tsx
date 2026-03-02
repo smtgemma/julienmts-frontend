@@ -241,8 +241,8 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import {
-  useResendCodeMutation,
-  useVerifyEmailMutation,
+  useResendForgetPasswordVeirifyOtpMutation,
+  useVerifyForgetPasswordOtpMutation,
 } from "@/redux/api/auth/authApi";
 import { toast } from "sonner";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
@@ -267,8 +267,8 @@ export default function OtpVerification() {
   const router = useRouter();
   const [activeInput, setActiveInput] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
-  const [resendCode] = useResendCodeMutation();
+  const [verifyForgetPasswordOtp, { isLoading }] = useVerifyForgetPasswordOtpMutation();
+  const [resendForgetPasswordVeirifyOtp] = useResendForgetPasswordVeirifyOtpMutation();
 
   // Resend OTP Timer - Initialize from localStorage or default to 300 seconds
   const [timeLeft, setTimeLeft] = useState(() => {
@@ -304,8 +304,8 @@ export default function OtpVerification() {
     const email = localStorage.getItem("email");
     localStorage.setItem("otpTimer", "30"); // Reset timer in localStorage
     setTimeLeft(30); // Reset timer in state
-    console.log("Resending OTP...");
-    resendCode({ email });
+    // console.log("Resending OTP...");
+    resendForgetPasswordVeirifyOtp({ email }).unwrap();
   };
 
   // Focus the first input on mount
@@ -320,15 +320,19 @@ export default function OtpVerification() {
     const otpValue = data.otp.join("");
     console.log("OTP submitted:", otpValue);
     try {
-      const response = await verifyEmail({
+      const response = await verifyForgetPasswordOtp({
         email,
         otp: otpValue,
         // "newPassword": data.newPassword
       }).unwrap();
       if (response?.success) {
+        const resetToken = response?.data?.resetToken;
+        localStorage.setItem("resetToken", resetToken);
+        // console.log(response?.data?.resetToken, "======================verifyEmailPassword")
         toast.success("Verification successful!");
+
         localStorage.removeItem("otpTimer"); // Clear timer on success
-        router.push("/signIn");
+        router.push("/reset-password");
       }
     } catch (error: any) {
       toast.error(
