@@ -86,7 +86,7 @@ export default function SignInPage() {
     // console.log("yesTonek= ", credentialResponse);
     try {
       const idToken = {
-        token: credentialResponse.credential,
+        idToken: credentialResponse.credential,
       };
 
       const response = await googleSignIn(idToken).unwrap();
