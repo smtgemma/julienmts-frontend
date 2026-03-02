@@ -50,6 +50,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
 
     // /auth/verify-forgot-password-otp
@@ -59,6 +60,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
 
     // resend otp for forget password
@@ -68,6 +70,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
 
     // reset password 
@@ -77,43 +80,27 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     
-
+    // google login 
     googleSignIn: builder.mutation({
       query: (body) => ({
         url: "/auth/google",
         method: "POST",
         body,
-      })
-    })
+      }),
+      invalidatesTags: ["User"],
+    }),
 
-
-
-
-
-    // resendCode: builder.mutation({
-    //   query: (body) => ({
-    //     url: "/auth/send-otp",
-    //     method: "POST",
-    //     body,
-    //   }),
-    // }),
-
-    // logout: builder.mutation({
-    //   query: () => ({
-    //     url: "/auth/logout",
-    //     method: "POST",
-    //   }),
-    // }),
-
-    // resetPassword: builder.mutation({
-    //   query: ({ userId, password }) => ({
-    //     url: `/auth/reset-password`,
-    //     method: "POST",
-    //     body: { userId, password },
-    //   }),
-    // }),
+    //log out
+    logout: builder.mutation({
+      query: (payload) => ({
+        url: "/auth/logout",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -122,11 +109,10 @@ export const {
   useSignUpMutation,
   useVerifyEmailMutation,
   useResendCodeMutation,
-
   useForgetPasswordMutation,
   useVerifyForgetPasswordOtpMutation,
   useResendForgetPasswordVeirifyOtpMutation,
   useResetPasswordMutation,
-
   useGoogleSignInMutation,
+  useLogoutMutation,
 } = authApi;

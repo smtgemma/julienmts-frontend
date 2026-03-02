@@ -18,27 +18,44 @@ import { RxDashboard } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { IoIosLogOut } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { persistor } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
-import { logout } from "@/redux/features/user/userSlice";
+import { useLogoutMutation } from "@/redux/api/auth/authApi";
+import { useRouter } from "next/navigation";
 
 
 export default function AppSidebar() {
   const pathname = usePathname();
-  
+  const router = useRouter()
+
+  const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
+  // console.log(refreshToken, "==============")
+
+  const [logout, { isLoading: logoutLoging }] = useLogoutMutation()
+
   // logout 
-  const handleLogout = () => {
-    // useDispatch(logout());
-    persistor.purge();
-    Cookies.remove("token", { path: "/" });
-    toast.success("Logout successfully");
+  const handleLogout = async () => {
+    const payload = {
+      refreshToken: refreshToken
+    }
+    try {
+      await logout(payload).unwrap();
 
-    // Redirect to login page
-    window.location.href = "/signIn";
+      // dispatch(logoutAction());
+      Cookies.remove("token");
+      Cookies.remove("refreshToken");
+
+      toast.success("Logout successfully");
+
+      setTimeout(() => {
+        router.replace("/signIn");
+      }, 1000);
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Logout failed");
+    }
   };
-
 
   const menuItems = [
     { label: "Home", href: "/dashboard/home", icon: GrHomeRounded },

@@ -4,9 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: {
   user: UserProfile | null;
   token: string | null;
+  refreshToken: string | null;
 } = {
   user: null,
   token: null,
+  refreshToken: null,
 };
 
 const userSlice = createSlice({
@@ -14,15 +16,16 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload.user; 
+      state.refreshToken = action.payload.refreshToken;
       state.token = action.payload.token;
     },
-    logout: (state) => {
+    logoutFc: (state) => {
       state.user = null;
       state.token = null;
     },
   },
 });
 
-export const { setUser, logout } = userSlice.actions;
+export const { setUser, logoutFc } = userSlice.actions;
 export default userSlice.reducer;

@@ -12,7 +12,8 @@ export const baseApi = createApi({
       const token = Cookies?.get("token");
       console.log("Token from prepareHeaders:", token);
       if (token) {
-        headers.set("Authorization", `${token}`);
+        // headers.set("Authorization", `${token}`);
+        headers.set("authorization", `Bearer ${token}`);
       }
       return headers;
     },

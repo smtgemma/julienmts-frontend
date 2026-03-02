@@ -61,6 +61,7 @@ export default function ResetPasswordPage() {
       }).unwrap();
 
       if (response?.success) {
+        localStorage.removeItem("resetToken");
         toast.success("Password reset successfully");
         router.push("/signIn");
       } else {

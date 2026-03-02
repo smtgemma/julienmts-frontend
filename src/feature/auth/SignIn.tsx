@@ -32,7 +32,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function SignInPage() {
-  const dispath = useDispatch();
+  const router = useRouter();
+  const dispatch = useDispatch();
   // Use React Hook Form with Zod resolver
   const {
     register,
@@ -49,9 +50,6 @@ export default function SignInPage() {
   const [signIn, { isLoading }] = useSignInMutation();
   const [googleSignIn] = useGoogleSignInMutation();
 
-  const router = useRouter();
-  const dispatch = useDispatch();
-
   // const domain = window.location.origin;
   // console.log(domain, "=================domin===============")
 
@@ -64,7 +62,8 @@ export default function SignInPage() {
         dispatch(
           setUser({
             token: response.data.accessToken,
-            userInfo: response.data,
+            refreshToken: response.data.refreshToken,
+            user: response.data.user,
           })
         );
         toast.success("Login successful");
