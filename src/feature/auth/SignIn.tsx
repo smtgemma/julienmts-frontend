@@ -84,12 +84,11 @@ export default function SignInPage() {
   const handleSuccess = async (credentialResponse: any) => {
     // console.log("yesTonek= ", credentialResponse);
     try {
-      const googleToken = {
+      const idToken = {
         token: credentialResponse.credential,
-        provider: "google"
       };
 
-      const response = await googleSignIn(googleToken).unwrap();
+      const response = await googleSignIn(idToken).unwrap();
       // console.log("response", response);
 
       if (response?.success) {

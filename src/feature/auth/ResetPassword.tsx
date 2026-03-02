@@ -72,10 +72,6 @@ export default function ResetPasswordPage() {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <AuthBackground>
       <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
@@ -111,11 +107,7 @@ export default function ResetPasswordPage() {
             label="Confirm Password"
             placeholder="Enter your password"
             showPasswordToggle={true}
-            error={
-              typeof errors.confirmPassword?.message === "string"
-                ? errors.confirmPassword.message
-                : "Password confirmation does not match the password."
-            }
+            error={errors.confirmPassword?.message}
             leftIcon={<img src="/authImage/passwordIcon.png" alt="icon" className="w-5 h-5" />}
             {...register("confirmPassword")}
           />

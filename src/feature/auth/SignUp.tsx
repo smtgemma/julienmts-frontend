@@ -87,12 +87,11 @@ export default function SignUpPage() {
   const handleSuccess = async (credentialResponse: any) => {
     // console.log("yesTonek= ", credentialResponse);
     try {
-      const googleToken = {
-        token: credentialResponse.credential,
-        provider: "google"
+      const idToken = {
+        idToken: credentialResponse.credential,
       };
 
-      const response = await googleSignIn(googleToken).unwrap();
+      const response = await googleSignIn(idToken).unwrap();
       // console.log("response", response);
 
       if (response?.success) {

@@ -82,7 +82,7 @@ export const authApi = baseApi.injectEndpoints({
 
     googleSignIn: builder.mutation({
       query: (body) => ({
-        url: "/auth/social-login",
+        url: "/auth/google",
         method: "POST",
         body,
       })
