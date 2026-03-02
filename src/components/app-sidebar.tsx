@@ -27,6 +27,7 @@ import { logout } from "@/redux/features/user/userSlice";
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  
   // logout 
   const handleLogout = () => {
     // useDispatch(logout());

@@ -59,6 +59,7 @@ export default function SignInPage() {
     try {
       const response = await signIn(data).unwrap();
       if (response?.success) {
+        console.log(response, "===============================")
         Cookies.set("token", response.data.accessToken);
         dispatch(
           setUser({
