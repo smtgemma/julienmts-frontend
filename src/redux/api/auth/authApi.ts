@@ -82,7 +82,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    
+
     // google login 
     googleSignIn: builder.mutation({
       query: (body) => ({
@@ -100,7 +100,19 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["User"],
     }),
+
+    // refresh token 
+    refreshToken: builder.mutation({
+      query: (refreshToken) => ({
+        url: "auth/refresh-token",
+        method: "POST",
+        body: refreshToken,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
   }),
 });
 
