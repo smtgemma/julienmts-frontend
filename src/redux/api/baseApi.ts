@@ -37,7 +37,8 @@ import {
 import Cookies from "js-cookie";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://206.162.244.134:8090/api/v1/",
+  // baseUrl: "http://206.162.244.134:8090/api/v1/",
+  baseUrl: "https://0227-103-174-189-65.ngrok-free.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers) => {
     const token = Cookies?.get("token");
@@ -84,7 +85,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
 export const baseApi = createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["User"],
+  tagTypes: ["User", "Meeting"],
   endpoints: () => ({}),
 });
 

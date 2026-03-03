@@ -3,17 +3,23 @@ import { Upload } from 'lucide-react';
 import StepTitle from './stepTitle';
 import { useDispatch } from 'react-redux';
 import { setProductValue } from '@/redux/features/startMeeting/startMeetingSlice';
+import { useMeetingSalesPersonMutation } from '@/redux/api/startMettingApi/startMettingApi';
+import { toast } from 'sonner';
+import DashboardButton from '../shared/dashboardButton/DashboardButton';
 
 const Step1 = (
     { handleNext }: { handleNext: () => void }
 ) => {
     const [formData, setFormData] = useState({
         productName: '',
-        description: ''
+        productUrl: '',
+        description: '',
     });
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [dragActive, setDragActive] = useState(false);
     const dispatch = useDispatch()
+
+    const [meetingSalesPerson, { isLoading }] = useMeetingSalesPersonMutation()
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -59,6 +65,7 @@ const Step1 = (
             'image/jpeg',
             'image/jpg',
             'image/png',
+            'image/svg',
             'image/gif',
             'image/webp'
         ];
@@ -68,20 +75,43 @@ const Step1 = (
         if (validTypes.includes(file.type) && file.size <= maxSize) {
             setUploadedFile(file);
         } else {
-            alert('Please upload PDF, DOC, PPTX, or Image files (Max 10MB)');
+            toast.error('Please upload PDF, DOC, PPTX, or Image files (Max 10MB)');
         }
     };
 
-    const handleSubmit = () => {
-        // console.log('Form Data:', formData);
-        // console.log('Uploaded File:', uploadedFile);
+    const handleSubmit = async () => {
         const fromFristStepData = {
             formData,
             uploadedFile,
         }
-        dispatch(setProductValue(fromFristStepData))
 
-        handleNext();
+        try {
+            const formDataToSend = new FormData();
+
+            // ✅ Send as "bodyData" key with JSON string value (matching Postman)
+            const bodyData = {
+                product_name: formData.productName,
+                product_url: formData.productUrl,
+                description: formData.description,
+            };
+
+            formDataToSend.append("bodyData", JSON.stringify(bodyData));
+
+            if (uploadedFile) {
+                formDataToSend.append("materials", uploadedFile);
+            }
+
+            const response = await meetingSalesPerson(formDataToSend).unwrap();
+            // console.log(response, "==============")
+            if (response.success) {
+                toast.success(response.message)
+                dispatch(setProductValue(response.data));
+                handleNext();
+            }
+
+        } catch (error: any) {
+            toast.error("Something went wrong", error.message)
+        }
     };
 
     return (
@@ -99,6 +129,20 @@ const Step1 = (
                     type="text"
                     name="productName"
                     value={formData.productName}
+                    onChange={handleInputChange}
+                    placeholder="https://example.com/product"
+                    className="w-full border border-[#D1D6DB] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
+                />
+            </div>
+            {/* Product url */}
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-[#2D2D2D] mb-2.5">
+                    Product Url
+                </label>
+                <input
+                    type="text"
+                    name="productUrl"
+                    value={formData.productUrl}
                     onChange={handleInputChange}
                     placeholder="https://example.com/product"
                     className="w-full border border-[#D1D6DB] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
@@ -161,13 +205,20 @@ const Step1 = (
             </div>
 
             {/* Button Footer */}
-            <div className="flex justify-end mt-8">
+            {/* <div className="flex justify-end mt-8">
                 <button
                     onClick={handleSubmit}
                     className="bg-primaryBgColor text-white px-6 py-3 rounded-lg shadow hover:bg-primaryBgColor transition cursor-pointer"
                 >
                     Next Step
                 </button>
+            </div> */}
+            <div className="flex justify-end mt-8">
+                <DashboardButton
+                    text="Next Step"
+                    onClick={handleSubmit}
+                    isLoading={isLoading} // RTK mutation loading state
+                />
             </div>
 
         </div>

@@ -102,17 +102,6 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-
-    // refresh token 
-    refreshToken: builder.mutation({
-      query: (refreshToken) => ({
-        url: "auth/refresh-token",
-        method: "POST",
-        body: refreshToken,
-      }),
-      invalidatesTags: ["User"],
-    }),
-
   }),
 });
 
