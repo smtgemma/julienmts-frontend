@@ -214,6 +214,7 @@ import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { X, Plus } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setParticipantsValue, setProductValue } from "@/redux/features/startMeeting/startMeetingSlice";
+import { useMeetingCompanyRepresentitiveMutation } from "@/redux/api/startMettingApi/startMettingApi";
 // import {
 //   Select,
 //   SelectContent,
@@ -239,6 +240,8 @@ export default function Step2(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
   const dispatch = useDispatch()
+  const [meetingCompanyRepresentitive, {isLoading}] = useMeetingCompanyRepresentitiveMutation()
+  
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       participants: [
@@ -259,9 +262,17 @@ export default function Step2(
     name: "participants",
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     console.log("Form Data:", data);
     const fromSecondStepData = data;
+    
+    try {
+      const response = await meetingCompanyRepresentitive(data).unwrap();
+      console.log(response, "==================")
+    } catch (error) {
+      console.log("something went wrong")
+    }
+
     dispatch(setParticipantsValue(fromSecondStepData))
     handleNext();
   };

@@ -205,14 +205,6 @@ const Step1 = (
             </div>
 
             {/* Button Footer */}
-            {/* <div className="flex justify-end mt-8">
-                <button
-                    onClick={handleSubmit}
-                    className="bg-primaryBgColor text-white px-6 py-3 rounded-lg shadow hover:bg-primaryBgColor transition cursor-pointer"
-                >
-                    Next Step
-                </button>
-            </div> */}
             <div className="flex justify-end mt-8">
                 <DashboardButton
                     text="Next Step"
