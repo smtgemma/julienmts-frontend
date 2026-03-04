@@ -22,6 +22,7 @@ export interface ProductValue {
 // second step 
 export interface CompanyData {
   company_size: string | null;
+  company_id: string,
   headquarters: string | null;
   revenue: string | null;
   industry: string | null;

@@ -22,15 +22,22 @@ export const startMettingApi = baseApi.injectEndpoints({
       invalidatesTags: ["Meeting"],
     }),
 
-    // meeting company representitives 
+    // // meeting company representitives 
+    // meetingCompanyRepresentitive: builder.mutation({
+    //   query: ({companyId, payload}) => ({
+    //     url: `/meeting/company/${companyId}/representatives`,
+    //     method: "POST",
+    //     body: payload,
+    //   }),
+    //   invalidatesTags: ["Meeting"],
+    // }),
     meetingCompanyRepresentitive: builder.mutation({
-      query: (body) => ({
-        url: `/meeting/company/:companyId/representatives`,
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["Meeting"],
-    }),
+  query: ({ companyId, participants }) => ({
+    url: `/meeting/company/${companyId}/representatives`,
+    method: "POST",
+    body: participants, // ✅ send array directly, not wrapped in an object
+  }),
+}),
   }),
 });
 

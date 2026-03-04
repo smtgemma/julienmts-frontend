@@ -159,6 +159,7 @@ export default function Step3(
   const dispatch = useDispatch()
 
   const allData = useSelector((state: RootState) => state.startMeeting);
+  
   const [meetngCompany, { isLoading }] = useMeetngCompanyMutation();
 
   const {
@@ -180,7 +181,7 @@ export default function Step3(
         // console.log(response, "==============response")
         toast.success(response.message)
         setcompanyDataShow(response?.data?.company_data);
-        dispatch(setCompanyData(response?.data?.company_data))
+        dispatch(setCompanyData(response?.data))
 
       }
     } catch (error: any) {
