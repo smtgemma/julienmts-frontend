@@ -14,7 +14,8 @@ export type ErrorTypes = {
 
 // first step
 export interface ProductValue {
-  productName : string;
+  salesperson_id: string; // after 
+  productName: string;
   description: string;
   uploadProduct: File | null;
 }
@@ -22,7 +23,7 @@ export interface ProductValue {
 // second step 
 export interface CompanyData {
   company_size: string | null;
-  company_id: string,
+  company_id: string, //after
   headquarters: string | null;
   revenue: string | null;
   industry: string | null;
@@ -41,12 +42,13 @@ export interface Participant {
   note: string;
   decisionMaker: boolean;
   linkedin: string;
+  representative_ids: string[];
 };
 
 // Full meeting state (IMPORTANT)
 export interface StartMeetingState {
   product: ProductValue | null;
-  companyData: CompanyData | null; 
+  companyData: CompanyData | null;
   participants: Participant[];
 }
 

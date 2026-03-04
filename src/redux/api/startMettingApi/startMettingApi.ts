@@ -15,29 +15,33 @@ export const startMettingApi = baseApi.injectEndpoints({
     // meeting company for crete compoany id
     meetngCompany: builder.mutation({
       query: (body) => ({
-        url: "/meeting/company",   
+        url: "/meeting/company",
         method: "POST",
         body,
       }),
       invalidatesTags: ["Meeting"],
     }),
 
-    // // meeting company representitives 
-    // meetingCompanyRepresentitive: builder.mutation({
-    //   query: ({companyId, payload}) => ({
-    //     url: `/meeting/company/${companyId}/representatives`,
-    //     method: "POST",
-    //     body: payload,
-    //   }),
-    //   invalidatesTags: ["Meeting"],
-    // }),
+    // meeting company representitive for crate representitive id 
     meetingCompanyRepresentitive: builder.mutation({
-  query: ({ companyId, participants }) => ({
-    url: `/meeting/company/${companyId}/representatives`,
-    method: "POST",
-    body: participants, // ✅ send array directly, not wrapped in an object
-  }),
-}),
+      query: ({ companyId, participants }) => ({
+        url: `/meeting/company/${companyId}/representatives`,
+        method: "POST",
+        body: participants,
+      }),
+      invalidatesTags: ["Meeting"],
+    }),
+
+    // create meeting api  for meeting_id 
+    createMeetingId: builder.mutation({
+      query: (body) => ({
+        url: "/meeting/create", 
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Meeting"],
+    }),
+
   }),
 });
 
@@ -45,4 +49,5 @@ export const {
   useMeetingSalesPersonMutation,
   useMeetngCompanyMutation,
   useMeetingCompanyRepresentitiveMutation,
+  useCreateMeetingIdMutation,
 } = startMettingApi;

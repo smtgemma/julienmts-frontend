@@ -269,6 +269,7 @@ export default function Step2({
   handlePrev: () => void;
 }) {
   const dispatch = useDispatch();
+  // take data from redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
   const companyId = allData?.companyData?.company_id;
 

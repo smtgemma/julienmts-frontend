@@ -10,10 +10,28 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import StepTitle from './stepTitle';
+import { useCreateMeetingIdMutation } from '@/redux/api/startMettingApi/startMettingApi';
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import DashboardButton from '../shared/dashboardButton/DashboardButton';
+import { toast } from 'sonner';
+import Cookies from "js-cookie";
 
 export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
+
+  // take data from redux 
+  const allData = useSelector((state: RootState) => state.startMeeting);
+  // console.log(allData, "============")
+  const representatives = allData?.participants?.representative_ids
+  const salesperson_id = allData?.product?.salesperson_id || {};
+  const companyId = allData?.companyData?.company_id || {};
+
+  // console.log(salesperson_id, companyId)
+
+  const [createMeetingId, { isLoading }] = useCreateMeetingIdMutation();
+
   const { register, control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       meetingGoal: 'Discovery',
@@ -36,10 +54,45 @@ export default function MeetingPrepForm(
     name: 'questions'
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log('Form Data:', data);
-    // Handle form submission here
-    handleNext();
+
+    // const payload = {
+    //   salesperson_id: salesperson_id,
+    //   company_id: companyId,
+    //   meeting_mode: "1-on-2",
+    //   representatives: representatives as string[],
+    //   meeting_goal: data?.meetingGoal || "",
+    //   personality: data?.personality || "",
+    //   duration_minutes: Number(data?.duration) || 0,
+    //   difficulty: data?.difficulty || "medium",
+    // };
+
+    const payload = {
+      salesperson_id: salesperson_id,
+      company_id: companyId,
+      meeting_mode: "1-on-1",
+      representatives: representatives as string[],
+      meeting_goal: data?.meetingGoal || "",
+      personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)
+        ? data.personality
+        : "nice",
+      duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
+      difficulty: ["beginner", "intermediate", "advanced"].includes(data?.difficulty)
+        ? data.difficulty
+        : "beginner",
+    };
+
+    try {
+      const response = await createMeetingId(payload).unwrap()
+      if (response?.success) {
+        Cookies.set("meetingId", response.data.meeting_id);
+        toast.success(response.message)
+        handleNext();
+      }
+    } catch (error: any) {
+      toast.error("Something went wrong", error.message)
+    }
   };
 
   const handleBack = () => {
@@ -224,12 +277,11 @@ export default function MeetingPrepForm(
           >
             Back
           </button>
-          <button
-            type="submit"
-            className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer"
-          >
-            Next Step
-          </button>
+          <DashboardButton
+            text="Next Step"
+            onClick={handleSubmit(onSubmit)}
+            isLoading={isLoading} // RTK mutation loading state
+          />
         </div>
       </form>
     </div>
