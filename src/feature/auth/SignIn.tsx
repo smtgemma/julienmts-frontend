@@ -59,6 +59,7 @@ export default function SignInPage() {
       if (response?.success) {
         console.log(response, "===============================")
         Cookies.set("token", response.data.accessToken);
+        Cookies.set("refreshToken", response.data.refreshToken);
         dispatch(
           setUser({
             token: response.data.accessToken,

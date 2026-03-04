@@ -25,33 +25,37 @@
 // // Export hooks for usage in functional components
 // export default baseApi;
 
-
 // src/features/api/baseApi.ts
-import {
-  createApi,
-  fetchBaseQuery,
+
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
-} from "@reduxjs/toolkit/query/react";
+} from "@reduxjs/toolkit/query";
 import Cookies from "js-cookie";
 
+/**
+ * Base Query
+ */
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://206.162.244.134:8090/api/v1/",
-  // baseUrl: "https://0227-103-174-189-65.ngrok-free.app/api/v1",
   credentials: "include",
-  prepareHeaders: (headers) => {
-    const token = Cookies?.get("token");
 
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
+  prepareHeaders: (headers) => {
+    const accessToken = Cookies.get("token");
+
+    if (accessToken) {
+      headers.set("authorization", `Bearer ${accessToken}`);
     }
 
     return headers;
   },
 });
 
-// ✅ Properly Typed baseQueryWithReauth
+/**
+ * Base Query With Auto Re-Authentication
+ */
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
@@ -59,31 +63,59 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
+  // If unauthorized → try refresh token
   if (result?.error?.status === 401) {
+    const refreshToken = Cookies.get("refreshToken");
+
+    // If no refresh token → logout
+    if (!refreshToken) {
+      Cookies.remove("token");
+      Cookies.remove("refreshToken");
+      return result;
+    }
+
+    // Call refresh endpoint
     const refreshResult = await baseQuery(
       {
         url: "auth/refresh-token",
         method: "POST",
+        body: {
+          refreshToken: refreshToken,
+        },
       },
       api,
       extraOptions
     );
 
     if (refreshResult?.data) {
-      const newToken = (refreshResult.data as any)?.accessToken;
+      const newAccessToken = (refreshResult.data as any)?.data?.accessToken;
 
-      Cookies.set("token", newToken);
+      if (newAccessToken) {
+        // Save new token
+        Cookies.set("token", newAccessToken);
 
-      result = await baseQuery(args, api, extraOptions);
+        // Retry original request
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+        // If refresh response structure invalid
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+      }
     } else {
+      // Refresh failed → clear tokens
       Cookies.remove("token");
+      Cookies.remove("refreshToken");
     }
   }
 
   return result;
 };
 
+/**
+ * Create API
+ */
 export const baseApi = createApi({
+  reducerPath: "baseApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["User", "Meeting"],
   endpoints: () => ({}),
