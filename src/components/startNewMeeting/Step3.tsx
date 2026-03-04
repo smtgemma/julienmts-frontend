@@ -141,11 +141,12 @@
 
 import React, { useState } from 'react';
 import StepTitle from './stepTitle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useMeetngCompanyMutation } from '@/redux/api/startMettingApi/startMettingApi';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { setCompanyData } from '@/redux/features/startMeeting/startMeetingSlice';
 
 type FormValues = {
   company_url: string;
@@ -154,7 +155,8 @@ type FormValues = {
 export default function Step3(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
-  const [companyData, setCompanyData] = useState<any>(null);
+  const [companyDataShow, setcompanyDataShow] = useState<any>(null);
+  const dispatch = useDispatch()
 
   const allData = useSelector((state: RootState) => state.startMeeting);
   const [meetngCompany, { isLoading }] = useMeetngCompanyMutation();
@@ -175,8 +177,11 @@ export default function Step3(
         company_url: data.company_url,
       }).unwrap();
       if (response?.success) {
+        // console.log(response, "==============response")
         toast.success(response.message)
-        setCompanyData(response?.data?.company_data);
+        setcompanyDataShow(response?.data?.company_data);
+        dispatch(setCompanyData(response?.data?.company_data))
+
       }
     } catch (error: any) {
       toast.error("Something went wrong", error.message)
@@ -234,25 +239,25 @@ export default function Step3(
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Company Size</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyData?.company_size || '320 Employees'}
+              {companyDataShow?.company_size || '320 Employees'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Headquarters</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyData?.headquarters || 'San Francisco'}
+              {companyDataShow?.headquarters || 'San Francisco'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Revenue</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyData?.revenue || '$55M'}
+              {companyDataShow?.revenue || '$55M'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Industry</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyData?.industry || 'SaaS'}
+              {companyDataShow?.industry || 'SaaS'}
             </div>
           </div>
         </div>
@@ -261,7 +266,7 @@ export default function Step3(
         <div className="mb-6">
           <div className="text-sm font-medium text-[#2D2D2D] mb-3">Wappalyzer Tech Stack</div>
           <div className="flex flex-wrap gap-2">
-            {(companyData?.tech_stack || ['HubSpot', 'Salesforce', 'Snowflake', 'Slack', 'Zoom', 'React', 'AWS', 'Google Analytics']).map((tech: string) => (
+            {(companyDataShow?.tech_stack || ['HubSpot', 'Salesforce', 'Snowflake', 'Slack', 'Zoom', 'React', 'AWS', 'Google Analytics']).map((tech: string) => (
               <span
                 key={tech}
                 className="px-6 py-2 bg-[#F3F4F6] text-[#2D2D2D] text-[16px] rounded-md"
@@ -277,13 +282,13 @@ export default function Step3(
           <div className="bg-[#B9F8CF33] border border-[#B9F8CF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">💼 Hiring Data</div>
             <div className="text-sm text-[#636F85]">
-              {companyData?.hiring_data || '45 open positions • Growing sales & engineering teams'}
+              {companyDataShow?.hiring_data || '45 open positions • Growing sales & engineering teams'}
             </div>
           </div>
           <div className="bg-[#E9D4FF33] border border-[#E9D4FF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">⭐ Customer Reviews</div>
             <div className="text-sm text-[#636F85]">
-              {companyData?.customer_reviews || '4.5/5 on G2 • 328 reviews • "Great for scaling teams"'}
+              {companyDataShow?.customer_reviews || '4.5/5 on G2 • 328 reviews • "Great for scaling teams"'}
             </div>
           </div>
         </div>
@@ -293,7 +298,7 @@ export default function Step3(
           <div className="text-sm font-medium text-[#2D2D2D] mb-3">Latest News</div>
           <div className="bg-[#6E51E00D] border border-[#6E51E01A] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <p className="text-sm text-[#2D2D2D]">
-              {companyData?.latest_news || 'FastGrowth Inc. announces Series B funding of $25M led by Sequoia Capital'}
+              {companyDataShow?.latest_news || 'FastGrowth Inc. announces Series B funding of $25M led by Sequoia Capital'}
             </p>
           </div>
         </div>
@@ -303,13 +308,13 @@ export default function Step3(
           <div className="bg-[#FFD6A733] border border-[#FFD6A7] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📊 Financial Statements</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyData?.financial_statements || 'YoY Growth: 85% • ARR: $42M • Burn Rate: Positive'}
+              {companyDataShow?.financial_statements || 'YoY Growth: 85% • ARR: $42M • Burn Rate: Positive'}
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📄 Product Documentation</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyData?.product_documentation || 'API docs available • Integration guides • Video tutorials'}
+              {companyDataShow?.product_documentation || 'API docs available • Integration guides • Video tutorials'}
             </div>
           </div>
         </div>

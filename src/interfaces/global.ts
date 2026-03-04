@@ -20,6 +20,20 @@ export interface ProductValue {
 }
 
 // second step 
+export interface CompanyData {
+  company_size: string | null;
+  headquarters: string | null;
+  revenue: string | null;
+  industry: string | null;
+  tech_stack: string[];
+  open_positions: string | null;
+  founded_year: string | null;
+  description: string | null;
+  social_links: Record<string, string>; // empty object {}
+  data_sources: string[];
+}
+
+// third step 
 export interface Participant {
   name: string;
   role: string;
@@ -31,6 +45,7 @@ export interface Participant {
 // Full meeting state (IMPORTANT)
 export interface StartMeetingState {
   product: ProductValue | null;
+  companyData: CompanyData | null; 
   participants: Participant[];
 }
 
