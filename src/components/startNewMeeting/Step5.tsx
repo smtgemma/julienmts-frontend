@@ -1,5 +1,6 @@
 import { Play } from 'lucide-react';
 import Link from 'next/link';
+import Cookies from "js-cookie";
 
 export default function Step5(
     { handlePrev }: { handlePrev: () => void }
@@ -17,9 +18,37 @@ export default function Step5(
         handlePrev();
     };
 
-    const handleStartMeeting = () => {
-        console.log('Starting AI Meeting');
-        // Handle start meeting action
+    const handleStartMeeting = async () => {
+        try {
+            const meetingId = Cookies.get("meetingId");
+
+            console.log(meetingId, "===================");
+
+            if (!meetingId) {
+                console.error("Meeting ID not found in cookies");
+                return;
+            }
+
+            const response = await fetch(
+                `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to start meeting");
+            }
+
+            console.log("Meeting Started:", data);
+        } catch (error: any) {
+            console.error("Start Meeting Error:", error.message);
+        }
     };
 
     return (

@@ -24,9 +24,10 @@ export default function MeetingPrepForm(
   // take data from redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
   // console.log(allData, "============")
-  const representatives = allData?.participants?.representative_ids
-  const salesperson_id = allData?.product?.salesperson_id || {};
-  const companyId = allData?.companyData?.company_id || {};
+  const representatives = allData?.participants;
+  // console.log(representatives, "============representatives")
+  const salesperson_id = allData?.product?.salesperson_id;
+  const companyId = allData?.companyData?.company_id;
 
   // console.log(salesperson_id, companyId)
 
@@ -72,7 +73,7 @@ export default function MeetingPrepForm(
       salesperson_id: salesperson_id,
       company_id: companyId,
       meeting_mode: "1-on-1",
-      representatives: representatives as string[],
+      representatives: representatives,
       meeting_goal: data?.meetingGoal || "",
       personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)
         ? data.personality

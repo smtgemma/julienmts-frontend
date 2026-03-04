@@ -42,7 +42,6 @@ export interface Participant {
   note: string;
   decisionMaker: boolean;
   linkedin: string;
-  representative_ids: string[];
 };
 
 // Full meeting state (IMPORTANT)

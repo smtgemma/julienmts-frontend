@@ -237,6 +237,7 @@ import { X, Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setParticipantsValue } from "@/redux/features/startMeeting/startMeetingSlice";
 import { useMeetingCompanyRepresentitiveMutation } from "@/redux/api/startMettingApi/startMettingApi";
+import Cookies from "js-cookie";
 
 import {
   Select,
@@ -313,7 +314,9 @@ export default function Step2({
       }).unwrap();
       if (response?.success) {
         toast.success(response?.message)
-        dispatch(setParticipantsValue(response?.data));
+        // console.log(response, "=======================partice")
+        // Cookies.set("representative_ids", response.data.representative_ids);
+        dispatch(setParticipantsValue(response?.data?.representative_ids));
         handleNext();
       }
     } catch (error: any) {
