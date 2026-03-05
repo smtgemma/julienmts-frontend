@@ -80,6 +80,32 @@ const Step1 = (
     };
 
     const handleSubmit = async () => {
+
+        // ✅ Basic empty field validation
+        if (!formData.productName.trim()) {
+            toast.error("Product Name is required");
+            return;
+        }
+        if (!formData.productUrl.trim()) {
+            toast.error("Product URL is required");
+            return;
+        }
+        if (!formData.description.trim()) {
+            toast.error("Description is required");
+            return;
+        }
+        if (!uploadedFile) {
+            toast.error("Please upload a product material");
+            return;
+        }
+
+        // ✅ Product URL format validation
+        const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-./?%&=]*)?$/;
+        if (!urlPattern.test(formData.productUrl)) {
+            toast.error("Please enter a valid product URL");
+            return;
+        }
+
         const fromFristStepData = {
             formData,
             uploadedFile,
@@ -130,7 +156,7 @@ const Step1 = (
                     name="productName"
                     value={formData.productName}
                     onChange={handleInputChange}
-                    placeholder="https://example.com/product"
+                    placeholder="Enter product name"
                     className="w-full border border-[#D1D6DB] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
                 />
             </div>
@@ -144,7 +170,7 @@ const Step1 = (
                     name="productUrl"
                     value={formData.productUrl}
                     onChange={handleInputChange}
-                    placeholder="https://example.com/product"
+                    placeholder="Enter Product url"
                     className="w-full border border-[#D1D6DB] rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
                 />
             </div>
@@ -158,7 +184,7 @@ const Step1 = (
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
-                    placeholder="example text for description"
+                    placeholder="Enter product description"
                     rows={4}
                     className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm resize-y focus:outline-none focus:ring-2 focus:ring-[#6E51E0]"
                 />

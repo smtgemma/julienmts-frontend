@@ -304,7 +304,7 @@ export default function Step2({
   const onSubmit = async (data: FormValues) => {
     const payload = data.participants.map((p) => ({
       ...p,
-      voice_id: "1-on-1",
+      voice_id: "1-on-2",
     }));
 
     try {

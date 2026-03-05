@@ -72,7 +72,7 @@ export default function MeetingPrepForm(
     const payload = {
       salesperson_id: salesperson_id,
       company_id: companyId,
-      meeting_mode: "1-on-1",
+      meeting_mode: "1-on-2",
       representatives: representatives,
       meeting_goal: data?.meetingGoal || "",
       personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)

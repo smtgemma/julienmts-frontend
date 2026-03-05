@@ -159,7 +159,7 @@ export default function Step3(
   const dispatch = useDispatch()
 
   const allData = useSelector((state: RootState) => state.startMeeting);
-  
+
   const [meetngCompany, { isLoading }] = useMeetngCompanyMutation();
 
   const {
@@ -319,39 +319,21 @@ export default function Step3(
             </div>
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        {/* <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={handlePrev}
-            className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
-          >
-            Back
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="bg-primaryBgColor text-white px-6 py-3 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Saving...' : 'Next Step'}
-          </button>
-        </div> */}
-
-        <div className="flex justify-between">
-          <button
-            onClick={handlePrev}
-            className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer">
-            Back
-          </button>
-          <button
-            onClick={handleNext}
-            className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer">
-            Next Step
-          </button>
-        </div>
-
       </form>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between">
+        <button
+          onClick={handlePrev}
+          className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer">
+          Back
+        </button>
+        <button
+          onClick={handleNext}
+          className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer">
+          Next Step
+        </button>
+      </div>
     </div>
   );
 }
