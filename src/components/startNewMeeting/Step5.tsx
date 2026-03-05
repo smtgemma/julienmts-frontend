@@ -616,7 +616,7 @@ type AudioQueueItem = {
 //   webkitAudioContext?: typeof AudioContext;
 // }
 
-export default function LiveConversation() {
+export default function LiveConversation({ handlePrev }: { handlePrev: () => void }) {
   // ─── State ─────────────────────────────────────────────
   // const [meetingId, setMeetingId] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -1180,8 +1180,8 @@ export default function LiveConversation() {
               </div>
               <div className="flex justify-between">
                 <button
-                  // onClick={handleBack}
-                  className="px-6 py-2 border border-gray-300 rounded-md"
+                  onClick={handlePrev}
+                  className="px-6 py-2 border border-gray-300 rounded-md cursor-pointer"
                 >
                   Back
                 </button>

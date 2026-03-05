@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
-import { logout, setUser } from "@/redux/features/user/userSlice";
+import { logoutFc, setUser } from "@/redux/features/user/userSlice";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -111,7 +111,7 @@ const useAuthUser = () => {
 
   const handleLogout = () => {
     Cookies.remove("token");
-    dispatch(logout()); // Reset Redux store
+    dispatch(logoutFc()); // Reset Redux store
     navigate.push("/signIn"); // Redirect to sign-in page
   };
   return {
