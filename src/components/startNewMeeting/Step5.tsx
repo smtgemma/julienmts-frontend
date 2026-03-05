@@ -54,78 +54,78 @@
 
 //   return (
 //     <div className="bg-white flex items-center justify-center py-6 border border-[#6E51E0] rounded-lg">
-//       <div className="max-w-xl w-full">
+// <div className="max-w-xl w-full">
 
-//         {/* Play Icon */}
-//         <div className="flex justify-center mb-6">
-//           <div className="w-20 h-20 bg-[#6E51E0] rounded-full flex items-center justify-center">
-//             <Play className="w-8 h-8 text-white" />
-//           </div>
-//         </div>
+// {/* Play Icon */}
+// <div className="flex justify-center mb-6">
+//   <div className="w-20 h-20 bg-[#6E51E0] rounded-full flex items-center justify-center">
+//     <Play className="w-8 h-8 text-white" />
+//   </div>
+// </div>
 
-//         {/* Heading */}
-//         <div className="text-center mb-8">
-//           <h1 className="text-3xl font-medium text-[#2D2D2D] mb-2">
-//             Ready to Start Simulation?
-//           </h1>
-//           <p className="text-[#636F85] text-[16px]">
-//             Your AI-powered meeting is configured and ready to begin
-//           </p>
-//         </div>
+//   {/* Heading */}
+// <div className="text-center mb-8">
+//   <h1 className="text-3xl font-medium text-[#2D2D2D] mb-2">
+//     Ready to Start Simulation?
+//   </h1>
+//   <p className="text-[#636F85] text-[16px]">
+//     Your AI-powered meeting is configured and ready to begin
+//   </p>
+// </div>
 
-//         {/* Meeting Summary */}
-//         <div className="bg-[#F9FAFB] rounded-lg shadow-sm p-6 mb-6">
-//           <h2 className="text-xl font-semibold text-[#2D2D2D] mb-5">
-//             Meeting Summary
-//           </h2>
+//   {/* Meeting Summary */}
+// <div className="bg-[#F9FAFB] rounded-lg shadow-sm p-6 mb-6">
+//   <h2 className="text-xl font-semibold text-[#2D2D2D] mb-5">
+//     Meeting Summary
+//   </h2>
 
-//           <div className="space-y-3">
-//             <div className="flex justify-between items-center">
-//               <span className="text-[#636F85]">Goal:</span>
-//               <span className="text-[#2D2D2D] text-[16px]">
-//                 {meetingData.goal}
-//               </span>
-//             </div>
+//   <div className="space-y-3">
+//     <div className="flex justify-between items-center">
+//       <span className="text-[#636F85]">Goal:</span>
+//       <span className="text-[#2D2D2D] text-[16px]">
+//         {meetingData.goal}
+//       </span>
+//     </div>
 
-//             <div className="flex justify-between items-center">
-//               <span className="text-[#636F85]">Methodology:</span>
-//               <span className="text-[#2D2D22] text-[16px]">
-//                 {meetingData.methodology}
-//               </span>
-//             </div>
+//     <div className="flex justify-between items-center">
+//       <span className="text-[#636F85]">Methodology:</span>
+//       <span className="text-[#2D2D22] text-[16px]">
+//         {meetingData.methodology}
+//       </span>
+//     </div>
 
-//             <div className="flex justify-between items-center">
-//               <span className="text-[#636F85]">Duration:</span>
-//               <span className="text-[#2D2D2D] text-[16px]">
-//                 {meetingData.duration}
-//               </span>
-//             </div>
+//     <div className="flex justify-between items-center">
+//       <span className="text-[#636F85]">Duration:</span>
+//       <span className="text-[#2D2D2D] text-[16px]">
+//         {meetingData.duration}
+//       </span>
+//     </div>
 
-//             <div className="flex justify-between items-center">
-//               <span className="text-[#636F85]">Participants:</span>
-//               <span className="text-[#2D2D2D] text-[16px]">
-//                 {meetingData.participantsName}
-//               </span>
-//             </div>
-//           </div>
-//         </div>
+//     <div className="flex justify-between items-center">
+//       <span className="text-[#636F85]">Participants:</span>
+//       <span className="text-[#2D2D2D] text-[16px]">
+//         {meetingData.participantsName}
+//       </span>
+//     </div>
+//   </div>
+//   </div>
 
-//         {/* Buttons */}
-//         <div className="flex justify-between">
-//           <button
-//             onClick={handleBack}
-//             className="px-6 py-2 border border-gray-300 rounded-md"
-//           >
-//             Back
-//           </button>
+//   {/* Buttons */}
+// <div className="flex justify-between">
+//   <button
+//     onClick={handleBack}
+//     className="px-6 py-2 border border-gray-300 rounded-md"
+//   >
+//     Back
+//   </button>
 
-//           <button
-//             onClick={handleStartMeeting}
-//             className="px-6 py-2 bg-[#6E51E0] text-white rounded-md"
-//           >
-//             Start Meeting
-//           </button>
-//         </div>
+//   <button
+//     onClick={handleStartMeeting}
+//     className="px-6 py-2 bg-[#6E51E0] text-white rounded-md"
+//   >
+//     Start Meeting
+//   </button>
+// </div>
 
 //       </div>
 //     </div>
@@ -590,7 +590,12 @@
 
 "use client";
 
+import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
+import { FaUsersGear } from "react-icons/fa6";
+
 
 type Rep = {
   id: string;
@@ -613,7 +618,7 @@ type AudioQueueItem = {
 
 export default function LiveConversation() {
   // ─── State ─────────────────────────────────────────────
-  const [meetingId, setMeetingId] = useState("");
+  // const [meetingId, setMeetingId] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isAIReplying, setIsAIReplying] = useState(false);
@@ -728,29 +733,126 @@ export default function LiveConversation() {
   }
 
   // ─── Connect ──────────────────────────────────────────
-  function connectToMeeting() {
-    if (!meetingId.trim()) {
-      alert("⚠️ Please enter a Meeting ID");
-      return;
+  // function connectToMeeting() {
+  //   if (!meetingId.trim()) {
+  //     alert("⚠️ Please enter a Meeting ID");
+  //     return;
+  //   }
+
+  // function connectToMeeting() {
+  //   // const meetingId = Cookies.get("meetingId") || "";
+  //   // if (!meetingId.trim()) {
+  //   //   alert("⚠️ Please enter a Meeting ID");
+  //   //   return;
+  //   // }
+
+  //   // Safely get meetingId from cookies
+  //   const meetingId = Cookies.get("meetingId")?.trim() || "";
+
+  //   if (!meetingId) {
+  //     alert("⚠️ Please enter a Meeting ID");
+  //     return;
+  //   }
+
+  //   // meeting active api 
+  //   // Optionally, you can call your API to start the meeting
+  //   fetch(`http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`, {
+  //     method: "POST", // or GET depending on your API
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) throw new Error("Failed to start meeting");
+  //       toast.success("Meeting started successfully");
+  //       setIsConnected(true);
+  //     })
+  //     .catch((err: any) => console.error(err));
+
+  //   // Update UI status
+  //   setStatusBox("disconnected", "Connecting...");
+  //   const ws = new WebSocket(
+  //     `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+  //   );
+  //   wsRef.current = ws;
+
+  //   ws.onopen = () => console.log("WS connected");
+  //   ws.onmessage = (e) => handleMessage(JSON.parse(e.data));
+  //   ws.onerror = () => {
+  //     setStatusBox("disconnected", "Connection error");
+  //     alert("❌ Failed to connect. Is server running?");
+  //   };
+  //   ws.onclose = () => {
+  //     setStatusBox("disconnected", "Disconnected");
+  //     setIsConnected(false);
+  //     disableMic();
+  //   };
+  // }
+
+  async function connectToMeeting() {
+    try {
+      // 1️⃣ Get meetingId from cookies
+      const meetingId = Cookies.get("meetingId")?.trim() || "";
+
+      if (!meetingId) {
+        toast.error("⚠️ Meeting ID not found");
+        return;
+      }
+
+      // 2️⃣ Update UI status
+      setStatusBox("disconnected", "Connecting...");
+
+      // 3️⃣ Start meeting API
+      const response = await fetch(
+        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to start meeting");
+      }
+
+      toast.success("Meeting started successfully");
+
+      // 4️⃣ Close previous socket if exists
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+
+      // 5️⃣ Create WebSocket connection
+      const ws = new WebSocket(
+        `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+      );
+
+      wsRef.current = ws;
+
+      // 6️⃣ WebSocket events
+      ws.onopen = () => {
+        console.log("✅ WebSocket connected");
+        setIsConnected(true);
+      };
+
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        handleMessage(data);
+      };
+
+      ws.onerror = () => {
+        toast.error("❌ WebSocket connection error");
+        setStatusBox("disconnected", "Connection error");
+      };
+
+      ws.onclose = () => {
+        console.log("❌ WebSocket disconnected");
+        setStatusBox("disconnected", "Disconnected");
+        setIsConnected(false);
+        disableMic();
+        toast.error("Connection closed");
+      };
+
+    } catch (error: any) {
+      console.error("Connect meeting error:", error);
+      toast.error(error.detail || "Something went wrong");
     }
-
-    setStatusBox("disconnected", "Connecting...");
-    const ws = new WebSocket(
-      `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-    );
-    wsRef.current = ws;
-
-    ws.onopen = () => console.log("WS connected");
-    ws.onmessage = (e) => handleMessage(JSON.parse(e.data));
-    ws.onerror = () => {
-      setStatusBox("disconnected", "Connection error");
-      alert("❌ Failed to connect. Is server running?");
-    };
-    ws.onclose = () => {
-      setStatusBox("disconnected", "Disconnected");
-      setIsConnected(false);
-      disableMic();
-    };
   }
 
   // ─── WS Handler ───────────────────────────────────────
@@ -954,17 +1056,60 @@ export default function LiveConversation() {
   }
 
   // ─── Disconnect ───────────────────────────────────────
-  function disconnect() {
-    stopListening();
-    stopVolumeMonitor();
-    audioQueueRef.current = [];
-    isPlayingAudioRef.current = false;
-    wsRef.current?.send(JSON.stringify({ type: "disconnect" }));
-    wsRef.current?.close();
-    wsRef.current = null;
-    setIsConnected(false);
-    setIsAIReplying(false);
-    setTranscript([]);
+  // function disconnect() {
+  //   stopListening();
+  //   stopVolumeMonitor();
+  //   audioQueueRef.current = [];
+  //   isPlayingAudioRef.current = false;
+  //   wsRef.current?.send(JSON.stringify({ type: "disconnect" }));
+  //   wsRef.current?.close();
+  //   wsRef.current = null;
+  //   setIsConnected(false);
+  //   setIsAIReplying(false);
+  //   setTranscript([]);
+  // }
+
+  async function disconnect() {
+    try {
+      const meetingId = Cookies.get("meetingId")?.trim() || "";
+
+      // 1️⃣ End meeting API
+      const response = await fetch(
+        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to end meeting");
+      }
+
+      toast.success("Meeting ended successfully");
+
+      // 2️⃣ Stop voice features
+      stopListening();
+      stopVolumeMonitor();
+
+      // 3️⃣ Reset audio queue
+      audioQueueRef.current = [];
+      isPlayingAudioRef.current = false;
+
+      // 4️⃣ Disconnect websocket
+      if (wsRef.current) {
+        wsRef.current.send(JSON.stringify({ type: "disconnect" }));
+        wsRef.current.close();
+        wsRef.current = null;
+      }
+
+      // 5️⃣ Reset states
+      setIsConnected(false);
+      setIsAIReplying(false);
+      setTranscript([]);
+
+    } catch (error) {
+      console.error("Disconnect error:", error);
+    }
   }
 
   // ─── Heartbeat ───────────────────────────────────────
@@ -978,37 +1123,82 @@ export default function LiveConversation() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-5">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full overflow-hidden">
-        {/* Header */}
-        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-center p-8">
-          <h1 className="text-3xl mb-2">🎙️ AI Sales Training</h1>
-          <p className="opacity-90">Speak naturally — AI representatives will auto-detect and reply with voice</p>
-        </div>
+    <div className="flex justify-center items-center">
+      <div className="bg-white w-full border border-[#6E51E0] rounded-xl p-6">
+        {/* Setup */}
+        {!isConnected && (
+          <div>
+            {/* Play Icon */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-[#6E51E0] rounded-full flex items-center justify-center">
+                <Play className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-medium text-[#2D2D2D] mb-2">
+                Ready to Start Simulation?
+              </h1>
+              <p className="text-[#636F85] text-[16px]">
+                Your AI-powered meeting is configured and ready to begin
+              </p>
+            </div>
+            <div className="max-w-2xl mx-auto">
+              {/* meeting summery  */}
+              <div className="bg-[#F9FAFB] rounded-lg shadow-sm p-6 mb-6">
+                {/* কার্ডের হেডার */}
+                <h2 className="text-xl font-semibold text-[#2D2D2D] mb-5">
+                  Meeting Summary
+                </h2>
 
+                {/* বিস্তারিত তথ্য */}
+                <div className="space-y-3">
+                  {/* Goal */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#636F85]">Goal:</span>
+                    <span className="text-[#2D2D2D] text-[16px]">Book a Demo</span>
+                  </div>
+
+                  {/* Methodology */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#636F85]">Methodology:</span>
+                    <span className="text-[#2D2D22] text-[16px]">SPIN</span>
+                  </div>
+
+                  {/* Duration */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#636F85]">Duration:</span>
+                    <span className="text-[#2D2D2D] text-[16px]">30 minutes</span>
+                  </div>
+
+                  {/* Participants */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#636F85]">Participants:</span>
+                    <span className="text-[#2D2D2D] text-[16px]">2</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <button
+                  // onClick={handleBack}
+                  className="px-6 py-2 border border-gray-300 rounded-md"
+                >
+                  Back
+                </button>
+
+                <button
+                  // onClick={handleStartMeeting}
+                  onClick={connectToMeeting}
+                  className="px-6 py-2 bg-[#6E51E0] text-white rounded-md cursor-pointer"
+                >
+                  Start Meeting
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Content */}
         <div className="p-8 space-y-6">
-
-          {/* Setup */}
-          {!isConnected && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">🔌 Connection Setup</h2>
-              <input
-                type="text"
-                placeholder="Enter meeting ID..."
-                className="w-full p-3 border-2 border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-200"
-                value={meetingId}
-                onChange={(e) => setMeetingId(e.target.value)}
-              />
-              <button
-                className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition"
-                onClick={connectToMeeting}
-              >
-                🚀 Connect & Start
-              </button>
-            </div>
-          )}
-
           {/* Status */}
           {isConnected && (
             <div className={`p-4 rounded-lg border-l-4 ${statusColors[status.type]} flex items-center gap-3 font-medium`}>
@@ -1020,7 +1210,10 @@ export default function LiveConversation() {
           {/* Reps */}
           {isConnected && reps.length > 0 && (
             <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">👥 AI Representatives</h2>
+              <div className="flex items-center gap-2">
+                <FaUsersGear size={20} className="text-[#6E51E0] -mt-4" />
+                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-[#6E51E0]"> AI Representatives</h2>
+              </div>
               <div className="flex flex-wrap gap-3">
                 {reps.map((rep) => (
                   <div
@@ -1040,10 +1233,10 @@ export default function LiveConversation() {
           {/* Mic */}
           {isConnected && (
             <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">🎤 Voice Conversation</h2>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2"> Voice Conversation</h2>
               <div className="flex flex-col items-center gap-4">
                 <button
-                  className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg ${isRecording ? "bg-red-600" : "bg-gradient-to-br from-indigo-500 to-purple-600"
+                  className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer ${isRecording ? "bg-red-600" : "bg-gradient-to-br from-indigo-500 to-purple-600"
                     }`}
                   onClick={toggleRecording}
                 >
@@ -1051,8 +1244,8 @@ export default function LiveConversation() {
                 </button>
                 <div>{micLabel}</div>
                 <div>{silenceCountdown}</div>
-                <button className="mt-3 bg-red-500 text-white px-4 py-2 rounded-lg" onClick={disconnect}>
-                  ⏹️ End Conversation
+                <button className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer" onClick={disconnect}>
+                  End Conversation
                 </button>
               </div>
             </div>
@@ -1061,7 +1254,7 @@ export default function LiveConversation() {
           {/* Transcript */}
           {isConnected && (
             <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">📜 Conversation Transcript</h2>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">Conversation Transcript</h2>
               <div className="bg-gray-100 rounded-lg p-4 max-h-[420px] overflow-y-auto space-y-3">
                 {transcript.length === 0 && <div className="text-gray-400 text-center italic">Start speaking — transcript will appear here.</div>}
                 {transcript}
