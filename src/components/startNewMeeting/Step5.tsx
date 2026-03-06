@@ -1311,12 +1311,19 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                 {reps.map((rep) => (
                   <div
                     key={rep.id}
-                    className={`p-3 rounded-lg border-l-4 flex-1 min-w-[180px] ${repSpeaking[rep.id] ? "border-purple-600 bg-purple-100 animate-pulse" : "border-orange-500 bg-orange-100"
-                      }`}
+                    className={`p-3 rounded-lg flex-1 min-w-[180px] 
+        ${repSpeaking[rep.id]
+                        ? "border-4 border-purple-600 bg-purple-200 animate-pulse shadow-lg shadow-purple-400/50"
+                        : "border-l-4 border-orange-500 bg-orange-100"
+                      } transition-all duration-300 ease-in-out`}
                   >
-                    <h3 className="text-orange-700 mb-1">{rep.name}</h3>
+                    <h3 className={`${repSpeaking[rep.id] ? "text-purple-800 font-bold" : "text-orange-700"} mb-1`}>
+                      {rep.name}
+                    </h3>
                     <p><strong>Role:</strong> {rep.role}</p>
-                    <p><strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality}</p>
+                    <p>
+                      <strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -1329,8 +1336,11 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
               <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2"> Voice Conversation</h2>
               <div className="flex flex-col items-center gap-4">
                 <button
-                  className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer ${isRecording ? "bg-red-600" : "bg-gradient-to-br from-indigo-500 to-purple-600"
-                    }`}
+                  className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer 
+    ${isRecording
+                      ? "bg-red-600 animate-pulse shadow-red-400/50" // when recording/speaking
+                      : "bg-gradient-to-br from-indigo-500 to-purple-600" // idle state
+                    } transition-all duration-300 ease-in-out`}
                   onClick={toggleRecording}
                 >
                   🎤
