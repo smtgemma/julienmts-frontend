@@ -14,7 +14,7 @@ import {
     Elements,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSubscriptionMutation } from "@/redux/api/subscriptionApi/subscriptionApi";
+import { usePaymentMethodMutation, useSubscriptionMutation } from "@/redux/api/subscriptionApi/subscriptionApi";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -29,6 +29,8 @@ function PaymentForm({ planId, onClose }: PassPaymentProps) {
 
     const [cardError, setCardError] = useState<string | null>(null);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    const [createPaymentMethod, { isLoading }] = usePaymentMethodMutation();
     const [subscriptionPayment, { isLoading: payLoading }] = useSubscriptionMutation();
 
     const handlePay = async () => {
@@ -43,11 +45,34 @@ function PaymentForm({ planId, onClose }: PassPaymentProps) {
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({ elements });
         console.log(paymentMethod, "==============================>==================>");
+
+        const payload = {
+            type: paymentMethod?.type,
+            "card[number]": paymentMethod?.card?.last4,
+            "card[exp_month]": paymentMethod?.card?.exp_month,
+            "card[exp_year]": paymentMethod?.card?.exp_year,
+            "card[cvc]": "123"
+        };
+        console.log(payload, "=============payload")
+
         if (error) {
             setCardError(error.message ?? "Card error. Please try again.");
             return;
         }
         try {
+            // const res = await createPaymentMethod(payload).unwrap();
+            // console.log(res, "=================res")
+            const res = await fetch("https://api.stripe.com/v1/payment_methods", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            console.log(res, "res===============res")
+
+
             const response = await subscriptionPayment({ planId, paymentMethodId: paymentMethod.id }).unwrap();
             console.log(response, "==================> ")
             setIsSuccess(true);

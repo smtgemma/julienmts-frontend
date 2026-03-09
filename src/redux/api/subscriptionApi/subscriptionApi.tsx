@@ -22,11 +22,22 @@ export const subscriptionApi = baseApi.injectEndpoints({
       providesTags: ["Subscripton"]
     }),
 
+    //payment method
+    paymentMethod: builder.mutation({
+      query: (payload) => ({
+        url: "/payment_methods",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["Subscripton"],
+    }),
+
     // subscription 
     subscription: builder.mutation({
       query: (payload) => ({
         url: "/subscriptions",
         method: "POST",
+        body: payload,
       }),
       invalidatesTags: ["Subscripton"],
     }),
@@ -34,4 +45,4 @@ export const subscriptionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllSubscriptionsQuery, useGetSinglePlanQuery, useSubscriptionMutation } = subscriptionApi;
+export const { useGetAllSubscriptionsQuery, useGetSinglePlanQuery, usePaymentMethodMutation, useSubscriptionMutation } = subscriptionApi;
