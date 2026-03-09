@@ -69,7 +69,10 @@ export default function SignInPage() {
         );
         toast.success("Login successful");
         console.log("Login successful", response?.data?.user?.role);
-        if (response?.data?.user?.role === "admin") {
+        if (
+          response?.data?.user?.role === "ADMIN" ||
+          response?.data?.user?.role === "SUPER_ADMIN"
+        ) {
           router.push("http://localhost:3011");
         } else {
           router.push("http://localhost:3054/dashboard/home");

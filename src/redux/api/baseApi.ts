@@ -27,6 +27,8 @@
 
 // src/features/api/baseApi.ts
 
+
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type {
   BaseQueryFn,
@@ -117,7 +119,7 @@ const baseQueryWithReauth: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["User", "Meeting"],
+  tagTypes: ["User", "Meeting", "Subscripton"],
   endpoints: () => ({}),
 });
 

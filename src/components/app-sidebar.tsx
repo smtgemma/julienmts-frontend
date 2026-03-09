@@ -24,6 +24,7 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { useLogoutMutation } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
+import { CreditCard } from "lucide-react";
 
 
 export default function AppSidebar() {
@@ -70,6 +71,7 @@ export default function AppSidebar() {
       icon: MdManageAccounts,
     },
     { label: "Dashboard", href: "/dashboard/dashboard", icon: RxDashboard },
+    { label: "Subscriptions", href: "/dashboard/subscriptions", icon: CreditCard },
     {
       label: "Setting",
       href: "/dashboard/settingPage",
