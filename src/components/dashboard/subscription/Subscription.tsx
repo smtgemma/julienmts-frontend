@@ -47,7 +47,7 @@ const SubscriptionPlan: React.FC = () => {
         <div className="mb-8">
           {/* Header */}
           <div className="mb-8 flex items-start justify-between">
-            <div>
+            <div className="mt-6">
               <h1 className="text-2xl font-bold text-gray-900">
                 Subscription Management
               </h1>
@@ -63,9 +63,10 @@ const SubscriptionPlan: React.FC = () => {
                 className={`flex h-full flex-col rounded-lg bg-white p-6 shadow-sm ${plan.highlighted ? "ring-2 ring-indigo-600" : ""
                   }`}
               >
-                <div className="mb-4 rounded-xl bg-gray-2 p-4">
+                <div className="mb-4 rounded-xl bg-gray-2 p-4 bg-gray-100">
                   <div
-                    className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium bg-gray-100 text-[#6E51E0] hover:bg-[#6E51E0] hover:text-white`}>
+                  // text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer
+                    className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium bg-gray-100 text-[#6E51E0] hover:bg-[#6E51E0] hover:text-white border-2 border-white hover:border-[#6E51E0] shadow-sm`}>
                     {plan.name}
                   </div>
 
