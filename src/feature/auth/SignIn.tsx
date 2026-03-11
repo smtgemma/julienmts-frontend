@@ -75,7 +75,8 @@ export default function SignInPage() {
         ) {
           router.push("http://localhost:3011");
         } else {
-          router.push("http://localhost:3054/dashboard/home");
+          // router.push("http://localhost:3054/dashboard/home");
+          router.push("http://206.162.244.131:3054/dashboard/home");
         }
       }
     } catch (error: any) {
