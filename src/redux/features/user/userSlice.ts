@@ -23,6 +23,7 @@ const userSlice = createSlice({
     logoutFc: (state) => {
       state.user = null;
       state.token = null;
+      state.refreshToken = null;
     },
   },
 });

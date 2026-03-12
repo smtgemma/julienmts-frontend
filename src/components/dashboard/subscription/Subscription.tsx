@@ -2,10 +2,13 @@
 "use client"
 
 import { useGetAllSubscriptionsQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Loading from "@/components/Others/Loading";
 import { useState } from "react";
 import PassPayment from "./payment/PassPayment";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import LoginRequiredModal from "./payment/LoginRequiredModal";
 
 interface Plan {
   name: string;
@@ -18,7 +21,12 @@ interface Plan {
 
 const SubscriptionPlan: React.FC = () => {
   const [planId, setPlanId] = useState<string | null>(null)
+  const [showLoginModal, setShowLoginModal] = useState(false)
   const router = useRouter()
+  const pathName = usePathname()
+
+  const user = useSelector((state: RootState) => state.user.token);
+  const isLoggedIn = Boolean(user);
 
   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery("")
   console.log(getAllSubscriptions, "=================")
@@ -26,6 +34,11 @@ const SubscriptionPlan: React.FC = () => {
   const plans = getAllSubscriptions?.data || [];
 
   const handlePurchase = (id: string) => {
+    if (!isLoggedIn) {
+      setShowLoginModal(true)
+
+      return;
+    }
     setPlanId(id);
   };
 
@@ -35,27 +48,36 @@ const SubscriptionPlan: React.FC = () => {
 
   if (isLoading) {
     return (
-      <p>
+      <div>
         <Loading />
-      </p>
-    )
+      </div>
+    );
+  }
+
+  if (!getAllSubscriptions || getAllSubscriptions.length === 0) {
+    return <p className="text-5xl text-center font-semibold my-12 text-red-400">Don't have data</p>;
   }
 
   return (
-    <div className="min-h-screen">
+    // <div className="min-h-screen">
+    <div>
       <div className="">
         <div className="mb-8">
           {/* Header */}
-          <div className="mb-8 flex items-start justify-between">
-            <div className="mt-6">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Subscription Management
-              </h1>
-              <p className="mt-1 text-sm text-gray-500">
-                Manage your plan
-              </p>
-            </div>
-          </div>
+          {
+            pathName === "/dashboard/subscriptions" && (
+              <div className="mb-8 flex items-start justify-between">
+                <div className="mt-6">
+                  <h1 className="text-2xl font-bold text-gray-900">
+                    Subscription Management
+                  </h1>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Manage your plan
+                  </p>
+                </div>
+              </div>
+            )
+          }
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {plans.map((plan: Plan, index: number) => (
               <div
@@ -65,7 +87,7 @@ const SubscriptionPlan: React.FC = () => {
               >
                 <div className="mb-4 rounded-xl bg-gray-2 p-4 bg-gray-100">
                   <div
-                  // text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer
+                    // text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer
                     className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium bg-gray-100 text-[#6E51E0] hover:bg-[#6E51E0] hover:text-white border-2 border-white hover:border-[#6E51E0] shadow-sm`}>
                     {plan.name}
                   </div>
@@ -120,7 +142,9 @@ const SubscriptionPlan: React.FC = () => {
                   {/* Edit Plan Link */}
                   <button
                     onClick={() => handlePurchase(plan.id)}
-                    className={`flex-1 bg-[rgba(255, 255, 255, 0.20)] flex items-center justify-center gap-3 rounded-full border py-2 text-sm font-medium ${plan.name === "Free" ? " bg-gray-100 cursor-pointer" : "bg-[#6E51E0] text-white cursor-pointer"}`}
+                    className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
+                                       hover:bg-primaryBgColor hover:text-white"
+                    style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
                   >
                     {
                       plan?.name === "Free" ? "Current plan" : "Upgrade plan"
@@ -148,6 +172,11 @@ const SubscriptionPlan: React.FC = () => {
       {planId && (
         <PassPayment planId={planId} onClose={handleClosePayment} />
       )}
+      {
+        showLoginModal && (
+          <LoginRequiredModal onClose={() => setShowLoginModal(false)} />
+        )
+      }
     </div>
   );
 };

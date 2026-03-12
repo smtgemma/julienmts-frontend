@@ -44,7 +44,7 @@ function PaymentForm({ planId, onClose }: PassPaymentProps) {
         }
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({ elements });
-        console.log(paymentMethod, "==============================>==================>");
+        console.log(paymentMethod, "==============================>=========dfdsfdsfd=========>");
 
         const payload = {
             type: paymentMethod?.type,

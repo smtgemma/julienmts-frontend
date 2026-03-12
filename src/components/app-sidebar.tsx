@@ -18,18 +18,20 @@ import { RxDashboard } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { IoIosLogOut } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { useLogoutMutation } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
 import { CreditCard } from "lucide-react";
+import { logoutFc } from "@/redux/features/user/userSlice";
 
 
 export default function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
   // console.log(refreshToken, "==============")
@@ -47,6 +49,8 @@ export default function AppSidebar() {
       // dispatch(logoutAction());
       Cookies.remove("token");
       Cookies.remove("refreshToken");
+
+      dispatch(logoutFc());
 
       toast.success("Logout successfully");
 
