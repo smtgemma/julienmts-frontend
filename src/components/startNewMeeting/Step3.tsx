@@ -172,20 +172,41 @@ export default function Step3(
     },
   });
 
+  // const onSubmit = async (data: FormValues) => {
+  //   try {
+  //     const response = await meetngCompany({
+  //       company_url: data.company_url,
+  //     }).unwrap();
+  //     if (response?.success) {
+  //       // console.log(response, "==============response")
+  //       toast.success(response.message)
+  //       setcompanyDataShow(response?.data?.company_data);
+  //       dispatch(setCompanyData(response?.data))
+
+  //     }
+  //   } catch (error: any) {
+  //     toast.error("Something went wrong", error.message)
+  //   }
+  // };
+
   const onSubmit = async (data: FormValues) => {
     try {
       const response = await meetngCompany({
         company_url: data.company_url,
       }).unwrap();
-      if (response?.success) {
-        // console.log(response, "==============response")
-        toast.success(response.message)
-        setcompanyDataShow(response?.data?.company_data);
-        dispatch(setCompanyData(response?.data))
 
+      if (response?.success) {
+        toast.success(response.message);
+        setcompanyDataShow(response?.data?.company_data);
+        dispatch(setCompanyData(response?.data));
       }
+
     } catch (error: any) {
-      toast.error("Something went wrong", error.message)
+      const message =
+        error?.data?.message || "Something went wrong";
+
+      console.error(message);
+      toast.error(message);
     }
   };
 
