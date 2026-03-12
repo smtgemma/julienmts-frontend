@@ -204,8 +204,6 @@ export default function Step3(
     } catch (error: any) {
       const message =
         error?.data?.message || "Something went wrong";
-
-      console.error(message);
       toast.error(message);
     }
   };
