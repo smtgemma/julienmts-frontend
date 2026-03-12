@@ -45,7 +45,7 @@ export default function MeetingPrepForm(
       ],
       personality: 'Nice',
       difficulty: 'Intermediate',
-      methodology: 'MEDDIC',
+      sales_methodology: "MEDDIC",
       duration: '5 minutes'
     }
   });
@@ -69,17 +69,35 @@ export default function MeetingPrepForm(
     //   difficulty: data?.difficulty || "medium",
     // };
 
+    // const payload = {
+    //   salesperson_id: salesperson_id,
+    //   company_id: companyId,
+    //   meeting_mode: "1-on-2",
+    //   representatives: representatives,
+    //   sales_methodology: data?.methodology,
+    //   meeting_goal: data?.meetingGoal || "",
+    //   personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)
+    //     ? data.personality
+    //     : "nice",
+    //   duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
+    //   difficulty: ["beginner", "intermediate", "advanced"].includes(data?.difficulty)
+    //     ? data.difficulty
+    //     : "beginner",
+    // };
     const payload = {
       salesperson_id: salesperson_id,
       company_id: companyId,
       meeting_mode: "1-on-2",
       representatives: representatives,
+      sales_methodology: data?.sales_methodology, // FIXED
       meeting_goal: data?.meetingGoal || "",
-      personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)
+      personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"]
+        .includes(data?.personality)
         ? data.personality
         : "nice",
       duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
-      difficulty: ["beginner", "intermediate", "advanced"].includes(data?.difficulty)
+      difficulty: ["beginner", "intermediate", "advanced"]
+        .includes(data?.difficulty)
         ? data.difficulty
         : "beginner",
     };
@@ -220,7 +238,7 @@ export default function MeetingPrepForm(
               Sales Methodology
             </label>
             <Controller
-              name="methodology"
+              name="sales_methodology"
               control={control}
               render={({ field }) => (
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -229,11 +247,11 @@ export default function MeetingPrepForm(
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="MEDDIC">MEDDIC</SelectItem>
-                    <SelectItem value="challenger">CHALLENGER SALES</SelectItem>
-                    <SelectItem value="bant">BANT</SelectItem>
-                    <SelectItem value="spin">SPIN Selling</SelectItem>
-                    <SelectItem value="meddpicc">MEDDPICC</SelectItem>
-                    <SelectItem value="value selling">Value Selling</SelectItem>
+                    <SelectItem value="Challenger Sales">Challenger Sales</SelectItem>
+                    <SelectItem value="BANT">BANT</SelectItem>
+                    <SelectItem value="SPIN Selling">SPIN Selling</SelectItem>
+                    <SelectItem value="MEDDPICC">MEDDPICC</SelectItem>
+                    <SelectItem value="Value Selling">Value Selling</SelectItem>
                   </SelectContent>
                 </Select>
               )}

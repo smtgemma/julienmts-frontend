@@ -324,6 +324,9 @@ export default function Step2({
     }
   };
 
+  const participaints: "1-on-2" | "group" = "1-on-2";
+  participaints.split("-on-")[1]
+
   return (
     <div className="py-6">
       <div className="space-y-6">
@@ -450,7 +453,7 @@ export default function Step2({
         ))}
 
         {/* Add Participant Button */}
-        <button
+        {/* <button
           type="button"
           onClick={() =>
             append({
@@ -461,6 +464,29 @@ export default function Step2({
               linkedin_profile: "",
             })
           }
+          className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
+        >
+          <Plus size={20} />
+          <span>Add Another Participant</span>
+        </button> */}
+
+        <button
+          type="button"
+          onClick={() => {
+            const maxParticipants = Number(participaints.split("-on-")[1]);
+
+            if (fields.length < maxParticipants) {
+              append({
+                name: "",
+                role: "",
+                notes: "",
+                is_decision_maker: false,
+                linkedin_profile: "",
+              });
+            } else {
+              toast.error(`You can add only ${maxParticipants} participants`);
+            }
+          }}
           className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
         >
           <Plus size={20} />
