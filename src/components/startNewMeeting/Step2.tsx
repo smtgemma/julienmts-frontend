@@ -328,7 +328,7 @@ export default function Step2({
     handlePrev();
   };
 
-  const participaints: "1-on-2" | "group" = "1-on-2";
+  const participaints: "1-on-3" | "group" = "1-on-3";
   participaints.split("-on-")[1]
 
   return (

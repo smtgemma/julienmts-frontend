@@ -259,25 +259,25 @@ export default function Step3(
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Company Size</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyDataShow?.company_size || '320 Employees'}
+              {companyDataShow?.company_size || 'N/A'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Headquarters</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyDataShow?.headquarters || 'San Francisco'}
+              {companyDataShow?.headquarters || 'N/A'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Revenue</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyDataShow?.revenue || '$55M'}
+              {companyDataShow?.revenue || 'N/A'}
             </div>
           </div>
           <div className="bg-[#F9FAFB] border border-[#D1D6DB] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-sm text-[#636F85] mb-1">Industry</div>
             <div className="text-xl font-semibold text-[#2D2D2D]">
-              {companyDataShow?.industry || 'SaaS'}
+              {companyDataShow?.industry || 'N/A'}
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@ export default function Step3(
         <div className="mb-6">
           <div className="text-sm font-medium text-[#2D2D2D] mb-3">Wappalyzer Tech Stack</div>
           <div className="flex flex-wrap gap-2">
-            {(companyDataShow?.tech_stack || ['HubSpot', 'Salesforce', 'Snowflake', 'Slack', 'Zoom', 'React', 'AWS', 'Google Analytics']).map((tech: string) => (
+            {(companyDataShow?.tech_stack || ['N/A']).map((tech: string) => (
               <span
                 key={tech}
                 className="px-6 py-2 bg-[#F3F4F6] text-[#2D2D2D] text-[16px] rounded-md"
@@ -302,13 +302,13 @@ export default function Step3(
           <div className="bg-[#B9F8CF33] border border-[#B9F8CF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">💼 Hiring Data</div>
             <div className="text-sm text-[#636F85]">
-              {companyDataShow?.hiring_data || '45 open positions • Growing sales & engineering teams'}
+              {companyDataShow?.hiring_data || 'N/A'}
             </div>
           </div>
           <div className="bg-[#E9D4FF33] border border-[#E9D4FF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">⭐ Customer Reviews</div>
             <div className="text-sm text-[#636F85]">
-              {companyDataShow?.customer_reviews || '4.5/5 on G2 • 328 reviews • "Great for scaling teams"'}
+              {companyDataShow?.customer_reviews || 'N/A'}
             </div>
           </div>
         </div>
@@ -318,7 +318,7 @@ export default function Step3(
           <div className="text-sm font-medium text-[#2D2D2D] mb-3">Latest News</div>
           <div className="bg-[#6E51E00D] border border-[#6E51E01A] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <p className="text-sm text-[#2D2D2D]">
-              {companyDataShow?.latest_news || 'FastGrowth Inc. announces Series B funding of $25M led by Sequoia Capital'}
+              {companyDataShow?.latest_news || 'N/A'}
             </p>
           </div>
         </div>
@@ -328,13 +328,13 @@ export default function Step3(
           <div className="bg-[#FFD6A733] border border-[#FFD6A7] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📊 Financial Statements</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyDataShow?.financial_statements || 'YoY Growth: 85% • ARR: $42M • Burn Rate: Positive'}
+              {companyDataShow?.financial_statements || 'N/A'}
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📄 Product Documentation</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyDataShow?.product_documentation || 'API docs available • Integration guides • Video tutorials'}
+              {companyDataShow?.product_documentation || 'N/A'}
             </div>
           </div>
         </div>
