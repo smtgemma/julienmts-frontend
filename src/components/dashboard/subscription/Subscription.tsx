@@ -17,6 +17,7 @@ interface Plan {
   price: number;
   features: string[];
   id: string;
+  meetingMode: string;
 }
 
 const SubscriptionPlan: React.FC = () => {
@@ -86,10 +87,16 @@ const SubscriptionPlan: React.FC = () => {
                   }`}
               >
                 <div className="mb-4 rounded-xl bg-gray-2 p-4 bg-gray-100">
-                  <div
-                    // text-[#6E51E0] text-md font-semibold border-2 border-white hover:border-none shadow-sm px-8 py-1.5 rounded-full hover:text-white hover:bg-primaryBgColor cursor-pointer
-                    className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium bg-gray-100 text-[#6E51E0] hover:bg-[#6E51E0] hover:text-white border-2 border-white hover:border-[#6E51E0] shadow-sm`}>
-                    {plan.name}
+                  <div className="flex justify-between items-center">
+                    <div
+                      className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium ${plan.highlighted
+                        ? "bg-indigo-600 text-white"
+                        : "text- bg-white text-indigo-700"
+                        }`}
+                    >
+                      {plan.name}
+                    </div>
+                    <p className="text-sm text-indigo-600">{plan.meetingMode}</p>
                   </div>
 
                   {/* Description */}

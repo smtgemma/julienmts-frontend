@@ -28,8 +28,9 @@ import { RootState } from "@/redux/store";
 
 const Navbar = () => {
     const user = useSelector((state: RootState) => state.user.token);
+    console.log(user, "===================user")
     const isLoggedIn = Boolean(user);
-    console.log(isLoggedIn, "=========================")
+    console.log(isLoggedIn, "=========================isloggedin")
     const pathName = usePathname()
 
     return (

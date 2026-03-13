@@ -43,8 +43,8 @@ export default function MeetingPrepForm(
         { value: 'Who else is involved in the decision?' },
         { value: 'What is your budget allocated for this?' }
       ],
-      personality: 'Nice',
-      difficulty: 'Intermediate',
+      personality: 'nice',
+      difficulty: 'intermediate',
       sales_methodology: "MEDDIC",
       duration: '5 minutes'
     }
@@ -58,49 +58,19 @@ export default function MeetingPrepForm(
   const onSubmit = async (data: any) => {
     console.log('Form Data:', data);
 
-    // const payload = {
-    //   salesperson_id: salesperson_id,
-    //   company_id: companyId,
-    //   meeting_mode: "1-on-2",
-    //   representatives: representatives as string[],
-    //   meeting_goal: data?.meetingGoal || "",
-    //   personality: data?.personality || "",
-    //   duration_minutes: Number(data?.duration) || 0,
-    //   difficulty: data?.difficulty || "medium",
-    // };
-
-    // const payload = {
-    //   salesperson_id: salesperson_id,
-    //   company_id: companyId,
-    //   meeting_mode: "1-on-2",
-    //   representatives: representatives,
-    //   sales_methodology: data?.methodology,
-    //   meeting_goal: data?.meetingGoal || "",
-    //   personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"].includes(data?.personality)
-    //     ? data.personality
-    //     : "nice",
-    //   duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
-    //   difficulty: ["beginner", "intermediate", "advanced"].includes(data?.difficulty)
-    //     ? data.difficulty
-    //     : "beginner",
-    // };
     const payload = {
       salesperson_id: salesperson_id,
       company_id: companyId,
       meeting_mode: "1-on-2",
+      status: 'active',
       representatives: representatives,
       sales_methodology: data?.sales_methodology, // FIXED
       meeting_goal: data?.meetingGoal || "",
-      personality: ["angry", "arrogant", "soft", "cold_hearted", "nice", "cool", "not_well", "analytical"]
-        .includes(data?.personality)
-        ? data.personality
-        : "nice",
+      personality: data?.personality,
       duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
-      difficulty: ["beginner", "intermediate", "advanced"]
-        .includes(data?.difficulty)
-        ? data.difficulty
-        : "beginner",
+      difficulty: data?.difficulty,
     };
+    console.log(payload, "payload================")
 
     try {
       const response = await createMeetingId(payload).unwrap()
@@ -200,10 +170,17 @@ export default function MeetingPrepForm(
                     <SelectValue placeholder="Select personality" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Nice">Nice</SelectItem>
-                    <SelectItem value="Professional">Professional</SelectItem>
-                    <SelectItem value="Casual">Casual</SelectItem>
-                    <SelectItem value="Direct">Direct</SelectItem>
+                    <SelectItem value="angry">Angry</SelectItem>
+                    <SelectItem value="arrogant">Arrogant</SelectItem>
+                    <SelectItem value="soft">Soft</SelectItem>
+                    <SelectItem value="cold_hearted">Cold Hearted</SelectItem>
+                    <SelectItem value="nice">Nice</SelectItem>
+                    <SelectItem value="cool">Cool</SelectItem>
+                    <SelectItem value="not_well">Not Well</SelectItem>
+                    <SelectItem value="analytical">Analytical</SelectItem>
+                    <SelectItem value="professional">Professional</SelectItem>
+                    <SelectItem value="casual">Casual</SelectItem>
+                    <SelectItem value="direct">Direct</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -222,10 +199,12 @@ export default function MeetingPrepForm(
                     <SelectValue placeholder="Select difficulty" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Beginner">Beginner</SelectItem>
-                    <SelectItem value="Intermediate">Intermediate</SelectItem>
-                    <SelectItem value="Advanced">Advanced</SelectItem>
-                    <SelectItem value="Expert">Expert</SelectItem>
+                    <SelectContent>
+                      <SelectItem value="beginner">Beginner</SelectItem>
+                      <SelectItem value="intermediate">Intermediate</SelectItem>
+                      <SelectItem value="advanced">Advanced</SelectItem>
+                      <SelectItem value="expert">Expert</SelectItem>
+                    </SelectContent>
                   </SelectContent>
                 </Select>
               )}

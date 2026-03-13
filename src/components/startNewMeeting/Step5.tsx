@@ -212,7 +212,8 @@
 
 //       // 3️⃣ Start meeting API
 //       const response = await fetch(
-//         `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+//         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+//         `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
 //         {
 //           method: "POST",
 //         }
@@ -629,12 +630,19 @@
 //                 {reps.map((rep) => (
 //                   <div
 //                     key={rep.id}
-//                     className={`p-3 rounded-lg border-l-4 flex-1 min-w-[180px] ${repSpeaking[rep.id] ? "border-purple-600 bg-purple-100 animate-pulse" : "border-orange-500 bg-orange-100"
-//                       }`}
+//                     className={`p-3 rounded-lg flex-1 min-w-[180px] 
+//         ${repSpeaking[rep.id]
+//                         ? "border-4 border-purple-600 bg-purple-200 animate-pulse shadow-lg shadow-purple-400/50"
+//                         : "border-l-4 border-orange-500 bg-orange-100"
+//                       } transition-all duration-300 ease-in-out`}
 //                   >
-//                     <h3 className="text-orange-700 mb-1">{rep.name}</h3>
+//                     <h3 className={`${repSpeaking[rep.id] ? "text-purple-800 font-bold" : "text-orange-700"} mb-1`}>
+//                       {rep.name}
+//                     </h3>
 //                     <p><strong>Role:</strong> {rep.role}</p>
-//                     <p><strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality}</p>
+//                     <p>
+//                       <strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality}
+//                     </p>
 //                   </div>
 //                 ))}
 //               </div>
@@ -647,8 +655,11 @@
 //               <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2"> Voice Conversation</h2>
 //               <div className="flex flex-col items-center gap-4">
 //                 <button
-//                   className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer ${isRecording ? "bg-red-600" : "bg-gradient-to-br from-indigo-500 to-purple-600"
-//                     }`}
+//                   className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer 
+//     ${isRecording
+//                       ? "bg-red-600 animate-pulse shadow-red-400/50" // when recording/speaking
+//                       : "bg-gradient-to-br from-indigo-500 to-purple-600" // idle state
+//                     } transition-all duration-300 ease-in-out`}
 //                   onClick={toggleRecording}
 //                 >
 //                   🎤
@@ -677,7 +688,6 @@
 //     </div>
 //   );
 // }
-
 
 
 
@@ -825,59 +835,77 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     setTimeout(() => startListening(), 800);
   }
 
-  // ─── Connect ──────────────────────────────────────────
-  // function connectToMeeting() {
-  //   if (!meetingId.trim()) {
-  //     alert("⚠️ Please enter a Meeting ID");
-  //     return;
-  //   }
+  // async function connectToMeeting() {
+  //   try {
+  //     // 1️⃣ Get meetingId from cookies
+  //     const meetingId = Cookies.get("meetingId")?.trim() || "";
 
-  // function connectToMeeting() {
-  //   // const meetingId = Cookies.get("meetingId") || "";
-  //   // if (!meetingId.trim()) {
-  //   //   alert("⚠️ Please enter a Meeting ID");
-  //   //   return;
-  //   // }
+  //     if (!meetingId) {
+  //       toast.error("⚠️ Meeting ID not found");
+  //       return;
+  //     }
 
-  //   // Safely get meetingId from cookies
-  //   const meetingId = Cookies.get("meetingId")?.trim() || "";
+  //     // 2️⃣ Update UI status
+  //     setStatusBox("disconnected", "Connecting...");
 
-  //   if (!meetingId) {
-  //     alert("⚠️ Please enter a Meeting ID");
-  //     return;
-  //   }
+  //     // 3️⃣ Start meeting API
+  //     const response = await fetch(
+  //       // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+  //       `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+  //       {
+  //         method: "POST",
+  //       }
+  //     );
 
-  //   // meeting active api 
-  //   // Optionally, you can call your API to start the meeting
-  //   fetch(`http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`, {
-  //     method: "POST", // or GET depending on your API
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) throw new Error("Failed to start meeting");
-  //       toast.success("Meeting started successfully");
+  //     if (!response.ok) {
+  //       throw new Error("Failed to start meeting");
+  //     }
+
+  //     toast.success("Meeting started successfully");
+
+  //     // 4️⃣ Close previous socket if exists
+  //     if (wsRef.current) {
+  //       wsRef.current.close();
+  //     }
+
+  //     // 5️⃣ Create WebSocket connection
+  //     const ws = new WebSocket(
+  //       `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+  //     );
+
+  //     wsRef.current = ws;
+
+  //     // 6️⃣ WebSocket events
+  //     ws.onopen = () => {
+  //       console.log("✅ WebSocket connected");
   //       setIsConnected(true);
-  //     })
-  //     .catch((err: any) => console.error(err));
+  //     };
 
-  //   // Update UI status
-  //   setStatusBox("disconnected", "Connecting...");
-  //   const ws = new WebSocket(
-  //     `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-  //   );
-  //   wsRef.current = ws;
+  //     ws.onmessage = (event) => {
+  //       const data = JSON.parse(event.data);
+  //       handleMessage(data);
+  //     };
 
-  //   ws.onopen = () => console.log("WS connected");
-  //   ws.onmessage = (e) => handleMessage(JSON.parse(e.data));
-  //   ws.onerror = () => {
-  //     setStatusBox("disconnected", "Connection error");
-  //     alert("❌ Failed to connect. Is server running?");
-  //   };
-  //   ws.onclose = () => {
-  //     setStatusBox("disconnected", "Disconnected");
-  //     setIsConnected(false);
-  //     disableMic();
-  //   };
+  //     ws.onerror = () => {
+  //       toast.error("❌ WebSocket connection error");
+  //       setStatusBox("disconnected", "Connection error");
+  //     };
+
+  //     ws.onclose = () => {
+  //       console.log("❌ WebSocket disconnected");
+  //       setStatusBox("disconnected", "Disconnected");
+  //       setIsConnected(false);
+  //       disableMic();
+  //       toast.error("Connection closed");
+  //     };
+
+  //   } catch (error: any) {
+  //     console.error("Connect meeting error:", error);
+  //     toast.error(error.detail || "Something went wrong");
+  //   }
   // }
+
+
 
   async function connectToMeeting() {
     try {
@@ -894,17 +922,18 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       // 3️⃣ Start meeting API
       const response = await fetch(
-        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
-        {
-          method: "POST",
-        }
+        `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+        { method: "POST" }
       );
 
       if (!response.ok) {
-        throw new Error("Failed to start meeting");
+        // Parse server JSON for detail/message
+        const errData = await response.json().catch(() => null);
+        const message = errData?.detail || errData?.message || "Failed to start meeting";
+        throw new Error(message);
       }
 
-      toast.success("Meeting started successfully");
+      toast.success("✅ Meeting started successfully");
 
       // 4️⃣ Close previous socket if exists
       if (wsRef.current) {
@@ -913,7 +942,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       // 5️⃣ Create WebSocket connection
       const ws = new WebSocket(
-        `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
       );
 
       wsRef.current = ws;
@@ -929,7 +958,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         handleMessage(data);
       };
 
-      ws.onerror = () => {
+      ws.onerror = (err) => {
+        console.error("WebSocket error:", err);
         toast.error("❌ WebSocket connection error");
         setStatusBox("disconnected", "Connection error");
       };
@@ -939,14 +969,18 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         setStatusBox("disconnected", "Disconnected");
         setIsConnected(false);
         disableMic();
-        toast.error("Connection closed");
+        toast.error("❌ Connection closed");
       };
 
     } catch (error: any) {
       console.error("Connect meeting error:", error);
-      toast.error(error.detail || "Something went wrong");
+
+      // ✅ Show proper error message from server detail if exists
+      const message = error instanceof Error ? error.message : JSON.stringify(error);
+      toast.error(`❌ ${message}, You have to create new meeting from before step`);
     }
   }
+
 
   // ─── WS Handler ───────────────────────────────────────
   function handleMessage(data: any) {
@@ -1168,7 +1202,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       // 1️⃣ End meeting API
       const response = await fetch(
-        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+        `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
         {
           method: "POST",
         }

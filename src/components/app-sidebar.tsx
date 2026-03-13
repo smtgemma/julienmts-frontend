@@ -51,6 +51,7 @@ export default function AppSidebar() {
       Cookies.remove("refreshToken");
 
       dispatch(logoutFc());
+      localStorage.clear();
 
       toast.success("Logout successfully");
 
