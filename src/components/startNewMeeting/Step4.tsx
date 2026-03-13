@@ -16,10 +16,17 @@ import { useSelector } from 'react-redux';
 import DashboardButton from '../shared/dashboardButton/DashboardButton';
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
+import { useActiveSubscriptionQuery } from '@/redux/api/subscriptionApi/subscriptionApi';
 
 export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
+
+  // all active subscription 
+  const { data: activeSubcripiton } = useActiveSubscriptionQuery("")
+  const status = activeSubcripiton?.data?.plan?.status;
+  const meetingMode = activeSubcripiton?.data?.plan?.meetingMode;
+  console.log(status, meetingMode, "================activesubscritpio");
 
   // take data from redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
@@ -61,8 +68,8 @@ export default function MeetingPrepForm(
     const payload = {
       salesperson_id: salesperson_id,
       company_id: companyId,
-      meeting_mode: "1-on-2",
-      status: 'active',
+      meeting_mode: meetingMode,
+      status: status,
       representatives: representatives,
       sales_methodology: data?.sales_methodology, // FIXED
       meeting_goal: data?.meetingGoal || "",

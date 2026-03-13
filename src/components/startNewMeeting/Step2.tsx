@@ -256,6 +256,7 @@ type Participant = {
   notes: string;
   is_decision_maker: boolean;
   linkedin_profile: string;
+  voice_id: string;
 };
 
 type FormValues = {
@@ -291,6 +292,7 @@ export default function Step2({
           notes: "",
           is_decision_maker: false,
           linkedin_profile: "",
+          voice_id: "",
         },
       ],
     },
@@ -304,7 +306,6 @@ export default function Step2({
   const onSubmit = async (data: FormValues) => {
     const payload = data.participants.map((p) => ({
       ...p,
-      voice_id: "1-on-2",
     }));
 
     try {
@@ -322,6 +323,9 @@ export default function Step2({
     } catch (error: any) {
       toast.error("Something went wrong", error.message)
     }
+  };
+  const handleBack = () => {
+    handlePrev();
   };
 
   const participaints: "1-on-2" | "group" = "1-on-2";
@@ -429,7 +433,27 @@ export default function Step2({
                   </p>
                 )}
               </div>
+              {/* meetingMode */}
+              <div className="mt-3">
+                <label className="text-sm font-medium">Meeting Mode</label>
 
+                <Controller
+                  name={`participants.${index}.voice_id`}
+                  control={control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full mt-1">
+                        <SelectValue placeholder="1-on-1" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1-on-1">1-on-1</SelectItem>
+                        <SelectItem value="1-on-2">1-on-2</SelectItem>
+                        <SelectItem value="1-on-3">1-on-3</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
               {/* Decision Maker */}
               <div className="mt-4 flex items-center gap-2">
                 <input
@@ -482,6 +506,7 @@ export default function Step2({
                 notes: "",
                 is_decision_maker: false,
                 linkedin_profile: "",
+                voice_id: "",
               });
             } else {
               toast.error(`You can add only ${maxParticipants} participants`);
@@ -496,17 +521,18 @@ export default function Step2({
         {/* Footer Buttons */}
         <div className="flex justify-between mt-8">
           <button
-            onClick={handlePrev}
             type="button"
-            className="border px-6 py-3 rounded-lg hover:bg-gray-100"
+            onClick={handleBack}
+            className="border border-[#D1D6DB] px-6 py-2 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
           >
             Back
           </button>
-          <div className="flex justify-end mt-8">
+
+          <div className="flex justify-end">
             <DashboardButton
               text="Next Step"
               onClick={handleSubmit(onSubmit)}
-              isLoading={isLoading} // RTK mutation loading state
+              isLoading={isLoading}
             />
           </div>
         </div>

@@ -42,7 +42,16 @@ export const subscriptionApi = baseApi.injectEndpoints({
       invalidatesTags: ["Subscripton"],
     }),
 
+    // active subscription 
+    activeSubscription: builder.query({
+      query: () => ({
+        url: "/subscriptions/me",
+        method: "GET",
+      }),
+      providesTags: ["Subscripton"],
+    }),
+
   }),
 });
 
-export const { useGetAllSubscriptionsQuery, useGetSinglePlanQuery, usePaymentMethodMutation, useSubscriptionMutation } = subscriptionApi;
+export const { useGetAllSubscriptionsQuery, useGetSinglePlanQuery, usePaymentMethodMutation, useSubscriptionMutation, useActiveSubscriptionQuery } = subscriptionApi;
