@@ -1070,12 +1070,9 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   async function startListening() {
     if (isRecording || isAIReplying || !isConnected || isPlayingAudioRef.current) return;
     try {
-      // const audioStream = await navigator.mediaDevices.getUserMedia({
-      //   audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 16000 },
-      // });
-      // audioStreamRef.current = audioStream;
-
-      const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      const audioStream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 16000 },
+      });
       audioStreamRef.current = audioStream;
 
       // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
