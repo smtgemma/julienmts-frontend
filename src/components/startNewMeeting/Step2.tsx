@@ -6,6 +6,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { setParticipantsValue } from "@/redux/features/startMeeting/startMeetingSlice";
 // import { useMeetingCompanyRepresentitiveMutation } from "@/redux/api/startMettingApi/startMettingApi";
+// import Cookies from "js-cookie";
 
 // import {
 //   Select,
@@ -15,6 +16,8 @@
 //   SelectValue,
 // } from "@/components/ui/select";
 // import { RootState } from "@/redux/store";
+// import { toast } from "sonner";
+// import DashboardButton from "../shared/dashboardButton/DashboardButton";
 
 // type Participant = {
 //   name: string;
@@ -22,6 +25,7 @@
 //   notes: string;
 //   is_decision_maker: boolean;
 //   linkedin_profile: string;
+//   voice_id: string;
 // };
 
 // type FormValues = {
@@ -36,13 +40,19 @@
 //   handlePrev: () => void;
 // }) {
 //   const dispatch = useDispatch();
+//   // take data from redux 
 //   const allData = useSelector((state: RootState) => state.startMeeting);
 //   const companyId = allData?.companyData?.company_id;
 
 //   const [meetingCompanyRepresentitive, { isLoading }] =
 //     useMeetingCompanyRepresentitiveMutation();
 
-//   const { register, control, handleSubmit } = useForm<FormValues>({
+//   const {
+//     register,
+//     control,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm<FormValues>({
 //     defaultValues: {
 //       participants: [
 //         {
@@ -51,6 +61,7 @@
 //           notes: "",
 //           is_decision_maker: false,
 //           linkedin_profile: "",
+//           voice_id: "",
 //         },
 //       ],
 //     },
@@ -62,27 +73,32 @@
 //   });
 
 //   const onSubmit = async (data: FormValues) => {
-//     // Add voice_id to each participant
 //     const payload = data.participants.map((p) => ({
 //       ...p,
-//       voice_id: "1-on-1",
 //     }));
 
 //     try {
-//       // Send payload as array with companyId
 //       const response = await meetingCompanyRepresentitive({
 //         companyId,
-//         participants: payload, // ✅ renamed from `body` to match the destructure above
+//         participants: payload,
 //       }).unwrap();
-
-//       console.log("Response:", response);
-//     } catch (error) {
-//       console.log("Something went wrong", error);
+//       if (response?.success) {
+//         toast.success(response?.message)
+//         // console.log(response, "=======================partice")
+//         // Cookies.set("representative_ids", response.data.representative_ids);
+//         dispatch(setParticipantsValue(response?.data?.representative_ids));
+//         handleNext();
+//       }
+//     } catch (error: any) {
+//       toast.error("Something went wrong", error.message)
 //     }
-
-//     dispatch(setParticipantsValue(data));
-//     handleNext();
 //   };
+//   const handleBack = () => {
+//     handlePrev();
+//   };
+
+//   const participaints: "1-on-3" | "group" = "1-on-3";
+//   participaints.split("-on-")[1]
 
 //   return (
 //     <div className="py-6">
@@ -124,8 +140,13 @@
 //                 <input
 //                   className="w-full border mt-1 rounded-md px-3 py-2"
 //                   placeholder="Sarah Miller"
-//                   {...register(`participants.${index}.name`)}
+//                   {...register(`participants.${index}.name`, { required: "Name is required" })}
 //                 />
+//                 {errors.participants?.[index]?.name && (
+//                   <p className="text-red-500 text-sm mt-1">
+//                     {errors.participants[index].name.message}
+//                   </p>
+//                 )}
 //               </div>
 
 //               {/* Role Dropdown */}
@@ -134,6 +155,7 @@
 //                 <Controller
 //                   name={`participants.${index}.role`}
 //                   control={control}
+//                   rules={{ required: "Role is required" }}
 //                   render={({ field }) => (
 //                     <Select onValueChange={field.onChange} value={field.value}>
 //                       <SelectTrigger className="w-full mt-1">
@@ -152,6 +174,11 @@
 //                     </Select>
 //                   )}
 //                 />
+//                 {errors.participants?.[index]?.role && (
+//                   <p className="text-red-500 text-sm mt-1">
+//                     {errors.participants[index].role.message}
+//                   </p>
+//                 )}
 //               </div>
 //             </div>
 
@@ -161,11 +188,41 @@
 //                 <label className="text-sm font-medium">LinkedIn Profile</label>
 //                 <input
 //                   className="w-full border mt-1 rounded-md px-3 py-2"
-//                   placeholder="https://linkedin.com/..."
-//                   {...register(`participants.${index}.linkedin_profile`)}
+//                   placeholder="https://linkedin.com/in/username"
+//                   {...register(`participants.${index}.linkedin_profile`, {
+//                     pattern: {
+//                       value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
+//                       message: "Please enter a valid LinkedIn URL",
+//                     },
+//                   })}
+//                 />
+//                 {errors.participants?.[index]?.linkedin_profile && (
+//                   <p className="text-red-500 text-sm mt-1">
+//                     {errors.participants[index].linkedin_profile.message}
+//                   </p>
+//                 )}
+//               </div>
+//               {/* meetingMode */}
+//               <div className="mt-3">
+//                 <label className="text-sm font-medium">Meeting Mode</label>
+
+//                 <Controller
+//                   name={`participants.${index}.voice_id`}
+//                   control={control}
+//                   render={({ field }) => (
+//                     <Select onValueChange={field.onChange} value={field.value}>
+//                       <SelectTrigger className="w-full mt-1">
+//                         <SelectValue placeholder="1-on-1" />
+//                       </SelectTrigger>
+//                       <SelectContent>
+//                         <SelectItem value="1-on-1">1-on-1</SelectItem>
+//                         <SelectItem value="1-on-2">1-on-2</SelectItem>
+//                         <SelectItem value="1-on-3">1-on-3</SelectItem>
+//                       </SelectContent>
+//                     </Select>
+//                   )}
 //                 />
 //               </div>
-
 //               {/* Decision Maker */}
 //               <div className="mt-4 flex items-center gap-2">
 //                 <input
@@ -189,7 +246,7 @@
 //         ))}
 
 //         {/* Add Participant Button */}
-//         <button
+//         {/* <button
 //           type="button"
 //           onClick={() =>
 //             append({
@@ -204,30 +261,55 @@
 //         >
 //           <Plus size={20} />
 //           <span>Add Another Participant</span>
+//         </button> */}
+
+//         <button
+//           type="button"
+//           onClick={() => {
+//             const maxParticipants = Number(participaints.split("-on-")[1]);
+
+//             if (fields.length < maxParticipants) {
+//               append({
+//                 name: "",
+//                 role: "",
+//                 notes: "",
+//                 is_decision_maker: false,
+//                 linkedin_profile: "",
+//                 voice_id: "",
+//               });
+//             } else {
+//               toast.error(`You can add only ${maxParticipants} participants`);
+//             }
+//           }}
+//           className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
+//         >
+//           <Plus size={20} />
+//           <span>Add Another Participant</span>
 //         </button>
 
 //         {/* Footer Buttons */}
 //         <div className="flex justify-between mt-8">
 //           <button
-//             onClick={handlePrev}
 //             type="button"
-//             className="border px-6 py-3 rounded-lg hover:bg-gray-100"
+//             onClick={handleBack}
+//             className="border border-[#D1D6DB] px-6 py-2 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
 //           >
 //             Back
 //           </button>
 
-//           <button
-//             onClick={handleSubmit(onSubmit)}
-//             disabled={isLoading}
-//             className="bg-primaryBgColor text-white px-6 py-3 rounded-lg disabled:opacity-50"
-//           >
-//             {isLoading ? "Processing..." : "Next Step"}
-//           </button>
+//           <div className="flex justify-end">
+//             <DashboardButton
+//               text="Next Step"
+//               onClick={handleSubmit(onSubmit)}
+//               isLoading={isLoading}
+//             />
+//           </div>
 //         </div>
 //       </div>
 //     </div>
 //   );
 // }
+
 
 
 "use client";
@@ -237,7 +319,6 @@ import { X, Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setParticipantsValue } from "@/redux/features/startMeeting/startMeetingSlice";
 import { useMeetingCompanyRepresentitiveMutation } from "@/redux/api/startMettingApi/startMettingApi";
-import Cookies from "js-cookie";
 
 import {
   Select,
@@ -246,9 +327,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import DashboardButton from "../shared/dashboardButton/DashboardButton";
+import { useActiveSubscriptionQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
 
 type Participant = {
   name: string;
@@ -256,7 +339,7 @@ type Participant = {
   notes: string;
   is_decision_maker: boolean;
   linkedin_profile: string;
-  voice_id: string;
+  voice_id?: string;
 };
 
 type FormValues = {
@@ -271,9 +354,19 @@ export default function Step2({
   handlePrev: () => void;
 }) {
   const dispatch = useDispatch();
-  // take data from redux 
+
   const allData = useSelector((state: RootState) => state.startMeeting);
   const companyId = allData?.companyData?.company_id;
+
+  // subscription
+  const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
+
+  const meetingMode =
+    activeSubcripiton?.data?.plan?.meetingMode || "1-on-1";
+
+  const maxParticipants = parseInt(
+    meetingMode.split("-on-")[1] || "1"
+  );
 
   const [meetingCompanyRepresentitive, { isLoading }] =
     useMeetingCompanyRepresentitiveMutation();
@@ -292,7 +385,6 @@ export default function Step2({
           notes: "",
           is_decision_maker: false,
           linkedin_profile: "",
-          voice_id: "",
         },
       ],
     },
@@ -304,8 +396,11 @@ export default function Step2({
   });
 
   const onSubmit = async (data: FormValues) => {
+    const voiceId = `1-on-${data.participants.length}`;
+
     const payload = data.participants.map((p) => ({
       ...p,
+      voice_id: voiceId,
     }));
 
     try {
@@ -314,26 +409,24 @@ export default function Step2({
         participants: payload,
       }).unwrap();
       if (response?.success) {
-        toast.success(response?.message)
-        // console.log(response, "=======================partice")
-        // Cookies.set("representative_ids", response.data.representative_ids);
+        console.log(response, "=========================response from step-22222222222222")
+        toast.success(response?.message);
         dispatch(setParticipantsValue(response?.data?.representative_ids));
         handleNext();
       }
     } catch (error: any) {
-      toast.error("Something went wrong", error.message)
+      toast.error("Something went wrong");
     }
   };
+
   const handleBack = () => {
     handlePrev();
   };
 
-  const participaints: "1-on-3" | "group" = "1-on-3";
-  participaints.split("-on-")[1]
-
   return (
     <div className="py-6">
       <div className="space-y-6">
+
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#2D2D2D] mb-2">
@@ -350,9 +443,11 @@ export default function Step2({
             key={item.id}
             className="border border-[#D1D6DB] rounded-xl p-6 bg-white"
           >
-            {/* Header */}
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold text-xl">Participant {index + 1}</h3>
+              <h3 className="font-semibold text-xl">
+                Participant {index + 1}
+              </h3>
+
               {fields.length > 1 && (
                 <button
                   type="button"
@@ -366,103 +461,116 @@ export default function Step2({
 
             {/* Name + Role */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
               <div>
                 <label className="text-sm font-medium">Name</label>
                 <input
                   className="w-full border mt-1 rounded-md px-3 py-2"
                   placeholder="Sarah Miller"
-                  {...register(`participants.${index}.name`, { required: "Name is required" })}
+                  {...register(`participants.${index}.name`, {
+                    required: "Name is required",
+                  })}
                 />
+
                 {errors.participants?.[index]?.name && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.participants[index].name.message}
+                    {errors.participants[index]?.name?.message}
                   </p>
                 )}
               </div>
 
-              {/* Role Dropdown */}
+              {/* Role */}
               <div>
                 <label className="text-sm font-medium">Role</label>
+
                 <Controller
                   name={`participants.${index}.role`}
                   control={control}
                   rules={{ required: "Role is required" }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                    >
                       <SelectTrigger className="w-full mt-1">
                         <SelectValue placeholder="Select role" />
                       </SelectTrigger>
+
                       <SelectContent>
                         <SelectItem value="ceo">CEO</SelectItem>
                         <SelectItem value="cmo">CMO</SelectItem>
                         <SelectItem value="cfo">CFO</SelectItem>
                         <SelectItem value="coo">COO</SelectItem>
                         <SelectItem value="cto">CTO</SelectItem>
-                        <SelectItem value="vp_sales">VP Sales</SelectItem>
-                        <SelectItem value="manager">Manager</SelectItem>
-                        <SelectItem value="director">Director</SelectItem>
+                        <SelectItem value="vp_sales">
+                          VP Sales
+                        </SelectItem>
+                        <SelectItem value="manager">
+                          Manager
+                        </SelectItem>
+                        <SelectItem value="director">
+                          Director
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   )}
                 />
+
                 {errors.participants?.[index]?.role && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.participants[index].role.message}
+                    {errors.participants[index]?.role?.message}
                   </p>
                 )}
               </div>
             </div>
 
-            {/* LinkedIn + Notes */}
+            {/* Linkedin */}
             <div className="mt-4">
-              <div>
-                <label className="text-sm font-medium">LinkedIn Profile</label>
-                <input
-                  className="w-full border mt-1 rounded-md px-3 py-2"
-                  placeholder="https://linkedin.com/in/username"
-                  {...register(`participants.${index}.linkedin_profile`, {
-                    pattern: {
-                      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
-                      message: "Please enter a valid LinkedIn URL",
-                    },
-                  })}
-                />
-                {errors.participants?.[index]?.linkedin_profile && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.participants[index].linkedin_profile.message}
-                  </p>
-                )}
-              </div>
-              {/* meetingMode */}
-              <div className="mt-3">
-                <label className="text-sm font-medium">Meeting Mode</label>
 
-                <Controller
-                  name={`participants.${index}.voice_id`}
-                  control={control}
-                  render={({ field }) => (
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="w-full mt-1">
-                        <SelectValue placeholder="1-on-1" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1-on-1">1-on-1</SelectItem>
-                        <SelectItem value="1-on-2">1-on-2</SelectItem>
-                        <SelectItem value="1-on-3">1-on-3</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-              </div>
-              {/* Decision Maker */}
+              <label className="text-sm font-medium">
+                LinkedIn Profile
+              </label>
+
+              <input
+                className="w-full border mt-1 rounded-md px-3 py-2"
+                placeholder="https://linkedin.com/in/username"
+                {...register(
+                  `participants.${index}.linkedin_profile`,
+                  {
+                    pattern: {
+                      value:
+                        /^https:\/\/(www\.)?linkedin\.com\/.*$/,
+                      message:
+                        "Please enter a valid LinkedIn URL",
+                    },
+                  }
+                )}
+              />
+
+              {errors.participants?.[index]?.linkedin_profile && (
+                <p className="text-red-500 text-sm mt-1">
+                  {
+                    errors.participants[index]
+                      ?.linkedin_profile?.message
+                  }
+                </p>
+              )}
+
+              {/* Decision maker */}
               <div className="mt-4 flex items-center gap-2">
                 <input
                   type="checkbox"
-                  {...register(`participants.${index}.is_decision_maker`)}
+                  {...register(
+                    `participants.${index}.is_decision_maker`
+                  )}
                 />
-                <label className="text-sm">Is Decision Maker?</label>
+
+                <label className="text-sm">
+                  Is Decision Maker?
+                </label>
               </div>
 
+              {/* Notes */}
               <div className="mt-4">
                 <label className="text-sm font-medium">Notes</label>
                 <textarea
@@ -472,33 +580,18 @@ export default function Step2({
                   {...register(`participants.${index}.notes`)}
                 />
               </div>
+
+              <p className="text-sm text-gray-500 mt-2">
+                Meeting Mode: 1-on-{fields.length}
+              </p>
             </div>
           </div>
         ))}
 
-        {/* Add Participant Button */}
-        {/* <button
-          type="button"
-          onClick={() =>
-            append({
-              name: "",
-              role: "",
-              notes: "",
-              is_decision_maker: false,
-              linkedin_profile: "",
-            })
-          }
-          className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
-        >
-          <Plus size={20} />
-          <span>Add Another Participant</span>
-        </button> */}
-
+        {/* Add Participant */}
         <button
           type="button"
           onClick={() => {
-            const maxParticipants = Number(participaints.split("-on-")[1]);
-
             if (fields.length < maxParticipants) {
               append({
                 name: "",
@@ -506,35 +599,34 @@ export default function Step2({
                 notes: "",
                 is_decision_maker: false,
                 linkedin_profile: "",
-                voice_id: "",
               });
             } else {
-              toast.error(`You can add only ${maxParticipants} participants`);
+              toast.error(
+                `You can add only ${maxParticipants} participants`
+              );
             }
           }}
           className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
         >
           <Plus size={20} />
-          <span>Add Another Participant</span>
+          <span className="cursor-pointer">Add Another Participant</span>
         </button>
 
-        {/* Footer Buttons */}
+        {/* Footer */}
         <div className="flex justify-between mt-8">
           <button
             type="button"
             onClick={handleBack}
-            className="border border-[#D1D6DB] px-6 py-2 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer"
+            className="border border-[#D1D6DB] px-6 py-2 rounded-lg hover:bg-primaryBgColor hover:text-white"
           >
             Back
           </button>
 
-          <div className="flex justify-end">
-            <DashboardButton
-              text="Next Step"
-              onClick={handleSubmit(onSubmit)}
-              isLoading={isLoading}
-            />
-          </div>
+          <DashboardButton
+            text="Next Step"
+            onClick={handleSubmit(onSubmit)}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </div>

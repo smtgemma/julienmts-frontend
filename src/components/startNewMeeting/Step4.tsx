@@ -22,7 +22,7 @@ export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
 
-  // all active subscription 
+  // active subscription 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("")
   const status = activeSubcripiton?.data?.plan?.status;
   const meetingMode = activeSubcripiton?.data?.plan?.meetingMode;
@@ -68,7 +68,8 @@ export default function MeetingPrepForm(
     const payload = {
       salesperson_id: salesperson_id,
       company_id: companyId,
-      meeting_mode: meetingMode,
+      // meeting_mode: meetingMode,
+      meeting_mode: "1-on-1",
       status: status,
       representatives: representatives,
       sales_methodology: data?.sales_methodology, // FIXED
