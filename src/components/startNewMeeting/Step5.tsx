@@ -948,7 +948,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       // 3️⃣ Start meeting API
       const response = await fetch(
-        `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+        `https://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
@@ -968,7 +968,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       // 5️⃣ Create WebSocket connection
       const ws = new WebSocket(
-        `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `wss://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
       );
 
       wsRef.current = ws;
