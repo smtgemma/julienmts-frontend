@@ -143,59 +143,77 @@
 //     setTimeout(() => startListening(), 800);
 //   }
 
-//   // ─── Connect ──────────────────────────────────────────
-//   // function connectToMeeting() {
-//   //   if (!meetingId.trim()) {
-//   //     alert("⚠️ Please enter a Meeting ID");
-//   //     return;
-//   //   }
+//   // async function connectToMeeting() {
+//   //   try {
+//   //     // 1️⃣ Get meetingId from cookies
+//   //     const meetingId = Cookies.get("meetingId")?.trim() || "";
 
-//   // function connectToMeeting() {
-//   //   // const meetingId = Cookies.get("meetingId") || "";
-//   //   // if (!meetingId.trim()) {
-//   //   //   alert("⚠️ Please enter a Meeting ID");
-//   //   //   return;
-//   //   // }
+//   //     if (!meetingId) {
+//   //       toast.error("⚠️ Meeting ID not found");
+//   //       return;
+//   //     }
 
-//   //   // Safely get meetingId from cookies
-//   //   const meetingId = Cookies.get("meetingId")?.trim() || "";
+//   //     // 2️⃣ Update UI status
+//   //     setStatusBox("disconnected", "Connecting...");
 
-//   //   if (!meetingId) {
-//   //     alert("⚠️ Please enter a Meeting ID");
-//   //     return;
-//   //   }
+//   //     // 3️⃣ Start meeting API
+//   //     const response = await fetch(
+//   //       // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+//   //       `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+//   //       {
+//   //         method: "POST",
+//   //       }
+//   //     );
 
-//   //   // meeting active api 
-//   //   // Optionally, you can call your API to start the meeting
-//   //   fetch(`http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`, {
-//   //     method: "POST", // or GET depending on your API
-//   //   })
-//   //     .then((res) => {
-//   //       if (!res.ok) throw new Error("Failed to start meeting");
-//   //       toast.success("Meeting started successfully");
+//   //     if (!response.ok) {
+//   //       throw new Error("Failed to start meeting");
+//   //     }
+
+//   //     toast.success("Meeting started successfully");
+
+//   //     // 4️⃣ Close previous socket if exists
+//   //     if (wsRef.current) {
+//   //       wsRef.current.close();
+//   //     }
+
+//   //     // 5️⃣ Create WebSocket connection
+//   //     const ws = new WebSocket(
+//   //       `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//   //     );
+
+//   //     wsRef.current = ws;
+
+//   //     // 6️⃣ WebSocket events
+//   //     ws.onopen = () => {
+//   //       console.log("✅ WebSocket connected");
 //   //       setIsConnected(true);
-//   //     })
-//   //     .catch((err: any) => console.error(err));
+//   //     };
 
-//   //   // Update UI status
-//   //   setStatusBox("disconnected", "Connecting...");
-//   //   const ws = new WebSocket(
-//   //     `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-//   //   );
-//   //   wsRef.current = ws;
+//   //     ws.onmessage = (event) => {
+//   //       const data = JSON.parse(event.data);
+//   //       handleMessage(data);
+//   //     };
 
-//   //   ws.onopen = () => console.log("WS connected");
-//   //   ws.onmessage = (e) => handleMessage(JSON.parse(e.data));
-//   //   ws.onerror = () => {
-//   //     setStatusBox("disconnected", "Connection error");
-//   //     alert("❌ Failed to connect. Is server running?");
-//   //   };
-//   //   ws.onclose = () => {
-//   //     setStatusBox("disconnected", "Disconnected");
-//   //     setIsConnected(false);
-//   //     disableMic();
-//   //   };
+//   //     ws.onerror = () => {
+//   //       toast.error("❌ WebSocket connection error");
+//   //       setStatusBox("disconnected", "Connection error");
+//   //     };
+
+//   //     ws.onclose = () => {
+//   //       console.log("❌ WebSocket disconnected");
+//   //       setStatusBox("disconnected", "Disconnected");
+//   //       setIsConnected(false);
+//   //       disableMic();
+//   //       toast.error("Connection closed");
+//   //     };
+
+//   //   } catch (error: any) {
+//   //     console.error("Connect meeting error:", error);
+//   //     toast.error(error.detail || "Something went wrong");
+//   //   }
 //   // }
+
+
 
 //   async function connectToMeeting() {
 //     try {
@@ -212,18 +230,18 @@
 
 //       // 3️⃣ Start meeting API
 //       const response = await fetch(
-//         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
 //         `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
-//         {
-//           method: "POST",
-//         }
+//         { method: "POST" }
 //       );
 
 //       if (!response.ok) {
-//         throw new Error("Failed to start meeting");
+//         // Parse server JSON for detail/message
+//         const errData = await response.json().catch(() => null);
+//         const message = errData?.detail || errData?.message || "Failed to start meeting";
+//         throw new Error(message);
 //       }
 
-//       toast.success("Meeting started successfully");
+//       toast.success("✅ Meeting started successfully");
 
 //       // 4️⃣ Close previous socket if exists
 //       if (wsRef.current) {
@@ -232,7 +250,7 @@
 
 //       // 5️⃣ Create WebSocket connection
 //       const ws = new WebSocket(
-//         `ws://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
 //       );
 
 //       wsRef.current = ws;
@@ -248,7 +266,8 @@
 //         handleMessage(data);
 //       };
 
-//       ws.onerror = () => {
+//       ws.onerror = (err) => {
+//         console.error("WebSocket error:", err);
 //         toast.error("❌ WebSocket connection error");
 //         setStatusBox("disconnected", "Connection error");
 //       };
@@ -258,14 +277,18 @@
 //         setStatusBox("disconnected", "Disconnected");
 //         setIsConnected(false);
 //         disableMic();
-//         toast.error("Connection closed");
+//         toast.error("❌ Connection closed");
 //       };
 
 //     } catch (error: any) {
 //       console.error("Connect meeting error:", error);
-//       toast.error(error.detail || "Something went wrong");
+
+//       // ✅ Show proper error message from server detail if exists
+//       const message = error instanceof Error ? error.message : JSON.stringify(error);
+//       toast.error(`❌ ${message}, You have to create new meeting from before step`);
 //     }
 //   }
+
 
 //   // ─── WS Handler ───────────────────────────────────────
 //   function handleMessage(data: any) {
@@ -487,7 +510,8 @@
 
 //       // 1️⃣ End meeting API
 //       const response = await fetch(
-//         `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+//         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+//         `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
 //         {
 //           method: "POST",
 //         }
@@ -688,6 +712,8 @@
 //     </div>
 //   );
 // }
+
+
 
 
 
@@ -1044,9 +1070,12 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   async function startListening() {
     if (isRecording || isAIReplying || !isConnected || isPlayingAudioRef.current) return;
     try {
-      const audioStream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 16000 },
-      });
+      // const audioStream = await navigator.mediaDevices.getUserMedia({
+      //   audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 16000 },
+      // });
+      // audioStreamRef.current = audioStream;
+
+      const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true })
       audioStreamRef.current = audioStream;
 
       // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
