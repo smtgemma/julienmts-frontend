@@ -332,6 +332,7 @@ import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import DashboardButton from "../shared/dashboardButton/DashboardButton";
 import { useActiveSubscriptionQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
+import Cookies from "js-cookie";
 
 type Participant = {
   name: string;
@@ -398,6 +399,9 @@ export default function Step2({
   const onSubmit = async (data: FormValues) => {
     const voiceId = `1-on-${data.participants.length}`;
 
+    // save voice id in cookies 
+    Cookies.set("last_voice_id", voiceId, { expires: 7 });
+
     const payload = data.participants.map((p) => ({
       ...p,
       voice_id: voiceId,
@@ -409,7 +413,6 @@ export default function Step2({
         participants: payload,
       }).unwrap();
       if (response?.success) {
-        console.log(response, "=========================response from step-22222222222222")
         toast.success(response?.message);
         dispatch(setParticipantsValue(response?.data?.representative_ids));
         handleNext();
