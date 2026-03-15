@@ -12,15 +12,18 @@ import {
 import StepTitle from './stepTitle';
 import { useCreateMeetingIdMutation } from '@/redux/api/startMettingApi/startMettingApi';
 import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DashboardButton from '../shared/dashboardButton/DashboardButton';
 import { toast } from 'sonner';
 import Cookies from "js-cookie";
 import { useActiveSubscriptionQuery } from '@/redux/api/subscriptionApi/subscriptionApi';
+import { setMeetingPayload } from "@/redux/features/startMeeting/startMeetingSlice";
 
 export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
+
+  const dispatch = useDispatch()
 
   // active subscription 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("")
@@ -76,10 +79,12 @@ export default function MeetingPrepForm(
       sales_methodology: data?.sales_methodology, // FIXED
       meeting_goal: data?.meetingGoal || "",
       personality: data?.personality,
-      duration_minutes: Number(data?.duration) > 0 ? Number(data.duration) : 15,
+      duration_minutes: parseInt(data?.duration) || 15,
       difficulty: data?.difficulty,
     };
-    console.log(payload, "payload================")
+    // console.log(payload, "payload================")
+
+    dispatch(setMeetingPayload(payload))
 
     try {
       const response = await createMeetingId(payload).unwrap()

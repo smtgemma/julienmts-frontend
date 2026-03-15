@@ -44,10 +44,26 @@ export interface Participant {
   linkedin: string;
 };
 
+
+// meeting payload
+interface MeetingPayload {
+  salesperson_id: string;
+  company_id: string;
+  meeting_mode: string;
+  status: string;
+  representatives: any[];
+  sales_methodology: string;
+  meeting_goal: string;
+  personality: string;
+  duration_minutes: number;
+  difficulty: string;
+}
+
 // Full meeting state (IMPORTANT)
 export interface StartMeetingState {
   product: ProductValue | null;
   companyData: CompanyData | null;
   participants: Participant[];
+  payloadData: MeetingPayload | null
 }
 

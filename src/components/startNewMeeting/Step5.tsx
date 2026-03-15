@@ -724,6 +724,8 @@ import { useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { FaUsersGear } from "react-icons/fa6";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 
 type Rep = {
@@ -741,11 +743,13 @@ type AudioQueueItem = {
   isPrimary: boolean;
 };
 
-// interface Window {
-//   webkitAudioContext?: typeof AudioContext;
-// }
-
 export default function LiveConversation({ handlePrev }: { handlePrev: () => void }) {
+  
+  // get all data form redux 
+  const allData = useSelector((state: RootState) => state.startMeeting);
+    console.log(allData?.payloadData, "============all data")
+    const {meeting_goal, duration_minutes, sales_methodology, representatives} = allData?.payloadData || {}
+
   // ─── State ─────────────────────────────────────────────
   // const [meetingId, setMeetingId] = useState("");
   const [isConnected, setIsConnected] = useState(false);
@@ -860,78 +864,6 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     setSilenceCountdown("");
     setTimeout(() => startListening(), 800);
   }
-
-  // async function connectToMeeting() {
-  //   try {
-  //     // 1️⃣ Get meetingId from cookies
-  //     const meetingId = Cookies.get("meetingId")?.trim() || "";
-
-  //     if (!meetingId) {
-  //       toast.error("⚠️ Meeting ID not found");
-  //       return;
-  //     }
-
-  //     // 2️⃣ Update UI status
-  //     setStatusBox("disconnected", "Connecting...");
-
-  //     // 3️⃣ Start meeting API
-  //     const response = await fetch(
-  //       // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
-  //       `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
-  //       {
-  //         method: "POST",
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to start meeting");
-  //     }
-
-  //     toast.success("Meeting started successfully");
-
-  //     // 4️⃣ Close previous socket if exists
-  //     if (wsRef.current) {
-  //       wsRef.current.close();
-  //     }
-
-  //     // 5️⃣ Create WebSocket connection
-  //     const ws = new WebSocket(
-  //       `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-  //     );
-
-  //     wsRef.current = ws;
-
-  //     // 6️⃣ WebSocket events
-  //     ws.onopen = () => {
-  //       console.log("✅ WebSocket connected");
-  //       setIsConnected(true);
-  //     };
-
-  //     ws.onmessage = (event) => {
-  //       const data = JSON.parse(event.data);
-  //       handleMessage(data);
-  //     };
-
-  //     ws.onerror = () => {
-  //       toast.error("❌ WebSocket connection error");
-  //       setStatusBox("disconnected", "Connection error");
-  //     };
-
-  //     ws.onclose = () => {
-  //       console.log("❌ WebSocket disconnected");
-  //       setStatusBox("disconnected", "Disconnected");
-  //       setIsConnected(false);
-  //       disableMic();
-  //       toast.error("Connection closed");
-  //     };
-
-  //   } catch (error: any) {
-  //     console.error("Connect meeting error:", error);
-  //     toast.error(error.detail || "Something went wrong");
-  //   }
-  // }
-
-
 
   async function connectToMeeting() {
     try {
@@ -1147,34 +1079,6 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     else startListening();
   }
 
-  // ─── Volume Monitor ────────────────────────────────────
-  // function startVolumeMonitor() {
-  //   if (!analyserRef.current) return;
-  //   const analyser = analyserRef.current;
-  //   const dataArray = new Uint8Array(analyser.frequencyBinCount);
-  //   let silenceStart: number | null = null;
-
-  //   volumeIntervalRef.current = setInterval(() => {
-  //     analyser.getByteFrequencyData(dataArray);
-  //     const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-
-  //     if (avg < SILENCE_THRESHOLD) {
-  //       if (!silenceStart) silenceStart = Date.now();
-  //       else if (Date.now() - silenceStart >= SILENCE_DELAY_MS) {
-  //         silenceStart = null;
-  //         stopVolumeMonitor();
-  //         stopListening();
-  //       }
-  //       setSilenceCountdown(
-  //         `Sending in ${((SILENCE_DELAY_MS - (Date.now() - (silenceStart || 0))) / 1000).toFixed(1)}s...`
-  //       );
-  //     } else {
-  //       silenceStart = null;
-  //       setSilenceCountdown("");
-  //     }
-  //   }, 100);
-  // }
-
   let silenceStart: number | null = null;
 
   function startVolumeMonitor() {
@@ -1207,20 +1111,6 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     if (volumeIntervalRef.current) clearInterval(volumeIntervalRef.current);
     volumeIntervalRef.current = null;
   }
-
-  // ─── Disconnect ───────────────────────────────────────
-  // function disconnect() {
-  //   stopListening();
-  //   stopVolumeMonitor();
-  //   audioQueueRef.current = [];
-  //   isPlayingAudioRef.current = false;
-  //   wsRef.current?.send(JSON.stringify({ type: "disconnect" }));
-  //   wsRef.current?.close();
-  //   wsRef.current = null;
-  //   setIsConnected(false);
-  //   setIsAIReplying(false);
-  //   setTranscript([]);
-  // }
 
   async function disconnect() {
     try {
@@ -1310,25 +1200,25 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                   {/* Goal */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Goal:</span>
-                    <span className="text-[#2D2D2D] text-[16px]">Book a Demo</span>
+                    <span className="text-[#2D2D2D] text-[16px]">{meeting_goal || "N/A"}</span>
                   </div>
 
                   {/* Methodology */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Methodology:</span>
-                    <span className="text-[#2D2D22] text-[16px]">SPIN</span>
+                    <span className="text-[#2D2D22] text-[16px]">{sales_methodology || "N/A"}</span>
                   </div>
 
                   {/* Duration */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Duration:</span>
-                    <span className="text-[#2D2D2D] text-[16px]">30 minutes</span>
+                    <span className="text-[#2D2D2D] text-[16px]">{duration_minutes || "0"} minutes</span>
                   </div>
 
                   {/* Participants */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Participants:</span>
-                    <span className="text-[#2D2D2D] text-[16px]">2</span>
+                    <span className="text-[#2D2D2D] text-[16px]">{representatives?.length || "0"}</span>
                   </div>
                 </div>
               </div>
