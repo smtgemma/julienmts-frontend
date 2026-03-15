@@ -1129,7 +1129,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         throw new Error("Failed to end meeting");
       }
 
-      toast.success("Meeting ended successfully");
+      // toast.success("Meeting ended successfully");
 
       // 2️⃣ Stop voice features
       stopListening();
