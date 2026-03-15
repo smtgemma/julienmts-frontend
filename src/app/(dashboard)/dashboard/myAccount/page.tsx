@@ -219,7 +219,7 @@ function MyAccount() {
   const [search, setSearch] = useState("");
 
   const { data: myAcount, isLoading } = useMyAccountListQuery("");
-  console.log(myAcount, "==================myaccount")
+  // console.log(myAcount, "==================myaccount")
   const accounts = myAcount?.data || []
 
   if (isLoading) {
@@ -331,7 +331,7 @@ function MyAccount() {
             </div>
 
             {/* Open Account Button */}
-            <Link href={`/dashboard/myAccount/${account.id}`}>
+            <Link href={`/dashboard/myAccount/${account.aiCompanyId}`}>
               <button
                 className={`bg-[#6E51E0] text-white px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 text-sm cursor-pointer
         ${view === "grid" ? "w-full" : ""}
