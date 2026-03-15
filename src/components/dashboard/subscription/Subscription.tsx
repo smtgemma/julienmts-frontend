@@ -94,8 +94,8 @@ const SubscriptionPlan: React.FC = () => {
                       className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium ${plan.id === String(activeSubcripiton?.data?.plan?.id)
                           ? "bg-primaryBgColor text-white"
                           : plan.highlighted
-                            ? "bg-indigo-600 text-white"
-                            : "bg-white text-indigo-700"
+                            ? "bg-primaryBgColor text-white"
+                            : "bg-white hover:bg-primaryBgColor text-primaryBgColor hover:text-white"
                         }`}
                     >
                       {plan.name}
