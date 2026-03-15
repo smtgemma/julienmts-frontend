@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useGetAllSubscriptionsQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
+import { useActiveSubscriptionQuery, useGetAllSubscriptionsQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
 import { usePathname, useRouter } from "next/navigation";
 import Loading from "@/components/Others/Loading";
 import { useState } from "react";
@@ -23,14 +23,16 @@ interface Plan {
 const SubscriptionPlan: React.FC = () => {
   const [planId, setPlanId] = useState<string | null>(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const router = useRouter()
+  // const router = useRouter()
   const pathName = usePathname()
 
   const user = useSelector((state: RootState) => state.user.token);
   const isLoggedIn = Boolean(user);
 
   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery("")
-  console.log(getAllSubscriptions, "=================")
+  // console.log(getAllSubscriptions, "=================")
+  const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
+  // console.log(activeSubcripiton?.data?.plan?.id, "=================active subscription")
 
   const plans = getAllSubscriptions?.data || [];
 
@@ -89,9 +91,11 @@ const SubscriptionPlan: React.FC = () => {
                 <div className="mb-4 rounded-xl bg-gray-2 p-4 bg-gray-100">
                   <div className="flex justify-between items-center">
                     <div
-                      className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium ${plan.highlighted
-                        ? "bg-indigo-600 text-white"
-                        : "text- bg-white text-indigo-700"
+                      className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium ${plan.id === String(activeSubcripiton?.data?.plan?.id)
+                          ? "bg-primaryBgColor text-white"
+                          : plan.highlighted
+                            ? "bg-indigo-600 text-white"
+                            : "bg-white text-indigo-700"
                         }`}
                     >
                       {plan.name}
@@ -149,13 +153,21 @@ const SubscriptionPlan: React.FC = () => {
                   {/* Edit Plan Link */}
                   <button
                     onClick={() => handlePurchase(plan.id)}
-                    className="w-full py-2 bg-[#FBFBFB] border border-gray-200 text-sm text-[#2D2D2D] font-medium rounded-full flex items-center justify-center cursor-pointer transition
-                                       hover:bg-primaryBgColor hover:text-white"
-                    style={{ boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)' }}
+                    disabled={plan.id === String(activeSubcripiton?.data?.plan?.id)}
+                    className={`w-full py-2 border text-sm font-medium rounded-full flex items-center justify-center transition 
+  ${plan.id === String(activeSubcripiton?.data?.plan?.id)
+                        ? "bg-primaryBgColor text-white cursor-not-allowed"
+                        : "bg-[#FBFBFB] border-gray-200 text-[#2D2D2D] hover:bg-primaryBgColor hover:text-white cursor-pointer"
+                      }`}
+                    style={{
+                      boxShadow:
+                        "inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -1px 2px rgba(255, 255, 255, 0.5)",
+                    }}
                   >
-                    {
-                      plan?.name === "Free" ? "Current plan" : "Upgrade plan"
-                    }
+                    {plan?.id === activeSubcripiton?.data?.plan?.id
+                      ? "Current plan"
+                      : "Upgrade plan"}
+
                     <svg
                       className="h-4 w-4"
                       fill="none"

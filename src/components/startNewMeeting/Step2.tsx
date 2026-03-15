@@ -361,6 +361,7 @@ export default function Step2({
 
   // subscription
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
+  console.log(activeSubcripiton, "=================active subscription")
 
   const meetingMode =
     activeSubcripiton?.data?.plan?.meetingMode || "1-on-1";
