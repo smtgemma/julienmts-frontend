@@ -5,9 +5,9 @@ export const subscriptionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
     // get all subscription
-    getAllSubscriptions: builder.query({
-      query: () => ({
-        url: "/plans",
+    getAllSubscriptions: builder.query<any, { interval: string }>({
+      query: ({ interval }) => ({
+        url: `/plans?interval=${interval}`,
         method: "GET",
       }),
       providesTags: ["Subscripton"],
