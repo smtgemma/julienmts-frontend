@@ -136,7 +136,13 @@ const Step1 = (
             }
 
         } catch (error: any) {
-            toast.error("Something went wrong", error.message)
+
+            const errorMessage =
+                error?.data?.errorMessages?.[0]?.message ||
+                error?.data?.message ||
+                "Something went wrong";
+
+            toast.error(errorMessage);
         }
     };
 
