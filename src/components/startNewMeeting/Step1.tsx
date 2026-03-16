@@ -79,58 +79,117 @@ const Step1 = (
         }
     };
 
+    // const handleSubmit = async () => {
+
+    //     // ✅ Basic empty field validation
+    //     if (!formData.productName.trim()) {
+    //         toast.error("Product Name is required");
+    //         return;
+    //     }
+    //     if (!formData.productUrl.trim()) {
+    //         toast.error("Product URL is required");
+    //         return;
+    //     }
+    //     if (!formData.description.trim()) {
+    //         toast.error("Description is required");
+    //         return;
+    //     }
+    //     if (!uploadedFile) {
+    //         toast.error("Please upload a product material");
+    //         return;
+    //     }
+
+    //     // ✅ Product URL format validation
+    //     const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-./?%&=]*)?$/;
+    //     if (!urlPattern.test(formData.productUrl)) {
+    //         toast.error("Please enter a valid product URL");
+    //         return;
+    //     }
+
+    //     const fromFristStepData = {
+    //         formData,
+    //         uploadedFile,
+    //     }
+
+    //     try {
+    //         const formDataToSend = new FormData();
+
+    //         // ✅ Send as "bodyData" key with JSON string value (matching Postman)
+    //         const bodyData = {
+    //             product_name: formData.productName,
+    //             product_url: formData.productUrl,
+    //             description: formData.description,
+    //         };
+
+    //         formDataToSend.append("bodyData", JSON.stringify(bodyData));
+
+    //         if (uploadedFile) {
+    //             formDataToSend.append("materials", uploadedFile);
+    //         }
+
+    //         const response = await meetingSalesPerson(formDataToSend).unwrap();
+    //         // console.log(response, "==============")
+    //         if (response.success) {
+    //             toast.success(response.message)
+    //             dispatch(setProductValue(response.data));
+    //             handleNext();
+    //         }
+
+    //     } catch (error: any) {
+
+    //         const errorMessage =
+    //             error?.data?.errorMessages?.[0]?.message ||
+    //             error?.data?.message ||
+    //             "Something went wrong";
+
+    //         toast.error(errorMessage);
+    //     }
+    // };
+
     const handleSubmit = async () => {
 
-        // ✅ Basic empty field validation
         if (!formData.productName.trim()) {
             toast.error("Product Name is required");
             return;
         }
+
         if (!formData.productUrl.trim()) {
             toast.error("Product URL is required");
             return;
         }
-        if (!formData.description.trim()) {
-            toast.error("Description is required");
-            return;
-        }
-        if (!uploadedFile) {
-            toast.error("Please upload a product material");
-            return;
-        }
 
-        // ✅ Product URL format validation
         const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-./?%&=]*)?$/;
+
         if (!urlPattern.test(formData.productUrl)) {
             toast.error("Please enter a valid product URL");
             return;
         }
 
-        const fromFristStepData = {
-            formData,
-            uploadedFile,
-        }
-
         try {
+
             const formDataToSend = new FormData();
 
-            // ✅ Send as "bodyData" key with JSON string value (matching Postman)
-            const bodyData = {
+            const bodyData: any = {
                 product_name: formData.productName,
                 product_url: formData.productUrl,
-                description: formData.description,
             };
+
+            // ✅ only send description if exists
+            if (formData.description.trim()) {
+                bodyData.description = formData.description;
+            }
 
             formDataToSend.append("bodyData", JSON.stringify(bodyData));
 
+            // ✅ only send file if uploaded
             if (uploadedFile) {
                 formDataToSend.append("materials", uploadedFile);
             }
 
             const response = await meetingSalesPerson(formDataToSend).unwrap();
-            // console.log(response, "==============")
+
             if (response.success) {
-                toast.success(response.message)
+                toast.success(response.message);
                 dispatch(setProductValue(response.data));
                 handleNext();
             }
