@@ -211,9 +211,10 @@ import { usePathname } from "next/navigation";
 import Loading from "@/components/Others/Loading";
 import { useState } from "react";
 import PassPayment from "./payment/PassPayment";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "@/redux/store";
 import LoginRequiredModal from "./payment/LoginRequiredModal";
+import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 
 interface Plan {
   name: string;
@@ -237,8 +238,11 @@ const SubscriptionPlan: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const pathName = usePathname()
 
-  const user = useSelector((state: RootState) => state.user.token);
-  const isLoggedIn = Boolean(user);
+  // const user = useSelector((state: RootState) => state.user.token);
+  // const isLoggedIn = Boolean(user);
+  const { data: getMe } = useGetMeQuery("")
+  const isLoggedIn = getMe;
+  console.log(getMe)
 
   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery({
     interval: planType,

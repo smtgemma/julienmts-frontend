@@ -23,14 +23,12 @@ import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Container from '@/lib/Container';
 import { PiGlobeLight } from "react-icons/pi";
 import { IoIosMenu } from "react-icons/io";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 
 const Navbar = () => {
-    const user = useSelector((state: RootState) => state.user.token);
-    console.log(user, "===================user")
-    const isLoggedIn = Boolean(user);
-    console.log(isLoggedIn, "=========================isloggedin")
+    const {data : getMe, isLoading} = useGetMeQuery("") 
+    const isLoggedIn = getMe;
+
     const pathName = usePathname()
 
     return (
