@@ -26,7 +26,7 @@ import { IoIosMenu } from "react-icons/io";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 
 const Navbar = () => {
-    const {data : getMe, isLoading} = useGetMeQuery("") 
+    const { data : getMe } = useGetMeQuery("") 
     const isLoggedIn = getMe;
 
     const pathName = usePathname()
