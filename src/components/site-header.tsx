@@ -10,10 +10,13 @@ import Image from "next/image"
 import { IoNotificationsOutline } from "react-icons/io5"
 import { Bell } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useGetMeQuery } from "@/redux/api/getMe/getMeApi"
 
 export function SiteHeader() {
   const pathname = usePathname();
-  console.log(pathname)
+  // console.log(pathname)
+
+  const { data: getMe, isLoading } = useGetMeQuery("")
 
   const notifications = [
     {
@@ -240,7 +243,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-2 bg-[#F3F4F6] rounded-full px-3 py-1.5">
             <div className="w-7 h-7 rounded-full overflow-hidden bg-[#d2caf0]">
               <Image
-                src="/dashboardImage/profileImage.svg"
+                src={getMe?.data?.profileImage ? getMe?.data?.profileImage : "/dashboardImage/profileImage.svg"}
                 width={28}
                 height={28}
                 alt="User"
@@ -248,7 +251,7 @@ export function SiteHeader() {
               />
             </div>
             <span className="text-sm font-medium text-[#2D2D2D]">
-              Md Shakil
+              {getMe?.data?.firstName || "N/A"} {getMe?.data?.lastName || "N/A"}
             </span>
           </div>
         </div>

@@ -156,6 +156,7 @@ export default function Step3(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
   const [companyDataShow, setcompanyDataShow] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useDispatch()
 
   const allData = useSelector((state: RootState) => state.startMeeting);
@@ -172,23 +173,6 @@ export default function Step3(
     },
   });
 
-  // const onSubmit = async (data: FormValues) => {
-  //   try {
-  //     const response = await meetngCompany({
-  //       company_url: data.company_url,
-  //     }).unwrap();
-  //     if (response?.success) {
-  //       // console.log(response, "==============response")
-  //       toast.success(response.message)
-  //       setcompanyDataShow(response?.data?.company_data);
-  //       dispatch(setCompanyData(response?.data))
-
-  //     }
-  //   } catch (error: any) {
-  //     toast.error("Something went wrong", error.message)
-  //   }
-  // };
-
   const onSubmit = async (data: FormValues) => {
     try {
       const response = await meetngCompany({
@@ -199,6 +183,7 @@ export default function Step3(
         toast.success(response.message);
         setcompanyDataShow(response?.data?.company_data);
         dispatch(setCompanyData(response?.data));
+        setIsSuccess(true)
       }
 
     } catch (error: any) {
@@ -347,11 +332,15 @@ export default function Step3(
           className="border border-[#D1D6DB] px-6 py-3 rounded-lg hover:bg-primaryBgColor hover:text-white transition-colors cursor-pointer">
           Back
         </button>
-        <button
-          onClick={handleNext}
-          className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer">
-          Next Step
-        </button>
+        {
+          isSuccess && (
+            <button
+              onClick={handleNext}
+              className="bg-primaryBgColor text-white px-6 py-3 rounded-lg hover:bg-primaryBgColor transition-colors cursor-pointer">
+              Next Step
+            </button>
+          )
+        }
       </div>
     </div>
   );
