@@ -219,7 +219,7 @@ function MyAccount() {
   const [search, setSearch] = useState("");
 
   const { data: myAcount, isLoading } = useMyAccountListQuery("");
-  // console.log(myAcount, "==================myaccount")
+  console.log(myAcount, "==================myaccount")
   const accounts = myAcount?.data || []
 
   if (isLoading) {
