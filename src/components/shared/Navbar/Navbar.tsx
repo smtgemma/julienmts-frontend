@@ -153,7 +153,7 @@ const Navbar = () => {
                             }
                             <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
                                 <Link
-                                    href="/login"
+                                    href="/signIn"
                                     className={`w-full ${pathName === "/login" ? "text-[#563FB1] font-semibold" : ""}`}
                                 >
                                     Login
