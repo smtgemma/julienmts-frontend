@@ -18,12 +18,15 @@ import { toast } from 'sonner';
 import Cookies from "js-cookie";
 import { useActiveSubscriptionQuery } from '@/redux/api/subscriptionApi/subscriptionApi';
 import { setMeetingPayload } from "@/redux/features/startMeeting/startMeetingSlice";
+import { useSearchParams } from 'next/navigation';
 
 export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
 
   const dispatch = useDispatch()
+  const searchParams = useSearchParams()
+  const companyIdFromParams = searchParams.get("id")
 
   // active subscription 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("")
@@ -37,7 +40,7 @@ export default function MeetingPrepForm(
   const representatives = allData?.participants;
   // console.log(representatives, "============representatives")
   const salesperson_id = allData?.product?.salesperson_id;
-  const companyId = allData?.companyData?.company_id;
+  const companyId = companyIdFromParams || allData?.companyData?.company_id;
 
   // console.log(salesperson_id, companyId)
 
