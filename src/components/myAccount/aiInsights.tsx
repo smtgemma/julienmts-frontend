@@ -4,10 +4,13 @@ import { Separator } from "@/components/ui/separator"
 
 export default function AIInsights({singleData} : {singleData : any}) {
     const ai_insights = singleData?.data?.ai_insights || {}
+    const upsellOpportunities = singleData?.data?.ai_insights?.upsell_opportunities || []
     
     const engagementScore = ai_insights?.average_engagement_score;
 
-    const sentimentTrend = [65, 70, 75, 82, 88];
+    // const sentimentTrend = [65, 70, 75, 82, 88];
+    const sentimentTrendData = singleData?.data?.ai_insights?.sentiment_data_points || []
+    const sentimentTrend = sentimentTrendData?.map((item : any) => item.sentiment_score);
 
     const riskAlerts1 = ai_insights?.risk_alerts
 
@@ -37,18 +40,18 @@ export default function AIInsights({singleData} : {singleData : any}) {
     //     }
     // ];
 
-    const upsellOpportunities = [
-        {
-            id: 1,
-            title: 'Advanced Analytics Module',
-            description: 'Based on reporting pain points mentioned in last call'
-        },
-        {
-            id: 2,
-            title: 'API Integration Package',
-            description: 'Strong tech stack integration needs'
-        }
-    ];
+    // const upsellOpportunities = [
+    //     {
+    //         id: 1,
+    //         title: 'Advanced Analytics Module',
+    //         description: 'Based on reporting pain points mentioned in last call'
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'API Integration Package',
+    //         description: 'Strong tech stack integration needs'
+    //     }
+    // ];
 
     return (
         <div className="w-full max-w-md mx-auto py-6 bg-white">
@@ -80,7 +83,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
             <div className="mb-6">
                 <h3 className="text-[16px] text-[#2D2D2D] mb-3">Sentiment Trend</h3>
                 <div className="flex items-end gap-2 h-24 mb-2">
-                    {sentimentTrend.map((value, index) => (
+                    {sentimentTrend.map((value : any, index : number) => (
                         <div
                             key={index}
                             className="flex-1 bg-gradient-to-t from-[#6E51E0] to-[#D4C9FF] rounded-t"
@@ -90,14 +93,14 @@ export default function AIInsights({singleData} : {singleData : any}) {
                 </div>
                 <div className="flex items-center gap-1 text-sm text-[#4A5565]">
                     <TrendingUp className="w-3 h-3" />
-                    <span>Improving over last 5 interactions</span>
+                    <span>Improving over last {sentimentTrendData?.length} interactions</span>
                 </div>
             </div>
 
             {/* Risk Alerts - Platform 1 */}
             <div className="mb-6">
                 <h3 className="text-[16px] font-semibold text-[#2D2D2D] mb-3">
-                    Risk Alerts For Enterprise CRM Platform 1
+                    Risk Alerts For Enterprise CRM Platform
                 </h3>
                 <div className="space-y-2">
                     {riskAlerts1.map((alert : any) => (
@@ -150,7 +153,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
             <div>
                 <h3 className="text-[16px] font-semibold text-[#2D2D2D] mb-3">Upsell Opportunities</h3>
                 <div className="space-y-3">
-                    {upsellOpportunities.map((opportunity) => (
+                    {upsellOpportunities.map((opportunity : any) => (
                         <div
                             key={opportunity.id}
                             className="bg-purple-50 p-4 rounded-lg"
@@ -162,7 +165,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
                                         {opportunity.title}
                                     </h4>
                                     <p className="text-sm text-[#636F85]">
-                                        {opportunity.description}
+                                        {opportunity.reason}
                                     </p>
                                 </div>
                             </div>

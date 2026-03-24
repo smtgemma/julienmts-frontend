@@ -49,7 +49,7 @@ export default function FastGrowth({ singleData }: { singleData: any }) {
           </div>
           <div>
             <div className="text-[16px] text-[#636F85] mb-1">Potential Value</div>
-            <div className="text-xl font-medium text-[#2D2D2D]">pai nai</div>
+            <div className="text-xl font-medium text-[#2D2D2D]">{singleData?.data?.ai_insights?.opportunities?.[0]?.value || "0"}</div>
           </div>
         </div>
 
