@@ -325,7 +325,7 @@ function MyAccount() {
                 {/* <div className="text-sm text-[#636F85]">Opportunities</div> */}
               </div>
               <div>
-                <div className="text-lg font-medium">{account.revenue || "0"}</div>
+                <div className="text-sm font-medium">{account.revenue || "0"}</div>
                 <div className="text-sm text-[#636F85]">Revenue</div>
               </div>
             </div>

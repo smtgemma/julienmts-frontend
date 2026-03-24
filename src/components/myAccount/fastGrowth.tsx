@@ -4,45 +4,17 @@ import { Separator } from "@/components/ui/separator"
 
 export default function FastGrowth({ singleData }: { singleData: any }) {
   const representatives = singleData?.data?.representatives || []
-  const account = {
-    name: 'FastGrowth Inc.',
-    initial: 'F',
-    industry: 'SaaS',
-    location: 'San Francisco',
-    employees: 320,
-    annualRevenue: '$55M',
-    totalMeetings: 7,
-    activeOpportunities: 3,
-    potentialValue: '$255K',
-    stakeholders: [
-      {
-        id: 1,
-        name: 'Sarah Miller',
-        initials: 'SM',
-        title: 'CMO',
-        color: 'bg-[#6E51E0]'
-      },
-      {
-        id: 2,
-        name: 'Jason Reed',
-        initials: 'JR',
-        title: 'VP Sales',
-        color: 'bg-[#6E51E0]'
-      }
-    ]
-  };
-
   return (
     <div className="w-full bg-gray-50 hover:shadow-sm transition-shadow">
       <div className="bg-white rounded-lg border border-[#D1D6DB] hover:shadow-sm transition-shadow">
         {/* Header */}
         <div className="flex items-start gap-4 p-5">
           <div className="bg-[#6E51E0] w-12 h-12 rounded-[10px] flex items-center justify-center text-white font-semibold text-xl">
-            {account.initial}
+            {singleData?.data?.company_name?.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1">
             <h2 className="text-[#2D2D2D] font-medium text-xl mb-2">
-              {account.name}
+              {singleData?.company_name}
             </h2>
             <div className="flex items-center gap-3 text-sm text-[#636F85]">
               <div className="flex items-center gap-2">
@@ -65,15 +37,15 @@ export default function FastGrowth({ singleData }: { singleData: any }) {
         <div className="grid grid-cols-4 gap-6 p-5">
           <div>
             <div className="text-[16px] text-[#636F85] mb-1">Annual Revenue</div>
-            <div className="text-xl font-medium text-[#2D2D2D]">{ singleData?.data?.company?.company_data?.revenue || "N/A"}</div>
+            <div className="text-xl font-medium text-[#2D2D2D]">{singleData?.data?.company?.company_data?.revenue || "N/A"}</div>
           </div>
           <div>
             <div className="text-[16px] text-[#636F85] mb-1">Total Meetings</div>
-            <div className="text-xl font-medium text-[#2D2D2D]">{ singleData?.data?.total_meetings || "N/A"}</div>
+            <div className="text-xl font-medium text-[#2D2D2D]">{singleData?.data?.total_meetings || "N/A"}</div>
           </div>
           <div>
             <div className="text-[16px] text-[#636F85] mb-1">Active Opportunities</div>
-            <div className="text-xl font-medium text-[#2D2D2D]">{ singleData?.data?.ai_insights?.upsell_opportunities?.length || "N/A"}</div>
+            <div className="text-xl font-medium text-[#2D2D2D]">{singleData?.data?.ai_insights?.upsell_opportunities?.length || "0"}</div>
           </div>
           <div>
             <div className="text-[16px] text-[#636F85] mb-1">Potential Value</div>
@@ -87,9 +59,9 @@ export default function FastGrowth({ singleData }: { singleData: any }) {
         <div className="p-6">
           <h3 className="text-[16px] font-medium text-[#636F85] mb-4">Key Stakeholders</h3>
           <div className="flex items-center gap-6">
-            {representatives?.map((stakeholder : any) => (
+            {representatives?.map((stakeholder: any) => (
               <div key={stakeholder.id} className="flex items-center gap-3">
-                <div className="bg-[#6E51E0] text-white h-12 w-12 rounded-full flex items-center justify-center text-xl">
+                <div className="bg-[#6E51E0] text-white h-10 w-10 rounded-full flex items-center justify-center text-xl">
                   {stakeholder?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div>
