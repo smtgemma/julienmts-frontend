@@ -3,34 +3,39 @@ import { Lightbulb, AlertTriangle, CheckCircle, DollarSign, TrendingUp } from 'l
 import { Separator } from "@/components/ui/separator"
 
 export default function AIInsights({singleData} : {singleData : any}) {
-    const engagementScore = 92;
+    const ai_insights = singleData?.data?.ai_insights || {}
+    
+    const engagementScore = ai_insights?.average_engagement_score;
+
     const sentimentTrend = [65, 70, 75, 82, 88];
 
-    const riskAlerts1 = [
-        {
-            id: 1,
-            type: 'warning',
-            message: 'Decision timeline may slip - VP Ops not yet engaged'
-        },
-        {
-            id: 2,
-            type: 'success',
-            message: 'Budget authority confirmed'
-        }
-    ];
+    const riskAlerts1 = ai_insights?.risk_alerts
 
-    const riskAlerts2 = [
-        {
-            id: 1,
-            type: 'warning',
-            message: 'Decision timeline may slip - VP Ops not yet engaged'
-        },
-        {
-            id: 2,
-            type: 'success',
-            message: 'Budget authority confirmed'
-        }
-    ];
+    // const riskAlerts1 = [
+    //     {
+    //         id: 1,
+    //         type: 'warning',
+    //         message: 'Decision timeline may slip - VP Ops not yet engaged'
+    //     },
+    //     {
+    //         id: 2,
+    //         type: 'success',
+    //         message: 'Budget authority confirmed'
+    //     }
+    // ];
+
+    // const riskAlerts2 = [
+    //     {
+    //         id: 1,
+    //         type: 'warning',
+    //         message: 'Decision timeline may slip - VP Ops not yet engaged'
+    //     },
+    //     {
+    //         id: 2,
+    //         type: 'success',
+    //         message: 'Budget authority confirmed'
+    //     }
+    // ];
 
     const upsellOpportunities = [
         {
@@ -95,7 +100,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
                     Risk Alerts For Enterprise CRM Platform 1
                 </h3>
                 <div className="space-y-2">
-                    {riskAlerts1.map((alert) => (
+                    {riskAlerts1.map((alert : any) => (
                         <div
                             key={alert.id}
                             className={`flex items-start gap-2 p-3 rounded-lg ${
@@ -116,7 +121,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
             </div>
 
             {/* Risk Alerts - Platform 2 */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
                 <h3 className="text-[16px] font-semibold text-[#2D2D2D] mb-3">
                     Risk Alerts For Enterprise CRM Platform 2
                 </h3>
@@ -139,7 +144,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
 
             {/* Upsell Opportunities */}
             <div>

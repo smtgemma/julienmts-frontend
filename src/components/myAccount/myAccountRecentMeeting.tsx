@@ -5,27 +5,11 @@ import Link from 'next/link';
 import OpportunitiesSection from './OpportunitiesSection';
 import { format } from "date-fns";
 
-export default function RecentMeetings({ singleData }: { singleData: any }) {
+export default function RecentMeetings({ singleData } : { singleData: any }) {
     const meetings = singleData?.data?.meetings || []
-    // const meetings = [
-    //     {
-    //         id: 1,
-    //         title: "Discovery Call with CMO",
-    //         date: "Jan 23",
-    //         duration: "42 minutes",
-    //         attendee: "Sarah Miller",
-    //         score: 78
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Discovery Call with CMO",
-    //         date: "Jan 23",
-    //         duration: "42 minutes",
-    //         attendee: "Sarah Miller",
-    //         score: 78
-    //     }
-    // ];
 
+    const opportunitiesData = singleData?.data?.ai_insights?.opportunities || []
+    
     const getScoreColor = (score: number) => {
         if (score >= 80) return 'text-[#6E51E0] bg-[#6E51E01A]';
         if (score >= 70) return 'text-[#6E51E0] bg-[#6E51E01A]';
@@ -110,7 +94,7 @@ export default function RecentMeetings({ singleData }: { singleData: any }) {
                     ))}
                 </div>
             </div>
-            <OpportunitiesSection />
+            <OpportunitiesSection opportunitiesData={opportunitiesData} />
         </div>
     );
 }
