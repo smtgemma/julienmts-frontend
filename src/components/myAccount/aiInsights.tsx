@@ -2,7 +2,7 @@ import React from 'react';
 import { Lightbulb, AlertTriangle, CheckCircle, DollarSign, TrendingUp } from 'lucide-react';
 import { Separator } from "@/components/ui/separator"
 
-export default function AIInsights() {
+export default function AIInsights({singleData} : {singleData : any}) {
     const engagementScore = 92;
     const sentimentTrend = [65, 70, 75, 82, 88];
 

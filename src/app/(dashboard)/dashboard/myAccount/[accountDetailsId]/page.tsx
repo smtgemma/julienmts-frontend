@@ -44,14 +44,14 @@ function AccountDetails() {
         </div>
       </div>
       {/* fast growth part  */}
-      <FastGrowth />
+      <FastGrowth singleData={singleData}/>
       {/* recent meetings part  */}
       <div className="grid grid-cols-3 gap-6 py-6">
         <div className="col-span-2">
-          <MyAccountRecentMeeting />
+          <MyAccountRecentMeeting singleData={singleData} />
         </div>
         <div className="col-span-1 bg-white px-6 rounded-xl">
-          <AIInsights />
+          <AIInsights singleData={singleData} />
         </div>
       </div>
     </div>

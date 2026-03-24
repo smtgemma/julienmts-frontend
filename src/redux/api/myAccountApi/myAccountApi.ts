@@ -13,7 +13,7 @@ export const myAccountApi = baseApi.injectEndpoints({
     // get single acount details 
     singleAccountDetails: builder.query({
       query: (id: string) => ({
-        url: `/meeting/company/${id}`,
+        url: `/meeting/company/${id}/account-details`,
         method: "GET",
       }),
       providesTags: ["MyAccount"],

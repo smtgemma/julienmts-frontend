@@ -4,7 +4,7 @@ import { Calendar, Clock, FileText, Play, TrendingUp, User } from 'lucide-react'
 import Link from 'next/link';
 import OpportunitiesSection from './OpportunitiesSection';
 
-export default function RecentMeetings() {
+export default function RecentMeetings({singleData} : {singleData : any}) {
     const meetings = [
         {
             id: 1,
