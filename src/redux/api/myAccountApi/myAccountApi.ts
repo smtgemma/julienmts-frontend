@@ -19,10 +19,20 @@ export const myAccountApi = baseApi.injectEndpoints({
       providesTags: ["MyAccount"],
     }),
 
+    // conversation history api for summery button 
+    conversationHistory: builder.query({
+      query: ({ meeting_id, session_id }) => ({
+        url: `/meeting/${meeting_id}/history?session_id=${session_id}`,
+        method: "GET",
+      }),
+      providesTags: ["MyAccount"],
+    }),
+
   }),
 });
 
 export const {
   useMyAccountListQuery,
   useSingleAccountDetailsQuery,
+  useConversationHistoryQuery,
 } = myAccountApi;

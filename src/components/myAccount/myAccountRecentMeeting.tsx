@@ -175,7 +175,7 @@ export default function RecentMeetings({ singleData }: { singleData: any }) {
 
                             {/* Action Buttons */}
                             <div className="grid grid-cols-3 gap-3">
-                                <Link href="/dashboard/home/viewSummary">
+                                <Link href={`/dashboard/home/viewSummary?meetingId=${meeting?.meeting_id}&sessionId=${meeting?.session_id}`}>
                                     <button className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
                                         <FileText className="w-4 h-4" />
                                         Summary
