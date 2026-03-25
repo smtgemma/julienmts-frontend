@@ -2,15 +2,15 @@ import React from 'react';
 import { Lightbulb, AlertTriangle, CheckCircle, DollarSign, TrendingUp } from 'lucide-react';
 import { Separator } from "@/components/ui/separator"
 
-export default function AIInsights({singleData} : {singleData : any}) {
+export default function AIInsights({ singleData }: { singleData: any }) {
     const ai_insights = singleData?.data?.ai_insights || {}
     const upsellOpportunities = singleData?.data?.ai_insights?.upsell_opportunities || []
-    
+
     const engagementScore = ai_insights?.average_engagement_score;
 
     // const sentimentTrend = [65, 70, 75, 82, 88];
     const sentimentTrendData = singleData?.data?.ai_insights?.sentiment_data_points || []
-    const sentimentTrend = sentimentTrendData?.map((item : any) => item.sentiment_score);
+    const sentimentTrend = sentimentTrendData?.map((item: any) => item.sentiment_score);
 
     const riskAlerts1 = ai_insights?.risk_alerts
 
@@ -83,7 +83,7 @@ export default function AIInsights({singleData} : {singleData : any}) {
             <div className="mb-6">
                 <h3 className="text-[16px] text-[#2D2D2D] mb-3">Sentiment Trend</h3>
                 <div className="flex items-end gap-2 h-24 mb-2">
-                    {sentimentTrend.map((value : any, index : number) => (
+                    {sentimentTrend.map((value: any, index: number) => (
                         <div
                             key={index}
                             className="flex-1 bg-gradient-to-t from-[#6E51E0] to-[#D4C9FF] rounded-t"
@@ -103,14 +103,13 @@ export default function AIInsights({singleData} : {singleData : any}) {
                     Risk Alerts For Enterprise CRM Platform
                 </h3>
                 <div className="space-y-2">
-                    {riskAlerts1.map((alert : any) => (
+                    {riskAlerts1.map((alert: any) => (
                         <div
                             key={alert.id}
-                            className={`flex items-start gap-2 p-3 rounded-lg ${
-                                alert.type === 'warning' 
-                                    ? 'bg-yellow-50' 
+                            className={`flex items-start gap-2 p-3 rounded-lg ${alert.type === 'warning'
+                                    ? 'bg-yellow-50'
                                     : 'bg-green-50'
-                            }`}
+                                }`}
                         >
                             {alert.type === 'warning' ? (
                                 <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
@@ -153,24 +152,33 @@ export default function AIInsights({singleData} : {singleData : any}) {
             <div>
                 <h3 className="text-[16px] font-semibold text-[#2D2D2D] mb-3">Upsell Opportunities</h3>
                 <div className="space-y-3">
-                    {upsellOpportunities.map((opportunity : any) => (
-                        <div
-                            key={opportunity.id}
-                            className="bg-purple-50 p-4 rounded-lg"
-                        >
-                            <div className="flex items-start gap-2">
-                                <DollarSign className="w-4 h-4 text-[#6E51E0] mt-0.5 flex-shrink-0" />
-                                <div>
-                                    <h4 className="text-[16px] font-semibold text-[#2D2D2D] mb-1">
-                                        {opportunity.title}
-                                    </h4>
-                                    <p className="text-sm text-[#636F85]">
-                                        {opportunity.reason}
-                                    </p>
+                    {upsellOpportunities && upsellOpportunities.length > 0 ? (
+                        upsellOpportunities.map((opportunity: any) => (
+                            <div
+                                key={opportunity.id}
+                                className="bg-purple-50 p-4 rounded-lg"
+                            >
+                                <div className="flex items-start gap-2">
+                                    <DollarSign className="w-4 h-4 text-[#6E51E0] mt-0.5 flex-shrink-0" />
+                                    <div>
+                                        <h4 className="text-[16px] font-semibold text-[#2D2D2D] mb-1">
+                                            {opportunity.title}
+                                        </h4>
+                                        <p className="text-sm text-[#636F85]">
+                                            {opportunity.reason}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+                        ))
+                    ) : (
+                        // No data UI
+                        <div className="text-center py-6">
+                            <p className="text-gray-500 text-sm">
+                                There are no upsell opportunities available
+                            </p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>

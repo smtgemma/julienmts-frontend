@@ -241,48 +241,58 @@ export default function OpportunitiesSection({ opportunitiesData }: { opportunit
 
             {/* Opportunities Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {opportunitiesData?.map((opportunity: any) => (
-                    <div
-                        key={opportunity.id}
-                        className="rounded-lg border border-gray-200 p-5 hover:shadow-sm transition-shadow"
-                    >
-                        {/* Header */}
-                        <div className="flex items-start justify-between mb-4 gap-2">
-                            <h3 className="text-[16px] font-medium text-[#2D2D2D]">
-                                {opportunity.name}
-                            </h3>
+                {opportunitiesData && opportunitiesData.length > 0 ? (
+                    opportunitiesData.map((opportunity: any) => (
+                        <div
+                            key={opportunity.id}
+                            className="rounded-lg border border-gray-200 p-5 hover:shadow-sm transition-shadow"
+                        >
+                            {/* Header */}
+                            <div className="flex items-start justify-between mb-4 gap-2">
+                                <h3 className="text-[16px] font-medium text-[#2D2D2D]">
+                                    {opportunity.name}
+                                </h3>
 
-                            <span className="text-[16px] text-[#34A853]">
-                                {opportunity.value}
-                            </span>
-                        </div>
-
-                        {/* Status & Close Date */}
-                        <div className="flex items-center justify-between mb-4 gap-2">
-                            <span className="px-2.5 py-1 bg-[#34A8531A] text-[#016630] text-sm font-medium rounded">
-                                {opportunity.stage}
-                            </span>
-
-                            <span className="text-[16px] text-[#636F85]">
-                                Close: {new Date(opportunity.close_date).toLocaleDateString()}
-                            </span>
-                        </div>
-
-                        {/* Probability */}
-                        <div className="space-y-2">
-                            <div className="text-sm text-[#636F85] text-right">
-                                {opportunity.probability}% probability
+                                <span className="text-[16px] text-[#34A853]">
+                                    {opportunity.value}
+                                </span>
                             </div>
 
-                            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                                <div
-                                    className="h-full rounded-full bg-[#101010]"
-                                    style={{ width: `${opportunity.probability}%` }}
-                                />
+                            {/* Status & Close Date */}
+                            <div className="flex items-center justify-between mb-4 gap-2">
+                                <span className="px-2.5 py-1 bg-[#34A8531A] text-[#016630] text-sm font-medium rounded">
+                                    {opportunity.stage}
+                                </span>
+
+                                <span className="text-[16px] text-[#636F85]">
+                                    Close:{" "}
+                                    {new Date(opportunity.close_date).toLocaleDateString()}
+                                </span>
+                            </div>
+
+                            {/* Probability */}
+                            <div className="space-y-2">
+                                <div className="text-sm text-[#636F85] text-right">
+                                    {opportunity.probability}% probability
+                                </div>
+
+                                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                    <div
+                                        className="h-full rounded-full bg-[#101010]"
+                                        style={{ width: `${opportunity.probability}%` }}
+                                    />
+                                </div>
                             </div>
                         </div>
+                    ))
+                ) : (
+                    // No data UI
+                    <div className="col-span-full text-center py-10">
+                        <p className="text-gray-500 text-lg">
+                            There are no opportunities available
+                        </p>
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

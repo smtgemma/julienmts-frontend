@@ -133,7 +133,7 @@ export default function RecentMeetings({ singleData }: { singleData: any }) {
                         <h2 className="text-lg font-semibold text-gray-900">Recent Meetings</h2>
                     </div>
                     <button
-                        className="text-sm font-medium text-gray-900 hover:text-gray-700"
+                        className="text-sm font-medium text-gray-900 hover:text-gray-700 cursor-pointer"
                         onClick={() => setShowAll(!showAll)}
                     >
                         {showAll ? "Show Less" : "View All"}
