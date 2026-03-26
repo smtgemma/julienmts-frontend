@@ -1,121 +1,215 @@
+
+
+// 'use client';
+
+// import { useContactSupportMutation } from '@/redux/api/auth/authApi';
+// import { useForm } from 'react-hook-form';
+
+// type FormData = {
+//     subject: string;
+//     message: string;
+// };
+
+// export default function HelpForm() {
+
+//     const [contactSupport, { isLoading }] = useContactSupportMutation()
+
+//     const { register, handleSubmit, reset } = useForm<FormData>();
+
+//     const onSubmit = async (data: FormData) => {
+//         console.log('Form Data:', data);
+//         const payload = {
+//             subject: data?.subject,
+//             message: data?.message,
+//         }
+//         try {
+//             const response = await contactSupport(payload).unwrap();
+//             console.log(response, "===================")
+//         } catch (error) {
+
+//         }
+//         reset();
+//     };
+
+//     return (
+//         <div className="py-6">
+//             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+
+//                 <div className="mb-6">
+//                     <h2 className="text-2xl font-semibold text-[#2D2D2D] mb-1">
+//                         Contact Support
+//                     </h2>
+//                     <p className="text-sm text-[#636F85]">
+//                         Can't find what you're looking for? Send us a message.
+//                     </p>
+//                 </div>
+
+//                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+
+//                     {/* Subject */}
+//                     <div>
+//                         <label className="block text-[16px] font-medium text-[#2D2D2D] mb-2">
+//                             Subject
+//                         </label>
+//                         <input
+//                             type="text"
+//                             placeholder="Briefly describe your issue"
+//                             {...register('subject')}
+//                             className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500"
+//                         />
+//                     </div>
+
+//                     {/* Message */}
+//                     <div>
+//                         <label className="block text-[16px] font-medium text-[#2D2D2D] mb-2">
+//                             Message
+//                         </label>
+//                         <textarea
+//                             rows={5}
+//                             placeholder="Briefly describe your issue"
+//                             {...register('message')}
+//                             className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"
+//                         />
+//                     </div>
+
+//                     {/* Button */}
+//                     <button
+//                         type="submit"
+//                         className="bg-[#6E51E0] text-white px-4 py-2 rounded font-medium flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+//                     >
+//                         {isLoading && (
+//                             <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+//                         )}
+//                         {isLoading ? "Sending..." : "Send"}
+//                     </button>
+
+//                 </form>
+//             </div>
+//         </div>
+//     );
+// }
+
+
 'use client';
 
-import { useState } from 'react';
+import { useContactSupportMutation } from '@/redux/api/auth/authApi';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+
+type FormData = {
+    subject: string;
+    message: string;
+};
 
 export default function HelpForm() {
-    const [formData, setFormData] = useState({
-        subject: '',
-        message: ''
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState(null);
 
-    const handleChange = (e : any) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+    const [contactSupport, { isLoading }] = useContactSupportMutation();
 
-    const handleSubmit = async () => {
-        setIsSubmitting(true);
-        setSubmitStatus(null);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors }
+    } = useForm<FormData>();
 
-        // Simulate API call
+    const onSubmit = async (data: FormData) => {
+        const payload = {
+            subject: data.subject,
+            message: data.message,
+        };
+
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            console.log('Form submitted:', formData);
-            // setSubmitStatus('success');
-            setFormData({ subject: '', message: '' });
-        } catch (error) {
-            // setSubmitStatus('error');
-        } finally {
-            setIsSubmitting(false);
+            const response = await contactSupport(payload).unwrap();
+
+            if (response?.success) {
+                toast.success(response.message || "Message sent successfully");
+                reset();
+            } else {
+                toast.error(response?.message || "Something went wrong");
+            }
+
+        } catch (error: any) {
+            toast.error(
+                error?.data?.message || error?.message || "Failed to send message"
+            );
         }
     };
-
-    const handleKeyDown = (e : any) => {
-        if (e.key === 'Enter' && e.ctrlKey) {
-            handleSubmit();
-        }
-    };
-
     return (
         <div className="py-6">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+
                 <div className="mb-6">
                     <h2 className="text-2xl font-semibold text-[#2D2D2D] mb-1">
                         Contact Support
                     </h2>
                     <p className="text-sm text-[#636F85]">
-                        Can't find what you're for? Send us message.
+                        Can't find what you're looking for? Send us a message.
                     </p>
                 </div>
 
-                <div className="space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+
+                    {/* Subject */}
                     <div>
-                        <label
-                            htmlFor="subject"
-                            className="block text-[16px] font-medium text-[#2D2D2D] mb-2"
-                        >
+                        <label className="block text-[16px] font-medium text-[#2D2D2D] mb-2">
                             Subject
                         </label>
                         <input
                             type="text"
-                            id="subject"
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            onKeyDown={handleKeyDown}
                             placeholder="Briefly describe your issue"
-                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent placeholder-gray-400"
+                            {...register('subject', {
+                                required: 'Subject is required',
+                                minLength: {
+                                    value: 3,
+                                    message: 'Subject must be at least 3 characters'
+                                }
+                            })}
+                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500"
                         />
+                        {errors.subject && (
+                            <p className="text-red-500 text-sm mt-1">
+                                {errors.subject.message}
+                            </p>
+                        )}
                     </div>
 
+                    {/* Message */}
                     <div>
-                        <label
-                            htmlFor="message"
-                            className="block text-[16px] font-medium text-[#2D2D2D] mb-2"
-                        >
+                        <label className="block text-[16px] font-medium text-[#2D2D2D] mb-2">
                             Message
                         </label>
                         <textarea
-                            id="message"
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            onKeyDown={handleKeyDown}
-                            placeholder="Briefly describe your issue"
                             rows={5}
-                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent placeholder-gray-400 resize-none"
+                            placeholder="Briefly describe your issue"
+                            {...register('message', {
+                                required: 'Message is required',
+                                minLength: {
+                                    value: 10,
+                                    message: 'Message must be at least 10 characters'
+                                }
+                            })}
+                            className="w-full px-3 py-2 text-sm text-[#636F85] border border-[#D1D6DB] rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"
                         />
+                        {errors.message && (
+                            <p className="text-red-500 text-sm mt-1">
+                                {errors.message.message}
+                            </p>
+                        )}
                     </div>
 
-                    {/* {submitStatus === 'success' && (
-            <div className="p-3 bg-green-50 border border-green-200 rounded-md">
-              <p className="text-sm text-green-800">
-                Message sent successfully!
-              </p>
-            </div>
-          )} */}
-
-                    {submitStatus === 'error' && (
-                        <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-                            <p className="text-sm text-red-800">
-                                Failed to send message. Please try again.
-                            </p>
-                        </div>
-                    )}
-
+                    {/* Button */}
                     <button
-                        onClick={handleSubmit}
-                        // disabled={isSubmitting || !formData.subject || !formData.message}
-                        className="w-full bg-[#6E51E0] hover:bg-[#6E51E0] text-white font-medium py-3 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        type="submit"
+                        className="bg-[#6E51E0] text-white px-4 py-2 rounded font-medium flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                        disabled={isLoading}
                     >
-                        {isSubmitting ? 'Sending...' : 'Send'}
+                        {isLoading && (
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        )}
+                        {isLoading ? "Sending..." : "Send"}
                     </button>
-                </div>
+
+                </form>
             </div>
         </div>
     );

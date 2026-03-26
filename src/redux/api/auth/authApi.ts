@@ -123,6 +123,15 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["User"],
     }),
 
+    // contact support in help page
+    contactSupport: builder.mutation({
+      query: (payload) => ({
+        url: "/support/contact",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+
   }),
 });
 
@@ -139,4 +148,5 @@ export const {
   useLogoutMutation,
   useUpdateProfileMutation,
   useChangePasswordMutation,
+  useContactSupportMutation,
 } = authApi;
