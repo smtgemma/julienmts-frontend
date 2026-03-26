@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Maximize2, BarChart3 } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { useConversationRecordingQuery } from '@/redux/api/myAccountApi/myAccountApi';
 
 function Replay() {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -9,6 +11,18 @@ function Replay() {
     const [volume, setVolume] = useState(1);
     const [showControls, setShowControls] = useState(true);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const searchParams = useSearchParams();
+    const meetingId = searchParams.get("meetingId");
+    const sessionId = searchParams.get("sessionId");
+    console.log(meetingId, sessionId);
+
+    const { data: getRecording, isLoading } = useConversationRecordingQuery({
+        session_id: sessionId,
+        meeting_id: meetingId,
+    })
+    console.log(getRecording, "getRecording")
+
 
     const formatTime = (seconds: any) => {
         const mins = Math.floor(seconds / 60);

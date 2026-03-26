@@ -242,7 +242,7 @@ function ViewSummary() {
     const searchParams = useSearchParams();
     const meetingId = searchParams.get("meetingId");
     const sessionId = searchParams.get("sessionId");
-    console.log(meetingId, sessionId);
+    // console.log(meetingId, sessionId);
 
     const { data: getSummery, isLoading } = useConversationHistoryQuery({
         session_id: sessionId,
