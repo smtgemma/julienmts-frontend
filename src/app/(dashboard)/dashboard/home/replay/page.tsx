@@ -12,6 +12,7 @@ function Replay() {
     const [showControls, setShowControls] = useState(true);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+    // api call
     const searchParams = useSearchParams();
     const meetingId = searchParams.get("meetingId");
     const sessionId = searchParams.get("sessionId");
@@ -21,7 +22,7 @@ function Replay() {
         session_id: sessionId,
         meeting_id: meetingId,
     })
-    console.log(getRecording, "getRecording")
+    // console.log(getRecording, "getRecording")
 
 
     const formatTime = (seconds: any) => {

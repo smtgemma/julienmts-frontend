@@ -25,16 +25,22 @@ export const myAccountApi = baseApi.injectEndpoints({
         url: `/meeting/${meeting_id}/history?session_id=${session_id}`,
         method: "GET",
       }),
-      providesTags: ["MyAccount"],
     }),
 
-    // conversation history api for summery button 
+    // conversation recording api for replay button 
     conversationRecording: builder.query({
       query: ({ meeting_id, session_id }) => ({
         url: `/meeting/${meeting_id}/recording?session_id=${session_id}`,
         method: "GET",
       }),
-      providesTags: ["MyAccount"],
+    }),
+
+    // conversation insights api for insights button 
+    conversationInsights: builder.query({
+      query: ({ meeting_id, session_id }) => ({
+        url: `/meeting/${meeting_id}/analytics?session_id=${session_id}`,
+        method: "GET",
+      }),
     }),
 
   }),
@@ -45,4 +51,5 @@ export const {
   useSingleAccountDetailsQuery,
   useConversationHistoryQuery,
   useConversationRecordingQuery,
+  useConversationInsightsQuery,
 } = myAccountApi;

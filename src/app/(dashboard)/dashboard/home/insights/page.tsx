@@ -1,14 +1,32 @@
+
+"use client"
 import ChartBarDefault from '@/components/insights/ChartBarDefault';
 import InsightsCard from '@/components/insights/insightsCard';
 import RisksOpportunities from '@/components/insights/RisksOpportunities';
 import TalkTimeDistribution from '@/components/insights/TalkTimeDistribution';
 import TopicsDiscussed from '@/components/insights/topicDiscus';
+import { useConversationInsightsQuery } from '@/redux/api/myAccountApi/myAccountApi';
 import { Award, BarChart3, Play } from 'lucide-react';
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation';
 import React from 'react'
 import { GoArrowLeft } from 'react-icons/go'
 
 function Insights() {
+
+  const searchParams = useSearchParams();
+  const meetingId = searchParams.get("meetingId");
+  const sessionId = searchParams.get("sessionId");
+  console.log(meetingId, sessionId);
+
+  const { data, isLoading } = useConversationInsightsQuery({
+    session_id: sessionId,
+    meeting_id: meetingId,
+  })
+  const getInsights = data?.data || {}
+  const risk = getInsights?.risks
+  console.log(getInsights, "getInsights===================")
+
   const score = 78;
   const maxScore = 100;
   const percentage = (score / maxScore) * 100;
@@ -23,11 +41,11 @@ function Insights() {
       <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6 hover:shadow-md transition-shadow">
         <div className="flex items-center justify-between">
           <Link href="/dashboard/home" className="flex-1">
-            <h3 className='flex items-center gap-2 text-[16px] text-[#2D2D2D]'><GoArrowLeft /> Back to Dashboard</h3>
+            {/* <h3 className='flex items-center gap-2 text-[16px] text-[#2D2D2D]'><GoArrowLeft /> Back to Dashboard</h3> */}
           </Link>
           <div className="ml-6">
             <div className="bg-[#6E51E0]/10 text-[#6E51E0] p-3 rounded-[8px] font-medium text-sm whitespace-nowrap">
-              Overall Score: 78/100
+              Overall Score: {getInsights?.overall_score || "0"}/100
             </div>
           </div>
         </div>
