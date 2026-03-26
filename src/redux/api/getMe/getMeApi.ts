@@ -8,7 +8,26 @@ export const getMe = baseApi.injectEndpoints({
       query: () => "/users/profile",
       providesTags: ["User"],
     }),
+
+    // get all notifications 
+    getAllNotifications: builder.query({
+      query: () => ({
+        url: "/notifications",
+        method: "GET",
+      }),
+      providesTags: ["Notification"],
+    }),
+
+    // read single Notification 
+    readNotification: builder.query({
+      query: (id) => ({
+        url: `/notifications/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Notification"],
+    }),
+
   }),
 });
 
-export const { useGetMeQuery } = getMe;
+export const { useGetMeQuery, useGetAllNotificationsQuery, useReadNotificationQuery } = getMe;
