@@ -102,6 +102,27 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+
+    // update profile
+    updateProfile: builder.mutation({
+      query: (bodyData) => ({
+        url: "/users/profile",
+        method: "PATCH",
+        body: bodyData,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    // change password
+    changePassword: builder.mutation({
+      query: (payload) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
   }),
 });
 
@@ -116,4 +137,6 @@ export const {
   useResetPasswordMutation,
   useGoogleSignInMutation,
   useLogoutMutation,
+  useUpdateProfileMutation,
+  useChangePasswordMutation,
 } = authApi;
