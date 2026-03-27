@@ -37,9 +37,11 @@ function Insights() {
   const risks = getSummary?.data?.analytics?.risks || [];
   // opportunites 
   const opportunities = getSummary?.data?.analytics?.opportunities || [];
+  // engagementScore 
+  const engagementScore = getSummary?.data?.engagement_score;
   console.log(getSummary, "=====================getSummary")
 
-  const score = 78;
+  const score = engagementScore;
   const maxScore = 100;
   const percentage = (score / maxScore) * 100;
   // Calculate the stroke dasharray for the circular progress
@@ -159,10 +161,6 @@ function Insights() {
           <Play className="w-5 h-5" />
           Watch Replay
         </button>
-        {/* <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
-          <BarChart3 className="w-5 h-5" />
-          View Insights
-        </button> */}
       </div>
     </div>
   )
