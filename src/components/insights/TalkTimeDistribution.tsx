@@ -7,9 +7,9 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-export default function TalkTimeDistribution() {
-    const yourTalkTime = 48
-    const otherTalkTime = 52
+export default function TalkTimeDistribution({salespersonTalkTime, representativeTalkTime} : {salespersonTalkTime : any, representativeTalkTime : any}) {
+    const yourTalkTime = salespersonTalkTime;
+    const otherTalkTime = representativeTalkTime;
 
     return (
         <Card className="w-full hover:shadow-md transition-shadow">
@@ -57,7 +57,7 @@ export default function TalkTimeDistribution() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-full bg-[#D1D6DB]"></div>
-                            <span className="text-[16px] text-[#2D2D2D]">Sarah Miller</span>
+                            <span className="text-[16px] text-[#2D2D2D]">Representative</span>
                         </div>
                         <span className="text-[16px] font-semibold text-[#0A0A0A]">{otherTalkTime}%</span>
                     </div>

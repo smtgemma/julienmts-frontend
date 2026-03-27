@@ -146,7 +146,7 @@ const chartConfig = {
 
 export default function SentimentAnalysis({ firstChart }: { firstChart: any }) {
     const chartData = firstChart;
-    console.log(firstChart, "============firstChart")
+    // console.log(firstChart, "============firstChart")
     return (
         <div>
             {/* bar chart */}

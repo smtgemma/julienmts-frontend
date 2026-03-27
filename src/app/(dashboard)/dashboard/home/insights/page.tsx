@@ -25,8 +25,11 @@ function Insights() {
     meeting_id: meetingId,
   });
 
-  // first chart 
+  // left chart 
   const firstChart = getSummary?.data?.turns || [];
+//  right chart 
+const representativeTalkTime = getSummary?.data?.representatives_talk_time ;
+const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
 
   // risk 
   const risk = getSummary?.data?.analytics?.risks;
@@ -132,7 +135,7 @@ function Insights() {
           <ChartBarDefault firstChart={firstChart} />
         </div>
         <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
-          <TalkTimeDistribution />
+          <TalkTimeDistribution salespersonTalkTime={salespersonTalkTime} representativeTalkTime={representativeTalkTime} />
         </div>
       </div>
       <InsightsCard />
