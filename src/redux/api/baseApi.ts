@@ -42,7 +42,8 @@ import Cookies from "js-cookie";
  */
 const baseQuery = fetchBaseQuery({
   // baseUrl: "http://206.162.244.134:8090/api/v1/",
-  baseUrl: "http://206.162.244.131:8092/api/v1",
+  // baseUrl: "http://206.162.244.131:8092/api/v1",
+  baseUrl: "https://df89-115-127-157-41.ngrok-free.app/api/v1",
   credentials: "include",
 
   prepareHeaders: (headers) => {
