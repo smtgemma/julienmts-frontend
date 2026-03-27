@@ -5,27 +5,32 @@ import InsightsCard from '@/components/insights/insightsCard';
 import RisksOpportunities from '@/components/insights/RisksOpportunities';
 import TalkTimeDistribution from '@/components/insights/TalkTimeDistribution';
 import TopicsDiscussed from '@/components/insights/topicDiscus';
-import { useConversationInsightsQuery } from '@/redux/api/myAccountApi/myAccountApi';
+import { useConversationHistoryQuery } from '@/redux/api/myAccountApi/myAccountApi';
 import { Award, BarChart3, Play } from 'lucide-react';
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation';
 import React from 'react'
-import { GoArrowLeft } from 'react-icons/go'
+import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 
 function Insights() {
 
+  // ✅ Get params
   const searchParams = useSearchParams();
-  const meetingId = searchParams.get("meetingId");
-  const sessionId = searchParams.get("sessionId");
-  console.log(meetingId, sessionId);
+  const meetingId = searchParams.get("meetingId") || "";
+  const sessionId = searchParams.get("sessionId") || "";
 
-  const { data, isLoading } = useConversationInsightsQuery({
+  // ✅ API call
+  const { data: getSummary, isLoading } = useConversationHistoryQuery({
     session_id: sessionId,
     meeting_id: meetingId,
-  })
-  const getInsights = data?.data || {}
-  const risk = getInsights?.risks
-  console.log(getInsights, "getInsights===================")
+  });
+
+  // first chart 
+  const firstChart = getSummary?.data?.turns || [];
+
+  // risk 
+  const risk = getSummary?.data?.analytics?.risks;
+  console.log(getSummary, "=====================getSummary")
 
   const score = 78;
   const maxScore = 100;
@@ -38,22 +43,33 @@ function Insights() {
   return (
     <div>
       {/* title part  */}
-      <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6 hover:shadow-md transition-shadow">
+      <div className="bg-white border border-[#6E51E0] rounded-[12px] p-6 my-6">
+        <h1 className="text-2xl font-medium text-[#2D2D2D]"> Discovery Call with CMO </h1>
         <div className="flex items-center justify-between">
-          <Link href="/dashboard/home" className="flex-1">
-            {/* <h3 className='flex items-center gap-2 text-[16px] text-[#2D2D2D]'><GoArrowLeft /> Back to Dashboard</h3> */}
-          </Link>
+          <p className="text-[#4A5565] text-[16px] flex items-center gap-2">
+            {/* Company */}
+            <span>FastGrowth Inc.</span>
+
+            {/* Date */}
+            <span className="flex items-center gap-1">
+              <AiOutlineCalendar className="text-gray-400" />
+              {getSummary?.data?.created_at
+                ? new Date(getSummary.data.created_at).toISOString().split("T")[0]
+                : "N/A"}
+            </span>
+
+            {/* Duration */}
+            <span className="flex items-center gap-1">
+              <AiOutlineClockCircle className="text-gray-400" />
+              {getSummary?.data?.analytics?.total_duration || "N/A"} minutes
+            </span>
+          </p>
+
           <div className="ml-6">
             <div className="bg-[#6E51E0]/10 text-[#6E51E0] p-3 rounded-[8px] font-medium text-sm whitespace-nowrap">
-              Overall Score: {getInsights?.overall_score || "0"}/100
+              Overall Score: {getSummary?.data?.analytics?.overall_score || "0"}/100
             </div>
           </div>
-        </div>
-        <div>
-          <h1 className="text-2xl font-medium text-[#2D2D2D] mb-4">
-            Discovery Call with CMO
-          </h1>
-          <p className='text-[#4A5565] text-[16px]'>FastGrowth Inc. • Jan 23 • 42 minutes</p>
         </div>
       </div>
       {/* engagement score part  */}
@@ -113,7 +129,7 @@ function Insights() {
       {/* chart part  */}
       <div className="lg:flex items-center gap-6 py-6">
         <div className="w-full lg:w-1/2">
-          <ChartBarDefault />
+          <ChartBarDefault firstChart={firstChart} />
         </div>
         <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
           <TalkTimeDistribution />

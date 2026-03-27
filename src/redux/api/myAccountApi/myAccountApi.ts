@@ -28,12 +28,12 @@ export const myAccountApi = baseApi.injectEndpoints({
     }),
 
     // conversation recording api for replay button 
-    conversationRecording: builder.query({
-      query: ({ meeting_id, session_id }) => ({
-        url: `/meeting/${meeting_id}/recording?session_id=${session_id}`,
-        method: "GET",
-      }),
-    }),
+    // conversationRecording: builder.query({
+    //   query: ({ meeting_id, session_id }) => ({
+    //     url: `/meeting/${meeting_id}/recording?session_id=${session_id}`,
+    //     method: "GET",
+    //   }),
+    // }),
 
     // conversation insights api for insights button 
     conversationInsights: builder.query({
@@ -50,6 +50,6 @@ export const {
   useMyAccountListQuery,
   useSingleAccountDetailsQuery,
   useConversationHistoryQuery,
-  useConversationRecordingQuery,
+  // useConversationRecordingQuery,
   useConversationInsightsQuery,
 } = myAccountApi;
