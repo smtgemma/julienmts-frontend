@@ -555,7 +555,7 @@ function Replay() {
             </div>
 
             {/* ⚡ ACTION BUTTONS */}
-            <div className="flex gap-4 mt-6">
+            {/* <div className="flex gap-4 mt-6">
                 <button className="flex-1 border border-gray-300 hover:border-indigo-500 py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
                     <Play className="w-5 h-5" />
                     Watch Replay
@@ -565,7 +565,7 @@ function Replay() {
                     <BarChart3 className="w-5 h-5" />
                     View Insights
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }
