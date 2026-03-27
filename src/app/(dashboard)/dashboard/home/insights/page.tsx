@@ -28,14 +28,15 @@ function Insights() {
 
   // left chart 
   const firstChart = getSummary?.data?.turns || [];
-//  right chart 
-const representativeTalkTime = getSummary?.data?.representatives_talk_time ;
-const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
-const topicDiscussed = getSummary?.data?.analytics?.topics_discussed || []
-
-
+  //  right chart 
+  const representativeTalkTime = getSummary?.data?.representatives_talk_time;
+  const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
+  // topics part 
+  const topicDiscussed = getSummary?.data?.analytics?.topics_discussed || [];
   // risk 
-  const risk = getSummary?.data?.analytics?.risks;
+  const risks = getSummary?.data?.analytics?.risks || [];
+  // opportunites 
+  const opportunities = getSummary?.data?.analytics?.opportunities || [];
   console.log(getSummary, "=====================getSummary")
 
   const score = 78;
@@ -46,10 +47,10 @@ const topicDiscussed = getSummary?.data?.analytics?.topics_discussed || []
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <p>
-        <Loading/>
+        <Loading />
       </p>
     )
   }
@@ -151,7 +152,7 @@ const topicDiscussed = getSummary?.data?.analytics?.topics_discussed || []
       </div>
       <InsightsCard />
       <TopicsDiscussed topicDiscussed={topicDiscussed} />
-      <RisksOpportunities />
+      <RisksOpportunities risks={risks} opportunities={opportunities} />
       {/* button part  */}
       <div className="flex gap-6 mb-6 px-6">
         <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
