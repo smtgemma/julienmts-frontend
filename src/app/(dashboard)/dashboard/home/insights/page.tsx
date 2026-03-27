@@ -5,6 +5,7 @@ import InsightsCard from '@/components/insights/insightsCard';
 import RisksOpportunities from '@/components/insights/RisksOpportunities';
 import TalkTimeDistribution from '@/components/insights/TalkTimeDistribution';
 import TopicsDiscussed from '@/components/insights/topicDiscus';
+import Loading from '@/components/Others/Loading';
 import { useConversationHistoryQuery } from '@/redux/api/myAccountApi/myAccountApi';
 import { Award, BarChart3, Play } from 'lucide-react';
 import Link from 'next/link'
@@ -30,6 +31,8 @@ function Insights() {
 //  right chart 
 const representativeTalkTime = getSummary?.data?.representatives_talk_time ;
 const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
+const topicDiscussed = getSummary?.data?.analytics?.topics_discussed || []
+
 
   // risk 
   const risk = getSummary?.data?.analytics?.risks;
@@ -42,6 +45,14 @@ const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  if(isLoading) {
+    return (
+      <p>
+        <Loading/>
+      </p>
+    )
+  }
 
   return (
     <div>
@@ -139,7 +150,7 @@ const salespersonTalkTime = getSummary?.data?.salesperson_talk_time;
         </div>
       </div>
       <InsightsCard />
-      <TopicsDiscussed />
+      <TopicsDiscussed topicDiscussed={topicDiscussed} />
       <RisksOpportunities />
       {/* button part  */}
       <div className="flex gap-6 mb-6 px-6">

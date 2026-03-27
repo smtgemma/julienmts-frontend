@@ -1,16 +1,7 @@
 import React from 'react';
 
-export default function TopicsDiscussed() {
-  const topics = [
-    'Budget Authority',
-    'Implementation Timeline',
-    'Current Pain Points',
-    'Integration Requirements',
-    'Decision Process',
-    'ROI Expectations',
-    'Stakeholder Mapping',
-    'Competition'
-  ];
+export default function TopicsDiscussed({ topicDiscussed }: { topicDiscussed: string[] }) {
+  const topics = topicDiscussed || [];
 
   return (
     <div className="px-6">
