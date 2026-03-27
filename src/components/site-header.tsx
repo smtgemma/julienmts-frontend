@@ -284,7 +284,7 @@ export function SiteHeader() {
   const { data: getAllNotifications, isLoading: notificationsLoading } = useGetAllNotificationsQuery("")
   const notifications = getAllNotifications?.data || []
   // console.log(getAllNotifications, "==================getAllNotifications")
-  const { data: readNotification } = useReadNotificationQuery(notificatonId)
+  const { data: readNotification, refetch } = useReadNotificationQuery(notificatonId)
   console.log(readNotification, "readnotification========")
   return (
     <header className="py-10 flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -400,6 +400,7 @@ export function SiteHeader() {
                         <p
                           onClick={() => {
                             setNotificationId(notification?.id)
+                            refetch()
                           }}
                         >
                           {notification.message}
