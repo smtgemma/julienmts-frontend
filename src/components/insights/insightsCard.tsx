@@ -2,14 +2,14 @@ import React from 'react';
 import { Target, Lightbulb, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 
-export default function InsightsCard() {
+export default function InsightsCard({questionsAsked, openQuestions, activeListeningGrade} : {questionsAsked : any, openQuestions : any, activeListeningGrade : any}) {
     const stats = [
         {
             icon: Target,
             iconBg: 'bg-[#155DFC1A]',
             iconColor: 'text-[#155DFC]',
             title: 'Questions Asked',
-            value: '18',
+            value: questionsAsked,
             subtitle: 'Above average for discovery calls'
         },
         {
@@ -17,7 +17,7 @@ export default function InsightsCard() {
             iconBg: 'bg-[#34A8531A]',
             iconColor: 'text-[#00A63E]',
             title: 'Open Questions',
-            value: '14/18',
+            value: openQuestions,
             subtitle: '77% open-ended questions'
         },
         {
@@ -25,7 +25,7 @@ export default function InsightsCard() {
             iconBg: 'bg-[#9810FA1A]',
             iconColor: 'text-[#9810FA]',
             title: 'Active Listening',
-            value: 'A+',
+            value: activeListeningGrade,
             subtitle: 'Excellent paraphrasing and clarification'
         }
     ];

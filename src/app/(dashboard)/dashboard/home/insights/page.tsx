@@ -39,6 +39,12 @@ function Insights() {
   const opportunities = getSummary?.data?.analytics?.opportunities || [];
   // engagementScore 
   const engagementScore = getSummary?.data?.engagement_score;
+
+  // Insights card 
+  const activeListeningGrade = getSummary?.data?.active_listening_grade;
+  const questionsAsked = getSummary?.data?.questions_asked;
+  const openQuestions = getSummary?.data?.open_questions;
+
   console.log(getSummary, "=====================getSummary")
 
   const score = engagementScore;
@@ -152,7 +158,7 @@ function Insights() {
           <TalkTimeDistribution salespersonTalkTime={salespersonTalkTime} representativeTalkTime={representativeTalkTime} />
         </div>
       </div>
-      <InsightsCard />
+      <InsightsCard openQuestions={openQuestions} activeListeningGrade={activeListeningGrade} questionsAsked={questionsAsked} />
       <TopicsDiscussed topicDiscussed={topicDiscussed} />
       <RisksOpportunities risks={risks} opportunities={opportunities} />
       {/* button part  */}
