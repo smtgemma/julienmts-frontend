@@ -73,11 +73,13 @@ export default function SignInPage() {
           response?.data?.user?.role === "ADMIN" ||
           response?.data?.user?.role === "SUPER_ADMIN"
         ) {
-          router.push("http://localhost:3055");
+          // router.push("http://localhost:3055");
           // router.push("http://206.162.244.131:3055/");
+          router.push("http://206.162.244.134:3055/");
         } else {
-          router.push("http://localhost:3054/dashboard/home");
+          // router.push("http://localhost:3054/dashboard/home");
           // router.push("http://206.162.244.131:3054/dashboard/home");
+          router.push("http://206.162.244.134:3054/dashboard/home");
         }
       }
     } catch (error: any) {

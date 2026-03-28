@@ -274,7 +274,6 @@ import Image from "next/image"
 import { usePathname } from "next/navigation";
 import { useGetAllNotificationsQuery, useGetMeQuery, useReadNotificationMutation } from "@/redux/api/getMe/getMeApi"
 import { Bell } from "lucide-react"
-import { useState } from "react"
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -300,7 +299,7 @@ export function SiteHeader() {
           (pathname === "/dashboard" || pathname === "/dashboard/home") && (
             <div>
               <h1 className="text-xl font-bold text-primaryBgColor">
-                Welcome back, Md Shakil
+                Welcome back, {getMe?.data?.firstName || "N/A"} {getMe?.data?.lastName || "N/A"}
               </h1>
               <p className="sm text-[#636F85]">
                 Here's your meeting activity and insights for today.
