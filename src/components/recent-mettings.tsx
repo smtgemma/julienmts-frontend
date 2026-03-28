@@ -3,7 +3,7 @@ import { Building2, FileText, Play, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function RecentMeetings({ recentMeetings }: { recentMeetings: any }) {
-  console.log(recentMeetings, "=============")
+  // console.log(recentMeetings, "=============")
   const meetings = [
     {
       title: "Discovery Call with CMO",
