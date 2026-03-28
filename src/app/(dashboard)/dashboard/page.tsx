@@ -1,13 +1,13 @@
 
-import { SectionCards } from "@/components/section-cards"
-import RecentMeetings from "@/components/recent-mettings"
+// import { SectionCards } from "@/components/section-cards"
+// import RecentMeetings from "@/components/recent-mettings"
 import { ExternalLink, Lightbulb } from "lucide-react"
 
 export default function Page() {
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-      <SectionCards />
-      <RecentMeetings />
+      {/* <SectionCards /> */}
+      {/* <RecentMeetings /> */}
       {/* active accounts  */}
       <div>
         <h3 className="text-[#2D2D2D] text-2xl font-medium mb-6">Active Accounts</h3>

@@ -272,20 +272,26 @@ import { IoNotificationsOutline } from "react-icons/io5"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import Image from "next/image"
 import { usePathname } from "next/navigation";
-import { useGetAllNotificationsQuery, useGetMeQuery, useReadNotificationQuery } from "@/redux/api/getMe/getMeApi"
+import { useGetAllNotificationsQuery, useGetMeQuery, useReadNotificationMutation } from "@/redux/api/getMe/getMeApi"
 import { Bell } from "lucide-react"
 import { useState } from "react"
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [notificatonId, setNotificationId] = useState("")
 
-  const { data: getMe, isLoading } = useGetMeQuery("")
-  const { data: getAllNotifications, isLoading: notificationsLoading } = useGetAllNotificationsQuery("")
+  const { data: getMe } = useGetMeQuery("")
+  const { data: getAllNotifications } = useGetAllNotificationsQuery("")
   const notifications = getAllNotifications?.data || []
-  // console.log(getAllNotifications, "==================getAllNotifications")
-  const { data: readNotification, refetch } = useReadNotificationQuery(notificatonId)
-  console.log(readNotification, "readnotification========")
+
+  const [readNotification] = useReadNotificationMutation()
+  const handleNotification = async (id: any) => {
+    try {
+      const response = await readNotification(id).unwrap();
+      // console.log(response, "========")
+    } catch (error) {
+      // console.log(error, "error")
+    }
+  }
   return (
     <header className="py-10 flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
       <div className="flex w-full items-center gap-1 px-6 py-6 lg:gap-2 lg:px-6">
@@ -393,16 +399,13 @@ export function SiteHeader() {
                       <div
                         className={`flex-1 min-w-0 text-sm ${notification.isRead ? "text-gray-500" : "text-gray-800 font-medium cursor-pointer"
                           }`}
+                        onClick={() => handleNotification(notification?.id)}
+
                       >
                         {/* <h3 className="font-semibold text-gray-900 mb-1 text-base">
                           {notification.title}
                         </h3> */}
-                        <p
-                          onClick={() => {
-                            setNotificationId(notification?.id)
-                            refetch()
-                          }}
-                        >
+                        <p>
                           {notification.message}
                         </p>
                         <time>

@@ -19,15 +19,28 @@ export const getMe = baseApi.injectEndpoints({
     }),
 
     // read single Notification 
-    readNotification: builder.query({
+    // readNotification: builder.query({
+    //   query: (id) => ({
+    //     url: `/notifications/${id}`,
+    //     method: "GET",
+    //   }),
+    //   providesTags: ["Notification"],
+    // }),
+
+    readNotification: builder.mutation({
       query: (id) => ({
-        url: `/notifications/${id}`,
-        method: "GET",
+        url: `/notifications/${id}/read`,
+        method: "PATCH",
       }),
-      providesTags: ["Notification"],
+      invalidatesTags: ["Notification"],
     }),
 
   }),
 });
 
-export const { useGetMeQuery, useGetAllNotificationsQuery, useReadNotificationQuery } = getMe;
+export const {
+  useGetMeQuery,
+  useGetAllNotificationsQuery,
+  // useReadNotificationQuery,
+  useReadNotificationMutation
+} = getMe;
