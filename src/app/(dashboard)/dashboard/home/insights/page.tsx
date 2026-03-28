@@ -45,7 +45,7 @@ function Insights() {
   const questionsAsked = getSummary?.data?.questions_asked;
   const openQuestions = getSummary?.data?.open_questions;
 
-  console.log(getSummary, "=====================getSummary")
+  // console.log(getSummary, "=====================getSummary")
 
   const score = engagementScore;
   const maxScore = 100;

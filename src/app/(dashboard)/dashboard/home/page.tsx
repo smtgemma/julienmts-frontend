@@ -1,14 +1,27 @@
-
+"use client"
 import { SectionCards } from "@/components/section-cards"
 import RecentMeetings from "@/components/recent-mettings"
 import { ExternalLink, Lightbulb } from "lucide-react"
 import HomeAiInsights from "@/components/home/HomeAiInsights"
 import Link from "next/link"
+import { useGetUserDashboardStatsQuery } from "@/redux/api/homeApi/homeApi"
+import Loading from "@/components/Others/Loading"
 
 export default function Page() {
+    const { data: getUserDashboardStats, isLoading } = useGetUserDashboardStatsQuery("")
+    const { total, performanceGrowth, completed } = getUserDashboardStats?.data?.meetings || {}
+    console.log(getUserDashboardStats, "=================")
+
+    if(isLoading) {
+        return (
+            <p>
+                <Loading/>
+            </p>
+        )
+    }
     return (
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <SectionCards />
+            <SectionCards total={total} performanceGrowth={performanceGrowth} completed={completed} />
             <RecentMeetings />
             {/* active accounts  */}
             <div>
