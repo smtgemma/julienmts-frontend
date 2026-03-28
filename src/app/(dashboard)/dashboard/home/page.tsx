@@ -10,6 +10,7 @@ import Loading from "@/components/Others/Loading"
 export default function Page() {
     const { data: getUserDashboardStats, isLoading } = useGetUserDashboardStatsQuery("")
     const { total, performanceGrowth, completed } = getUserDashboardStats?.data?.meetings || {}
+    const recentMeetings = getUserDashboardStats?.data?.recentMeetings || []
     console.log(getUserDashboardStats, "=================")
 
     if(isLoading) {
@@ -22,7 +23,7 @@ export default function Page() {
     return (
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
             <SectionCards total={total} performanceGrowth={performanceGrowth} completed={completed} />
-            <RecentMeetings />
+            <RecentMeetings recentMeetings={recentMeetings}/>
             {/* active accounts  */}
             <div>
                 <h3 className="text-[#2D2D2D] text-2xl font-medium mb-6">Active Accounts</h3>
