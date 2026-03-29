@@ -76,7 +76,7 @@ export default function SignInPage() {
           // router.push("http://localhost:3055");
           // router.push("http://206.162.244.131:3055/");
           // router.push("http://206.162.244.134:3055/");
-          router.push("https://julientmts.aiteamtwo.com");
+          router.push("https://julientmts.aiteamtwo.com/admin-dashboard");
         } else {
           // router.push("http://localhost:3054/dashboard/home");
           // router.push("http://206.162.244.131:3054/dashboard/home");
