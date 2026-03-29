@@ -75,7 +75,7 @@ export default function AppSidebar() {
       href: "/dashboard/myAccount",
       icon: MdManageAccounts,
     },
-    { label: "Dashboard", href: "/dashboard/dashboard", icon: RxDashboard },
+    // { label: "Dashboard", href: "/dashboard/dashboard", icon: RxDashboard },
     { label: "Subscriptions", href: "/dashboard/subscriptions", icon: CreditCard },
     {
       label: "Setting",
