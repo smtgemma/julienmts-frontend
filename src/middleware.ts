@@ -48,7 +48,7 @@ import { NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
-  console.log("Middleware token:=============", token);
+  // console.log("Middleware token:=============", token);
 
   // ❌ No token → redirect to signIn
   if (!token) {
