@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
 
   // ❌ If NOT USER → redirect to signIn
   if (
-    currentPath.startsWith("/dashboard/home") &&
+    currentPath.startsWith("/dashboard2/home") &&
     userInfo?.role !== "USER"
   )
    {
@@ -85,7 +85,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/home/:path*"], // all nested routes included
+  matcher: ["/dashboard2/home/:path*"], // all nested routes included
 };
 
 
