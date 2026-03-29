@@ -28,12 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <body suppressHydrationWarning={true} className={rubik.variable}> */}
-      <body
+      <body suppressHydrationWarning={true} className={rubik.variable}>
+      {/* <body
         suppressHydrationWarning={true}
-        className={`${nunitoSans.className} antialiased relative! z-20 top-0!`}
+        className={`${rubik.variable} antialiased relative! z-20 top-0!`}
         style={{ position: "static", top: "0" }}
-      >
+      > */}
         <div className="bg-[#FFFFFF]">
           <GoogleTranslateProvider>
             <ReduxProvider>
