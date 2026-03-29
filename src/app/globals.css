@@ -17,7 +17,7 @@ body {
 
 @theme {
   --color-authBackgroundButton: #151515;
-  --color-primaryBgColor:#6E51E0;
+  --color-primaryBgColor: #6E51E0;
   --color-secondary: #168B86;
   --color-accent: #E5E5FF;
   --color-surface: #FFEDE2;
@@ -139,10 +139,123 @@ body {
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* translate css  */
+
+body .skiptranslate {
+  display: none !important;
+  position: absolute;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+  position: absolute;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
+  visibility: hidden !important;
+  height: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  position: absolute;
+}
+
+/* =============================================
+   Google Translate লোগো এবং ব্যানার লুকানোর CSS
+   ============================================= */
+
+/* মূল translate element লুকান */
+#google_translate_element,
+.goog-te-banner-frame,
+.goog-te-top-frame,
+.goog-te-float-frame,
+.goog-te-combo,
+.goog-tooltip,
+.skiptranslate,
+[class*="VIpgJd"],
+[class*="goog-te"],
+[class*="goog-tooltip"],
+.google-translate-element {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  overflow: hidden !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* সব Google Translate iframes লুকান */
+iframe[class*="goog"],
+iframe[src*="translate"],
+iframe[src*="google.com/translate"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+/* Body তে translate করা element এর জন্য */
+body {
+  top: 0 !important;
+  position: static !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html {
+  top: 0 !important;
+  position: static !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* সব divs যাতে translate related classes আছে */
+div[class*="goog-te"],
+div[class*="VIpgJd"],
+div[class*="skiptranslate"],
+span[class*="goog-te"],
+span[class*="VIpgJd"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* Pseudo elements লুকান */
+.goog-te-banner-frame::before,
+.goog-te-banner-frame::after,
+.goog-te-top-frame::before,
+.goog-te-top-frame::after {
+  display: none !important;
+}
+
+/* গুগল translate notification লুকান */
+.goog-tooltip,
+.goog-tooltip-hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Translate widget লুকান */
+.goog-te-gadget,
+.goog-te-gadget-simple {
+  display: none !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

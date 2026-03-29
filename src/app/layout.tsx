@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import ReduxProvider from "@/redux/Provider";
 import Loading from "@/components/Others/Loading";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import GoogleTranslateProvider from "@/components/shared/googleTranslation/GoogleLang";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -27,16 +28,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}  className={rubik.variable}>
+      {/* <body suppressHydrationWarning={true} className={rubik.variable}> */}
+      <body
+        suppressHydrationWarning={true}
+        className={`${rubik.variable} antialiased relative! z-20 top-0!`}
+        style={{ position: "static", top: "0" }}
+      >
         <div className="bg-[#FFFFFF]">
-          <ReduxProvider>
-          <Toaster position="top-center" expand={true} richColors />
-           <GoogleOAuthProvider
-            clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
-          >
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-          </GoogleOAuthProvider>
-        </ReduxProvider>
+          <GoogleTranslateProvider>
+            <ReduxProvider>
+              <Toaster position="top-center" expand={true} richColors />
+              <GoogleOAuthProvider
+                clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
+              >
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+              </GoogleOAuthProvider>
+            </ReduxProvider>
+          </GoogleTranslateProvider>
         </div>
       </body>
     </html>

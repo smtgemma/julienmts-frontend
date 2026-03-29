@@ -9,14 +9,14 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+// import {
+//     Select,
+//     SelectContent,
+//     SelectGroup,
+//     SelectItem,
+//     SelectTrigger,
+//     SelectValue,
+// } from "@/components/ui/select"
 
 import * as React from "react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
@@ -24,9 +24,10 @@ import Container from '@/lib/Container';
 import { PiGlobeLight } from "react-icons/pi";
 import { IoIosMenu } from "react-icons/io";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
+import { LanguageSwitcher } from "../googleTranslation/LanguageSwitcher";
 
 const Navbar = () => {
-    const { data : getMe } = useGetMeQuery("") 
+    const { data: getMe } = useGetMeQuery("")
     const isLoggedIn = getMe;
 
     const pathName = usePathname()
@@ -56,19 +57,19 @@ const Navbar = () => {
 
                 {/* Right Section for large device */}
                 <div className="hidden md:flex items-center gap-2 lg:gap-3">
-                    <Select>
+                    {/* <Select>
                         <SelectTrigger className="flex items-center gap-2 border border-[#D1D6DB] px-1 lg:px-4 py-2 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
-                      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+                      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"> */}
 
-                            {/* Globe icon on left */}
-                            <PiGlobeLight size={20} className="text-[#6B7280]" />
+                    {/* Globe icon on left */}
+                    {/* <PiGlobeLight size={20} className="text-[#6B7280]" /> */}
 
-                            {/* Placeholder with black color */}
-                            <SelectValue placeholder="Eng" className="text-black" />
+                    {/* Placeholder with black color */}
+                    {/* <SelectValue placeholder="Eng" className="text-black" />
 
-                        </SelectTrigger>
+                        </SelectTrigger> */}
 
-                        <SelectContent>
+                    {/* <SelectContent>
                             <SelectGroup>
                                 <SelectItem value="English">Eng</SelectItem>
                                 <SelectItem value="Bangla">Bang</SelectItem>
@@ -79,7 +80,25 @@ const Navbar = () => {
                                 <SelectItem value="Italian">Itali</SelectItem>
                             </SelectGroup>
                         </SelectContent>
-                    </Select>
+                    </Select> */}
+
+
+                    {/* <div className="flex items-center border border-[#D1D6DB] px-2 py-1 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
+                          focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+                        <style dangerouslySetInnerHTML={{
+                            __html: `
+                            .goog-te-banner-frame,
+                            .goog-te-top-frame,
+                            .goog-te-float-frame,
+                            [class*="VIpgJd"],
+                            iframe[src*="translate"],
+                            .skiptranslate {
+                              display: none !important;
+                            }
+                          `}} /> */}
+                    {/* <PiGlobeLight size={20} className="text-[#6B7280]" /> */}
+                    {/* <LanguageSwitcher />
+                    </div> */}
 
                     <Link href="/signIn" className="group">
                         <span className="px-4 lg:px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">

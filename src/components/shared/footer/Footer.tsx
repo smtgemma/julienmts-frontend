@@ -3,14 +3,15 @@ import Container from "@/lib/Container";
 import Link from "next/link";
 import { PiGlobeLight } from "react-icons/pi";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa6";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+// import {
+//   Select,
+//   SelectContent,
+//   SelectGroup,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select"
+import { LanguageSwitcher } from "../googleTranslation/LanguageSwitcher";
 
 export default function Footer() {
   return (
@@ -24,18 +25,18 @@ export default function Footer() {
               <h3 className='text-2xl text-primaryBgColor font-semibold'>phora</h3>
             </div>
           </Link>
-          <Select>
-            <SelectTrigger className="flex items-center gap-2 border border-[#D1D6DB] px-4 py-2 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
-      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+          {/* <Select> */}
+            {/* <SelectTrigger className="flex items-center gap-2 border border-[#D1D6DB] px-4 py-2 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
+      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"> */}
 
-              {/* Globe icon on left */}
-              <PiGlobeLight size={20} className="text-[#6B7280]" />
+            {/* Globe icon on left */}
+            {/* <PiGlobeLight size={20} className="text-[#6B7280]" /> */}
 
-              {/* Placeholder with black color */}
-              <SelectValue placeholder="Eng" className="text-black" />
+            {/* Placeholder with black color */}
+            {/* <SelectValue placeholder="Eng" className="text-black" />
 
-            </SelectTrigger>
-
+            </SelectTrigger> */}
+            {/* 
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="English">Eng</SelectItem>
@@ -46,9 +47,27 @@ export default function Footer() {
                 <SelectItem value="Spanish">Span</SelectItem>
                 <SelectItem value="Italian">Itali</SelectItem>
               </SelectGroup>
-            </SelectContent>
-          </Select>
+            </SelectContent> */}
+          {/* </Select> */}
+
+          <div className="flex items-center border border-[#D1D6DB] px-2 py-1 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
+      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">{/* আপনার অন্যান্য কন্টেন্ট */}
+            <style dangerouslySetInnerHTML={{
+              __html: `
+        .goog-te-banner-frame,
+        .goog-te-top-frame,
+        .goog-te-float-frame,
+        [class*="VIpgJd"],
+        iframe[src*="translate"],
+        .skiptranslate {
+          display: none !important;
+        }
+      `}} />
+            {/* <PiGlobeLight size={20} className="text-[#6B7280]" /> */}
+            <LanguageSwitcher />
+          </div>
         </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <p className="text-[#2D2D2D] text-[16px] font-medium">
