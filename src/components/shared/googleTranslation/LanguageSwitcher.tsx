@@ -78,7 +78,7 @@ export function LanguageSwitcher() {
         className="w-auto h-6 md:h-auto px-2 py-1 notranslate rounded-full border-none font-bold text-black/70 bg-white/30 hover:bg-white/50 flex items-center justify-between cursor-pointer transition-all duration-200 hover:shadow-md"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <PiGlobeLight size={20} className="text-[#6B7280]" />
+        <PiGlobeLight size={20} className="text-[#6B7280] mr-1" />
         {languageNames[selectedLanguage] || "Select a language"}
         <svg
           className={`ml-2 w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
