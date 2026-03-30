@@ -883,8 +883,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       const response = await fetch(
         // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/start`,
-        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
-        // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
+        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+        `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
@@ -906,8 +906,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       const ws = new WebSocket(
         // `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        `http://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        // `http://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
       );
 
       wsRef.current = ws;
