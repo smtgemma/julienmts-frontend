@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
 
   // ❌ If NOT USER → redirect to signIn
   if (
-    currentPath.startsWith("/dashboard2/home") &&
+    currentPath.startsWith("/dashboard/home") &&
     userInfo?.role !== "USER"
   )
    {
@@ -85,55 +85,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard2/home/:path*"], // all nested routes included
+  matcher: ["/dashboard/home/:path*"], // all nested routes included
 };
 
-
-// import { jwtDecode } from "jwt-decode";
-// import type { NextRequest } from "next/server";
-// import { NextResponse } from "next/server";
-
-// export function middleware(request: NextRequest) {
-//   const token = request.cookies.get("token")?.value;
-
-//   console.log("Middleware token:", token);
-
-//   // ❌ No token → redirect to signIn
-//   if (!token) {
-//     return NextResponse.redirect(new URL("/signIn", request.url));
-//   }
-
-//   let userInfo: { role?: string; exp: number };
-
-//   try {
-//     userInfo = jwtDecode(token) as { role?: string; exp: number };
-
-//     // ❌ Token expired → redirect
-//     if (userInfo.exp * 1000 < Date.now()) {
-//       return NextResponse.redirect(new URL("/signIn", request.url));
-//     }
-//   } catch (error) {
-//     // ❌ Invalid token → redirect
-//     return NextResponse.redirect(new URL("/signIn", request.url));
-//   }
-
-//   const role = userInfo?.role;
-//   const currentPath = request.nextUrl.pathname;
-
-//   console.log("ROLE:", role);
-
-//   // ✅ USER → allow dashboard
-//   if (role === "USER") {
-//     return NextResponse.next();
-//   }
-
-//   // ✅ ADMIN / SUPER_ADMIN → redirect to admin panel
-//   if (role === "SUPER_ADMINee" || role === "ADMINee") {
-//     return NextResponse.redirect(
-//       "https://admin-julientmts.aiteamtwo.com/"
-//     );
-//   }
-
-//   // ❌ অন্য সবাই → signIn
-//   return NextResponse.redirect(new URL("/signIn", request.url));
-// }
