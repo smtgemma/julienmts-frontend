@@ -869,6 +869,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     try {
       // 1️⃣ Get meetingId from cookies
       const meetingId = Cookies.get("meetingId")?.trim() || "";
+      console.log(meetingId, "=================meeting id in connect to meeting function");
 
       if (!meetingId) {
         toast.error("⚠️ Meeting ID not found");
