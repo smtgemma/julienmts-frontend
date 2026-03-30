@@ -1128,8 +1128,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
         // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/end`,
-        `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
-        // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
+        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+        `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
         {
           method: "POST",
         }
