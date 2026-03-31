@@ -122,11 +122,11 @@ export default function SignInPage() {
 
         // console.log(response?.data?.userData?.role);
 
-        dispatch(
-          setUser({
-            token: response.data.accessToken,
-          }),
-        );
+        // dispatch(
+        //   setUser({
+        //     token: response.data.accessToken,
+        //   }),
+        // );
         toast.success(response?.message);
         router.push("/dashboard/home");
         // if (response?.data?.teeRegistration === null) {
