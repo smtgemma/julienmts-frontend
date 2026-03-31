@@ -337,7 +337,15 @@ const SubscriptionPlan: React.FC = () => {
                     >
                       {plan.name}
                     </div>
-                    <p className="text-sm text-indigo-600">{plan.meetingMode}</p>
+                    <p className="text-sm text-indigo-600">
+                      {plan?.meetingMode === "1-on-1"
+                        ? "1 to 1"
+                        : plan?.meetingMode === "1-on-2"
+                          ? "1 to 2"
+                          : plan?.meetingMode === "1-on-3"
+                            ? "1 to 3"
+                            : "N/A"} 
+                    </p>
                   </div>
 
                   {/* Description */}
