@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
 
   // ❌ If NOT USER → redirect to signIn
   if (
-    currentPath.startsWith("/dashboard/home") &&
+    currentPath.startsWith("https://julientmts.aiteamtwo.com") &&
     userInfo?.role !== "USER"
   )
    {
