@@ -58,8 +58,8 @@
 //       const response = await signIn(data).unwrap();
 //       if (response?.success) {
 //         // console.log(response, "===============================")
-//         // Cookies.set("token", response.data.accessToken);
-//         // Cookies.set("refreshToken", response.data.refreshToken);
+//         Cookies.set("token", response.data.accessToken);
+//         Cookies.set("refreshToken", response.data.refreshToken);
 //         Cookies.set("token", response.data.accessToken, {
 //           domain: ".aiteamtwo.com",
 //           secure: true,
@@ -121,18 +121,6 @@
 //         // console.log("Google Email:", email);
 
 //         // console.log(response?.data?.userData?.role);
-
-//         Cookies.set("token", response.data.accessToken, {
-//           domain: ".aiteamtwo.com",
-//           secure: true,
-//           sameSite: "None",
-//         });
-
-//         Cookies.set("refreshToken", response.data.refreshToken, {
-//           domain: ".aiteamtwo.com",
-//           secure: true,
-//           sameSite: "None",
-//         });
 
 //         dispatch(
 //           setUser({
@@ -320,15 +308,15 @@ export default function SignInPage() {
           response?.data?.user?.role === "ADMIN" ||
           response?.data?.user?.role === "SUPER_ADMIN"
         ) {
-          router.push("http://localhost:3055");
+          // router.push("http://localhost:3055");
           // router.push("http://206.162.244.131:3055/");
           // router.push("http://206.162.244.134:3055/");
-          // router.push("https://admin-julientmts.aiteamtwo.com");
+          router.push("https://admin-julientmts.aiteamtwo.com");
         } else {
-          router.push("http://localhost:3054/dashboard/home");
+          // router.push("http://localhost:3054/dashboard/home");
           // router.push("http://206.162.244.131:3054/dashboard/home");
           // router.push("http://206.162.244.134:3054/dashboard/home");
-          // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
         }
       }
     } catch (error: any) {
@@ -337,50 +325,69 @@ export default function SignInPage() {
     }
   };
 
+
   // google login working for functonalti
   const handleSuccess = async (credentialResponse: any) => {
+    // console.log("yesTonek= ", credentialResponse);
     try {
-      const idToken = { idToken: credentialResponse.credential };
+      const idToken = {
+        idToken: credentialResponse.credential,
+      };
+
       const response = await googleSignIn(idToken).unwrap();
+      // console.log("response", response);
 
       if (response?.success) {
-        // Set cookies properly
+        // Cookies.set("token", response.data.accessToken);
+        // Cookies.set("refreshToken", response.data.refreshToken);
         Cookies.set("token", response.data.accessToken, {
           domain: ".aiteamtwo.com",
           secure: true,
           sameSite: "None",
         });
+
         Cookies.set("refreshToken", response.data.refreshToken, {
           domain: ".aiteamtwo.com",
           secure: true,
           sameSite: "None",
         });
-
-        // Decode JWT to get user info if needed
-        const decodedUser = jwtDecode<any>(response.data.accessToken);
-
-        // Set Redux state exactly like manual login
         dispatch(
           setUser({
             token: response.data.accessToken,
             refreshToken: response.data.refreshToken,
-            user: response.data.user || decodedUser, // use API user or decoded info
+            user: response.data.user,
           })
         );
+        // localStorage.setItem("accessToken", response?.data?.accessToken);
+        // Cookies.set("accessToken", response?.data?.accessToken);
+        // const decoded = jwtDecode(response?.data?.accessToken);
 
-        toast.success(response?.message || "Login successful");
+        // const email = decoded.email;
+        // console.log("Google Email:", email);
 
-        // Redirect based on role
-        const role = response.data.user?.role || (decodedUser as any).role;
-        if (role === "ADMIN" || role === "SUPER_ADMIN") {
-          router.push("http://localhost:3055");
-        } else {
-          router.push("http://localhost:3054/dashboard/home");
+        // console.log(response?.data?.userData?.role);
+
+        dispatch(
+          setUser({
+            token: response.data.accessToken,
+          }),
+        );
+        toast.success(response?.message);
+        if (response?.data?.user?.role === "USER") {
+          // router.push("http://localhost:3054/dashboard/home");
+          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
         }
+        // if (response?.data?.teeRegistration === null) {
+        //   router.push(`/role?email=${email}`);
+        // } else {
+        //   router.push("/new-project");
+        // }
       }
+
+      console.log("Login successful", response.data);
+      // Handle successful login (store tokens, redirect, etc.)
     } catch (error) {
-      console.error("Google login failed", error);
-      toast.error("Google login failed");
+      console.error("Login failed", error);
     }
   };
   const handleError = () => {
