@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
 
   // ❌ If NOT USER → redirect to signIn
   if (
-    currentPath.startsWith("https://julientmts.aiteamtwo.com") &&
+    currentPath.startsWith("/dashboard") &&
     userInfo?.role !== "USER"
   )
    {
@@ -85,6 +85,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/home/:path*"], // all nested routes included
+  matcher: ["/dashboard/:path*"], // all nested routes included
 };
 
