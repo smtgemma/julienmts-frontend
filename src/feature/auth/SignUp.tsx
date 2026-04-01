@@ -213,7 +213,7 @@ export default function SignUpPage() {
             />
             <span className="text-[#2D2D2D] font-medium text-[16px]">Sign in with Google</span>
           </button> */}
-          <div>
+          <div className="flex justify-center items-center">
             <GoogleLogin
               size="large"
               onSuccess={handleSuccess}
