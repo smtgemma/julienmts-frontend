@@ -6,6 +6,8 @@
 // import Cookies from "js-cookie";
 // import { toast } from "sonner";
 // import { FaUsersGear } from "react-icons/fa6";
+// import { RootState } from "@/redux/store";
+// import { useSelector } from "react-redux";
 
 
 // type Rep = {
@@ -23,11 +25,13 @@
 //   isPrimary: boolean;
 // };
 
-// // interface Window {
-// //   webkitAudioContext?: typeof AudioContext;
-// // }
-
 // export default function LiveConversation({ handlePrev }: { handlePrev: () => void }) {
+
+//   // get all data form redux 
+//   const allData = useSelector((state: RootState) => state.startMeeting);
+//   console.log(allData?.payloadData, "============all data")
+//   const { meeting_goal, duration_minutes, sales_methodology, representatives } = allData?.payloadData || {}
+
 //   // ─── State ─────────────────────────────────────────────
 //   // const [meetingId, setMeetingId] = useState("");
 //   const [isConnected, setIsConnected] = useState(false);
@@ -143,82 +147,11 @@
 //     setTimeout(() => startListening(), 800);
 //   }
 
-//   // async function connectToMeeting() {
-//   //   try {
-//   //     // 1️⃣ Get meetingId from cookies
-//   //     const meetingId = Cookies.get("meetingId")?.trim() || "";
-
-//   //     if (!meetingId) {
-//   //       toast.error("⚠️ Meeting ID not found");
-//   //       return;
-//   //     }
-
-//   //     // 2️⃣ Update UI status
-//   //     setStatusBox("disconnected", "Connecting...");
-
-//   //     // 3️⃣ Start meeting API
-//   //     const response = await fetch(
-//   //       // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
-//   //       `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
-//   //       {
-//   //         method: "POST",
-//   //       }
-//   //     );
-
-//   //     if (!response.ok) {
-//   //       throw new Error("Failed to start meeting");
-//   //     }
-
-//   //     toast.success("Meeting started successfully");
-
-//   //     // 4️⃣ Close previous socket if exists
-//   //     if (wsRef.current) {
-//   //       wsRef.current.close();
-//   //     }
-
-//   //     // 5️⃣ Create WebSocket connection
-//   //     const ws = new WebSocket(
-//   //       `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-//   //     );
-
-//   //     wsRef.current = ws;
-
-//   //     // 6️⃣ WebSocket events
-//   //     ws.onopen = () => {
-//   //       console.log("✅ WebSocket connected");
-//   //       setIsConnected(true);
-//   //     };
-
-//   //     ws.onmessage = (event) => {
-//   //       const data = JSON.parse(event.data);
-//   //       handleMessage(data);
-//   //     };
-
-//   //     ws.onerror = () => {
-//   //       toast.error("❌ WebSocket connection error");
-//   //       setStatusBox("disconnected", "Connection error");
-//   //     };
-
-//   //     ws.onclose = () => {
-//   //       console.log("❌ WebSocket disconnected");
-//   //       setStatusBox("disconnected", "Disconnected");
-//   //       setIsConnected(false);
-//   //       disableMic();
-//   //       toast.error("Connection closed");
-//   //     };
-
-//   //   } catch (error: any) {
-//   //     console.error("Connect meeting error:", error);
-//   //     toast.error(error.detail || "Something went wrong");
-//   //   }
-//   // }
-
-
-
 //   async function connectToMeeting() {
 //     try {
 //       // 1️⃣ Get meetingId from cookies
 //       const meetingId = Cookies.get("meetingId")?.trim() || "";
+//       console.log(meetingId, "=================meeting id in connect to meeting function");
 
 //       if (!meetingId) {
 //         toast.error("⚠️ Meeting ID not found");
@@ -230,7 +163,10 @@
 
 //       // 3️⃣ Start meeting API
 //       const response = await fetch(
-//         `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+//         // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
+//         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/start`,
+//         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
+//         `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
 //         { method: "POST" }
 //       );
 
@@ -250,7 +186,10 @@
 
 //       // 5️⃣ Create WebSocket connection
 //       const ws = new WebSocket(
-//         `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         // `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         // `http://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
 //       );
 
 //       wsRef.current = ws;
@@ -429,34 +368,6 @@
 //     else startListening();
 //   }
 
-//   // ─── Volume Monitor ────────────────────────────────────
-//   // function startVolumeMonitor() {
-//   //   if (!analyserRef.current) return;
-//   //   const analyser = analyserRef.current;
-//   //   const dataArray = new Uint8Array(analyser.frequencyBinCount);
-//   //   let silenceStart: number | null = null;
-
-//   //   volumeIntervalRef.current = setInterval(() => {
-//   //     analyser.getByteFrequencyData(dataArray);
-//   //     const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-
-//   //     if (avg < SILENCE_THRESHOLD) {
-//   //       if (!silenceStart) silenceStart = Date.now();
-//   //       else if (Date.now() - silenceStart >= SILENCE_DELAY_MS) {
-//   //         silenceStart = null;
-//   //         stopVolumeMonitor();
-//   //         stopListening();
-//   //       }
-//   //       setSilenceCountdown(
-//   //         `Sending in ${((SILENCE_DELAY_MS - (Date.now() - (silenceStart || 0))) / 1000).toFixed(1)}s...`
-//   //       );
-//   //     } else {
-//   //       silenceStart = null;
-//   //       setSilenceCountdown("");
-//   //     }
-//   //   }, 100);
-//   // }
-
 //   let silenceStart: number | null = null;
 
 //   function startVolumeMonitor() {
@@ -490,20 +401,6 @@
 //     volumeIntervalRef.current = null;
 //   }
 
-//   // ─── Disconnect ───────────────────────────────────────
-//   // function disconnect() {
-//   //   stopListening();
-//   //   stopVolumeMonitor();
-//   //   audioQueueRef.current = [];
-//   //   isPlayingAudioRef.current = false;
-//   //   wsRef.current?.send(JSON.stringify({ type: "disconnect" }));
-//   //   wsRef.current?.close();
-//   //   wsRef.current = null;
-//   //   setIsConnected(false);
-//   //   setIsAIReplying(false);
-//   //   setTranscript([]);
-//   // }
-
 //   async function disconnect() {
 //     try {
 //       const meetingId = Cookies.get("meetingId")?.trim() || "";
@@ -511,7 +408,10 @@
 //       // 1️⃣ End meeting API
 //       const response = await fetch(
 //         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
-//         `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
+//         // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
+//         // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/end`,
+//         // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
+//         `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
 //         {
 //           method: "POST",
 //         }
@@ -521,7 +421,7 @@
 //         throw new Error("Failed to end meeting");
 //       }
 
-//       toast.success("Meeting ended successfully");
+//       // toast.success("Meeting ended successfully");
 
 //       // 2️⃣ Stop voice features
 //       stopListening();
@@ -592,25 +492,25 @@
 //                   {/* Goal */}
 //                   <div className="flex justify-between items-center">
 //                     <span className="text-[#636F85]">Goal:</span>
-//                     <span className="text-[#2D2D2D] text-[16px]">Book a Demo</span>
+//                     <span className="text-[#2D2D2D] text-[16px]">{meeting_goal || "N/A"}</span>
 //                   </div>
 
 //                   {/* Methodology */}
 //                   <div className="flex justify-between items-center">
 //                     <span className="text-[#636F85]">Methodology:</span>
-//                     <span className="text-[#2D2D22] text-[16px]">SPIN</span>
+//                     <span className="text-[#2D2D22] text-[16px]">{sales_methodology || "N/A"}</span>
 //                   </div>
 
 //                   {/* Duration */}
 //                   <div className="flex justify-between items-center">
 //                     <span className="text-[#636F85]">Duration:</span>
-//                     <span className="text-[#2D2D2D] text-[16px]">30 minutes</span>
+//                     <span className="text-[#2D2D2D] text-[16px]">{duration_minutes || "0"} minutes</span>
 //                   </div>
 
 //                   {/* Participants */}
 //                   <div className="flex justify-between items-center">
 //                     <span className="text-[#636F85]">Participants:</span>
-//                     <span className="text-[#2D2D2D] text-[16px]">2</span>
+//                     <span className="text-[#2D2D2D] text-[16px]">{representatives?.length || "0"}</span>
 //                   </div>
 //                 </div>
 //               </div>
@@ -716,7 +616,6 @@
 
 
 
-
 "use client";
 
 import { Play } from "lucide-react";
@@ -751,14 +650,12 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   const { meeting_goal, duration_minutes, sales_methodology, representatives } = allData?.payloadData || {}
 
   // ─── State ─────────────────────────────────────────────
-  // const [meetingId, setMeetingId] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isAIReplying, setIsAIReplying] = useState(false);
   const [status, setStatus] = useState({ type: "disconnected", text: "Disconnected" });
   const [micLabel, setMicLabel] = useState("Connecting...");
   const [silenceCountdown, setSilenceCountdown] = useState("");
-  // const [transcript, setTranscript] = useState<JSX.Element[]>([]);
   const [transcript, setTranscript] = useState<React.ReactElement[]>([]);
   const [reps, setReps] = useState<Rep[]>([]);
   const [repSpeaking, setRepSpeaking] = useState<{ [key: string]: boolean }>({});
@@ -769,15 +666,25 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   const audioStreamRef = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
-  // const volumeIntervalRef = useRef<NodeJS.Timer | null>(null);
-  // const volumeIntervalRef = useRef<number | null>(null);
-  // Node.js/React context: Timeout type use করো
   const volumeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const audioQueueRef = useRef<AudioQueueItem[]>([]);
   const isPlayingAudioRef = useRef(false);
 
+  // ✅ FIX: silenceStart as a ref to avoid closure bug
+  const silenceStartRef = useRef<number | null>(null);
+
+  // ✅ Track recording/AI state in refs for use inside callbacks
+  const isRecordingRef = useRef(false);
+  const isAIReplyingRef = useRef(false);
+  const isConnectedRef = useRef(false);
+
   const SILENCE_DELAY_MS = 1500;
   const SILENCE_THRESHOLD = 8;
+
+  // ─── Sync refs with state ─────────────────────────────
+  useEffect(() => { isRecordingRef.current = isRecording; }, [isRecording]);
+  useEffect(() => { isAIReplyingRef.current = isAIReplying; }, [isAIReplying]);
+  useEffect(() => { isConnectedRef.current = isConnected; }, [isConnected]);
 
   // ─── Status Helpers ───────────────────────────────────
   const statusColors: Record<string, string> = {
@@ -840,7 +747,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     setStatusBox("playing", `🔊 ${speakerName} is speaking...`);
     setMicLabel(`${speakerName} is speaking...`);
 
-    if (isRecording) stopListening(); // stop mic while AI speaking
+    // ✅ Stop mic while AI is speaking
+    if (isRecordingRef.current) stopListening();
 
     const audio = new Audio(`data:${mimeType};base64,${base64}`);
     audio.onended = () => {
@@ -857,17 +765,23 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     });
   }
 
+  // ✅ Auto-restart listening after AI finishes — natural conversation flow
   function onAllAudioFinished() {
     setIsAIReplying(false);
+    isAIReplyingRef.current = false;
     setStatusBox("connected", "✅ Your turn — speak now");
     setMicLabel("Your turn — speak now");
     setSilenceCountdown("");
-    setTimeout(() => startListening(), 800);
+    // Auto-start listening so user doesn't need to click anything
+    setTimeout(() => {
+      if (isConnectedRef.current && !isRecordingRef.current) {
+        startListening();
+      }
+    }, 800);
   }
 
   async function connectToMeeting() {
     try {
-      // 1️⃣ Get meetingId from cookies
       const meetingId = Cookies.get("meetingId")?.trim() || "";
       console.log(meetingId, "=================meeting id in connect to meeting function");
 
@@ -876,20 +790,14 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         return;
       }
 
-      // 2️⃣ Update UI status
       setStatusBox("disconnected", "Connecting...");
 
-      // 3️⃣ Start meeting API
       const response = await fetch(
-        // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/start`,
-        // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/start`,
-        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/start`,
         `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
       if (!response.ok) {
-        // Parse server JSON for detail/message
         const errData = await response.json().catch(() => null);
         const message = errData?.detail || errData?.message || "Failed to start meeting";
         throw new Error(message);
@@ -897,25 +805,20 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       toast.success("✅ Meeting started successfully");
 
-      // 4️⃣ Close previous socket if exists
       if (wsRef.current) {
         wsRef.current.close();
       }
 
-      // 5️⃣ Create WebSocket connection
       const ws = new WebSocket(
-        // `ws://148.230.93.55:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        // `https://richelle-nonfictive-derivationally.ngrok-free.dev/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        // `http://206.162.244.134:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
         `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
       );
 
       wsRef.current = ws;
 
-      // 6️⃣ WebSocket events
       ws.onopen = () => {
         console.log("✅ WebSocket connected");
         setIsConnected(true);
+        isConnectedRef.current = true;
       };
 
       ws.onmessage = (event) => {
@@ -933,19 +836,17 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         console.log("❌ WebSocket disconnected");
         setStatusBox("disconnected", "Disconnected");
         setIsConnected(false);
+        isConnectedRef.current = false;
         disableMic();
         toast.error("❌ Connection closed");
       };
 
     } catch (error: any) {
       console.error("Connect meeting error:", error);
-
-      // ✅ Show proper error message from server detail if exists
       const message = error instanceof Error ? error.message : JSON.stringify(error);
       toast.error(`❌ ${message}, You have to create new meeting from before step`);
     }
   }
-
 
   // ─── WS Handler ───────────────────────────────────────
   function handleMessage(data: any) {
@@ -954,10 +855,12 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     switch (data.type) {
       case "connected":
         setIsConnected(true);
+        isConnectedRef.current = true;
         setStatusBox("connected", "✅ Connected — start speaking!");
         if (data.representatives) displayReps(data.representatives);
         addMessage("System", data.message || "Connected.", "message-system");
         enableMic();
+        // ✅ Auto-start listening immediately on connect
         setTimeout(() => startListening(), 500);
         break;
 
@@ -969,6 +872,9 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         setStatusBox("thinking", "💭 AI is thinking...");
         setMicLabel("AI is thinking...");
         setIsAIReplying(true);
+        isAIReplyingRef.current = true;
+        // ✅ Stop mic while AI thinks
+        if (isRecordingRef.current) stopListening();
         break;
 
       case "ai_response_text":
@@ -1004,18 +910,19 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
   function disableMic() {
     setIsRecording(false);
+    isRecordingRef.current = false;
   }
 
   async function startListening() {
-    if (isRecording || isAIReplying || !isConnected || isPlayingAudioRef.current) return;
+    // ✅ Use refs for reliable state check inside async/callbacks
+    if (isRecordingRef.current || isAIReplyingRef.current || !isConnectedRef.current || isPlayingAudioRef.current) return;
+
     try {
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 16000 },
       });
       audioStreamRef.current = audioStream;
 
-      // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      // audioContextRef.current = audioContext;
       const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
       const audioContext = new AudioContextClass();
       audioContextRef.current = audioContext;
@@ -1062,6 +969,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       mediaRecorder.start(100);
       setIsRecording(true);
+      isRecordingRef.current = true;
       setStatusBox("recording", "🎙️ Listening...");
       setMicLabel("Listening... (auto-stops on silence)");
       startVolumeMonitor();
@@ -1072,21 +980,22 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   }
 
   function stopListening() {
-    if (!isRecording) return;
+    if (!isRecordingRef.current) return;
     setIsRecording(false);
+    isRecordingRef.current = false;
     setSilenceCountdown("");
+    silenceStartRef.current = null;
     mediaRecorderRef.current?.stop();
     setStatusBox("thinking", "⏳ Processing...");
     setMicLabel("Processing...");
   }
 
+  // ✅ Manual toggle still works if user wants to click
   function toggleRecording() {
-    if (isAIReplying) return;
-    if (isRecording) stopListening();
+    if (isAIReplyingRef.current || isPlayingAudioRef.current) return;
+    if (isRecordingRef.current) stopListening();
     else startListening();
   }
-
-  let silenceStart: number | null = null;
 
   function startVolumeMonitor() {
     if (!analyserRef.current) return;
@@ -1098,17 +1007,24 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
       if (avg < SILENCE_THRESHOLD) {
-        if (!silenceStart) silenceStart = Date.now();
-        else if (Date.now() - silenceStart >= SILENCE_DELAY_MS) {
-          silenceStart = null;
-          stopVolumeMonitor();
-          stopListening();
+        if (!silenceStartRef.current) {
+          // ✅ FIX: use ref instead of local variable — no closure bug
+          silenceStartRef.current = Date.now();
+        } else {
+          const elapsed = Date.now() - silenceStartRef.current;
+          if (elapsed >= SILENCE_DELAY_MS) {
+            silenceStartRef.current = null;
+            stopVolumeMonitor();
+            stopListening();
+          } else {
+            setSilenceCountdown(
+              `Sending in ${((SILENCE_DELAY_MS - elapsed) / 1000).toFixed(1)}s...`
+            );
+          }
         }
-        setSilenceCountdown(
-          `Sending in ${((SILENCE_DELAY_MS - (Date.now() - (silenceStart || 0))) / 1000).toFixed(1)}s...`
-        );
       } else {
-        silenceStart = null;
+        // ✅ Voice detected — reset silence timer
+        silenceStartRef.current = null;
         setSilenceCountdown("");
       }
     }, 100);
@@ -1123,42 +1039,31 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     try {
       const meetingId = Cookies.get("meetingId")?.trim() || "";
 
-      // 1️⃣ End meeting API
       const response = await fetch(
-        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
-        // `http://148.230.93.55:8012/meetings/api/meeting/${meetingId}/end`,
-        // `https://richelle-nonfictive-derivationally.ngrok-free.dev/meetings/api/meeting/${meetingId}/end`,
-        // `http://206.162.244.134:8012/meetings/api/meeting/${meetingId}/end`,
         `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
-        {
-          method: "POST",
-        }
+        { method: "POST" }
       );
 
       if (!response.ok) {
         throw new Error("Failed to end meeting");
       }
 
-      // toast.success("Meeting ended successfully");
-
-      // 2️⃣ Stop voice features
       stopListening();
       stopVolumeMonitor();
 
-      // 3️⃣ Reset audio queue
       audioQueueRef.current = [];
       isPlayingAudioRef.current = false;
 
-      // 4️⃣ Disconnect websocket
       if (wsRef.current) {
         wsRef.current.send(JSON.stringify({ type: "disconnect" }));
         wsRef.current.close();
         wsRef.current = null;
       }
 
-      // 5️⃣ Reset states
       setIsConnected(false);
+      isConnectedRef.current = false;
       setIsAIReplying(false);
+      isAIReplyingRef.current = false;
       setTranscript([]);
 
     } catch (error) {
@@ -1174,6 +1079,16 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       }
     }, 25000);
     return () => clearInterval(interval);
+  }, []);
+
+  // ─── Cleanup on unmount ───────────────────────────────
+  useEffect(() => {
+    return () => {
+      stopVolumeMonitor();
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
   }, []);
 
   return (
@@ -1200,32 +1115,22 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             <div className="max-w-2xl mx-auto">
               {/* meeting summery  */}
               <div className="bg-[#F9FAFB] rounded-lg shadow-sm p-6 mb-6">
-                {/* কার্ডের হেডার */}
                 <h2 className="text-xl font-semibold text-[#2D2D2D] mb-5">
                   Meeting Summary
                 </h2>
-
-                {/* বিস্তারিত তথ্য */}
                 <div className="space-y-3">
-                  {/* Goal */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Goal:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{meeting_goal || "N/A"}</span>
                   </div>
-
-                  {/* Methodology */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Methodology:</span>
                     <span className="text-[#2D2D22] text-[16px]">{sales_methodology || "N/A"}</span>
                   </div>
-
-                  {/* Duration */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Duration:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{duration_minutes || "0"} minutes</span>
                   </div>
-
-                  {/* Participants */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Participants:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{representatives?.length || "0"}</span>
@@ -1239,9 +1144,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                 >
                   Back
                 </button>
-
                 <button
-                  // onClick={handleStartMeeting}
                   onClick={connectToMeeting}
                   className="px-6 py-2 bg-[#6E51E0] text-white rounded-md cursor-pointer"
                 >
@@ -1251,6 +1154,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             </div>
           </div>
         )}
+
         {/* Content */}
         <div className="p-8 space-y-6">
           {/* Status */}
@@ -1273,7 +1177,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                   <div
                     key={rep.id}
                     className={`p-3 rounded-lg flex-1 min-w-[180px] 
-        ${repSpeaking[rep.id]
+                      ${repSpeaking[rep.id]
                         ? "border-4 border-purple-600 bg-purple-200 animate-pulse shadow-lg shadow-purple-400/50"
                         : "border-l-4 border-orange-500 bg-orange-100"
                       } transition-all duration-300 ease-in-out`}
@@ -1296,19 +1200,28 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             <div>
               <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2"> Voice Conversation</h2>
               <div className="flex flex-col items-center gap-4">
+                {/* ✅ Mic button still clickable as manual override, but not required */}
                 <button
+                  title={isAIReplying || isPlayingAudioRef.current ? "AI is speaking..." : isRecording ? "Click to stop" : "Click to speak"}
                   className={`w-20 h-20 rounded-full text-white text-2xl flex items-center justify-center shadow-lg cursor-pointer 
-    ${isRecording
-                      ? "bg-red-600 animate-pulse shadow-red-400/50" // when recording/speaking
-                      : "bg-gradient-to-br from-indigo-500 to-purple-600" // idle state
+                    ${isRecording
+                      ? "bg-red-600 animate-pulse shadow-red-400/50"
+                      : isAIReplying || isPlayingAudioRef.current
+                        ? "bg-purple-500 animate-pulse"
+                        : "bg-gradient-to-br from-indigo-500 to-purple-600"
                     } transition-all duration-300 ease-in-out`}
                   onClick={toggleRecording}
                 >
-                  🎤
+                  {isAIReplying || isPlayingAudioRef.current ? "🔊" : "🎤"}
                 </button>
-                <div>{micLabel}</div>
-                <div>{silenceCountdown}</div>
-                <button className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer" onClick={disconnect}>
+                <div className="text-sm text-gray-600">{micLabel}</div>
+                {silenceCountdown && (
+                  <div className="text-xs text-orange-500 font-medium">{silenceCountdown}</div>
+                )}
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={disconnect}
+                >
                   End Conversation
                 </button>
               </div>
@@ -1320,7 +1233,11 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             <div>
               <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">Conversation Transcript</h2>
               <div className="bg-gray-100 rounded-lg p-4 max-h-[420px] overflow-y-auto space-y-3">
-                {transcript.length === 0 && <div className="text-gray-400 text-center italic">Start speaking — transcript will appear here.</div>}
+                {transcript.length === 0 && (
+                  <div className="text-gray-400 text-center italic">
+                    Start speaking — transcript will appear here.
+                  </div>
+                )}
                 {transcript}
               </div>
             </div>
