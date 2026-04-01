@@ -162,12 +162,27 @@ function Insights() {
       <TopicsDiscussed topicDiscussed={topicDiscussed} />
       <RisksOpportunities risks={risks} opportunities={opportunities} />
       {/* button part  */}
-      {/* <div className="flex gap-6 mb-6 px-6">
-        <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
-          <Play className="w-5 h-5" />
-          Watch Replay
-        </button>
-      </div> */}
+      <div className="flex gap-6 mb-6">
+        <Link
+          href={`/dashboard/home/viewSummary?meetingId=${meetingId}&sessionId=${sessionId}`}
+          className="flex-1"
+        >
+          <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors cursor-pointer">
+            <Play className="w-5 h-5" />
+            View Summary
+          </button>
+        </Link>
+
+        <Link
+          href={`/dashboard/home/replay?meetingId=${meetingId}&sessionId=${sessionId}`}
+          className="flex-1"
+        >
+          <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors cursor-pointer">
+            <BarChart3 className="w-5 h-5" />
+            Watch Replay
+          </button>
+        </Link>
+      </div>
     </div>
   )
 }

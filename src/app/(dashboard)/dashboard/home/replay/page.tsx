@@ -433,6 +433,7 @@ import { useSearchParams } from "next/navigation";
 import { useConversationHistoryQuery } from "@/redux/api/myAccountApi/myAccountApi";
 import Loading from "@/components/Others/Loading";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
+import Link from "next/link";
 
 type TranscriptTurn = {
     turn_number: number;
@@ -555,17 +556,27 @@ function Replay() {
             </div>
 
             {/* ⚡ ACTION BUTTONS */}
-            {/* <div className="flex gap-4 mt-6">
-                <button className="flex-1 border border-gray-300 hover:border-indigo-500 py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
-                    <Play className="w-5 h-5" />
-                    Watch Replay
-                </button>
+            <div className="flex gap-6 mb-6">
+                <Link
+                    href={`/dashboard/home/viewSummary?meetingId=${meetingId}&sessionId=${sessionId}`}
+                    className="flex-1"
+                >
+                    <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors cursor-pointer">
+                        <Play className="w-5 h-5" />
+                        View Summary
+                    </button>
+                </Link>
 
-                <button className="flex-1 border border-gray-300 hover:border-indigo-500 py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
-                    <BarChart3 className="w-5 h-5" />
-                    View Insights
-                </button>
-            </div> */}
+                <Link
+                    href={`/dashboard/home/insights?meetingId=${meetingId}&sessionId=${sessionId}`}
+                    className="flex-1"
+                >
+                    <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors cursor-pointer">
+                        <BarChart3 className="w-5 h-5" />
+                        View Insights
+                    </button>
+                </Link>
+            </div>
         </div>
     );
 }
