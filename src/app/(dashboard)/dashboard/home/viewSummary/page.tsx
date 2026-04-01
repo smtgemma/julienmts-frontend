@@ -237,6 +237,7 @@ import { useSearchParams } from 'next/navigation';
 import { CiCircleCheck } from "react-icons/ci";
 import { format } from "date-fns";
 import Loading from '@/components/Others/Loading';
+import Link from 'next/link';
 
 function ViewSummary() {
     const searchParams = useSearchParams();
@@ -402,14 +403,18 @@ function ViewSummary() {
             </div>
             {/* button part  */}
             <div className="flex gap-6 mb-6">
-                <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
-                    <Play className="w-5 h-5" />
-                    Watch Replay
-                </button>
-                <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
-                    <BarChart3 className="w-5 h-5" />
-                    View Insights
-                </button>
+                <Link href={`/dashboard/home/replay?meetingId=${meetingId}&sessionId=${sessionId}`}>
+                    <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                        <Play className="w-5 h-5" />
+                        Watch Replay
+                    </button>
+                </Link>
+                <Link href={`/dashboard/home/insights?meetingId=${meetingId}&sessionId=${sessionId}`}>
+                    <button className="flex-1 bg-white border border-[#D1D6DB] hover:border-[#6E51E0] text-[#0A0A0A] text-[16px] font-medium py-2.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                        <BarChart3 className="w-5 h-5" />
+                        View Insights
+                    </button>
+                </Link>
             </div>
         </div>
     )
