@@ -13,6 +13,7 @@ import AuthBackground from "@/components/shared/AuthBackground/AuthBackground";
 import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/features/user/userSlice";
+import Cookies from "js-cookie";
 
 // Define Zod schema for validation
 const formSchema = z
@@ -95,14 +96,26 @@ export default function SignUpPage() {
       // console.log("response", response);
 
       if (response?.success) {
-        // localStorage.setItem("accessToken", response?.data?.accessToken);
-        // Cookies.set("accessToken", response?.data?.accessToken);
-        // const decoded = jwtDecode(response?.data?.accessToken);
+        // Cookies.set("token", response.data.accessToken);
+        // Cookies.set("refreshToken", response.data.refreshToken);
+        Cookies.set("token", response.data.accessToken, {
+          domain: ".aiteamtwo.com",
+          secure: true,
+          sameSite: "None",
+        });
 
-        // const email = decoded.email;
-        // console.log("Google Email:", email);
-
-        // console.log(response?.data?.userData?.role);
+        Cookies.set("refreshToken", response.data.refreshToken, {
+          domain: ".aiteamtwo.com",
+          secure: true,
+          sameSite: "None",
+        });
+        dispatch(
+          setUser({
+            token: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+            user: response.data.user,
+          })
+        );
 
         dispatch(
           setUser({
@@ -110,12 +123,10 @@ export default function SignUpPage() {
           }),
         );
         toast.success(response?.message);
-        router.push("/dashboard/home");
-        // if (response?.data?.teeRegistration === null) {
-        //   router.push(`/role?email=${email}`);
-        // } else {
-        //   router.push("/new-project");
-        // }
+        if (response?.data?.user?.role === "USER") {
+          // router.push("http://localhost:3054/dashboard/home");
+          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+        }
       }
 
       console.log("Login successful", response.data);

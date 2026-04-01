@@ -239,7 +239,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import * as z from "zod";
 import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 
 // Define Zod schema for validation
 const formSchema = z.object({
@@ -358,14 +357,6 @@ export default function SignInPage() {
             user: response.data.user,
           })
         );
-        // localStorage.setItem("accessToken", response?.data?.accessToken);
-        // Cookies.set("accessToken", response?.data?.accessToken);
-        // const decoded = jwtDecode(response?.data?.accessToken);
-
-        // const email = decoded.email;
-        // console.log("Google Email:", email);
-
-        // console.log(response?.data?.userData?.role);
 
         dispatch(
           setUser({
@@ -377,11 +368,6 @@ export default function SignInPage() {
           // router.push("http://localhost:3054/dashboard/home");
           router.push("https://julientmts.aiteamtwo.com/dashboard/home");
         }
-        // if (response?.data?.teeRegistration === null) {
-        //   router.push(`/role?email=${email}`);
-        // } else {
-        //   router.push("/new-project");
-        // }
       }
 
       console.log("Login successful", response.data);
