@@ -39,23 +39,42 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // const handleChange = (newLang: string) => {
+  //   if (!newLang || newLang === selectedLanguage) return;
+
+  //   // নতুন ভাষা সংরক্ষণ করুন
+  //   localStorage.setItem("selectedLanguage", newLang);
+  //   setSelectedLanguage(newLang);
+
+  //   // পুরানো Google Translate cookie মুছে ফেলুন
+  //   document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+  //   document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+
+  //   // নতুন cookie সেট করুন
+  //   document.cookie = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+
+  //   // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
+  //   window.location.reload();
+  // };
+
   const handleChange = (newLang: string) => {
-    if (!newLang || newLang === selectedLanguage) return;
+  if (!newLang || newLang === selectedLanguage) return;
 
-    // নতুন ভাষা সংরক্ষণ করুন
-    localStorage.setItem("selectedLanguage", newLang);
-    setSelectedLanguage(newLang);
+  localStorage.setItem("selectedLanguage", newLang);
+  setSelectedLanguage(newLang);
 
-    // পুরানো Google Translate cookie মুছে ফেলুন
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+  // remove old cookie
+  document.cookie =
+    "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-    // নতুন cookie সেট করুন
-    document.cookie = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+  // set new cookie
+  document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
 
-    // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
-    window.location.reload();
-  };
+  // force reload
+  setTimeout(() => {
+    window.location.href = window.location.origin + window.location.pathname;
+  }, 100);
+};
 
   const languageNames: Record<string, string> = {
     en: "English",
