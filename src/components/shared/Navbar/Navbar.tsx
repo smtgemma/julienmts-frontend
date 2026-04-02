@@ -1,7 +1,7 @@
 
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -27,6 +27,7 @@ import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { LanguageSwitcher } from "../googleTranslation/LanguageSwitcher";
 
 const Navbar = () => {
+    const router = useRouter();
     const { data: getMe } = useGetMeQuery("")
     console.log(getMe, "===================================getme==================")
     const isLoggedIn = getMe;
@@ -173,9 +174,9 @@ const Navbar = () => {
                                         className='px-2 py-0.5 hover:text-[#563FB1]'
                                         onClick={() => {
                                             if (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") {
-                                                window.location.href = "https://admin-julientmts.aiteamtwo.com";
+                                                 router.push("https://admin-julientmts.aiteamtwo.com");
                                             } else {
-                                                window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home";
+                                                 router.push("https://julientmts.aiteamtwo.com/dashboard/home");
                                             }
                                         }}
                                     >
