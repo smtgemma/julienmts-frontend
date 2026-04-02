@@ -28,6 +28,7 @@ import { LanguageSwitcher } from "../googleTranslation/LanguageSwitcher";
 
 const Navbar = () => {
     const { data: getMe } = useGetMeQuery("")
+    console.log(getMe, "===================================getme==================")
     const isLoggedIn = getMe;
 
     const pathName = usePathname()
@@ -160,13 +161,25 @@ const Navbar = () => {
                             </DropdownMenuItem>
                             {
                                 isLoggedIn && (
-                                    <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
-                                        <Link
-                                            href="/dashboard/home"
-                                            className={`w-full ${pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}`}
-                                        >
-                                            My Portal
-                                        </Link>
+                                    // <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
+                                    //     <Link
+                                    //         href="/dashboard/home"
+                                    //         className={`w-full ${pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}`}
+                                    //     >
+                                    //         My Portal
+                                    //     </Link>
+                                    // </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        className='px-2 py-0.5 hover:text-[#563FB1]'
+                                        onClick={() => {
+                                            if (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") {
+                                                window.location.href = "https://admin-julientmts.aiteamtwo.com";
+                                            } else {
+                                                window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home";
+                                            }
+                                        }}
+                                    >
+                                        <span className="w-full cursor-pointer">My Portal</span>
                                     </DropdownMenuItem>
                                 )
                             }
