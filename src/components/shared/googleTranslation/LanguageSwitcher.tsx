@@ -57,41 +57,43 @@ export function LanguageSwitcher() {
   //   window.location.reload();
   // };
 
-//   const handleChange = (newLang: string) => {
-//   if (!newLang || newLang === selectedLanguage) return;
+  //   const handleChange = (newLang: string) => {
+  //   if (!newLang || newLang === selectedLanguage) return;
 
-//   localStorage.setItem("selectedLanguage", newLang);
-//   setSelectedLanguage(newLang);
+  //   localStorage.setItem("selectedLanguage", newLang);
+  //   setSelectedLanguage(newLang);
 
-//   // remove old cookie
-//   document.cookie =
-//     "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  //   // remove old cookie
+  //   document.cookie =
+  //     "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-//   // set new cookie
-//   document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
+  //   // set new cookie
+  //   document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
 
-//   // force reload
-//   setTimeout(() => {
-//     window.location.href = window.location.origin + window.location.pathname;
-//   }, 100);
-// };
+  //   // force reload
+  //   setTimeout(() => {
+  //     window.location.href = window.location.origin + window.location.pathname;
+  //   }, 100);
+  // };
 
-const handleChange = (newLang: string) => {
-  if (!newLang || newLang === selectedLanguage) return;
+  const handleChange = (newLang: string) => {
+    if (!newLang || newLang === selectedLanguage) return;
 
-  localStorage.setItem("selectedLanguage", newLang);
-  setSelectedLanguage(newLang);
+    localStorage.setItem("selectedLanguage", newLang);
+    setSelectedLanguage(newLang);
 
-  // remove old cookie
-  document.cookie =
-    "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    // Delete old cookie
+    document.cookie =
+      "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-  // set new cookie (NO domain)
-  document.cookie = `googtrans=/en/${newLang}; path=/`;
+    // Set new cookie (IMPORTANT FIXES HERE)
+    document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com; Secure; SameSite=None`;
 
-  // reload properly
-  window.location.reload();
-};
+    // Delay reload to ensure cookie is saved
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+  };
 
   const languageNames: Record<string, string> = {
     en: "English",
