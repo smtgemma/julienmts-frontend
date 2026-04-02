@@ -57,7 +57,26 @@ export function LanguageSwitcher() {
   //   window.location.reload();
   // };
 
-  const handleChange = (newLang: string) => {
+//   const handleChange = (newLang: string) => {
+//   if (!newLang || newLang === selectedLanguage) return;
+
+//   localStorage.setItem("selectedLanguage", newLang);
+//   setSelectedLanguage(newLang);
+
+//   // remove old cookie
+//   document.cookie =
+//     "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+
+//   // set new cookie
+//   document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
+
+//   // force reload
+//   setTimeout(() => {
+//     window.location.href = window.location.origin + window.location.pathname;
+//   }, 100);
+// };
+
+const handleChange = (newLang: string) => {
   if (!newLang || newLang === selectedLanguage) return;
 
   localStorage.setItem("selectedLanguage", newLang);
@@ -65,15 +84,13 @@ export function LanguageSwitcher() {
 
   // remove old cookie
   document.cookie =
-    "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 
-  // set new cookie
-  document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
+  // set new cookie (NO domain)
+  document.cookie = `googtrans=/en/${newLang}; path=/`;
 
-  // force reload
-  setTimeout(() => {
-    window.location.href = window.location.origin + window.location.pathname;
-  }, 100);
+  // reload properly
+  window.location.reload();
 };
 
   const languageNames: Record<string, string> = {
