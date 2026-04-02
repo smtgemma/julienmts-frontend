@@ -47,27 +47,26 @@ export default function AppSidebar() {
       await logout(payload).unwrap();
 
       // dispatch(logoutAction());
-      // Cookies.remove("token");
-      // Cookies.remove("refreshToken");
-      Cookies.remove("token", {
-        domain: ".aiteamtwo.com",
-        secure: true,
-        sameSite: "None",
-      });
+      Cookies.remove("token");
+      Cookies.remove("refreshToken");
+      // Cookies.remove("token", {
+      //   domain: ".aiteamtwo.com",
+      //   secure: true,
+      //   sameSite: "None",
+      // });
 
-      Cookies.remove("refreshToken", {
-        domain: ".aiteamtwo.com",
-        secure: true,
-        sameSite: "None",
-      });
+      // Cookies.remove("refreshToken", {
+      //   domain: ".aiteamtwo.com",
+      //   secure: true,
+      //   sameSite: "None",
+      // });
 
       dispatch(logoutFc());
       localStorage.clear();
-
       toast.success("Logout successfully");
 
       setTimeout(() => {
-        router.replace("/signIn");
+        router.replace("/");
       }, 1000);
     } catch (error: any) {
       toast.error(error?.data?.message || "Logout failed");

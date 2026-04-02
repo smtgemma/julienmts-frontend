@@ -25,14 +25,67 @@ import { PiGlobeLight } from "react-icons/pi";
 import { IoIosMenu } from "react-icons/io";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { LanguageSwitcher } from "../googleTranslation/LanguageSwitcher";
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useLogoutMutation } from "@/redux/api/auth/authApi";
+import { logoutFc } from "@/redux/features/user/userSlice";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
     const router = useRouter();
-    const { data: getMe } = useGetMeQuery("")
+    const token = Cookies.get("token")
+    const { data: getMe } = useGetMeQuery("", {
+        skip: !token
+    });
     console.log(getMe, "===================================getme==================")
     const isLoggedIn = getMe;
 
     const pathName = usePathname()
+
+    const dispatch = useDispatch()
+
+    const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
+    // console.log(refreshToken, "==============")
+
+    const [logout, { isLoading: logoutLoging }] = useLogoutMutation()
+
+    // logout 
+    const handleLogout = async () => {
+        const payload = {
+            refreshToken: refreshToken
+        }
+        try {
+            await logout(payload).unwrap();
+
+            // dispatch(logoutAction());
+            Cookies.remove("token");
+            Cookies.remove("refreshToken");
+            // Cookies.remove("token", {
+            //     domain: ".aiteamtwo.com",
+            //     secure: true,
+            //     sameSite: "None",
+            // });
+
+            // Cookies.remove("refreshToken", {
+            //     domain: ".aiteamtwo.com",
+            //     secure: true,
+            //     sameSite: "None",
+            // });
+
+            dispatch(logoutFc());
+            localStorage.clear();
+            // window.location.reload();
+            toast.success("Logout successfully");
+            router.push("/");
+
+            setTimeout(() => {
+                router.replace("/signIn");
+            }, 1000);
+        } catch (error: any) {
+            toast.error(error?.data?.message || "Logout failed");
+        }
+    };
 
     return (
         <div className='pt-6 px-3 md:px-0'>
@@ -46,13 +99,22 @@ const Navbar = () => {
                 </Link>
                 {/* Center Menu */}
                 <div className="hidden lg:flex items-center md:gap-6 lg:gap-12 text-[#000000] text-[16px] font-medium">
-                    <Link href="/" className={pathName === "/" ? "text-[#563FB1] font-semibold" : ""}>Home</Link>
-                    <Link href="/about" className={pathName === "/about" ? "text-[#563FB1] font-semibold" : ""}>About</Link>
-                    <Link href="/pricing" className={pathName === "/pricing" ? "text-[#563FB1] font-semibold" : ""}>Pricing</Link>
-                    <Link href="/contact" className={pathName === "/contact" ? "text-[#563FB1] font-semibold" : ""}>Contact</Link>
+                    <Link href="/" className={pathName === "/" ? "text-[#563FB1] font-semibold" : "hover:text-[#563FB1]"}>Home</Link>
+                    <Link href="/about" className={pathName === "/about" ? "text-[#563FB1] font-semibold" : "hover:text-[#563FB1]"}>About</Link>
+                    <Link href="/pricing" className={pathName === "/pricing" ? "text-[#563FB1] font-semibold" : "hover:text-[#563FB1]"}>Pricing</Link>
+                    <Link href="/contact" className={pathName === "/contact" ? "text-[#563FB1] font-semibold" : "hover:text-[#563FB1]"}>Contact</Link>
                     {
                         isLoggedIn && (
-                            <Link href="/dashboard/home" className={pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}>My Portal</Link>
+                            <button
+                                onClick={() => {
+                                    (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
+                                    getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
+                                }}
+                                // className={pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}
+                                className="hover:text-[#563FB1] cursor-pointer"
+                            >
+                                My Portal
+                            </button>
                         )
                     }
                 </div>
@@ -102,11 +164,19 @@ const Navbar = () => {
                     {/* <LanguageSwitcher />
                     </div> */}
 
-                    <Link href="/signIn" className="group">
-                        <span className="px-4 lg:px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D]">
-                            Login
-                        </span>
-                    </Link>
+                    {
+                        isLoggedIn ? (
+                            <button onClick={handleLogout} className="px-4 lg:px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D] cursor-pointer">
+                                Logout
+                            </button>
+                        ) : (
+                            <Link href="/signIn" className="group">
+                                <span className="px-4 lg:px-5 py-3 rounded-[6px] font-medium transition hover:bg-[#6E51E0] hover:text-white text-[#2D2D2D] cursor-pointer">
+                                    Login
+                                </span>
+                            </Link>
+                        )
+                    }
 
                     <Link href="/signUp" className="group">
                         <span className="px-4 lg:px-5 py-3 rounded-[6px] font-medium transition bg-[#6E51E0] text-white">
@@ -171,16 +241,10 @@ const Navbar = () => {
                                     //     </Link>
                                     // </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className='px-2 py-0.5 hover:text-[#563FB1]'
+                                        className='px-2 py-0.5 hover:text-[#563FB1] cursor-pointer'
                                         onClick={() => {
-                                            if (
-                                                getMe?.data?.role === "ADMIN" ||
-                                                getMe?.data?.role === "SUPER_ADMIN"
-                                            ) {
-                                                window.location.href = "https://admin-julientmts.aiteamtwo.com";
-                                            } else {
-                                                window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home";
-                                            }
+                                            (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
+                                            getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
                                         }}
                                     >
                                         <span className="w-full cursor-pointer">My Portal</span>
@@ -188,12 +252,21 @@ const Navbar = () => {
                                 )
                             }
                             <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
-                                <Link
-                                    href="/signIn"
-                                    className={`w-full ${pathName === "/login" ? "text-[#563FB1] font-semibold" : ""}`}
-                                >
-                                    Login
-                                </Link>
+                                {
+                                    isLoggedIn ? (
+                                        <button onClick={handleLogout} className="cursor-pointer">
+                                            Logout
+                                        </button>
+                                    ) : (
+
+                                        <Link
+                                            href="/signIn"
+                                            className={`w-full ${pathName === "/login" ? "text-[#563FB1] font-semibold" : ""}`}
+                                        >
+                                            Login
+                                        </Link>
+                                    )
+                                }
                             </DropdownMenuItem>
                             <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
                                 <Link
@@ -208,8 +281,8 @@ const Navbar = () => {
                     </DropdownMenu>
                 </div>
 
-            </Container>
-        </div>
+            </Container >
+        </div >
     );
 };
 
