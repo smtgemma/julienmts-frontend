@@ -1044,6 +1044,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         { method: "POST" }
       );
 
+      // jamil vai api
+
       if (!response.ok) {
         throw new Error("Failed to end meeting");
       }

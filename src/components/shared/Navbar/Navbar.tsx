@@ -35,10 +35,10 @@ import Cookies from "js-cookie";
 const Navbar = () => {
     const router = useRouter();
     const token = Cookies.get("token")
-    const { data: getMe } = useGetMeQuery("", {
+    const { data: getMe, refetch } = useGetMeQuery("", {
         skip: !token
     });
-    console.log(getMe, "===================================getme==================")
+    // console.log(getMe, "===================================getme==================")
     const isLoggedIn = getMe;
 
     const pathName = usePathname()
@@ -57,31 +57,30 @@ const Navbar = () => {
         }
         try {
             await logout(payload).unwrap();
-
+            localStorage.removeItem("persist:root");
             // dispatch(logoutAction());
-            Cookies.remove("token");
-            Cookies.remove("refreshToken");
-            // Cookies.remove("token", {
-            //     domain: ".aiteamtwo.com",
-            //     secure: true,
-            //     sameSite: "None",
-            // });
+            // Cookies.remove("token");
+            // Cookies.remove("refreshToken");
+            Cookies.remove("token", {
+              domain: ".aiteamtwo.com",
+              secure: true,
+              sameSite: "None",
+            });
 
-            // Cookies.remove("refreshToken", {
-            //     domain: ".aiteamtwo.com",
-            //     secure: true,
-            //     sameSite: "None",
-            // });
+            Cookies.remove("refreshToken", {
+              domain: ".aiteamtwo.com",
+              secure: true,
+              sameSite: "None",
+            });
 
             dispatch(logoutFc());
-            localStorage.clear();
-            // window.location.reload();
+            await refetch();
             toast.success("Logout successfully");
-            router.push("/");
-
-            setTimeout(() => {
-                router.replace("/signIn");
-            }, 1000);
+            router.push("/"); // optional redirect
+            window.location.reload();
+            // setTimeout(() => {
+            //     router.replace("/");
+            // }, 1000);
         } catch (error: any) {
             toast.error(error?.data?.message || "Logout failed");
         }
@@ -107,10 +106,11 @@ const Navbar = () => {
                         isLoggedIn && (
                             <button
                                 onClick={() => {
-                                    (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
-                                    getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
+                                    (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
+                                    getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                    // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
+                                    // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
                                 }}
-                                // className={pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}
                                 className="hover:text-[#563FB1] cursor-pointer"
                             >
                                 My Portal
@@ -232,19 +232,13 @@ const Navbar = () => {
                             </DropdownMenuItem>
                             {
                                 isLoggedIn && (
-                                    // <DropdownMenuItem className='px-2 py-0.5 hover:text-[#563FB1]'>
-                                    //     <Link
-                                    //         href="/dashboard/home"
-                                    //         className={`w-full ${pathName === "/dashboard" ? "text-[#563FB1] font-semibold" : ""}`}
-                                    //     >
-                                    //         My Portal
-                                    //     </Link>
-                                    // </DropdownMenuItem>
                                     <DropdownMenuItem
                                         className='px-2 py-0.5 hover:text-[#563FB1] cursor-pointer'
                                         onClick={() => {
-                                            (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
-                                            getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
+                                            (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
+                                            getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                            // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
+                                            // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
                                         }}
                                     >
                                         <span className="w-full cursor-pointer">My Portal</span>

@@ -46,20 +46,19 @@ export default function AppSidebar() {
     try {
       await logout(payload).unwrap();
 
-      // dispatch(logoutAction());
-      Cookies.remove("token");
-      Cookies.remove("refreshToken");
-      // Cookies.remove("token", {
-      //   domain: ".aiteamtwo.com",
-      //   secure: true,
-      //   sameSite: "None",
-      // });
+      // Cookies.remove("token");
+      // Cookies.remove("refreshToken");
+      Cookies.remove("token", {
+        domain: ".aiteamtwo.com",
+        secure: true,
+        sameSite: "None",
+      });
 
-      // Cookies.remove("refreshToken", {
-      //   domain: ".aiteamtwo.com",
-      //   secure: true,
-      //   sameSite: "None",
-      // });
+      Cookies.remove("refreshToken", {
+        domain: ".aiteamtwo.com",
+        secure: true,
+        sameSite: "None",
+      });
 
       dispatch(logoutFc());
       localStorage.clear();

@@ -171,7 +171,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
       if (newAccessToken) {
         // Save new token
-        Cookies.set("token", newAccessToken);
+        // Cookies.set("token", newAccessToken);
         Cookies.set("token", newAccessToken, {
           domain: ".aiteamtwo.com",
           secure: true,
@@ -182,8 +182,8 @@ const baseQueryWithReauth: BaseQueryFn<
         result = await baseQuery(args, api, extraOptions);
       } else {
         // If refresh response structure invalid
-        Cookies.remove("token");
-        Cookies.remove("refreshToken");
+        // Cookies.remove("token");
+        // Cookies.remove("refreshToken");
         Cookies.remove("token", {
           domain: ".aiteamtwo.com",
         });
@@ -193,8 +193,8 @@ const baseQueryWithReauth: BaseQueryFn<
       }
     } else {
       // Refresh failed → clear tokens
-      Cookies.remove("token");
-      Cookies.remove("refreshToken");
+      // Cookies.remove("token");
+      // Cookies.remove("refreshToken");
       Cookies.remove("token", {
         domain: ".aiteamtwo.com",
       });

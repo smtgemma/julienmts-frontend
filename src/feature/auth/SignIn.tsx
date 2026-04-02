@@ -281,19 +281,19 @@ export default function SignInPage() {
       const response = await signIn(data).unwrap();
       if (response?.success) {
         // console.log(response, "===============================")
-        Cookies.set("token", response.data.accessToken);
-        Cookies.set("refreshToken", response.data.refreshToken);
-        // Cookies.set("token", response.data.accessToken, {
-        //   domain: ".aiteamtwo.com",
-        //   secure: true,
-        //   sameSite: "None",
-        // });
+        // Cookies.set("token", response.data.accessToken);
+        // Cookies.set("refreshToken", response.data.refreshToken);
+        Cookies.set("token", response.data.accessToken, {
+          domain: ".aiteamtwo.com",
+          secure: true,
+          sameSite: "None",
+        });
 
-        // Cookies.set("refreshToken", response.data.refreshToken, {
-        //   domain: ".aiteamtwo.com",
-        //   secure: true,
-        //   sameSite: "None",
-        // });
+        Cookies.set("refreshToken", response.data.refreshToken, {
+          domain: ".aiteamtwo.com",
+          secure: true,
+          sameSite: "None",
+        });
         dispatch(
           setUser({
             token: response.data.accessToken,
@@ -307,15 +307,15 @@ export default function SignInPage() {
           response?.data?.user?.role === "ADMIN" ||
           response?.data?.user?.role === "SUPER_ADMIN"
         ) {
-          router.push("http://localhost:3055");
+          // router.push("http://localhost:3055");
           // router.push("http://206.162.244.131:3055/");
           // router.push("http://206.162.244.134:3055/");
-          // router.push("https://admin-julientmts.aiteamtwo.com");
+          router.push("https://admin-julientmts.aiteamtwo.com");
         } else {
-          router.push("http://localhost:3054/dashboard/home");
+          // router.push("http://localhost:3054/dashboard/home");
           // router.push("http://206.162.244.131:3054/dashboard/home");
           // router.push("http://206.162.244.134:3054/dashboard/home");
-          // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
         }
       }
     } catch (error: any) {
@@ -430,16 +430,6 @@ export default function SignInPage() {
             <span className="text-[16px] text-authBackgroundButton">or</span>
             <div className="flex-1 h-[1px] bg-[#D1D6DB]" />
           </div>
-          {/* <button
-            className="w-full flex items-center justify-center gap-3 border border-[#D1D6DB] rounded-md py-2.5 transition"
-          >
-            <img
-              src="/authImage/googleIcon.png"
-              alt="google icon"
-              className="w-5 h-5"
-            />
-            <span className="text-[#2D2D2D] font-medium text-[16px]">Sign in with Google</span>
-          </button> */}
           <div className="flex justify-center items-center">
             <GoogleLogin
               size="large"
