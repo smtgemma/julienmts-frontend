@@ -39,60 +39,22 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // const handleChange = (newLang: string) => {
-  //   if (!newLang || newLang === selectedLanguage) return;
-
-  //   // নতুন ভাষা সংরক্ষণ করুন
-  //   localStorage.setItem("selectedLanguage", newLang);
-  //   setSelectedLanguage(newLang);
-
-  //   // পুরানো Google Translate cookie মুছে ফেলুন
-  //   document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-  //   document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
-
-  //   // নতুন cookie সেট করুন
-  //   document.cookie = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
-
-  //   // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
-  //   window.location.reload();
-  // };
-
-  //   const handleChange = (newLang: string) => {
-  //   if (!newLang || newLang === selectedLanguage) return;
-
-  //   localStorage.setItem("selectedLanguage", newLang);
-  //   setSelectedLanguage(newLang);
-
-  //   // remove old cookie
-  //   document.cookie =
-  //     "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-
-  //   // set new cookie
-  //   document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com`;
-
-  //   // force reload
-  //   setTimeout(() => {
-  //     window.location.href = window.location.origin + window.location.pathname;
-  //   }, 100);
-  // };
-
   const handleChange = (newLang: string) => {
     if (!newLang || newLang === selectedLanguage) return;
 
+    // নতুন ভাষা সংরক্ষণ করুন
     localStorage.setItem("selectedLanguage", newLang);
     setSelectedLanguage(newLang);
 
-    // Delete old cookie
-    document.cookie =
-      "googtrans=; path=/; domain=.aiteamtwo.com; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    // পুরানো Google Translate cookie মুছে ফেলুন
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
 
-    // Set new cookie (IMPORTANT FIXES HERE)
-    document.cookie = `googtrans=/en/${newLang}; path=/; domain=.aiteamtwo.com; Secure; SameSite=None`;
+    // নতুন cookie সেট করুন
+    document.cookie = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
 
-    // Delay reload to ensure cookie is saved
-    setTimeout(() => {
-      window.location.reload();
-    }, 300);
+    // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
+    window.location.reload();
   };
 
   const languageNames: Record<string, string> = {
