@@ -1,4 +1,5 @@
 
+
 // "use client";
 // import { useEffect, useState, useRef } from "react";
 // import { PiGlobeLight } from "react-icons/pi";
@@ -11,16 +12,6 @@
 //   const dropdownRef = useRef<HTMLDivElement | null>(null);
 //   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-//   const getCookieDomains = () => {
-//     const host = window.location.hostname;
-//     if (host === "localhost" || host.match(/^\\d+\\.\\d+\\.\\d+\\.\\d+$/)) {
-//       return [undefined, host];
-//     }
-//     const parts = host.split('.');
-//     const rootDomain = parts.length > 2 ? parts.slice(-2).join('.') : host;
-//     return Array.from(new Set([undefined, host, `.${host}`, rootDomain, `.${rootDomain}`]));
-//   };
-
 //   useEffect(() => {
 //     setMounted(true);
 
@@ -28,15 +19,8 @@
 //     const storedLang = localStorage.getItem("selectedLanguage") || "en";
 //     setSelectedLanguage(storedLang);
 
-//     // Google Translate এর জন্য cookie সেট করুন সব domain variation এ
-//     const domains = getCookieDomains();
-//     domains.forEach(domain => {
-//       let cookieStr = `googtrans=/en/${storedLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
-//       if (domain) {
-//         cookieStr += `; domain=${domain}`;
-//       }
-//       document.cookie = cookieStr;
-//     });
+//     // Google Translate এর জন্য cookie সেট করুন
+//     document.cookie = `googtrans=/en/${storedLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
 //   }, []);
 
 //   useEffect(() => {
@@ -62,25 +46,12 @@
 //     localStorage.setItem("selectedLanguage", newLang);
 //     setSelectedLanguage(newLang);
 
-//     const domains = getCookieDomains();
-
-//     // পুরানো Google Translate cookie মুছে ফেলুন সব domain variation থেকে
-//     domains.forEach(domain => {
-//       let cookieStr = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-//       if (domain) {
-//         cookieStr += `; domain=${domain}`;
-//       }
-//       document.cookie = cookieStr;
-//     });
+//     // পুরানো Google Translate cookie মুছে ফেলুন
+//     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+//     document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
 
 //     // নতুন cookie সেট করুন
-//     domains.forEach(domain => {
-//       let cookieStr = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
-//       if (domain) {
-//         cookieStr += `; domain=${domain}`;
-//       }
-//       document.cookie = cookieStr;
-//     });
+//     document.cookie = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
 
 //     // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
 //     window.location.reload();
@@ -155,7 +126,6 @@
 
 
 
-
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { PiGlobeLight } from "react-icons/pi";
@@ -168,73 +138,32 @@ export function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const getLanguageFromCookie = () => {
-    const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
-    if (match) {
-        const val = decodeURIComponent(match[1]);
-        const parts = val.split('/');
-        if (parts.length > 2) {
-             return parts[2]; // e.g. "es" from "/en/es"
-        }
-    }
-    return null;
-  };
-
-  const setTranslateCookie = (lang: string) => {
+  const getCookieDomains = () => {
     const host = window.location.hostname;
-    
-    // 1. Gather all possible domains to clear out old state, avoiding conflict (Very important for migration)
-    const domains = [undefined, host, `.${host}`];
-    let rootDomain: string | undefined;
-    
-    if (host !== "localhost" && !host.match(/^\d+\.\d+\.\d+\.\d+$/)) {
-      const parts = host.split('.');
-      for (let i = 0; i < parts.length - 1; i++) {
-        const d = parts.slice(i).join('.');
-        domains.push(d);
-        domains.push(`.${d}`);
-      }
-      // Determine actual root shared domain (e.g. .aiteamtwo.com)
-      if (parts.length >= 2) {
-          rootDomain = `.${parts.slice(-2).join('.')}`;
-      }
+    if (host === "localhost" || host.match(/^\\d+\\.\\d+\\.\\d+\\.\\d+$/)) {
+      return [undefined, host];
     }
-    
-    // 2. Clear out everything
-    const uniqueDomains = Array.from(new Set(domains));
-    uniqueDomains.forEach(domain => {
-      let cookieStr = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-      if (domain) cookieStr += `; domain=${domain}`;
-      document.cookie = cookieStr;
-    });
-
-    // 3. Set the cookie strategically on the shared ROOT DOMAIN so both admin and main app share it
-    if (rootDomain) {
-        document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=${rootDomain}`;
-    } else {
-        // Fallback for localhost
-        document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
-    }
+    const parts = host.split('.');
+    const rootDomain = parts.length > 2 ? parts.slice(-2).join('.') : host;
+    return Array.from(new Set([undefined, host, `.${host}`, rootDomain, `.${rootDomain}`]));
   };
 
   useEffect(() => {
     setMounted(true);
 
-    // Sync subdomains: Cookie takes priority over localStorage because cookie can be shared across subdomains
-    const cookieLang = getLanguageFromCookie();
-    const storedLang = localStorage.getItem("selectedLanguage");
-    
-    const finalLang = cookieLang || storedLang || "en";
-    
-    setSelectedLanguage(finalLang);
+    // localStorage থেকে সংরক্ষিত ভাষা পড়ুন
+    const storedLang = localStorage.getItem("selectedLanguage") || "en";
+    setSelectedLanguage(storedLang);
 
-    // If moving from another subdomain, update this subdomain's isolated localStorage
-    if (cookieLang && cookieLang !== storedLang) {
-        localStorage.setItem("selectedLanguage", cookieLang);
-    }
-
-    // Refresh the cookie on the root domain on mount
-    setTranslateCookie(finalLang);
+    // Google Translate এর জন্য cookie সেট করুন সব domain variation এ
+    const domains = getCookieDomains();
+    domains.forEach(domain => {
+      let cookieStr = `googtrans=/en/${storedLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+      if (domain) {
+        cookieStr += `; domain=${domain}`;
+      }
+      document.cookie = cookieStr;
+    });
   }, []);
 
   useEffect(() => {
@@ -256,12 +185,31 @@ export function LanguageSwitcher() {
   const handleChange = (newLang: string) => {
     if (!newLang || newLang === selectedLanguage) return;
 
+    // নতুন ভাষা সংরক্ষণ করুন
     localStorage.setItem("selectedLanguage", newLang);
     setSelectedLanguage(newLang);
 
-    // Update shared shared cookie
-    setTranslateCookie(newLang);
+    const domains = getCookieDomains();
 
+    // পুরানো Google Translate cookie মুছে ফেলুন সব domain variation থেকে
+    domains.forEach(domain => {
+      let cookieStr = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+      if (domain) {
+        cookieStr += `; domain=${domain}`;
+      }
+      document.cookie = cookieStr;
+    });
+
+    // নতুন cookie সেট করুন
+    domains.forEach(domain => {
+      let cookieStr = `googtrans=/en/${newLang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+      if (domain) {
+        cookieStr += `; domain=${domain}`;
+      }
+      document.cookie = cookieStr;
+    });
+
+    // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
     window.location.reload();
   };
 
