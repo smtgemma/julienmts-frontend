@@ -155,6 +155,7 @@
 
 
 
+
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { PiGlobeLight } from "react-icons/pi";
@@ -170,22 +171,22 @@ export function LanguageSwitcher() {
   const getLanguageFromCookie = () => {
     const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
     if (match) {
-      const val = decodeURIComponent(match[1]);
-      const parts = val.split('/');
-      if (parts.length > 2) {
-        return parts[2]; // e.g. "es" from "/en/es"
-      }
+        const val = decodeURIComponent(match[1]);
+        const parts = val.split('/');
+        if (parts.length > 2) {
+             return parts[2]; // e.g. "es" from "/en/es"
+        }
     }
     return null;
   };
 
   const setTranslateCookie = (lang: string) => {
     const host = window.location.hostname;
-
+    
     // 1. Gather all possible domains to clear out old state, avoiding conflict (Very important for migration)
     const domains = [undefined, host, `.${host}`];
     let rootDomain: string | undefined;
-
+    
     if (host !== "localhost" && !host.match(/^\d+\.\d+\.\d+\.\d+$/)) {
       const parts = host.split('.');
       for (let i = 0; i < parts.length - 1; i++) {
@@ -195,10 +196,10 @@ export function LanguageSwitcher() {
       }
       // Determine actual root shared domain (e.g. .aiteamtwo.com)
       if (parts.length >= 2) {
-        rootDomain = `.${parts.slice(-2).join('.')}`;
+          rootDomain = `.${parts.slice(-2).join('.')}`;
       }
     }
-
+    
     // 2. Clear out everything
     const uniqueDomains = Array.from(new Set(domains));
     uniqueDomains.forEach(domain => {
@@ -209,10 +210,10 @@ export function LanguageSwitcher() {
 
     // 3. Set the cookie strategically on the shared ROOT DOMAIN so both admin and main app share it
     if (rootDomain) {
-      document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=${rootDomain}`;
+        document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=${rootDomain}`;
     } else {
-      // Fallback for localhost
-      document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+        // Fallback for localhost
+        document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
   };
 
@@ -222,14 +223,14 @@ export function LanguageSwitcher() {
     // Sync subdomains: Cookie takes priority over localStorage because cookie can be shared across subdomains
     const cookieLang = getLanguageFromCookie();
     const storedLang = localStorage.getItem("selectedLanguage");
-
+    
     const finalLang = cookieLang || storedLang || "en";
-
+    
     setSelectedLanguage(finalLang);
 
     // If moving from another subdomain, update this subdomain's isolated localStorage
     if (cookieLang && cookieLang !== storedLang) {
-      localStorage.setItem("selectedLanguage", cookieLang);
+        localStorage.setItem("selectedLanguage", cookieLang);
     }
 
     // Refresh the cookie on the root domain on mount
@@ -329,7 +330,3 @@ export function LanguageSwitcher() {
     </div>
   );
 }
-
-
-
-// ;llkjljklkjlkjlkjkl
