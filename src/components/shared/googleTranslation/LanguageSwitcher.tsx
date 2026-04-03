@@ -167,10 +167,25 @@ export function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const getCookieDomains = () => {
+  const getLanguageFromCookie = () => {
+    const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
+    if (match) {
+      const val = decodeURIComponent(match[1]);
+      const parts = val.split('/');
+      if (parts.length > 2) {
+        return parts[2]; // e.g. "es" from "/en/es"
+      }
+    }
+    return null;
+  };
+
+  const setTranslateCookie = (lang: string) => {
     const host = window.location.hostname;
+
+    // 1. Gather all possible domains to clear out old state, avoiding conflict (Very important for migration)
     const domains = [undefined, host, `.${host}`];
-    
+    let rootDomain: string | undefined;
+
     if (host !== "localhost" && !host.match(/^\d+\.\d+\.\d+\.\d+$/)) {
       const parts = host.split('.');
       for (let i = 0; i < parts.length - 1; i++) {
@@ -178,44 +193,47 @@ export function LanguageSwitcher() {
         domains.push(d);
         domains.push(`.${d}`);
       }
-    }
-    return Array.from(new Set(domains));
-  };
-
-  const setTranslateCookie = (lang: string) => {
-    const domains = getCookieDomains();
-
-    // পুরানো Google Translate cookie মুছে ফেলুন সব domain variation থেকে
-    domains.forEach(domain => {
-      let cookieStr = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-      if (domain) {
-        cookieStr += `; domain=${domain}`;
+      // Determine actual root shared domain (e.g. .aiteamtwo.com)
+      if (parts.length >= 2) {
+        rootDomain = `.${parts.slice(-2).join('.')}`;
       }
+    }
+
+    // 2. Clear out everything
+    const uniqueDomains = Array.from(new Set(domains));
+    uniqueDomains.forEach(domain => {
+      let cookieStr = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+      if (domain) cookieStr += `; domain=${domain}`;
       document.cookie = cookieStr;
     });
 
-    // নতুন cookie সেট করুন
-    const rootHost = window.location.hostname;
-    
-    // Set for host-only (best for localhost and general usage)
-    document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
-    
-    // Set for specific domains if needed (excluding localhost for safety limit)
-    if (rootHost !== "localhost") {
-       document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=${rootHost}`;
-       document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=.${rootHost}`;
+    // 3. Set the cookie strategically on the shared ROOT DOMAIN so both admin and main app share it
+    if (rootDomain) {
+      document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/; domain=${rootDomain}`;
+    } else {
+      // Fallback for localhost
+      document.cookie = `googtrans=/en/${lang}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
   };
 
   useEffect(() => {
     setMounted(true);
 
-    // localStorage থেকে সংরক্ষিত ভাষা পড়ুন
-    const storedLang = localStorage.getItem("selectedLanguage") || "en";
-    setSelectedLanguage(storedLang);
+    // Sync subdomains: Cookie takes priority over localStorage because cookie can be shared across subdomains
+    const cookieLang = getLanguageFromCookie();
+    const storedLang = localStorage.getItem("selectedLanguage");
 
-    // Mount হওয়ার সময় cookie সেট করে নিশ্চিত করুন
-    setTranslateCookie(storedLang);
+    const finalLang = cookieLang || storedLang || "en";
+
+    setSelectedLanguage(finalLang);
+
+    // If moving from another subdomain, update this subdomain's isolated localStorage
+    if (cookieLang && cookieLang !== storedLang) {
+      localStorage.setItem("selectedLanguage", cookieLang);
+    }
+
+    // Refresh the cookie on the root domain on mount
+    setTranslateCookie(finalLang);
   }, []);
 
   useEffect(() => {
@@ -237,14 +255,12 @@ export function LanguageSwitcher() {
   const handleChange = (newLang: string) => {
     if (!newLang || newLang === selectedLanguage) return;
 
-    // নতুন ভাষা সংরক্ষণ করুন
     localStorage.setItem("selectedLanguage", newLang);
     setSelectedLanguage(newLang);
 
-    // Cookie update করুন 
+    // Update shared shared cookie
     setTranslateCookie(newLang);
 
-    // Page reload করুন - এটিই একমাত্র উপায় Google Translate এর জন্য
     window.location.reload();
   };
 
