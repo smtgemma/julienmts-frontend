@@ -50,8 +50,8 @@ export default function Footer() {
             </SelectContent> */}
           {/* </Select> */}
 
-          <div className="flex items-center border border-[#D1D6DB] px-2 py-1 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
-      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">{/* আপনার অন্যান্য কন্টেন্ট */}
+          {/* <div className="flex items-center border border-[#D1D6DB] px-2 py-1 rounded-sm text-[#2D2D2D] focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-[#D1D6DB]
+      focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
             <style dangerouslySetInnerHTML={{
               __html: `
         .goog-te-banner-frame,
@@ -63,9 +63,8 @@ export default function Footer() {
           display: none !important;
         }
       `}} />
-            {/* <PiGlobeLight size={20} className="text-[#6B7280]" /> */}
             <LanguageSwitcher />
-          </div>
+          </div> */}
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
