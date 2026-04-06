@@ -838,7 +838,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         setIsConnected(false);
         isConnectedRef.current = false;
         disableMic();
-        toast.error("❌ Connection closed");
+        // toast.error("❌ Connection closed");
+        toast.success("✅ Meeting ended successfully");
       };
 
     } catch (error: any) {
