@@ -625,6 +625,7 @@ import { toast } from "sonner";
 import { FaUsersGear } from "react-icons/fa6";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
+import { useUpdateMeetingMutation } from "@/redux/api/startMettingApi/startMettingApi";
 
 
 type Rep = {
@@ -646,8 +647,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
   // get all data form redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
-  console.log(allData?.payloadData, "============all data")
+  // console.log(allData?.payloadData, "============all data")
   const { meeting_goal, duration_minutes, sales_methodology, representatives } = allData?.payloadData || {}
+
+  const [updateMeeting] = useUpdateMeetingMutation()
 
   // ─── State ─────────────────────────────────────────────
   const [isConnected, setIsConnected] = useState(false);
@@ -1037,13 +1040,22 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   }
 
   async function disconnect() {
+    const meetingId = Cookies.get("meetingId")?.trim() || "";
     try {
-      const meetingId = Cookies.get("meetingId")?.trim() || "";
 
       const response = await fetch(
         `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
         { method: "POST" }
       );
+
+      if (response) {
+        // after end meeting this api will be called 
+        const playload = {
+          status: "completed"
+        }
+        const responseData = await updateMeeting({ meetingId, playload }).unwrap();
+        console.log(responseData, "end meeting responseData")
+      }
 
       // jamil vai api
 

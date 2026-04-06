@@ -42,6 +42,15 @@ export const startMettingApi = baseApi.injectEndpoints({
       invalidatesTags: ["Meeting"],
     }),
 
+    // after finishing the meeting call this api 
+    updateMeeting: builder.mutation({
+      query: ({meetingId, playload}) => ({
+        url: `/meeting/${meetingId}/status`,
+        method: "PATCH",
+        body: playload,
+      }),
+    }),
+
   }),
 });
 
@@ -50,4 +59,5 @@ export const {
   useMeetngCompanyMutation,
   useMeetingCompanyRepresentitiveMutation,
   useCreateMeetingIdMutation,
+  useUpdateMeetingMutation,
 } = startMettingApi;
