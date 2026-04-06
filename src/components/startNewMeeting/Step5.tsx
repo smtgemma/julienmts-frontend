@@ -865,7 +865,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         break;
 
       case "transcription":
-        addMessage("You 🎙️", data.text, "message-user");
+        addMessage("Me 🎙️", data.text, "message-user");
         break;
 
       case "ai_thinking":
