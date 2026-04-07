@@ -281,19 +281,19 @@ export default function SignInPage() {
       const response = await signIn(data).unwrap();
       if (response?.success) {
         // console.log(response, "===============================")
-        // Cookies.set("token", response.data.accessToken);
-        // Cookies.set("refreshToken", response.data.refreshToken);
-        Cookies.set("token", response.data.accessToken, {
-          domain: ".aiteamtwo.com",
-          secure: true,
-          sameSite: "None",
-        });
+        Cookies.set("token", response.data.accessToken);
+        Cookies.set("refreshToken", response.data.refreshToken);
+        // Cookies.set("token", response.data.accessToken, {
+        //   domain: ".aiteamtwo.com",
+        //   secure: true,
+        //   sameSite: "None",
+        // });
 
-        Cookies.set("refreshToken", response.data.refreshToken, {
-          domain: ".aiteamtwo.com",
-          secure: true,
-          sameSite: "None",
-        });
+        // Cookies.set("refreshToken", response.data.refreshToken, {
+        //   domain: ".aiteamtwo.com",
+        //   secure: true,
+        //   sameSite: "None",
+        // });
         dispatch(
           setUser({
             token: response.data.accessToken,
@@ -307,15 +307,15 @@ export default function SignInPage() {
           response?.data?.user?.role === "ADMIN" ||
           response?.data?.user?.role === "SUPER_ADMIN"
         ) {
-          // router.push("http://localhost:3055");
+          router.push("http://localhost:3055");
           // router.push("http://206.162.244.131:3055/");
           // router.push("http://206.162.244.134:3055/");
-          router.push("https://admin-julientmts.aiteamtwo.com");
+          // router.push("https://admin-julientmts.aiteamtwo.com");
         } else {
-          // router.push("http://localhost:3054/dashboard/home");
+          router.push("http://localhost:3054/dashboard/home");
           // router.push("http://206.162.244.131:3054/dashboard/home");
           // router.push("http://206.162.244.134:3054/dashboard/home");
-          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+          // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
         }
       }
     } catch (error: any) {
