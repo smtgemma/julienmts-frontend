@@ -96,19 +96,19 @@ export default function SignUpPage() {
       // console.log("response", response);
 
       if (response?.success) {
-        // Cookies.set("token", response.data.accessToken);
-        // Cookies.set("refreshToken", response.data.refreshToken);
-        Cookies.set("token", response.data.accessToken, {
-          domain: ".aiteamtwo.com",
-          secure: true,
-          sameSite: "None",
-        });
+        Cookies.set("token", response.data.accessToken);
+        Cookies.set("refreshToken", response.data.refreshToken);
+        // Cookies.set("token", response.data.accessToken, {
+        //   domain: ".aiteamtwo.com",
+        //   secure: true,
+        //   sameSite: "None",
+        // });
 
-        Cookies.set("refreshToken", response.data.refreshToken, {
-          domain: ".aiteamtwo.com",
-          secure: true,
-          sameSite: "None",
-        });
+        // Cookies.set("refreshToken", response.data.refreshToken, {
+        //   domain: ".aiteamtwo.com",
+        //   secure: true,
+        //   sameSite: "None",
+        // });
         dispatch(
           setUser({
             token: response.data.accessToken,
