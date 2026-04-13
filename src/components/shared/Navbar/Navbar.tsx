@@ -107,7 +107,8 @@ const Navbar = () => {
                             <button
                                 onClick={() => {
                                     // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
-                                    getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                    // getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                    getMe?.data?.role === "USER" && (window.location.href = "/dashboard/home");
                                     // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
                                     // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
                                 }}
@@ -236,7 +237,8 @@ const Navbar = () => {
                                         className='px-2 py-0.5 hover:text-[#563FB1] cursor-pointer'
                                         onClick={() => {
                                             // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
-                                            getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                            // getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
+                                            getMe?.data?.role === "USER" && (window.location.href = "/dashboard/home");
                                             // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
                                             // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
                                         }}

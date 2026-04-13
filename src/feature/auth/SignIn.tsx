@@ -366,7 +366,8 @@ export default function SignInPage() {
         toast.success(response?.message);
         if (response?.data?.user?.role === "USER") {
           // router.push("http://localhost:3054/dashboard/home");
-          router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+          // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+          router.push("/dashboard/home");
         }
       }
 
