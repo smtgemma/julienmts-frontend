@@ -113,7 +113,7 @@ export default function SignUpPage() {
           setUser({
             token: response.data.accessToken,
             refreshToken: response.data.refreshToken,
-            user: response.data.user,
+            user: response?.data?.user,
           })
         );
 

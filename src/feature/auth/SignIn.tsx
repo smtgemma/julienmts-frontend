@@ -75,7 +75,7 @@
 //           setUser({
 //             token: response.data.accessToken,
 //             refreshToken: response.data.refreshToken,
-//             user: response.data.user,
+//             user: response?.data?.user,
 //           })
 //         );
 //         toast.success("Login successful");
@@ -298,24 +298,28 @@ export default function SignInPage() {
           setUser({
             token: response.data.accessToken,
             refreshToken: response.data.refreshToken,
-            user: response.data.user,
+            user: response?.data?.user,
           })
         );
         toast.success("Login successful");
         console.log("Login successful", response?.data?.user?.role);
-        if (
-          response?.data?.user?.role === "ADMIN" ||
-          response?.data?.user?.role === "SUPER_ADMIN"
-        ) {
-          router.push("http://localhost:3055");
-          // router.push("http://206.162.244.131:3055/");
-          // router.push("http://206.162.244.134:3055/");
-          // router.push("https://admin-julientmts.aiteamtwo.com");
-        } else {
-          router.push("http://localhost:3054/dashboard/home");
-          // router.push("http://206.162.244.131:3054/dashboard/home");
-          // router.push("http://206.162.244.134:3054/dashboard/home");
-          // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+        // if (
+        //   response?.data?.user?.role === "ADMIN" ||
+        //   response?.data?.user?.role === "SUPER_ADMIN"
+        // ) {
+        //   router.push("http://localhost:3055");
+        //   // router.push("http://206.162.244.131:3055/");
+        //   // router.push("http://206.162.244.134:3055/");
+        //   // router.push("https://admin-julientmts.aiteamtwo.com");
+        // } else {
+        //   router.push("http://localhost:3054/dashboard/home");
+        //   // router.push("http://206.162.244.131:3054/dashboard/home");
+        //   // router.push("http://206.162.244.134:3054/dashboard/home");
+        //   // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
+        // }
+
+        if (response?.data?.user?.role === "USER") {
+          router.push("/dashboard/home");
         }
       }
     } catch (error: any) {
@@ -354,7 +358,7 @@ export default function SignInPage() {
           setUser({
             token: response.data.accessToken,
             refreshToken: response.data.refreshToken,
-            user: response.data.user,
+            user: response?.data?.user,
           })
         );
 
