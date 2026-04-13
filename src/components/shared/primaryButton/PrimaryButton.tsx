@@ -18,7 +18,7 @@ const PrimaryButton = ({
   return children ? (
     <div
       onClick={onClick}
-      className="px-2 cursor-pointer text-center py-2 bg-primary/80 transition-all duration-300 text-white hover:bg-primary shadow"
+      className="px-2 cursor-pointer text-center py-2 bg-[#6E51E0]/80 transition-all duration-300 text-white hover:bg-[#6E51E0] shadow"
     >
       {children}
     </div>
@@ -27,13 +27,12 @@ const PrimaryButton = ({
       type={type}
       disabled={loading}
       onClick={onClick}
-      className="px-3 py-2 w-full text-center rounded-[8px] bg-authBackgroundButton transition-all duration-300 text-white hover:bg-primary shadow cursor-pointer"
+      className="px-3 py-2 w-full text-center rounded-[8px] bg-authBackgroundButton transition-all duration-300 text-white hover:bg-[#6E51E0] shadow cursor-pointer"
     >
       <div className={`flex items-center justify-center gap-2`}>
         <LuLoader
-          className={`${
-            loading ? "opacity-100" : "opacity-0"
-          } animate-spin text-center absolute`}
+          className={`${loading ? "opacity-100" : "opacity-0"
+            } animate-spin text-center absolute`}
         />
         <span className={`${loading ? "opacity-0" : "opacity-100"}`}>
           {text}

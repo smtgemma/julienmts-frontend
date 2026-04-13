@@ -59,19 +59,19 @@ const Navbar = () => {
             await logout(payload).unwrap();
             localStorage.removeItem("persist:root");
             // dispatch(logoutAction());
-            // Cookies.remove("token");
-            // Cookies.remove("refreshToken");
-            Cookies.remove("token", {
-              domain: ".aiteamtwo.com",
-              secure: true,
-              sameSite: "None",
-            });
+            Cookies.remove("token");
+            Cookies.remove("refreshToken");
+            // Cookies.remove("token", {
+            //   domain: ".aiteamtwo.com",
+            //   secure: true,
+            //   sameSite: "None",
+            // });
 
-            Cookies.remove("refreshToken", {
-              domain: ".aiteamtwo.com",
-              secure: true,
-              sameSite: "None",
-            });
+            // Cookies.remove("refreshToken", {
+            //   domain: ".aiteamtwo.com",
+            //   secure: true,
+            //   sameSite: "None",
+            // });
 
             dispatch(logoutFc());
             await refetch();
@@ -106,7 +106,7 @@ const Navbar = () => {
                         isLoggedIn && (
                             <button
                                 onClick={() => {
-                                    (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
+                                    // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
                                     getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
                                     // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
                                     // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");
@@ -235,7 +235,7 @@ const Navbar = () => {
                                     <DropdownMenuItem
                                         className='px-2 py-0.5 hover:text-[#563FB1] cursor-pointer'
                                         onClick={() => {
-                                            (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
+                                            // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "https://admin-julientmts.aiteamtwo.com");
                                             getMe?.data?.role === "USER" && (window.location.href = "https://julientmts.aiteamtwo.com/dashboard/home");
                                             // (getMe?.data?.role === "ADMIN" || getMe?.data?.role === "SUPER_ADMIN") && (window.location.href = "http://localhost:3055/");
                                             // getMe?.data?.role === "USER" && (window.location.href = "http://localhost:3054/dashboard/home");

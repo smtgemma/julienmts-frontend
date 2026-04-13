@@ -171,36 +171,36 @@ const baseQueryWithReauth: BaseQueryFn<
 
       if (newAccessToken) {
         // Save new token
-        // Cookies.set("token", newAccessToken);
-        Cookies.set("token", newAccessToken, {
-          domain: ".aiteamtwo.com",
-          secure: true,
-          sameSite: "None",
-        });
+        Cookies.set("token", newAccessToken);
+        // Cookies.set("token", newAccessToken, {
+        //   domain: ".aiteamtwo.com",
+        //   secure: true,
+        //   sameSite: "None",
+        // });
 
         // Retry original request
         result = await baseQuery(args, api, extraOptions);
       } else {
         // If refresh response structure invalid
-        // Cookies.remove("token");
-        // Cookies.remove("refreshToken");
-        Cookies.remove("token", {
-          domain: ".aiteamtwo.com",
-        });
-        Cookies.remove("refreshToken", {
-          domain: ".aiteamtwo.com",
-        });
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+        // Cookies.remove("token", {
+        //   domain: ".aiteamtwo.com",
+        // });
+        // Cookies.remove("refreshToken", {
+        //   domain: ".aiteamtwo.com",
+        // });
       }
     } else {
       // Refresh failed → clear tokens
-      // Cookies.remove("token");
-      // Cookies.remove("refreshToken");
-      Cookies.remove("token", {
-        domain: ".aiteamtwo.com",
-      });
-      Cookies.remove("refreshToken", {
-        domain: ".aiteamtwo.com",
-      });
+      Cookies.remove("token"); 
+      Cookies.remove("refreshToken");
+      // Cookies.remove("token", {
+      //   domain: ".aiteamtwo.com",
+      // });
+      // Cookies.remove("refreshToken", {
+      //   domain: ".aiteamtwo.com",
+      // });
     }
   }
 
