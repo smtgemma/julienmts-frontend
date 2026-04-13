@@ -411,7 +411,12 @@ export default function MeetingPrepForm(
         setIsSuccess(true);
       }
     } catch (error: any) {
-      toast.error("Something went wrong");
+      const errorMessage =
+        error?.data?.message ||
+        error?.response?.data?.message ||
+        "Something went wrong";
+
+      toast.error(errorMessage);
     }
   };
 
