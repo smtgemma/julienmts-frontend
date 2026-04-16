@@ -35,6 +35,7 @@ import Cookies from "js-cookie";
 const Navbar = () => {
     const router = useRouter();
     const token = Cookies.get("token")
+    const refreshToken = Cookies.get("refreshToken")
     const { data: getMe, refetch } = useGetMeQuery("", {
         skip: !token
     });
@@ -45,7 +46,7 @@ const Navbar = () => {
 
     const dispatch = useDispatch()
 
-    const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
+    // const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
     // console.log(refreshToken, "==============")
 
     const [logout, { isLoading: logoutLoging }] = useLogoutMutation()

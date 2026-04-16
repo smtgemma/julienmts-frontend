@@ -301,8 +301,7 @@ export default function SignInPage() {
             user: response?.data?.user,
           })
         );
-        toast.success("Login successful");
-        console.log("Login successful", response?.data?.user?.role);
+        // console.log("Login successful", response?.data?.user?.role);
         // if (
         //   response?.data?.user?.role === "ADMIN" ||
         //   response?.data?.user?.role === "SUPER_ADMIN"
@@ -319,7 +318,11 @@ export default function SignInPage() {
         // }
 
         if (response?.data?.user?.role === "USER") {
+          toast.success("Login successful");
           router.push("/dashboard/home");
+        }
+        else {
+          toast.error("You have to login by user credential");
         }
       }
     } catch (error: any) {
