@@ -33,7 +33,9 @@ export default function AppSidebar() {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
+  const refreshToken = Cookies.get("refreshToken");
+
+  // const refreshToken = useSelector((state: RootState) => state.user.refreshToken);
   // console.log(refreshToken, "==============")
 
   const [logout, { isLoading: logoutLoging }] = useLogoutMutation()
