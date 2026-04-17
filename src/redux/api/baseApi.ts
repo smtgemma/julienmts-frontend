@@ -150,6 +150,7 @@ const baseQueryWithReauth: BaseQueryFn<
     if (!refreshToken) {
       Cookies.remove("token");
       Cookies.remove("refreshToken");
+      window.location.href = "/signIn";
       return result;
     }
 
@@ -184,6 +185,7 @@ const baseQueryWithReauth: BaseQueryFn<
         // If refresh response structure invalid
         Cookies.remove("token");
         Cookies.remove("refreshToken");
+        window.location.href = "/signIn"; 
         // Cookies.remove("token", {
         //   domain: ".aiteamtwo.com",
         // });
@@ -195,6 +197,7 @@ const baseQueryWithReauth: BaseQueryFn<
       // Refresh failed → clear tokens
       Cookies.remove("token"); 
       Cookies.remove("refreshToken");
+        window.location.href = "/signIn"; 
       // Cookies.remove("token", {
       //   domain: ".aiteamtwo.com",
       // });
