@@ -814,6 +814,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const ws = new WebSocket(
         `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
 
       wsRef.current = ws;
