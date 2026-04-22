@@ -197,7 +197,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search, Calendar, ExternalLink, LayoutGrid, List } from "lucide-react";
 import Link from "next/link";
 import { CiFilter } from "react-icons/ci";
@@ -218,9 +218,13 @@ function MyAccount() {
   const [view, setView] = useState("grid");
   const [search, setSearch] = useState("");
 
-  const { data: myAcount, isLoading } = useMyAccountListQuery("");
-  // console.log(myAcount, "==================myaccount")
+  const { data: myAcount, isLoading, refetch } = useMyAccountListQuery("");
+  console.log(myAcount, "==================myaccount")
   const accounts = myAcount?.data || []
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return (

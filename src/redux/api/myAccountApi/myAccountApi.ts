@@ -25,7 +25,6 @@ export const myAccountApi = baseApi.injectEndpoints({
         url: `/meeting/${meeting_id}/history?session_id=${session_id}`,
         method: "GET",
       }),
-      providesTags: ["MyAccount"],
     }),
 
     // conversation recording api for replay button 
@@ -42,7 +41,6 @@ export const myAccountApi = baseApi.injectEndpoints({
         url: `/meeting/${meeting_id}/analytics?session_id=${session_id}`,
         method: "GET",
       }),
-      providesTags: ["MyAccount"],
     }),
 
   }),
