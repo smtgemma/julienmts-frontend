@@ -416,7 +416,7 @@ export default function MeetingPrepForm(
         error?.response?.data?.message ||
         "Something went wrong";
 
-      toast.error(errorMessage);
+      toast.success(errorMessage);
     }
   };
 
