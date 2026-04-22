@@ -103,7 +103,7 @@ export default function AIInsights({ singleData }: { singleData: any }) {
                     Risk Alerts For Enterprise CRM Platform
                 </h3>
                 <div className="space-y-2">
-                    {riskAlerts1.map((alert: any) => (
+                    {riskAlerts1?.map((alert: any) => (
                         <div
                             key={alert.id}
                             className={`flex items-start gap-2 p-3 rounded-lg ${alert.type === 'warning'
