@@ -34,7 +34,7 @@ function AccountDetails() {
           </div>
 
           <div className="ml-6">
-            <Link href={`/dashboard/startNewMeeting?step=4&id=${accountDetailsId}`}>
+            <Link href={`/dashboard/startNewMeeting?step=3&id=${accountDetailsId}`}>
               <button className="flex items-center justify-center gap-3 bg-[#6E51E0] text-[16px] font-medium text-white px-4 py-2 rounded-[6px] cursor-pointer">
                 <span><FiPlus size={24} /></span>
                 <span>New Meeting</span>
