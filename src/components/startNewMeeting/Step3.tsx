@@ -287,13 +287,15 @@ export default function Step3(
           <div className="bg-[#B9F8CF33] border border-[#B9F8CF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">💼 Hiring Data</div>
             <div className="text-sm text-[#636F85]">
-              {companyDataShow?.hiring_data || 'N/A'}
+              {/* {companyDataShow?.hiring_data || 'N/A'} */}
+              N/A
             </div>
           </div>
           <div className="bg-[#E9D4FF33] border border-[#E9D4FF] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">⭐ Customer Reviews</div>
             <div className="text-sm text-[#636F85]">
-              {companyDataShow?.customer_reviews || 'N/A'}
+              {/* {companyDataShow?.customer_reviews || 'N/A'} */}
+              "N/A"
             </div>
           </div>
         </div>
@@ -303,7 +305,8 @@ export default function Step3(
           <div className="text-sm font-medium text-[#2D2D2D] mb-3">Latest News</div>
           <div className="bg-[#6E51E00D] border border-[#6E51E01A] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <p className="text-sm text-[#2D2D2D]">
-              {companyDataShow?.latest_news || 'N/A'}
+              {/* {companyDataShow?.latest_news || 'N/A'} */}
+              "N/A"
             </p>
           </div>
         </div>
@@ -313,13 +316,15 @@ export default function Step3(
           <div className="bg-[#FFD6A733] border border-[#FFD6A7] rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📊 Financial Statements</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyDataShow?.financial_statements || 'N/A'}
+              {/* {companyDataShow?.financial_statements || 'N/A'} */}
+              "N/A"
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
             <div className="text-xl font-semibold text-[#2D2D2D] mb-1">📄 Product Documentation</div>
             <div className="text-[16px] text-[#636F85]">
-              {companyDataShow?.product_documentation || 'N/A'}
+              {/* {companyDataShow?.product_documentation || 'N/A'} */}
+              "N/A"
             </div>
           </div>
         </div>
