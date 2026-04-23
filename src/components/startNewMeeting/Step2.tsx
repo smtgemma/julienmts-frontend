@@ -348,6 +348,7 @@ import { toast } from "sonner";
 import DashboardButton from "../shared/dashboardButton/DashboardButton";
 import { useActiveSubscriptionQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
 import Cookies from "js-cookie";
+import { useSearchParams } from "next/navigation";
 
 type Participant = {
   name: string;
@@ -373,8 +374,12 @@ export default function Step2({
 
   const [customRoles, setCustomRoles] = useState<{ [key: number]: string }>({});
 
-  const allData = useSelector((state: RootState) => state.startMeeting);
-  const companyId = allData?.companyData?.company_id;
+  // const allData = useSelector((state: RootState) => state.startMeeting);
+  // const companyId = allData?.companyData?.company_id;
+
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const companyId = id;
 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
 
