@@ -1,45 +1,3 @@
-// import { jwtDecode } from "jwt-decode"; // Ensure proper import for jwtDecode
-// import type { NextRequest } from "next/server";
-// import { NextResponse } from "next/server";
-
-// export function middleware(request: NextRequest) {
-//   // Get token from cookies
-//   const token = request.cookies.get("accessToken")?.value;
-//   if (!token) {
-//     // Redirect to home if no token is present
-//     return NextResponse.redirect(new URL("/", request.url));
-//   }
-
-//   // Decode token to get user info
-//   let userInfo: { role?: string; exp: number };
-//   try {
-//     userInfo = jwtDecode(token as string) as { role?: string; exp: number };
-//     if (userInfo.exp && userInfo.exp * 1000 < Date.now()) {
-//       return NextResponse.redirect(new URL("/", request.url));
-//     }
-//   } catch (error) {
-//     if (error) {
-//       return NextResponse.redirect(new URL("/", request.url));
-//     }
-//     return;
-//   }
-//   const currentPath = request.nextUrl.pathname;
-
-//   // Restrict access to admin paths if user is not an ADMIN
-//   if (
-//     currentPath.startsWith("/dashboard/home") &&
-//     userInfo?.role !== "USER"
-//   ) {
-//     return NextResponse.redirect(new URL("/signIn", request.url));
-//   }
-
-//   // Allow the request to proceed
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/dashboard/home"], // Apply middleware to all routes
-// };
 
 
 // import { jwtDecode } from "jwt-decode";
@@ -48,45 +6,52 @@
 
 // export function middleware(request: NextRequest) {
 //   const token = request.cookies.get("token")?.value;
-//   // console.log("Middleware token:=============", token);
+//   const refreshToken = request.cookies.get("refreshToken")?.value;
+//   const signInUrl = "/signIn";
 
-//   // ❌ No token → redirect to signIn
-//   if (!token) {
-//     return NextResponse.redirect(new URL("/signIn", request.url));
+//   // ❌ No token AND no refresh token → redirect to signIn
+//   // If there's a refresh token, let the app handle it client-side
+//   if (!token && !refreshToken) {
+//     return NextResponse.redirect(new URL(signInUrl, request.url));
+//   }
+
+//   // If there's a refresh token but no access token, let the app try to refresh
+//   if (!token && refreshToken) {
+//     return NextResponse.next(); // ✅ Let RTK Query handle the refresh
 //   }
 
 //   let userInfo: { role?: string; exp: number };
 
 //   try {
-//     userInfo = jwtDecode(token) as { role?: string; exp: number };
+//     userInfo = jwtDecode(token!);
 
-//     // ❌ Token expired → redirect
-//     if (userInfo.exp * 1000 < Date.now()) {
-//       return NextResponse.redirect(new URL("/signIn", request.url));
+//     // ✅ DON'T check expiry here — let RTK Query handle refresh
+//     // Only redirect if token is completely malformed (caught below)
+//   } catch {
+//     // ❌ Unparseable token — but if refresh token exists, give app a chance
+//     if (refreshToken) {
+//       return NextResponse.next();
 //     }
-//   } catch (error) {
-//     // ❌ Invalid token → redirect
-//     return NextResponse.redirect(new URL("/signIn", request.url));
+//     return NextResponse.redirect(new URL(signInUrl, request.url));
 //   }
 
 //   const currentPath = request.nextUrl.pathname;
 
-//   // ❌ If NOT USER → redirect to signIn
+//   // ❌ Role restriction
 //   if (
 //     currentPath.startsWith("/dashboard") &&
 //     userInfo?.role !== "USER"
-//   )
-//    {
-//     return NextResponse.redirect(new URL("/signIn", request.url));
+//   ) {
+//     return NextResponse.redirect(new URL(signInUrl, request.url));
 //   }
 
-//   // ✅ Allow request
 //   return NextResponse.next();
 // }
 
 // export const config = {
-//   matcher: ["/dashboard/:path*"], // all nested routes included
+//   matcher: ["/dashboard/:path*"],
 // };
+
 
 
 
@@ -98,47 +63,39 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const refreshToken = request.cookies.get("refreshToken")?.value;
+
+  const currentPath = request.nextUrl.pathname;
   const signInUrl = "/signIn";
 
-  // ❌ No token AND no refresh token → redirect to signIn
-  // If there's a refresh token, let the app handle it client-side
+  // ✅ Only run logic for dashboard
+  if (!currentPath.startsWith("/dashboard")) {
+    return NextResponse.next(); // 🔥 VERY IMPORTANT
+  }
+
+  // ❌ No token + no refresh
   if (!token && !refreshToken) {
     return NextResponse.redirect(new URL(signInUrl, request.url));
   }
 
-  // If there's a refresh token but no access token, let the app try to refresh
+  // ✅ Let refresh happen
   if (!token && refreshToken) {
-    return NextResponse.next(); // ✅ Let RTK Query handle the refresh
+    return NextResponse.next();
   }
-
-  let userInfo: { role?: string; exp: number };
 
   try {
-    userInfo = jwtDecode(token!);
+    const userInfo: { role?: string } = jwtDecode(token!);
 
-    // ✅ DON'T check expiry here — let RTK Query handle refresh
-    // Only redirect if token is completely malformed (caught below)
-  } catch {
-    // ❌ Unparseable token — but if refresh token exists, give app a chance
-    if (refreshToken) {
-      return NextResponse.next();
+    if (userInfo?.role !== "USER") {
+      return NextResponse.redirect(new URL(signInUrl, request.url));
     }
-    return NextResponse.redirect(new URL(signInUrl, request.url));
-  }
-
-  const currentPath = request.nextUrl.pathname;
-
-  // ❌ Role restriction
-  if (
-    currentPath.startsWith("/dashboard") &&
-    userInfo?.role !== "USER"
-  ) {
-    return NextResponse.redirect(new URL(signInUrl, request.url));
+  } catch {
+    if (!refreshToken) {
+      return NextResponse.redirect(new URL(signInUrl, request.url));
+    }
   }
 
   return NextResponse.next();
 }
-
 export const config = {
   matcher: ["/dashboard/:path*"],
 };

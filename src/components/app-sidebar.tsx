@@ -65,10 +65,12 @@ export default function AppSidebar() {
       dispatch(logoutFc());
       localStorage.clear();
       toast.success("Logout successfully");
+      router.replace("/");
+      router.refresh(); 
 
-      setTimeout(() => {
-        router.replace("/");
-      }, 1000);
+      // setTimeout(() => {
+      //   router.replace("/");
+      // }, 1000);
     } catch (error: any) {
       toast.error(error?.data?.message || "Logout failed");
     }
