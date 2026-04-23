@@ -1,7 +1,7 @@
 "use client"
 import { SectionCards } from "@/components/section-cards"
 import RecentMeetings from "@/components/recent-mettings"
-import { ExternalLink, Lightbulb } from "lucide-react"
+import { Building2, ExternalLink, Lightbulb } from "lucide-react"
 import HomeAiInsights from "@/components/home/HomeAiInsights"
 import Link from "next/link"
 import { useGetUserDashboardStatsQuery } from "@/redux/api/homeApi/homeApi"
@@ -73,9 +73,30 @@ export default function Page() {
                             </div>
                         ))
                     ) : (
-                        <p className="text-center col-span-full text-gray-500">
-                            No Accounts Found
-                        </p>
+                        <div className="col-span-full flex flex-col items-center justify-center border border-dashed border-[#D1D6DB] rounded-xl py-14 bg-white">
+
+                            {/* Icon */}
+                            <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#F4F6FA] mb-4">
+                                <Building2 className="w-6 h-6 text-[#6E51E0]" />
+                            </div>
+
+                            {/* Title */}
+                            <h3 className="text-lg font-semibold text-[#2D2D2D] mb-2">
+                                No Accounts Found
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-sm text-[#636F85] text-center max-w-xs mb-5">
+                                You haven’t added any accounts yet. Start by creating a new account to manage your companies.
+                            </p>
+
+                            {/* CTA Button */}
+                            <Link href="/dashboard/startNewMeeting">
+                                <button className="px-5 py-2 bg-[#6E51E0] text-white rounded-md text-sm font-medium hover:bg-[#5a42c9] transition cursor-pointer">
+                                    + Add New Account
+                                </button>
+                            </Link>
+                        </div>
                     )}
                 </div>
             </div>

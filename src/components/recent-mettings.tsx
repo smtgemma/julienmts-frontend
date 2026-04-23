@@ -115,8 +115,8 @@ export default function RecentMeetings({ recentMeetings }: { recentMeetings: any
       {recentMeetings.length === 0 ? (
         // ✅ Empty State UI
         <div className="flex flex-col items-center justify-center border border-dashed border-gray-300 rounded-xl py-16">
-          <div className="bg-gray-100 p-4 rounded-full mb-4">
-            <Building2 className="w-8 h-8 text-gray-500" />
+          <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#F4F6FA] mb-4">
+            <Building2 className="w-6 h-6 text-[#6E51E0]" />
           </div>
           <h2 className="text-lg font-semibold text-gray-800 mb-2">
             No meetings yet
@@ -126,7 +126,7 @@ export default function RecentMeetings({ recentMeetings }: { recentMeetings: any
           </p>
 
           <Link href="/dashboard/startNewMeeting">
-            <button className="px-3 py-2 w-full text-center rounded-[8px] bg-authBackgroundButton transition-all duration-300 text-white hover:bg-[#6E51E0] shadow cursor-pointer">
+            <button className="px-5 py-2 bg-[#6E51E0] text-white rounded-md text-sm font-medium hover:bg-[#5a42c9] transition cursor-pointer">
               Start Meeting
             </button>
           </Link>
