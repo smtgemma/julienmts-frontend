@@ -300,8 +300,8 @@ export function SiteHeader() {
 
               <DropdownMenuContent className="w-96 max-h-96 overflow-y-auto border border-gray-50">
                 {notifications.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-10 text-gray-400">
-                    <Bell className="w-10 h-10 mb-2" />
+                  <div className="flex flex-col items-center justify-center py-6 text-gray-400">
+                    <Bell className="w-6 h-6 mb-2" />
                     <p className="text-sm">No notifications yet</p>
                   </div>
                 ) : (
