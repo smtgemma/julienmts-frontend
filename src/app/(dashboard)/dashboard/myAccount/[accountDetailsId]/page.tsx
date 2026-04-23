@@ -17,7 +17,7 @@ function AccountDetails() {
   if (isLoading) {
     return (
       <p>
-        <Loading />
+        <Loading title="Loading account details" />
       </p>
     )
   }
