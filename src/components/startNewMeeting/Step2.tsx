@@ -374,12 +374,13 @@ export default function Step2({
 
   const [customRoles, setCustomRoles] = useState<{ [key: number]: string }>({});
 
-  // const allData = useSelector((state: RootState) => state.startMeeting);
-  // const companyId = allData?.companyData?.company_id;
+  const allData = useSelector((state: RootState) => state.startMeeting);
+  const company_id = allData?.companyData?.company_id;
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const companyId = id;
+  const companyId = id || company_id;
+  // console.log(companyId, "companyid=====================")
 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
 
@@ -441,6 +442,7 @@ export default function Step2({
         toast.success(response?.message);
         dispatch(setParticipantsValue(response?.data?.representative_ids));
         handleNext();
+        Cookies.set("companyId", companyId ?? "");
       }
     } catch (error: any) {
       toast.error("Something went wrong");

@@ -336,8 +336,10 @@ export default function MeetingPrepForm(
 
   const dispatch = useDispatch()
   const [isSuccess, setIsSuccess] = useState(false);
-  const searchParams = useSearchParams()
-  const companyIdFromParams = searchParams.get("id")
+  // const searchParams = useSearchParams()
+  // const companyIdFromParams = searchParams.get("id")
+  const companyIdFromStep2 = Cookies.get("companyId");
+  console.log(companyIdFromStep2, "=======================companyIdFromParams")
   const [showDescription, setShowDescription] = useState(false);
 
   // Active subscription
@@ -348,7 +350,8 @@ export default function MeetingPrepForm(
   const allData = useSelector((state: RootState) => state.startMeeting);
   const representatives = allData?.participants;
   const salesperson_id = allData?.product?.salesperson_id;
-  const companyId = companyIdFromParams || allData?.companyData?.company_id;
+  console.log(salesperson_id, "===========salesperson_id")
+  const companyId = companyIdFromStep2 || allData?.companyData?.company_id;
 
   const [createMeetingId, { isLoading }] = useCreateMeetingIdMutation();
 
