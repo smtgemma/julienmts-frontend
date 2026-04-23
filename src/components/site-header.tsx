@@ -1,122 +1,33 @@
 
 // "use client"
-// import { SidebarTrigger } from "@/components/ui/sidebar"
 // import {
 //   DropdownMenu,
 //   DropdownMenuContent,
 //   DropdownMenuTrigger,
 // } from "@/components/ui/dropdown-menu"
-// import Image from "next/image"
 // import { IoNotificationsOutline } from "react-icons/io5"
-// import { Bell } from "lucide-react";
+// import { SidebarTrigger } from "@/components/ui/sidebar"
+// import Image from "next/image"
 // import { usePathname } from "next/navigation";
-// import { useGetMeQuery } from "@/redux/api/getMe/getMeApi"
+// import { useGetAllNotificationsQuery, useGetMeQuery, useReadNotificationMutation } from "@/redux/api/getMe/getMeApi"
+// import { Bell } from "lucide-react"
 
 // export function SiteHeader() {
 //   const pathname = usePathname();
-//   // console.log(pathname)
 
-//   const { data: getMe, isLoading } = useGetMeQuery("")
+//   const { data: getMe } = useGetMeQuery("")
+//   const { data: getAllNotifications } = useGetAllNotificationsQuery("")
+//   const notifications = getAllNotifications?.data || []
 
-// const notifications = [
-//   {
-//     id: 1,
-//     title: 'New message received',
-//     description: 'John sent you a message',
-//     time: '5 min ago',
-//     read: false,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 2,
-//     title: 'Project update',
-//     description: 'Your project has been approved',
-//     time: '1 hour ago',
-//     read: false,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 3,
-//     title: 'Meeting reminder',
-//     description: 'Team meeting starts in 30 minutes',
-//     time: '2 hours ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-//   {
-//     id: 4,
-//     title: 'Task completed',
-//     description: 'Design review task marked as done',
-//     time: '1 day ago',
-//     read: true,
-//     date: "23-04-2-25",
-//   },
-// ];
-
+//   const [readNotification] = useReadNotificationMutation()
+//   const handleNotification = async (id: any) => {
+//     try {
+//       const response = await readNotification(id).unwrap();
+//       // console.log(response, "========")
+//     } catch (error) {
+//       // console.log(error, "error")
+//     }
+//   }
 //   return (
 //     <header className="py-10 flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
 //       <div className="flex w-full items-center gap-1 px-6 py-6 lg:gap-2 lg:px-6">
@@ -125,7 +36,7 @@
 //           (pathname === "/dashboard" || pathname === "/dashboard/home") && (
 //             <div>
 //               <h1 className="text-xl font-bold text-primaryBgColor">
-//                 Welcome back, Md Shakil
+//                 Welcome back, {getMe?.data?.firstName || "N/A"} {getMe?.data?.lastName || "N/A"}
 //               </h1>
 //               <p className="sm text-[#636F85]">
 //                 Here's your meeting activity and insights for today.
@@ -206,7 +117,7 @@
 //               </DropdownMenuTrigger>
 
 //               <DropdownMenuContent className="w-96 h-95 border border-gray-50">
-//                 {notifications.map((notification) => (
+//                 {notifications.map((notification: any) => (
 //                   <div
 //                     key={notification.id}
 //                     className="hover:bg-gray-100 transition-shadow px-4 py-3"
@@ -221,15 +132,20 @@
 //                         </div>
 //                       </div>
 
-//                       <div className="flex-1 min-w-0">
-//                         <h3 className="font-semibold text-gray-900 mb-1 text-base">
-//                           {/* {notification.title} */}
-//                         </h3>
-//                         <p className="text-[#2D2D2D] text-sm">
-//                           {notification.description}
+//                       <div
+//                         className={`flex-1 min-w-0 text-sm ${notification.isRead ? "text-gray-500" : "text-gray-800 font-medium cursor-pointer"
+//                           }`}
+//                         onClick={() => handleNotification(notification?.id)}
+
+//                       >
+//                         {/* <h3 className="font-semibold text-gray-900 mb-1 text-base">
+//                           {notification.title}
+//                         </h3> */}
+//                         <p>
+//                           {notification.message}
 //                         </p>
-//                         <time className="text-[#2D2D2D] text-sm">
-//                           {notification.date}
+//                         <time>
+//                           {new Date(notification.createdAt).toLocaleString()}
 //                         </time>
 //                       </div>
 //                     </button>
@@ -238,27 +154,30 @@
 //               </DropdownMenuContent>
 //             </DropdownMenu>
 //           </div>
-
-//           {/* Profile */}
-//           <div className="flex items-center gap-2 bg-[#F3F4F6] rounded-full px-3 py-1.5">
-//             <div className="w-7 h-7 rounded-full overflow-hidden bg-[#d2caf0]">
-//               <Image
-//                 src={getMe?.data?.profileImage ? getMe?.data?.profileImage : "/dashboardImage/profileImage.svg"}
-//                 width={28}
-//                 height={28}
-//                 alt="User"
-//                 className="object-cover"
-//               />
+//           <div className="ml-auto flex items-center gap-2">
+//             {/* Profile */}
+//             <div className="flex items-center gap-2 bg-[#F3F4F6] rounded-full px-3 py-1.5">
+//               <div className="w-7 h-7 rounded-full overflow-hidden bg-[#d2caf0]">
+//                 <Image
+//                   src={getMe?.data?.profileImage ? getMe?.data?.profileImage : "/dashboardImage/profileImage.svg"}
+//                   width={28}
+//                   height={28}
+//                   alt="User"
+//                   className="object-cover"
+//                 />
+//               </div>
+//               <span className="text-sm font-medium text-[#2D2D2D]">
+//                 {getMe?.data?.firstName || "N/A"} {getMe?.data?.lastName || "N/A"}
+//               </span>
 //             </div>
-//             <span className="text-sm font-medium text-[#2D2D2D]">
-//               {getMe?.data?.firstName || "N/A"} {getMe?.data?.lastName || "N/A"}
-//             </span>
 //           </div>
 //         </div>
 //       </div>
 //     </header>
 //   )
 // }
+
+
 
 
 
@@ -379,41 +298,44 @@ export function SiteHeader() {
                 </div>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent className="w-96 h-95 border border-gray-50">
-                {notifications.map((notification: any) => (
-                  <div
-                    key={notification.id}
-                    className="hover:bg-gray-100 transition-shadow px-4 py-3"
-                  >
-                    <button
-                      type="button"
-                      className="w-full text-left flex items-start gap-4"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
-                          <Bell className="w-5 h-5 text-white" />
-                        </div>
-                      </div>
-
-                      <div
-                        className={`flex-1 min-w-0 text-sm ${notification.isRead ? "text-gray-500" : "text-gray-800 font-medium cursor-pointer"
-                          }`}
-                        onClick={() => handleNotification(notification?.id)}
-
-                      >
-                        {/* <h3 className="font-semibold text-gray-900 mb-1 text-base">
-                          {notification.title}
-                        </h3> */}
-                        <p>
-                          {notification.message}
-                        </p>
-                        <time>
-                          {new Date(notification.createdAt).toLocaleString()}
-                        </time>
-                      </div>
-                    </button>
+              <DropdownMenuContent className="w-96 max-h-96 overflow-y-auto border border-gray-50">
+                {notifications.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-10 text-gray-400">
+                    <Bell className="w-10 h-10 mb-2" />
+                    <p className="text-sm">No notifications yet</p>
                   </div>
-                ))}
+                ) : (
+                  notifications.map((notification: any) => (
+                    <div
+                      key={notification.id}
+                      className="hover:bg-gray-100 transition-shadow px-4 py-3"
+                    >
+                      <button
+                        type="button"
+                        className="w-full text-left flex items-start gap-4"
+                      >
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                            <Bell className="w-5 h-5 text-white" />
+                          </div>
+                        </div>
+
+                        <div
+                          className={`flex-1 min-w-0 text-sm ${notification.isRead
+                              ? "text-gray-500"
+                              : "text-gray-800 font-medium cursor-pointer"
+                            }`}
+                          onClick={() => handleNotification(notification?.id)}
+                        >
+                          <p>{notification.message}</p>
+                          <time>
+                            {new Date(notification.createdAt).toLocaleString()}
+                          </time>
+                        </div>
+                      </button>
+                    </div>
+                  ))
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
