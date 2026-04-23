@@ -20,7 +20,7 @@ export default function Page() {
     if (isLoading) {
         return (
             <p>
-                <Loading />
+                <Loading title="Loading Home Page" />
             </p>
         )
     }

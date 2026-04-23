@@ -194,7 +194,7 @@ function MyAccount() {
   if (isLoading) {
     return (
       <p>
-        <Loading />
+        <Loading title="Loading account" />
       </p>
     )
   }

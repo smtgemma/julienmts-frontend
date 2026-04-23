@@ -28,13 +28,13 @@ const Loading: React.FC<LoadingSpinnerProps> = ({
         ></div>
         {/* Inner spinning element */}
         <div
-          className={`absolute top-0 left-0 ${sizeClasses[spinnerSize]} border-transparent border-t-primary rounded-full animate-spin`}
+          className={`absolute top-0 left-0 ${sizeClasses[spinnerSize]} border-transparent border-t-[#6E51E0] rounded-full animate-spin`}
         ></div>
         {/* Center dot */}
         <div
           className={`absolute top-1/2 left-1/2 ${
             spinnerSize === "sm" ? "w-1.5 h-1.5" : "w-2 h-2"
-          } bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse`}
+          } bg-[#6E51E0] rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse`}
         ></div>
       </div>
 
@@ -46,13 +46,13 @@ const Loading: React.FC<LoadingSpinnerProps> = ({
       {/* Progress dots */}
       {showProgressDots && (
         <div className="flex space-x-1 mt-4">
-          <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+          <div className="w-2 h-2 bg-[#6E51E0] rounded-full animate-bounce"></div>
           <div
-            className="w-2 h-2 bg-primary rounded-full animate-bounce"
+            className="w-2 h-2 bg-[#6E51E0] rounded-full animate-bounce"
             style={{ animationDelay: "0.1s" }}
           ></div>
           <div
-            className="w-2 h-2 bg-primary rounded-full animate-bounce"
+            className="w-2 h-2 bg-[#6E51E0] rounded-full animate-bounce"
             style={{ animationDelay: "0.2s" }}
           ></div>
         </div>

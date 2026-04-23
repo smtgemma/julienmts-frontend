@@ -269,7 +269,7 @@ const SubscriptionPlan: React.FC = () => {
   if (isLoading) {
     return (
       <div>
-        <Loading />
+        <Loading title="Loading subscription plan" />
       </div>
     );
   }
