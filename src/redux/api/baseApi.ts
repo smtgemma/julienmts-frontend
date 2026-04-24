@@ -110,6 +110,7 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 /**
  * Base Query
@@ -145,12 +146,14 @@ const baseQueryWithReauth: BaseQueryFn<
   // If unauthorized → try refresh token
   if (result?.error?.status === 401) {
     const refreshToken = Cookies.get("refreshToken");
+    const router = useRouter();
 
     // If no refresh token → logout
     if (!refreshToken) {
       Cookies.remove("token");
       Cookies.remove("refreshToken");
-      window.location.href = "/signIn";
+      // window.location.href = "/signIn";
+      router.push('/')
       return result;
     }
 
@@ -185,7 +188,8 @@ const baseQueryWithReauth: BaseQueryFn<
         // If refresh response structure invalid
         Cookies.remove("token");
         Cookies.remove("refreshToken");
-        window.location.href = "/signIn"; 
+        // window.location.href = "/signIn";
+        router.push('/')
         // Cookies.remove("token", {
         //   domain: ".aiteamtwo.com",
         // });
@@ -195,9 +199,10 @@ const baseQueryWithReauth: BaseQueryFn<
       }
     } else {
       // Refresh failed → clear tokens
-      Cookies.remove("token"); 
+      Cookies.remove("token");
       Cookies.remove("refreshToken");
-        window.location.href = "/signIn"; 
+      // window.location.href = "/signIn"; 
+      router.push('/')
       // Cookies.remove("token", {
       //   domain: ".aiteamtwo.com",
       // });
