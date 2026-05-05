@@ -26,6 +26,7 @@ import { useLogoutMutation } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
 import { CreditCard } from "lucide-react";
 import { logoutFc } from "@/redux/features/user/userSlice";
+import { BsChatSquareText } from "react-icons/bs";
 
 
 export default function AppSidebar() {
@@ -66,7 +67,7 @@ export default function AppSidebar() {
       localStorage.clear();
       toast.success("Logout successfully");
       router.replace("/");
-      router.refresh(); 
+      router.refresh();
 
       // setTimeout(() => {
       //   router.replace("/");
@@ -82,6 +83,11 @@ export default function AppSidebar() {
       label: "Start a New Meeting",
       href: "/dashboard/startNewMeeting",
       icon: RiIdCardLine,
+    },
+    {
+      label: "Custom Prompt",
+      href: "/dashboard/customPrompt",
+      icon: BsChatSquareText,
     },
     {
       label: "My Accounts",
