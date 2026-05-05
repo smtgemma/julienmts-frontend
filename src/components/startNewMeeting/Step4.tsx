@@ -334,13 +334,18 @@ export default function MeetingPrepForm(
   { handleNext, handlePrev }: { handleNext: () => void; handlePrev: () => void }
 ) {
 
+  // sales person Id from account destils page
+  const salespersonId = Cookies.get("salesperson_id");
+  // console.log(salespersonId);
+
   const dispatch = useDispatch()
   const [isSuccess, setIsSuccess] = useState(false);
   // const searchParams = useSearchParams()
   // const companyIdFromParams = searchParams.get("id")
   const companyIdFromStep2 = Cookies.get("companyId");
-  console.log(companyIdFromStep2, "=======================companyIdFromParams")
+  // console.log(companyIdFromStep2, "=======================companyIdFromParams")
   const [showDescription, setShowDescription] = useState(false);
+
 
   // Active subscription
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("")
@@ -349,8 +354,8 @@ export default function MeetingPrepForm(
   // Redux data
   const allData = useSelector((state: RootState) => state.startMeeting);
   const representatives = allData?.participants;
-  const salesperson_id = allData?.product?.salesperson_id;
-  console.log(salesperson_id, "===========salesperson_id")
+  const salesperson_id = salespersonId || allData?.product?.salesperson_id;
+  // console.log(salesperson_id, "===========salesperson_id from main flow")
   const companyId = companyIdFromStep2 || allData?.companyData?.company_id;
 
   const [createMeetingId, { isLoading }] = useCreateMeetingIdMutation();

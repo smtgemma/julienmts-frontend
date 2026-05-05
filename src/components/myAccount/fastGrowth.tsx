@@ -59,13 +59,13 @@ export default function FastGrowth({ singleData }: { singleData: any }) {
         <div className="p-6">
           <h3 className="text-[16px] font-medium text-[#636F85] mb-4">Key Stakeholders</h3>
           <div className="flex items-center gap-6">
-            {representatives?.map((stakeholder: any) => (
+            {representatives?.slice(0, 2).map((stakeholder: any) => (
               <div key={stakeholder.id} className="flex items-center gap-3">
                 <div className="bg-[#6E51E0] text-white h-10 w-10 rounded-full flex items-center justify-center text-xl">
                   {stakeholder?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <div className="text[16px] font-medium text-[#101010]">
+                  <div className="text-[16px] font-medium text-[#101010]">
                     {stakeholder.name}
                   </div>
                   <div className="text-sm text-[#636F85]">
