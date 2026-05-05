@@ -180,7 +180,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       setStatusBox("disconnected", "Connecting...");
 
       const response = await fetch(
-        `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
+        // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
+        `http://206.162.244.175:8012/meetings/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
