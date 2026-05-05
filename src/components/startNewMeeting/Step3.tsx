@@ -227,6 +227,7 @@ import { useMeetngCompanyMutation } from '@/redux/api/startMettingApi/startMetti
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { setCompanyData } from '@/redux/features/startMeeting/startMeetingSlice';
+import { motion } from "framer-motion";
 
 type FormValues = {
   company_url: string;
@@ -243,10 +244,10 @@ export default function Step3({
   const [companyDataShow, setcompanyDataShow] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useDispatch();
-  
+
   const allData = useSelector((state: RootState) => state.startMeeting);
   const salesperson_id = allData?.product?.salesperson_id;
-  console.log(salesperson_id, "===========salesperson_id")
+  // console.log(salesperson_id, "===========salesperson_id")
   console.log(salesperson_id)
 
   const [meetngCompany, { isLoading }] = useMeetngCompanyMutation();
@@ -267,9 +268,9 @@ export default function Step3({
       let url = data.company_url.trim();
 
       // ✅ auto add https if missing (recommended UX)
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        url = `https://${url}`;
-      }
+      // if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      //   url = `https://${url}`;
+      // }
 
       const response = await meetngCompany({
         company_url: url,
@@ -292,10 +293,43 @@ export default function Step3({
     <div className="p-6 bg-white rounded-lg border border-[#D1D6DB]">
 
       {/* Header */}
-      <StepTitle
-        title="Company Information"
-        subtitle="Provide details about the target company"
-      />
+      <div className="flex items-center justify-between w-full">
+        <StepTitle
+          title="Company Information"
+          subtitle="Provide details about the target company"
+        />
+
+        {isLoading && (
+          <div className="relative w-120 group">
+            {/* Dynamic Status Text - Gives the "thinking" vibe */}
+            <div className="absolute -top-6 right-0 text-[10px] font-bold uppercase tracking-tighter text-[#6E51E0] animate-pulse">
+              AI Processing...
+            </div>
+
+            {/* The Premium Track */}
+            <div className="relative h-1.5 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-50">
+
+              {/* The "Neural" Glowing Beam */}
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-[#6E51E0] to-transparent shadow-[0_0_10px_#3b82f6]"
+              />
+
+              {/* Subtle Background Pulse */}
+              <div className="absolute inset-0 bg-blue-400/10 animate-pulse" />
+            </div>
+
+            {/* Decorative Glow under the bar */}
+            <div className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-blue-300/30 to-transparent blur-sm" />
+          </div>
+        )}
+      </div>
 
       {/* FORM */}
       <form onSubmit={handleSubmit(onSubmit)}>
