@@ -197,7 +197,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       }
 
       const ws = new WebSocket(
-        `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `http://206.162.244.175:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
 
@@ -429,7 +430,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     try {
 
       const response = await fetch(
-        `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
+        // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/end`,
+        `http://206.162.244.175:8012/meetings/api/meeting/${meetingId}/end`,
         { method: "POST" }
       );
 
