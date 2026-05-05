@@ -344,7 +344,7 @@ export default function MeetingPrepForm(
   // const companyIdFromParams = searchParams.get("id")
   const companyIdFromStep2 = Cookies.get("companyId");
   // console.log(companyIdFromStep2, "=======================companyIdFromParams")
-  const [showDescription, setShowDescription] = useState(false);
+  // const [showDescription, setShowDescription] = useState(false);
 
 
   // Active subscription
@@ -392,7 +392,7 @@ export default function MeetingPrepForm(
       status: status,
       representatives: representatives,
       sales_methodology: data.sales_methodology,
-      methodology_description: data.methodology_description, // ✅ NEW FIELD
+      // methodology_description: data.methodology_description, // ✅ NEW FIELD
       meeting_goal: data.meetingGoal,
       personality: data.personality,
       duration_minutes: parseInt(data.duration) || 15,
@@ -550,7 +550,7 @@ export default function MeetingPrepForm(
               <Select
                 onValueChange={(value) => {
                   field.onChange(value)
-                  setShowDescription(true);
+                  // setShowDescription(true);
                 }} // ✅ FIXED
                 value={field.value}
               >
@@ -571,14 +571,15 @@ export default function MeetingPrepForm(
 
           {/* ✅ Show input when selected */}
           {/* {selectedMethodology && ( */}
-          {showDescription && (
+
+          {/* {showDescription && (
             <input
               type="text"
               {...register("methodology_description")}
               placeholder="Write methodology description..."
               className="mt-3 w-full px-3 py-2 border rounded-md"
             />
-          )}
+          )} */}
         </div>
 
         {/* Buttons */}
