@@ -84,11 +84,11 @@ export default function AppSidebar() {
       href: "/dashboard/startNewMeeting",
       icon: RiIdCardLine,
     },
-    {
-      label: "Custom Prompt",
-      href: "/dashboard/customPrompt",
-      icon: BsChatSquareText,
-    },
+    // {
+    //   label: "Custom Prompt",
+    //   href: "/dashboard/customPrompt",
+    //   icon: BsChatSquareText,
+    // },
     {
       label: "My Accounts",
       href: "/dashboard/myAccount",
