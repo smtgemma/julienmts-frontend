@@ -533,10 +533,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                     <span className="text-[#636F85]">Methodology:</span>
                     <span className="text-[#2D2D22] text-[16px]">{sales_methodology || "N/A"}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  {/* <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Duration:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{duration_minutes || "0"} minutes</span>
-                  </div>
+                  </div> */}
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Participants:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{representatives?.length || "0"}</span>
