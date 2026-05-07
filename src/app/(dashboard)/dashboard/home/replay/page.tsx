@@ -518,7 +518,9 @@ function Replay() {
                         />
                     </div>
                 ) : (
-                    <p className="text-gray-500">There is no any meeting recording</p>
+                    <p className="text-xl text-primaryBgColor">
+                        No data available because the meeting duration is 0.
+                    </p>
                 )}
             </div>
 
