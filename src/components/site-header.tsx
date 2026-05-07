@@ -200,6 +200,7 @@ export function SiteHeader() {
   const { data: getMe } = useGetMeQuery("")
   const { data: getAllNotifications } = useGetAllNotificationsQuery("")
   const notifications = getAllNotifications?.data || []
+  console.log(notifications, "===================notifications")
 
   const [readNotification] = useReadNotificationMutation()
   const handleNotification = async (id: any) => {
@@ -327,7 +328,8 @@ export function SiteHeader() {
                             }`}
                           onClick={() => handleNotification(notification?.id)}
                         >
-                          <p>{notification.message}</p>
+                          <p className="text-sm">{notification.title}</p>
+                          <p className="text-xs">{notification.message}</p>
                           <time>
                             {new Date(notification.createdAt).toLocaleString()}
                           </time>
