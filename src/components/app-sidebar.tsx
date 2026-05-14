@@ -121,8 +121,8 @@ export default function AppSidebar() {
                       className="w-14 h-14"
                     />
                     <h3 className="text-3xl text-[#6E51E0] font-semibold">
-                      Phora
-                    </h3>
+                      Dilico
+                    </h3> 
                   </Link>
                 </div>
 

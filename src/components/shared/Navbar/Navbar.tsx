@@ -94,7 +94,7 @@ const Navbar = () => {
                 <Link href="/" className="text-xl text-[#000000]">
                     <div className="flex items-center gap-2">
                         <img src="/navbar/logo.png" alt="logo" className='w-8 md:w-12 h-8 md:h-12' />
-                        <h3 className='text-2xl text-[#6E51E0] font-semibold'>phora</h3>
+                        <h3 className='text-2xl text-[#6E51E0] font-semibold'>Dilico</h3>
                     </div>
                 </Link>
                 {/* Center Menu */}
