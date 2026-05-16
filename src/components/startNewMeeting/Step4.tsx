@@ -354,8 +354,8 @@ export default function MeetingPrepForm(
   // Redux data
   const allData = useSelector((state: RootState) => state.startMeeting);
   const representatives = allData?.participants;
-  const salesperson_id = salespersonId || allData?.product?.salesperson_id;
-  // console.log(salesperson_id, "===========salesperson_id from main flow")
+  const salesperson_id = salespersonId ?? allData?.product?.salesperson_id;
+  console.log(salesperson_id, "===========salesperson_id from main flow")
   const companyId = companyIdFromStep2 || allData?.companyData?.company_id;
 
   const [createMeetingId, { isLoading }] = useCreateMeetingIdMutation();
@@ -395,7 +395,7 @@ export default function MeetingPrepForm(
       // methodology_description: data.methodology_description, // ✅ NEW FIELD
       meeting_goal: data.meetingGoal,
       personality: data.personality,
-      duration_minutes: parseInt(data.duration) || 15,
+      duration_minutes: parseInt(data.duration) || 5,
       difficulty: data.difficulty,
     };
 
@@ -581,6 +581,27 @@ export default function MeetingPrepForm(
             />
           )} */}
         </div>
+
+
+          <div className='mb-6'>
+            <label className="block text-sm font-medium text-[#2D2D2D] mb-2.5">Meeting Duration</label>
+            <Controller
+              name="duration"
+              control={control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="5 minutes" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Array.from({ length: 12 }, (_, i) => 5 + i * 5).map(min => (
+                      <SelectItem key={min} value={`${min} minutes`}>{min} minutes</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
 
         {/* Buttons */}
         <div className="flex justify-between">
