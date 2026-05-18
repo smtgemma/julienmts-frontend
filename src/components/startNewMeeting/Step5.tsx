@@ -2203,10 +2203,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                     <span className="text-[#636F85]">Methodology:</span>
                     <span className="text-[#2D2D22] text-[16px]">{sales_methodology || "N/A"}</span>
                   </div>
-                  {/* <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Duration:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{duration_minutes || "0"} minutes</span>
-                  </div> */}
+                  </div>
                   <div className="flex justify-between items-center">
                     <span className="text-[#636F85]">Participants:</span>
                     <span className="text-[#2D2D2D] text-[16px]">{representatives?.length || "0"}</span>
@@ -2259,11 +2259,11 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                       } transition-all duration-300 ease-in-out`}
                   >
                     <h3 className={`${repSpeaking[rep.id] ? "text-purple-800 font-bold" : "text-orange-700"} mb-1`}>
-                      {rep.name}
+                      {rep.name.toUpperCase()}
                     </h3>
-                    <p><strong>Role:</strong> {rep.role}</p>
+                    <p><strong>Role:</strong> {rep.role.toUpperCase()}</p>
                     <p>
-                      <strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality}
+                      <strong>Personality:</strong> {Array.isArray(rep.personality) ? rep.personality.join(", ") : rep.personality.toUpperCase()}
                     </p>
                   </div>
                 ))}
