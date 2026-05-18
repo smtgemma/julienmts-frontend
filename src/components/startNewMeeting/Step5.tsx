@@ -874,6 +874,7 @@ import { FaUsersGear } from "react-icons/fa6";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useUpdateMeetingMutation } from "@/redux/api/startMettingApi/startMettingApi";
+import { useRouter } from "next/navigation";
 
 
 type Rep = {
@@ -901,6 +902,8 @@ type TranscriptMessage = {
 
 export default function LiveConversation({ handlePrev }: { handlePrev: () => void }) {
 
+  const router = useRouter();
+
   // get all data form redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
   // console.log(allData?.payloadData, "============all data")
@@ -918,6 +921,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   const [transcript, setTranscript] = useState<TranscriptMessage[]>([]);
   const [reps, setReps] = useState<Rep[]>([]);
   const [repSpeaking, setRepSpeaking] = useState<{ [key: string]: boolean }>({});
+  const [timeRemaining, setTimeRemaining] = useState<number>(0); // seconds
+  const [meetingDuration, setMeetingDuration] = useState<number>(0); // total seconds
 
   // ─── Refs ─────────────────────────────────────────────
   const wsRef = useRef<WebSocket | null>(null);
@@ -946,6 +951,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   const isNewUserTurnRef = useRef(true);
   const hasDetectedVoiceRef = useRef(false);
   const startTimeRef = useRef<number | null>(null);
+  const meetingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const SILENCE_DELAY_MS = 3000;
   const SILENCE_THRESHOLD = 10;
@@ -1192,6 +1198,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         isConnectedRef.current = true;
         setStatusBox("connected", "✅ Connected — start speaking!");
         if (data.representatives) displayReps(data.representatives);
+        // ✅ Start auto-end timer if duration_minutes provided
+        if (data.duration_minutes && data.duration_minutes > 0) {
+          startMeetingTimer(data.duration_minutes);
+        }
         addMessage("System", data.message || "Connected.", "message-system");
         enableMic();
         // ✅ Auto-start listening immediately on connect
@@ -1468,6 +1478,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       stopListening();
       stopVolumeMonitor();
+      stopMeetingTimer();
 
       audioQueueRef.current = [];
       isPlayingAudioRef.current = false;
@@ -1483,10 +1494,57 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       setIsAIReplying(false);
       isAIReplyingRef.current = false;
       setTranscript([]);
+      setReps([]);
+      setRepSpeaking({});
+      setTimeRemaining(0);
+      setMeetingDuration(0);
+
+      toast.success("✅ Meeting ended successfully");
 
     } catch (error) {
       console.error("Disconnect error:", error);
+      // Reset state even on error
+      setIsConnected(false);
+      isConnectedRef.current = false;
+      setTimeRemaining(0);
+      setMeetingDuration(0);
     }
+  }
+
+  // ─── Meeting Timer (auto-end) ─────────────────────────
+  function startMeetingTimer(minutes: number) {
+    // Clear any existing timer
+    if (meetingTimerRef.current) clearInterval(meetingTimerRef.current);
+    const totalSeconds = minutes * 60;
+    setMeetingDuration(totalSeconds);
+    setTimeRemaining(totalSeconds);
+
+    meetingTimerRef.current = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          // Time's up — auto disconnect
+          if (meetingTimerRef.current) clearInterval(meetingTimerRef.current);
+          meetingTimerRef.current = null;
+          disconnect();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  }
+
+  function stopMeetingTimer() {
+    if (meetingTimerRef.current) {
+      clearInterval(meetingTimerRef.current);
+      meetingTimerRef.current = null;
+    }
+    setTimeRemaining(0);
+  }
+
+  function formatTime(seconds: number): string {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   }
 
   // ─── Heartbeat ───────────────────────────────────────
@@ -1503,6 +1561,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   useEffect(() => {
     return () => {
       stopVolumeMonitor();
+      stopMeetingTimer();
       if (wsRef.current) {
         wsRef.current.close();
       }
@@ -1618,10 +1677,47 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             </div>
           )}
 
-          {/* Mic */}
+          {/* Mic + Timer */}
           {isConnected && (
             <div>
               <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2"> Voice Conversation</h2>
+
+              {/* ⏱ Meeting Timer */}
+              {meetingDuration > 0 && (
+                <div className="mb-4 px-4">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-sm font-medium text-[#636F85]">⏱ Time Remaining</span>
+                    <span
+                      className={`text-sm font-bold font-mono ${timeRemaining <= 60
+                        ? "text-red-600 animate-pulse"
+                        : timeRemaining <= 120
+                          ? "text-orange-500"
+                          : "text-[#6E51E0]"
+                        }`}
+                    >
+                      {formatTime(timeRemaining)}
+                    </span>
+                  </div>
+                  {/* Progress bar */}
+                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-2 rounded-full transition-all duration-1000 ${timeRemaining <= 60
+                        ? "bg-red-500"
+                        : timeRemaining <= 120
+                          ? "bg-orange-400"
+                          : "bg-[#6E51E0]"
+                        }`}
+                      style={{ width: `${(timeRemaining / meetingDuration) * 100}%` }}
+                    />
+                  </div>
+                  {timeRemaining <= 60 && (
+                    <p className="text-xs text-red-500 mt-1 text-center animate-pulse">
+                      ⚠️ Meeting ending soon...
+                    </p>
+                  )}
+                </div>
+              )}
+
               <div className="flex flex-col items-center gap-4">
                 {/* ✅ Mic button still clickable as manual override, but not required */}
                 <button
