@@ -16,8 +16,9 @@ import Cookies from "js-cookie";
 function AccountDetails() {
   const router = useRouter()
   const { accountDetailsId } = useParams();
+  console.log(accountDetailsId, "accountDetailsId==============")
   const { data: singleData, isLoading } = useSingleAccountDetailsQuery(accountDetailsId as string);
-  console.log(singleData?.data?.company?.salesperson_id, "singleData==============")
+  // console.log(singleData?.data?.company?.salesperson_id, "singleData==============")
 
   const handleNewMeeting = (accountDetailsId: any) => {
     const salespersonId = singleData?.data?.company?.salesperson_id;
