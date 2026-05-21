@@ -588,7 +588,7 @@ export default function Step2({
             </div>
 
             {/* Linkedin */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <label className="text-sm font-medium">
                 LinkedIn Profile
               </label>
@@ -616,7 +616,37 @@ export default function Step2({
                       ?.linkedin_profile?.message
                   }
                 </p>
+              )} */}
+
+            {/* Linkedin */}
+            <div className="mt-4">
+              <label className="text-sm font-medium">
+                LinkedIn Profile (Optional)
+              </label>
+
+              <input
+                className="w-full border mt-1 rounded-md px-3 py-2"
+                placeholder="https://linkedin.com/in/username"
+                {...register(
+                  `participants.${index}.linkedin_profile`,
+                  {
+                    validate: (value) => {
+                      if (!value) return true;
+                      return (
+                        /^https:\/\/(www\.)?linkedin\.com\/.*$/.test(value) ||
+                        "Please enter a valid LinkedIn URL"
+                      );
+                    }
+                  }
+                )}
+              />
+
+              {errors.participants?.[index]?.linkedin_profile && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.participants[index]?.linkedin_profile?.message}
+                </p>
               )}
+
 
               {/* Decision maker */}
               <div className="mt-4 flex items-center gap-2">
