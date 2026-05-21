@@ -1,4 +1,6 @@
 
+
+
 // "use client";
 
 // import { useForm, useFieldArray, Controller } from "react-hook-form";
@@ -6,6 +8,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { setParticipantsValue } from "@/redux/features/startMeeting/startMeetingSlice";
 // import { useMeetingCompanyRepresentitiveMutation } from "@/redux/api/startMettingApi/startMettingApi";
+// import { useState } from "react";
 
 // import {
 //   Select,
@@ -20,6 +23,7 @@
 // import DashboardButton from "../shared/dashboardButton/DashboardButton";
 // import { useActiveSubscriptionQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
 // import Cookies from "js-cookie";
+// import { useSearchParams } from "next/navigation";
 
 // type Participant = {
 //   name: string;
@@ -43,12 +47,17 @@
 // }) {
 //   const dispatch = useDispatch();
 
-//   const allData = useSelector((state: RootState) => state.startMeeting);
-//   const companyId = allData?.companyData?.company_id;
+//   const [customRoles, setCustomRoles] = useState<{ [key: number]: string }>({});
 
-//   // subscription
+//   const allData = useSelector((state: RootState) => state.startMeeting);
+//   const company_id = allData?.companyData?.company_id;
+
+//   const searchParams = useSearchParams();
+//   const id = searchParams.get("id");
+//   const companyId = id || company_id;
+//   // console.log(companyId, "companyid=====================")
+
 //   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
-//   // console.log(activeSubcripiton, "=================active subscription")
 
 //   const meetingMode =
 //     activeSubcripiton?.data?.plan?.meetingMode || "1-on-1";
@@ -87,11 +96,14 @@
 //   const onSubmit = async (data: FormValues) => {
 //     const voiceId = `1-on-${data.participants.length}`;
 
-//     // save voice id in cookies 
 //     Cookies.set("last_voice_id", voiceId, { expires: 7 });
 
-//     const payload = data.participants.map((p) => ({
+//     const payload = data.participants.map((p, index) => ({
 //       ...p,
+//       role:
+//         p.role === "other"
+//           ? customRoles[index] || "other"
+//           : p.role,
 //       voice_id: voiceId,
 //     }));
 
@@ -100,10 +112,12 @@
 //         companyId,
 //         participants: payload,
 //       }).unwrap();
+
 //       if (response?.success) {
 //         toast.success(response?.message);
 //         dispatch(setParticipantsValue(response?.data?.representative_ids));
 //         handleNext();
+//         Cookies.set("companyId", companyId ?? "");
 //       }
 //     } catch (error: any) {
 //       toast.error("Something went wrong");
@@ -153,6 +167,7 @@
 //             {/* Name + Role */}
 //             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
+//               {/* Name */}
 //               <div>
 //                 <label className="text-sm font-medium">Name</label>
 //                 <input
@@ -162,7 +177,6 @@
 //                     required: "Name is required",
 //                   })}
 //                 />
-
 //                 {errors.participants?.[index]?.name && (
 //                   <p className="text-red-500 text-sm mt-1">
 //                     {errors.participants[index]?.name?.message}
@@ -179,31 +193,64 @@
 //                   control={control}
 //                   rules={{ required: "Role is required" }}
 //                   render={({ field }) => (
-//                     <Select
-//                       onValueChange={field.onChange}
-//                       value={field.value}
-//                     >
-//                       <SelectTrigger className="w-full mt-1">
-//                         <SelectValue placeholder="Select role" />
-//                       </SelectTrigger>
+//                     <>
+//                       <Select
+//                         onValueChange={(value) => {
+//                           field.onChange(value);
 
-//                       <SelectContent>
-//                         <SelectItem value="ceo">CEO</SelectItem>
-//                         <SelectItem value="cmo">CMO</SelectItem>
-//                         <SelectItem value="cfo">CFO</SelectItem>
-//                         <SelectItem value="coo">COO</SelectItem>
-//                         <SelectItem value="cto">CTO</SelectItem>
-//                         <SelectItem value="vp_sales">
-//                           VP Sales
-//                         </SelectItem>
-//                         <SelectItem value="manager">
-//                           Manager
-//                         </SelectItem>
-//                         <SelectItem value="director">
-//                           Director
-//                         </SelectItem>
-//                       </SelectContent>
-//                     </Select>
+//                           if (value === "other") {
+//                             setCustomRoles((prev) => ({
+//                               ...prev,
+//                               [index]: "",
+//                             }));
+//                           } else {
+//                             setCustomRoles((prev) => {
+//                               const updated = { ...prev };
+//                               delete updated[index];
+//                               return updated;
+//                             });
+//                           }
+//                         }}
+//                         value={field.value}
+//                       >
+//                         <SelectTrigger className="w-full mt-1">
+//                           <SelectValue placeholder="Select role" />
+//                         </SelectTrigger>
+
+//                         <SelectContent>
+//                           <SelectItem value="other">Other</SelectItem>
+//                           <SelectItem value="ceo">CEO</SelectItem>
+//                           <SelectItem value="cmo">CMO</SelectItem>
+//                           <SelectItem value="cfo">CFO</SelectItem>
+//                           <SelectItem value="coo">COO</SelectItem>
+//                           <SelectItem value="cto">CTO</SelectItem>
+//                           <SelectItem value="vp_sales">VP Sales</SelectItem>
+//                           <SelectItem value="manager">Manager</SelectItem>
+//                           <SelectItem value="director">Director</SelectItem>
+//                         </SelectContent>
+//                       </Select>
+
+//                       {/* Custom Role Input */}
+//                       {customRoles[index] !== undefined && (
+//                         <div className="mt-3">
+//                           <input
+//                             className="w-full border rounded-md px-3 py-2"
+//                             placeholder="Enter custom role"
+//                             value={customRoles[index]}
+//                             onChange={(e) => {
+//                               const value = e.target.value;
+
+//                               setCustomRoles((prev) => ({
+//                                 ...prev,
+//                                 [index]: value,
+//                               }));
+
+//                               field.onChange(value);
+//                             }}
+//                           />
+//                         </div>
+//                       )}
+//                     </>
 //                   )}
 //                 />
 
@@ -216,8 +263,7 @@
 //             </div>
 
 //             {/* Linkedin */}
-//             <div className="mt-4">
-
+//             {/* <div className="mt-4">
 //               <label className="text-sm font-medium">
 //                 LinkedIn Profile
 //               </label>
@@ -245,6 +291,35 @@
 //                       ?.linkedin_profile?.message
 //                   }
 //                 </p>
+//               )} */}
+
+//             {/* Linkedin */}
+//             <div className="mt-4">
+//               <label className="text-sm font-medium">
+//                 LinkedIn Profile (Optional)
+//               </label>
+
+//               <input
+//                 className="w-full border mt-1 rounded-md px-3 py-2"
+//                 placeholder="https://linkedin.com/in/username"
+//                 {...register(
+//                   `participants.${index}.linkedin_profile`,
+//                   {
+//                     validate: (value) => {
+//                       if (!value) return true;
+//                       return (
+//                         /^https:\/\/(www\.)?linkedin\.com\/.*$/.test(value) ||
+//                         "Please enter a valid LinkedIn URL"
+//                       );
+//                     }
+//                   }
+//                 )}
+//               />
+
+//               {errors.participants?.[index]?.linkedin_profile && (
+//                 <p className="text-red-500 text-sm mt-1">
+//                   {errors.participants[index]?.linkedin_profile?.message}
+//                 </p>
 //               )}
 
 //               {/* Decision maker */}
@@ -255,7 +330,6 @@
 //                     `participants.${index}.is_decision_maker`
 //                   )}
 //                 />
-
 //                 <label className="text-sm">
 //                   Is Decision Maker?
 //                 </label>
@@ -300,7 +374,7 @@
 //           className="w-full py-3 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-50"
 //         >
 //           <Plus size={20} />
-//           <span className="cursor-pointer">Add Another Participant</span>
+//           Add Another Participant
 //         </button>
 
 //         {/* Footer */}
@@ -323,7 +397,6 @@
 //     </div>
 //   );
 // }
-
 
 
 "use client";
@@ -353,9 +426,10 @@ import { useSearchParams } from "next/navigation";
 type Participant = {
   name: string;
   role: string;
+  role_description: string;
   notes: string;
   is_decision_maker: boolean;
-  linkedin_profile: string;
+  linkedin_profile?: string;
   voice_id?: string;
 };
 
@@ -380,7 +454,6 @@ export default function Step2({
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const companyId = id || company_id;
-  // console.log(companyId, "companyid=====================")
 
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
 
@@ -405,6 +478,7 @@ export default function Step2({
         {
           name: "",
           role: "",
+          role_description: "",
           notes: "",
           is_decision_maker: false,
           linkedin_profile: "",
@@ -423,14 +497,19 @@ export default function Step2({
 
     Cookies.set("last_voice_id", voiceId, { expires: 7 });
 
-    const payload = data.participants.map((p, index) => ({
-      ...p,
-      role:
-        p.role === "other"
-          ? customRoles[index] || "other"
-          : p.role,
-      voice_id: voiceId,
-    }));
+    const payload = data.participants.map((p, index) => {
+      const participantData: any = {
+        ...p,
+        role: p.role === "other" ? customRoles[index] || "other" : p.role,
+        voice_id: voiceId,
+      };
+
+      if (!p.linkedin_profile || p.linkedin_profile.trim() === "") {
+        delete participantData.linkedin_profile;
+      }
+
+      return participantData;
+    });
 
     try {
       const response = await meetingCompanyRepresentitive({
@@ -445,7 +524,8 @@ export default function Step2({
         Cookies.set("companyId", companyId ?? "");
       }
     } catch (error: any) {
-      toast.error("Something went wrong");
+      const backendError = error?.data?.errorMessages?.[0]?.message || error?.data?.message || "Something went wrong";
+      toast.error(backendError);
     }
   };
 
@@ -587,38 +667,18 @@ export default function Step2({
               </div>
             </div>
 
-            {/* Linkedin */}
-            {/* <div className="mt-4">
-              <label className="text-sm font-medium">
-                LinkedIn Profile
-              </label>
-
-              <input
-                className="w-full border mt-1 rounded-md px-3 py-2"
-                placeholder="https://linkedin.com/in/username"
-                {...register(
-                  `participants.${index}.linkedin_profile`,
-                  {
-                    pattern: {
-                      value:
-                        /^https:\/\/(www\.)?linkedin\.com\/.*$/,
-                      message:
-                        "Please enter a valid LinkedIn URL",
-                    },
-                  }
-                )}
+            {/* Role Description Field */}
+            <div className="mt-4">
+              <label className="text-sm font-medium">Role Description</label>
+              <textarea
+                className="w-full border rounded-md px-3 py-2 mt-1"
+                rows={2}
+                placeholder="Describe their responsibilities or team focus..."
+                {...register(`participants.${index}.role_description`)}
               />
+            </div>
 
-              {errors.participants?.[index]?.linkedin_profile && (
-                <p className="text-red-500 text-sm mt-1">
-                  {
-                    errors.participants[index]
-                      ?.linkedin_profile?.message
-                  }
-                </p>
-              )} */}
-
-            {/* Linkedin */}
+            {/* LinkedIn Profile */}
             <div className="mt-4">
               <label className="text-sm font-medium">
                 LinkedIn Profile (Optional)
@@ -627,18 +687,15 @@ export default function Step2({
               <input
                 className="w-full border mt-1 rounded-md px-3 py-2"
                 placeholder="https://linkedin.com/in/username"
-                {...register(
-                  `participants.${index}.linkedin_profile`,
-                  {
-                    validate: (value) => {
-                      if (!value) return true;
-                      return (
-                        /^https:\/\/(www\.)?linkedin\.com\/.*$/.test(value) ||
-                        "Please enter a valid LinkedIn URL"
-                      );
-                    }
-                  }
-                )}
+                {...register(`participants.${index}.linkedin_profile`, {
+                  validate: (value) => {
+                    if (!value || value.trim() === "") return true;
+                    return (
+                      /^https:\/\/(www\.)?linkedin\.com\/.*$/.test(value) ||
+                      "Please enter a valid LinkedIn URL"
+                    );
+                  },
+                })}
               />
 
               {errors.participants?.[index]?.linkedin_profile && (
@@ -646,36 +703,31 @@ export default function Step2({
                   {errors.participants[index]?.linkedin_profile?.message}
                 </p>
               )}
-
-
-              {/* Decision maker */}
-              <div className="mt-4 flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  {...register(
-                    `participants.${index}.is_decision_maker`
-                  )}
-                />
-                <label className="text-sm">
-                  Is Decision Maker?
-                </label>
-              </div>
-
-              {/* Notes */}
-              <div className="mt-4">
-                <label className="text-sm font-medium">Notes</label>
-                <textarea
-                  className="w-full border rounded-md px-3 py-2 mt-1"
-                  rows={3}
-                  placeholder="Write notes here..."
-                  {...register(`participants.${index}.notes`)}
-                />
-              </div>
-
-              <p className="text-sm text-gray-500 mt-2">
-                Meeting Mode: 1-on-{fields.length}
-              </p>
             </div>
+
+            {/* Decision maker */}
+            <div className="mt-4 flex items-center gap-2">
+              <input
+                type="checkbox"
+                {...register(`participants.${index}.is_decision_maker`)}
+              />
+              <label className="text-sm">Is Decision Maker?</label>
+            </div>
+
+            {/* Notes */}
+            <div className="mt-4">
+              <label className="text-sm font-medium">Notes</label>
+              <textarea
+                className="w-full border rounded-md px-3 py-2 mt-1"
+                rows={3}
+                placeholder="Write notes here..."
+                {...register(`participants.${index}.notes`)}
+              />
+            </div>
+
+            <p className="text-sm text-gray-500 mt-4">
+              Meeting Mode: 1-on-{fields.length}
+            </p>
           </div>
         ))}
 
@@ -687,6 +739,7 @@ export default function Step2({
               append({
                 name: "",
                 role: "",
+                role_description: "",
                 notes: "",
                 is_decision_maker: false,
                 linkedin_profile: "",
