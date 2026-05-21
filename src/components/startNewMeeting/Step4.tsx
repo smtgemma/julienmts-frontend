@@ -335,7 +335,10 @@ export default function MeetingPrepForm(
 ) {
 
   // sales person Id from account destils page
-  const salespersonId = Cookies.get("salesperson_id");
+  const rawSalespersonId = Cookies.get("salesperson_id");
+  const salespersonId = (rawSalespersonId === "undefined" || rawSalespersonId === "null" || !rawSalespersonId) 
+    ? undefined 
+    : rawSalespersonId;
   // console.log(salespersonId);
 
   const dispatch = useDispatch()

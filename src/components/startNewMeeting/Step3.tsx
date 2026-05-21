@@ -228,6 +228,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { setCompanyData } from '@/redux/features/startMeeting/startMeetingSlice';
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
 
 type FormValues = {
   company_url: string;
@@ -246,7 +247,14 @@ export default function Step3({
   const dispatch = useDispatch();
 
   const allData = useSelector((state: RootState) => state.startMeeting);
-  const salesperson_id = allData?.product?.salesperson_id;
+  
+  // Safely get salesperson_id from either Redux or Cookie (similar to Step4)
+  const rawSalespersonId = Cookies.get("salesperson_id");
+  const salespersonIdFromCookie = (rawSalespersonId === "undefined" || rawSalespersonId === "null" || !rawSalespersonId) 
+    ? undefined 
+    : rawSalespersonId;
+    
+  const salesperson_id = salespersonIdFromCookie ?? allData?.product?.salesperson_id;
   // console.log(salesperson_id, "===========salesperson_id")
   console.log(salesperson_id)
 

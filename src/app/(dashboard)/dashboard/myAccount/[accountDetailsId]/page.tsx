@@ -22,8 +22,12 @@ function AccountDetails() {
 
   const handleNewMeeting = (accountDetailsId: any) => {
     const salespersonId = singleData?.data?.company?.salesperson_id;
-    // cookie set
-    Cookies.set("salesperson_id", salespersonId);
+    // cookie set: only set if defined, else remove to prevent setting the string "undefined"
+    if (salespersonId) {
+      Cookies.set("salesperson_id", salespersonId);
+    } else {
+      Cookies.remove("salesperson_id");
+    }
 
     // redirect
     router.push(`/dashboard/startNewMeeting?step=3&id=${accountDetailsId}`);
