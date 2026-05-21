@@ -27,7 +27,7 @@ function NextMeeting() {
                 </div>
               </Link>
 
-              <Link href="" className="">
+              {/* <Link href="" className="">
                 <div
                   className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
                                          border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px]"
@@ -37,7 +37,7 @@ function NextMeeting() {
                   </span>
                   <GoArrowRight className="w-5 h-5" />
                 </div>
-              </Link>
+              </Link> */}
 
             </div>
           </div>
