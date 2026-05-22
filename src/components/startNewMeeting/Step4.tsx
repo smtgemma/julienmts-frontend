@@ -470,7 +470,7 @@ export default function MeetingPrepForm(
         {isSuccess && (
           <div className="mb-6">
             <label className="block text-sm font-medium text-[#2D2D2D] mb-2.5">
-              Top 5 Discovery Questions
+              Top 5 Questions
             </label>
             <div className="space-y-3">
               {fields.map((field, index) => (
