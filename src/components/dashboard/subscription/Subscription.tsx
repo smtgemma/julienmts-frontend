@@ -1,4 +1,6 @@
 
+
+
 // "use client"
 
 // import { useActiveSubscriptionQuery, useGetAllSubscriptionsQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
@@ -6,9 +8,10 @@
 // import Loading from "@/components/Others/Loading";
 // import { useState } from "react";
 // import PassPayment from "./payment/PassPayment";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/redux/store";
+// // import { useSelector } from "react-redux";
+// // import { RootState } from "@/redux/store";
 // import LoginRequiredModal from "./payment/LoginRequiredModal";
+// import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 
 // interface Plan {
 //   name: string;
@@ -18,17 +21,29 @@
 //   features: string[];
 //   id: string;
 //   meetingMode: string;
+//   interval: string;
 // }
 
 // const SubscriptionPlan: React.FC = () => {
+//   const [planType, setPlanType] = useState<"monthly" | "yearly">("monthly");
+//   const togglePlan = () => {
+//     setPlanType((prev) => (prev === "monthly" ? "yearly" : "monthly"));
+//   };
+
+
 //   const [planId, setPlanId] = useState<string | null>(null)
 //   const [showLoginModal, setShowLoginModal] = useState(false)
 //   const pathName = usePathname()
 
-//   const user = useSelector((state: RootState) => state.user.token);
-//   const isLoggedIn = Boolean(user);
+//   // const user = useSelector((state: RootState) => state.user.token);
+//   // const isLoggedIn = Boolean(user);
+//   const { data: getMe } = useGetMeQuery("")
+//   const isLoggedIn = getMe;
+//   console.log(getMe)
 
-//   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery("")
+//   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery({
+//     interval: planType,
+//   })
 //   // console.log(getAllSubscriptions, "=================")
 //   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
 //   // console.log(activeSubcripiton?.data?.plan?.id, "=================active subscription")
@@ -51,7 +66,7 @@
 //   if (isLoading) {
 //     return (
 //       <div>
-//         <Loading />
+//         <Loading title="Loading subscription plan" />
 //       </div>
 //     );
 //   }
@@ -80,26 +95,54 @@
 //               </div>
 //             )
 //           }
+
+//           <div className='my-6 flex items-center justify-center gap-4'>
+//             <p className='text-[16px] text-[#2D2D2D]'>Monthly</p>
+
+//             <button
+//               onClick={togglePlan}
+//               className='w-14 h-8 rounded-full relative flex items-center p-1 bg-primaryBgColor transition-all cursor-pointer'
+//             >
+//               <span
+//                 className={`w-6 h-6 bg-white rounded-full transition-all duration-300
+//                             ${planType === "yearly" ? "translate-x-6" : ""}`}
+//               ></span>
+//             </button>
+
+//             <p className='text-[16px] text-[#2D2D2D]'>Yearly</p>
+//             <p className='text-[#6E51E0] text-sm border rounded-full px-3 py-1'>
+//               30% Off
+//             </p>
+//           </div>
+
 //           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 //             {plans.map((plan: Plan, index: number) => (
 //               <div
 //                 key={index}
-//                 className={`flex h-full flex-col rounded-lg bg-white p-6 shadow-sm ${plan.highlighted ? "ring-2 ring-indigo-600" : ""
-//                   }`}
+//                 className={`group flex h-full flex-col rounded-lg bg-white p-6 shadow-sm ${plan.highlighted ? "ring-2 ring-indigo-600" : ""}`}
 //               >
 //                 <div className="mb-4 rounded-xl bg-gray-2 p-4 bg-gray-100">
 //                   <div className="flex justify-between items-center">
 //                     <div
-//                       className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium ${plan.id === String(activeSubcripiton?.data?.plan?.id)
+//                       className={`mb-4 inline-block rounded-full px-4 py-1 text-sm font-medium transition-colors 
+//                      ${plan.id === String(activeSubcripiton?.data?.plan?.id)
 //                           ? "bg-primaryBgColor text-white"
 //                           : plan.highlighted
 //                             ? "bg-primaryBgColor text-white"
-//                             : "bg-white hover:bg-primaryBgColor text-primaryBgColor hover:text-white"
+//                             : "bg-white text-primaryBgColor hover:bg-primaryBgColor hover:text-white group-hover:bg-primaryBgColor group-hover:text-white"
 //                         }`}
 //                     >
 //                       {plan.name}
 //                     </div>
-//                     <p className="text-sm text-indigo-600">{plan.meetingMode}</p>
+//                     <p className="text-sm text-indigo-600">
+//                       {plan?.meetingMode === "1-on-1"
+//                         ? "1 to 1"
+//                         : plan?.meetingMode === "1-on-2"
+//                           ? "1 to 2"
+//                           : plan?.meetingMode === "1-on-3"
+//                             ? "1 to 3"
+//                             : "N/A"} 
+//                     </p>
 //                   </div>
 
 //                   {/* Description */}
@@ -112,7 +155,7 @@
 //                     <span className="text-2xl font-bold text-gray-900 xl:text-3xl">
 //                       ${plan.price.toFixed(2)}
 //                     </span>
-//                     <span className="ml-2 text-gray-500">/Month</span>
+//                     <span className="ml-2 text-gray-500">/{plan.interval || "N/A"}</span>
 //                   </div>
 //                 </div>
 
@@ -153,10 +196,10 @@
 //                   <button
 //                     onClick={() => handlePurchase(plan.id)}
 //                     disabled={plan.id === String(activeSubcripiton?.data?.plan?.id)}
-//                     className={`w-full py-2 border text-sm font-medium rounded-full flex items-center justify-center transition 
-//   ${plan.id === String(activeSubcripiton?.data?.plan?.id)
+//                     className={`w-full py-2 border text-sm font-medium rounded-full flex items-center justify-center transition-colors
+//                     ${plan.id === String(activeSubcripiton?.data?.plan?.id)
 //                         ? "bg-primaryBgColor text-white cursor-not-allowed"
-//                         : "bg-[#FBFBFB] border-gray-200 text-[#2D2D2D] hover:bg-primaryBgColor hover:text-white cursor-pointer"
+//                         : "bg-[#FBFBFB] border-gray-200 text-[#2D2D2D] hover:bg-primaryBgColor hover:text-white group-hover:bg-primaryBgColor group-hover:text-white cursor-pointer"
 //                       }`}
 //                     style={{
 //                       boxShadow:
@@ -204,6 +247,9 @@
 
 
 
+
+
+
 "use client"
 
 import { useActiveSubscriptionQuery, useGetAllSubscriptionsQuery } from "@/redux/api/subscriptionApi/subscriptionApi";
@@ -247,7 +293,7 @@ const SubscriptionPlan: React.FC = () => {
   const { data: getAllSubscriptions, isLoading } = useGetAllSubscriptionsQuery({
     interval: planType,
   })
-  // console.log(getAllSubscriptions, "=================")
+  console.log(getAllSubscriptions, "=================dsdsfdsfdsf")
   const { data: activeSubcripiton } = useActiveSubscriptionQuery("");
   // console.log(activeSubcripiton?.data?.plan?.id, "=================active subscription")
 
@@ -446,3 +492,4 @@ const SubscriptionPlan: React.FC = () => {
 };
 
 export default SubscriptionPlan;
+
