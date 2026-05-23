@@ -106,13 +106,18 @@ import { Building2, FileText, Play, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function RecentMeetings({ recentMeetings }: { recentMeetings: any }) {
+  // Sort newest first
+  const sortedMeetings = [...(recentMeetings || [])].sort(
+    (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         Recent Meetings
       </h1>
 
-      {recentMeetings.length === 0 ? (
+      {sortedMeetings.length === 0 ? (
         // ✅ Empty State UI
         <div className="flex flex-col items-center justify-center border border-dashed border-gray-300 rounded-xl py-16">
           <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#F4F6FA] mb-4">

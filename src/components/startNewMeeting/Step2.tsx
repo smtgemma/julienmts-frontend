@@ -426,6 +426,7 @@ import { useSearchParams } from "next/navigation";
 type Participant = {
   name: string;
   role: string;
+  gender: string;
   role_description: string;
   notes: string;
   is_decision_maker: boolean;
@@ -478,6 +479,7 @@ export default function Step2({
         {
           name: "",
           role: "",
+          gender: "",
           role_description: "",
           notes: "",
           is_decision_maker: false,
@@ -569,14 +571,14 @@ export default function Step2({
               )}
             </div>
 
-            {/* Name + Role */}
+            {/* Name + Gender */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
               {/* Name */}
               <div>
                 <label className="text-sm font-medium">Name</label>
                 <input
-                  className="w-full border mt-1 rounded-md px-3 py-2"
+                  className="w-full border mt-1 rounded-md px-3 py-1.5"
                   placeholder="Sarah Miller"
                   {...register(`participants.${index}.name`, {
                     required: "Name is required",
@@ -589,9 +591,36 @@ export default function Step2({
                 )}
               </div>
 
-              {/* Role */}
+              {/* Gender */}
               <div>
-                <label className="text-sm font-medium">Role</label>
+                <label className="text-sm font-medium">Gender</label>
+                <Controller
+                  name={`participants.${index}.gender`}
+                  control={control}
+                  rules={{ required: "Gender is required" }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full mt-1">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="male">Male</SelectItem>
+                        <SelectItem value="female">Female</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.participants?.[index]?.gender && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.participants[index]?.gender?.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Role */}
+            <div className="mt-4">
+              <label className="text-sm font-medium">Role</label>
 
                 <Controller
                   name={`participants.${index}.role`}
@@ -664,7 +693,6 @@ export default function Step2({
                     {errors.participants[index]?.role?.message}
                   </p>
                 )}
-              </div>
             </div>
 
             {/* Role Description Field */}
@@ -739,6 +767,7 @@ export default function Step2({
               append({
                 name: "",
                 role: "",
+                gender: "",
                 role_description: "",
                 notes: "",
                 is_decision_maker: false,

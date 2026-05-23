@@ -115,13 +115,18 @@ export default function RecentMeetings({ singleData }: { singleData: any }) {
 
     const [showAll, setShowAll] = useState(false);
 
+    // Sort newest first
+    const sortedMeetings = [...meetings].sort(
+        (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+
     const getScoreColor = (score: number) => {
         if (score >= 80) return 'text-[#6E51E0] bg-[#6E51E01A]';
         if (score >= 70) return 'text-[#6E51E0] bg-[#6E51E01A]';
         return 'text-orange-600 bg-orange-50';
     };
 
-    const displayedMeetings = showAll ? meetings : meetings.slice(0, 2);
+    const displayedMeetings = showAll ? sortedMeetings : sortedMeetings.slice(0, 2);
 
     return (
         <div>

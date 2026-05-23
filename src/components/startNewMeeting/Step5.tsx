@@ -1867,6 +1867,54 @@ type Rep = {
   personality: string[] | string;
 };
 
+// Methodology core fields data (same as Step4)
+const METHODOLOGY_DATA: Record<string, { field: string; definition: string }[]> = {
+  MEDDIC: [
+    { field: "Metrics", definition: "Quantified business impact / ROI" },
+    { field: "Economic Buyer", definition: "Person with final budget authority" },
+    { field: "Decision Criteria", definition: "Factors used to evaluate vendors" },
+    { field: "Decision Process", definition: "Steps to approve purchase" },
+    { field: "Identify Pain", definition: "Main business problem to solve" },
+    { field: "Champion", definition: "Internal advocate pushing your deal" },
+  ],
+  "Challenger Sales": [
+    { field: "Commercial Insight", definition: "New perspective taught to buyer" },
+    { field: "Pain Intensity", definition: "Severity of business issue" },
+    { field: "Change Urgency", definition: "Need to act now" },
+    { field: "Stakeholder Alignment", definition: "Internal agreement across teams" },
+    { field: "Status Quo Cost", definition: "Risk/cost of doing nothing" },
+  ],
+  BANT: [
+    { field: "Budget", definition: "Available spending capacity" },
+    { field: "Authority", definition: "Decision-maker ownership" },
+    { field: "Need", definition: "Clear business requirement" },
+    { field: "Timeline", definition: "Expected buying timeframe" },
+  ],
+  "SPIN Selling": [
+    { field: "Situation", definition: "Current customer environment" },
+    { field: "Problem", definition: "Existing issue/friction" },
+    { field: "Implication", definition: "Business consequences of problem" },
+    { field: "Need-Payoff", definition: "Value of solving the issue" },
+  ],
+  MEDDPICC: [
+    { field: "Metrics", definition: "Quantified business impact" },
+    { field: "Economic Buyer", definition: "Final financial approver" },
+    { field: "Decision Criteria", definition: "Vendor evaluation standards" },
+    { field: "Decision Process", definition: "Internal approval workflow" },
+    { field: "Paper Process", definition: "Procurement/legal contract steps" },
+    { field: "Identify Pain", definition: "Critical business challenge" },
+    { field: "Champion", definition: "Internal supporter influencing deal" },
+    { field: "Competition", definition: "Alternative vendors or status quo" },
+  ],
+  "Value Selling": [
+    { field: "Business Value", definition: "Measurable customer gain" },
+    { field: "ROI", definition: "Financial return expected" },
+    { field: "Customer Goals", definition: "Strategic objectives" },
+    { field: "Pain Cost", definition: "Cost of current problem" },
+    { field: "Success Outcomes", definition: "Desired measurable result" },
+  ],
+};
+
 type AudioQueueItem = {
   base64: string;
   mimeType: string;
@@ -1890,7 +1938,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   // get all data form redux 
   const allData = useSelector((state: RootState) => state.startMeeting);
   // console.log(allData?.payloadData, "============all data")
-  const { meeting_goal, duration_minutes, sales_methodology, representatives } = allData?.payloadData || {}
+  const { meeting_goal, duration_minutes, sales_methodology, representatives, questions } = allData?.payloadData || {}
 
   const [updateMeeting] = useUpdateMeetingMutation()
 
@@ -2573,11 +2621,11 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   return (
     <div className="flex justify-center items-center">
       <div className="bg-white w-full border border-[#6E51E0] rounded-xl p-2">
-        {/* Setup */}
+        {/* Setup — Pre-meeting screen */}
         {!isConnected && (
           <div>
             {/* Play Icon */}
-            <div className="flex justify-center mb-6 mt-4">
+            <div className="flex justify-center mb-6">
               <div className="w-20 h-20 bg-[#6E51E0] rounded-full flex items-center justify-center">
                 <Play className="w-8 h-8 text-white" />
               </div>
@@ -2634,6 +2682,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
           </div>
         )}
 
+
         {/* Content */}
         <div className="p-8 space-y-6">
           {/* Status */}
@@ -2676,6 +2725,52 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Methodology & Questions Reference Panel */}
+          {isConnected && (sales_methodology || (questions && questions.length > 0)) && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Methodology Core Fields */}
+              {sales_methodology && METHODOLOGY_DATA[sales_methodology] && (
+                <div className="bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[#6E51E0] mb-3 flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+                    {sales_methodology} — Core Fields
+                  </h3>
+                  <div className="space-y-1.5">
+                    {METHODOLOGY_DATA[sales_methodology].map((item) => (
+                      <div key={item.field} className="flex items-start gap-2">
+                        <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#6E51E0] mt-1.5" />
+                        <div className="flex flex-wrap gap-x-1.5 text-xs leading-relaxed">
+                          <span className="font-semibold text-[#2D2D2D]">{item.field}</span>
+                          <span className="text-[#636F85]">— {item.definition}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Discovery Questions */}
+              {questions && questions.length > 0 && (
+                <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-[#16A34A] mb-3 flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+                    Discovery Questions
+                  </h3>
+                  <ol className="space-y-1.5">
+                    {questions.map((q: string, i: number) => (
+                      <li key={i} className="flex gap-2 items-start text-xs">
+                        <span className="flex-shrink-0 w-4 h-4 rounded-full bg-[#16A34A] text-white text-[9px] font-bold flex items-center justify-center mt-0.5">
+                          {i + 1}
+                        </span>
+                        <span className="text-[#2D2D2D] leading-relaxed">{q}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
             </div>
           )}
 

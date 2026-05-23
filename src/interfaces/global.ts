@@ -57,6 +57,7 @@ interface MeetingPayload {
   personality: string;
   duration_minutes: number;
   difficulty: string;
+  questions?: string[];
 }
 
 // Full meeting state (IMPORTANT)

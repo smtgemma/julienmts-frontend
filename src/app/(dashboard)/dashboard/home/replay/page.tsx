@@ -434,6 +434,8 @@ import { useConversationHistoryQuery } from "@/redux/api/myAccountApi/myAccountA
 import Loading from "@/components/Others/Loading";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import Link from "next/link";
+import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
+import Image from "next/image";
 
 type TranscriptTurn = {
     turn_number: number;
@@ -448,6 +450,11 @@ function Replay() {
     const searchParams = useSearchParams();
     const meetingId = searchParams.get("meetingId") || "";
     const sessionId = searchParams.get("sessionId") || "";
+
+    // ✅ Logged-in user profile
+    const { data: getMe } = useGetMeQuery("");
+    const userProfileImage = getMe?.data?.profileImage || "/dashboardImage/profileImage.svg";
+    const userName = `${getMe?.data?.firstName || ""} ${getMe?.data?.lastName || ""}`.trim() || "You";
 
     // ✅ API call
     const { data: getSummary, isLoading } = useConversationHistoryQuery({
@@ -541,14 +548,16 @@ function Replay() {
                         <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
                                 <div className="w-8 h-8">
-                                    <img
-                                        src="/dashboardImage/profileImage.svg"
-                                        alt=""
-                                        className="rounded-full"
+                                    <Image
+                                        src={turn.speaker_name === "Salesperson" ? userProfileImage : "/dashboardImage/profileImage.svg"}
+                                        alt={turn.speaker_name}
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full object-cover w-8 h-8"
                                     />
                                 </div>
                                 <span className="text-[16px] font-medium text-[#0A0A0A]">
-                                    {turn.speaker_name}
+                                    {turn.speaker_name === "Salesperson" ? userName : turn.speaker_name}
                                 </span>
                             </div>
                             <p className="text-sm text-[#364153]">{turn.text}</p>
