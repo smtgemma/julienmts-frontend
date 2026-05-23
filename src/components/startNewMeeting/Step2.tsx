@@ -681,7 +681,7 @@ export default function Step2({
             {/* LinkedIn Profile */}
             <div className="mt-4">
               <label className="text-sm font-medium">
-                LinkedIn Profile (Optional)
+                LinkedIn Profile
               </label>
 
               <input
