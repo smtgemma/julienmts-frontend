@@ -1,31 +1,18 @@
 import type { NextConfig } from "next";
 
-// const isProd = process.env.NEXT_PUBLIC_ENV === "production";
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // Allows all hostnames
+        hostname: "**",
       },
       {
         protocol: "http",
-        hostname: "**", // Allows all hostnames
+        hostname: "**",
       },
     ],
   },
-  // env: {
-  //   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: isProd
-  //     ? process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  //     : process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_DEV,
-  //   NEXT_PUBLIC_SOCKET_URL: isProd
-  //     ? process.env.NEXT_PUBLIC_SOCKET_URL
-  //     : process.env.NEXT_PUBLIC_SOCKET_URL_DEV,
-  //   NEXT_PUBLIC_URL: isProd
-  //     ? process.env.NEXT_PUBLIC_URL
-  //     : process.env.NEXT_PUBLIC_URL_DEV,
-  // },
 };
 
 export default nextConfig;

@@ -1973,9 +1973,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     type: TranscriptMessage['type'];
   } | null>(null);
 
-  // ✅ FIX: silenceStart as a ref to avoid closure bug
   const silenceStartRef = useRef<number | null>(null);
-
   const isRecordingRef = useRef(false);
   const isAIReplyingRef = useRef(false);
   const isConnectedRef = useRef(false);
@@ -1984,7 +1982,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   const startTimeRef = useRef<number | null>(null);
   const meetingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const SILENCE_DELAY_MS = 3000;
+  // Silence detection: 800ms after voice stops → send audio (faster than old 3s)
+  const SILENCE_DELAY_MS = 800;
   const SILENCE_THRESHOLD = 10;
 
   // ─── Sync refs with state ─────────────────────────────
@@ -2365,12 +2364,13 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     isRecordingRef.current = false;
   }
 
+  // ─── Mic + fast silence detection ─────────────────────
   async function startListening() {
-    // ✅ Use refs for reliable state check inside async/callbacks
     if (isRecordingRef.current || isAIReplyingRef.current || !isConnectedRef.current || isPlayingAudioRef.current) return;
 
     isNewUserTurnRef.current = true;
     hasDetectedVoiceRef.current = false;
+
     try {
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 48000 },
@@ -2416,9 +2416,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
         if (wsRef.current?.readyState === WebSocket.OPEN && hasSentAudio && hasDetectedVoiceRef.current) {
           wsRef.current.send(JSON.stringify({ type: "audio_chunk", data: "", is_speaking: false }));
         } else {
-          // If no voice was detected, don't trigger AI, just reset for next try
           if (isConnectedRef.current && !isAIReplyingRef.current) {
-            setTimeout(() => startListening(), 500);
+            setTimeout(() => startListening(), 300);
           }
         }
         audioStream.getTracks().forEach((t) => t.stop());
@@ -2430,10 +2429,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       setIsRecording(true);
       isRecordingRef.current = true;
       setStatusBox("recording", "🎙️ Listening...");
-      setMicLabel("Listening... (auto-stops on silence)");
+      setMicLabel("Listening...");
       startVolumeMonitor();
+
     } catch (err) {
-      // console.error("Mic error:", err);
       addMessage("System", "⚠️ Microphone access denied.", "message-system");
     }
   }
@@ -2449,13 +2448,13 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     setMicLabel("Processing...");
   }
 
-  // ✅ Manual toggle still works if user wants to click
   function toggleRecording() {
     if (isAIReplyingRef.current || isPlayingAudioRef.current) return;
     if (isRecordingRef.current) stopListening();
     else startListening();
   }
 
+  // ─── Volume monitor (fast silence: 800ms) ─────────────
   function startVolumeMonitor() {
     if (!analyserRef.current) return;
     const analyser = analyserRef.current;
@@ -2465,14 +2464,12 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       analyser.getByteFrequencyData(dataArray);
       const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
-      // Track if we hear anything significant (above noise floor)
       if (avg > SILENCE_THRESHOLD) {
         hasDetectedVoiceRef.current = true;
-      }
-
-      if (avg < SILENCE_THRESHOLD) {
+        silenceStartRef.current = null;
+        setSilenceCountdown("");
+      } else {
         if (!silenceStartRef.current) {
-          // ✅ FIX: use ref instead of local variable — no closure bug
           silenceStartRef.current = Date.now();
         } else {
           const elapsed = Date.now() - silenceStartRef.current;
@@ -2481,15 +2478,10 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
             stopVolumeMonitor();
             stopListening();
           } else {
-            setSilenceCountdown(
-              `Sending in ${((SILENCE_DELAY_MS - elapsed) / 1000).toFixed(1)}s...`
-            );
+            const remaining = ((SILENCE_DELAY_MS - elapsed) / 1000).toFixed(1);
+            setSilenceCountdown(`Sending in ${remaining}s...`);
           }
         }
-      } else {
-        // ✅ Voice detected — reset silence timer
-        silenceStartRef.current = null;
-        setSilenceCountdown("");
       }
     }, 100);
   }
