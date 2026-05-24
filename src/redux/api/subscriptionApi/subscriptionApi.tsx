@@ -51,7 +51,24 @@ export const subscriptionApi = baseApi.injectEndpoints({
       providesTags: ["Subscripton"],
     }),
 
+    // cancel subscription
+    cancelSubscription: builder.mutation({
+      query: (body) => ({
+        url: "/subscriptions/cancel",
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Subscripton"],
+    }),
+
   }),
 });
 
-export const { useGetAllSubscriptionsQuery, useGetSinglePlanQuery, usePaymentMethodMutation, useSubscriptionMutation, useActiveSubscriptionQuery } = subscriptionApi;
+export const {
+  useGetAllSubscriptionsQuery,
+  useGetSinglePlanQuery,
+  usePaymentMethodMutation,
+  useSubscriptionMutation,
+  useActiveSubscriptionQuery,
+  useCancelSubscriptionMutation,
+} = subscriptionApi;

@@ -233,7 +233,7 @@ import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
@@ -256,6 +256,8 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/dashboard/home";
   const dispatch = useDispatch();
   // Use React Hook Form with Zod resolver
   const {
@@ -319,7 +321,7 @@ export default function SignInPage() {
 
         if (response?.data?.user?.role === "USER") {
           toast.success("Login successful");
-          router.push("/dashboard/home");
+          router.push(redirectUrl);
         }
         else {
           toast.error("You have to login by user credential");
@@ -374,7 +376,7 @@ export default function SignInPage() {
         if (response?.data?.user?.role === "USER") {
           // router.push("http://localhost:3054/dashboard/home");
           // router.push("https://julientmts.aiteamtwo.com/dashboard/home");
-          router.push("/dashboard/home");
+          router.push(redirectUrl);
         }
       }
 

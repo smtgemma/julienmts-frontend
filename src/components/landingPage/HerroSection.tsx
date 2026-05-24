@@ -124,15 +124,115 @@
 
 
 "use client"
-import { useState } from "react"; // Modal state track korar jonyo change
+import { useState } from "react";
 import Container from "@/lib/Container"
-import Link from "next/link"
 import { GoArrowRight } from "react-icons/go";
 import { MdSlowMotionVideo } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+import { LuLogIn } from "react-icons/lu";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 function HerroSection() {
+    const router = useRouter();
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+    const handlePrepareMeeting = () => {
+        const token = Cookies.get("token");
+        if (token) {
+            router.push("/dashboard/startNewMeeting");
+        } else {
+            setIsSignInModalOpen(true);
+        }
+    };
+
+    const handleGoToLogin = () => {
+        setIsSignInModalOpen(false);
+        router.push(`/signIn?redirect=/dashboard/startNewMeeting`);
+    };
+
     return (
         <Container className="relative mb-12">
+
+            {/* Sign In Required Modal */}
+            {isSignInModalOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+                    onClick={() => setIsSignInModalOpen(false)}
+                >
+                    <div
+                        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 flex flex-col items-center"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Close */}
+                        <button
+                            onClick={() => setIsSignInModalOpen(false)}
+                            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                        >
+                            <IoMdClose className="w-5 h-5" />
+                        </button>
+
+                        {/* Icon */}
+                        <div className="w-16 h-16 rounded-full bg-[#6E51E0] flex items-center justify-center mb-5">
+                            <LuLogIn className="w-7 h-7 text-white" />
+                        </div>
+
+                        {/* Title */}
+                        <h2 className="text-2xl font-bold text-[#2D2D2D] mb-3">Sign In Required</h2>
+
+                        {/* Description */}
+                        <p className="text-center text-[#636F85] text-sm mb-7 leading-relaxed">
+                            You need to be signed in to prepare your meeting.<br />
+                            Please log in or create an account to continue.
+                        </p>
+
+                        {/* Go to Login */}
+                        <button
+                            onClick={handleGoToLogin}
+                            className="w-full flex items-center justify-center gap-2 bg-[#6E51E0] hover:bg-[#5a3fd4] text-white font-medium py-3.5 rounded-full transition cursor-pointer mb-3"
+                        >
+                            <LuLogIn className="w-5 h-5" />
+                            Go to Login
+                        </button>
+
+                        {/* Cancel */}
+                        <button
+                            onClick={() => setIsSignInModalOpen(false)}
+                            className="w-full flex items-center justify-center bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#2D2D2D] font-medium py-3.5 rounded-full transition cursor-pointer"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Video Modal */}
+            {isVideoOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+                    onClick={() => setIsVideoOpen(false)}
+                >
+                    <div
+                        className="relative w-full max-w-3xl mx-4 rounded-xl overflow-hidden shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setIsVideoOpen(false)}
+                            className="absolute top-3 right-3 z-10 bg-black/60 hover:bg-black text-white rounded-full p-1 transition cursor-pointer"
+                        >
+                            <IoMdClose className="w-5 h-5" />
+                        </button>
+                        <video
+                            src="/videos/how-it-works.mp4"
+                            controls
+                            autoPlay
+                            className="w-full"
+                        />
+                    </div>
+                </div>
+            )}
+
             <div className="z-50">
                 {/* Hero Section */}
                 <main className="px-6">
@@ -178,30 +278,23 @@ function HerroSection() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
-                            <Link href="">
-                                <div
-                                    className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
-                                         border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px]"
-                                >
-                                    <span className="">
-                                        Prepare My Meeting
-                                    </span>
-                                    <GoArrowRight className="w-5 h-5" />
-                                </div>
-                            </Link>
+                            <button
+                                onClick={handlePrepareMeeting}
+                                className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
+                                     border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px] cursor-pointer"
+                            >
+                                <span>Prepare My Meeting</span>
+                                <GoArrowRight className="w-5 h-5" />
+                            </button>
 
-                            <Link href="" className="">
-                                <div
-                                    className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
-                                         border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px]"
-                                >
-                                    <span className="">
-                                        See How It Works
-                                    </span>
-                                    <MdSlowMotionVideo className="w-5 h-5" />
-                                </div>
-                            </Link>
-
+                            <button
+                                onClick={() => setIsVideoOpen(true)}
+                                className="bg-white px-6 py-3 font-medium transition flex items-center gap-2 hover:bg-primaryBgColor border-2
+                                     border-[#6E51E0] rounded-sm hover:text-white text-primaryBgColor text-[16px] cursor-pointer"
+                            >
+                                <span>See How It Works</span>
+                                <MdSlowMotionVideo className="w-5 h-5" />
+                            </button>
                         </div>
                     </div>
                 </main>

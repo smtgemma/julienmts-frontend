@@ -407,7 +407,7 @@ export default function MeetingPrepForm(
   const allData = useSelector((state: RootState) => state.startMeeting);
   const representatives = allData?.participants;
   const salesperson_id = salespersonId ?? allData?.product?.salesperson_id;
-  console.log(salesperson_id, "===========salesperson_id from main flow")
+  console.log("salesperson_id:", salesperson_id, "| from cookie:", salespersonId, "| from redux:", allData?.product?.salesperson_id)
   const companyId = companyIdFromStep2 || allData?.companyData?.company_id;
 
   const [createMeetingId, { isLoading }] = useCreateMeetingIdMutation();
@@ -436,6 +436,12 @@ export default function MeetingPrepForm(
   // Submit function
   const onSubmit = async (data: FormValues) => {
     const lastVoiceId = Cookies.get("last_voice_id");
+
+    // Guard: salesperson_id must exist
+    if (!salesperson_id) {
+      toast.error("Salesperson profile not found. Please complete Step 1 first.");
+      return;
+    }
 
     const payload = {
       salesperson_id: salesperson_id,
@@ -486,7 +492,7 @@ export default function MeetingPrepForm(
         error?.response?.data?.message ||
         "Something went wrong";
 
-      toast.success(errorMessage);
+      toast.error(errorMessage);
     }
   };
 

@@ -6,6 +6,7 @@ import { setProductValue } from '@/redux/features/startMeeting/startMeetingSlice
 import { useMeetingSalesPersonMutation } from '@/redux/api/startMettingApi/startMettingApi';
 import { toast } from 'sonner';
 import DashboardButton from '../shared/dashboardButton/DashboardButton';
+import Cookies from 'js-cookie';
 
 const Step1 = (
     { handleNext }: { handleNext: () => void }
@@ -191,6 +192,11 @@ const Step1 = (
             if (response.success) {
                 toast.success(response.message);
                 dispatch(setProductValue(response.data));
+                // Save salesperson_id to cookie so Step4 can always access it
+                const spId = response.data?.salesperson_id || response.data?.id;
+                if (spId) {
+                    Cookies.set("salesperson_id", spId, { expires: 7 });
+                }
                 handleNext();
             }
 
