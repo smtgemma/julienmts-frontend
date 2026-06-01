@@ -24,7 +24,7 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { useLogoutMutation } from "@/redux/api/auth/authApi";
 import { useRouter } from "next/navigation";
-import { CreditCard } from "lucide-react";
+import { CreditCard, Sparkles } from "lucide-react";
 import { logoutFc } from "@/redux/features/user/userSlice";
 import { BsChatSquareText } from "react-icons/bs";
 
@@ -113,7 +113,7 @@ export default function AppSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {/* Logo */}
-                <div className="flex justify-start items-center mb-10 mt-2">
+                {/* <div className="flex justify-start items-center mb-10 mt-2">
                   <Link href="/" className="flex items-center gap-2 ml-4">
                     <img
                       src="/navbar/logo.png"
@@ -124,7 +124,26 @@ export default function AppSidebar() {
                       Dilico
                     </h3> 
                   </Link>
+                </div> */}
+
+
+                <div className="flex justify-start items-center mb-10 mt-2">
+                  <Link href="/" className="flex items-center gap-2 ml-4">
+                    <img
+                      src="/navbar/logo.png"
+                      alt="logo"
+                      className="w-14 h-14"
+                    />
+                    <h3 className="text-3xl text-[#6E51E0] font-semibold">
+                      Dilico
+                    </h3>
+                    <div className="flex items-center gap-1 rounded bg-orange-500 px-2 py-1 text-xs font-semibold text-white">
+                      <Sparkles size={12} />
+                      Beta
+                    </div>
+                  </Link>
                 </div>
+
 
                 {/* Navigation */}
                 <div className="space-y-2">
