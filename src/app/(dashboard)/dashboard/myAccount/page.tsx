@@ -163,7 +163,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Calendar, ExternalLink, LayoutGrid, List, Building2 } from "lucide-react";
+import { Search, Calendar, ExternalLink, LayoutGrid, List, Building2, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { CiFilter } from "react-icons/ci";
 
@@ -175,21 +175,44 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useMyAccountListQuery } from "@/redux/api/myAccountApi/myAccountApi";
+import { useDeleteAccountMutation, useMyAccountListQuery } from "@/redux/api/myAccountApi/myAccountApi";
 import { format } from 'date-fns';
 import Loading from "@/components/Others/Loading";
+import { toast } from "sonner";
+import { LuLoader } from "react-icons/lu";
+import { MdDeleteOutline } from "react-icons/md";
 
 function MyAccount() {
   const [view, setView] = useState("grid");
   const [search, setSearch] = useState("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const { data: myAcount, isLoading, refetch } = useMyAccountListQuery("");
   // console.log(myAcount, "==================myaccount")
   const accounts = myAcount?.data || []
 
+  const [deleteAccount, { isLoading: isDeleting }] = useDeleteAccountMutation();
+
   useEffect(() => {
     refetch();
   }, []);
+
+  const handleDeleteAccount = async (aiCompanyId: string) => {
+    setDeletingId(aiCompanyId);
+    try {
+      const response = await deleteAccount(aiCompanyId).unwrap();
+
+      if (response.success) {
+        toast.success(response.message || "Account deleted successfully");
+        // 2. Refetch the data
+        refetch();
+      }
+    } catch (error) {
+      toast.error("Failed to delete the account. Please try again.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -333,15 +356,30 @@ function MyAccount() {
               </div>
 
               {/* Open Account Button */}
-              <Link href={`/dashboard/myAccount/${account.aiCompanyId}`}>
+              <div className="flex items-center gap-2 w-full">
+                {/* Open Account Link/Button - Full Width */}
+                <Link href={`/dashboard/myAccount/${account.aiCompanyId}`} className="flex-1 w-full">
+                  <button
+                    className="w-full bg-[#6E51E0] text-white px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 text-sm cursor-pointer"
+                  >
+                    <ExternalLink size={16} />
+                    Open Account
+                  </button>
+                </Link>
+
+                {/* Delete Icon - Placed on the right side */}
                 <button
-                  className={`bg-[#6E51E0] text-white px-4 py-2.5 rounded-lg flex items-center justify-center gap-2 text-sm cursor-pointer ${view === "grid" ? "w-full" : ""
-                    }`}
+                  onClick={() => handleDeleteAccount(account.aiCompanyId)}
+                  disabled={isDeleting && deletingId === account.aiCompanyId}
+                  className="flex-shrink-0 text-red-500 p-2 rounded-full hover:bg-red-100 transition disabled:opacity-50 cursor-pointer"
                 >
-                  <ExternalLink size={16} />
-                  Open Account
+                  {isDeleting && deletingId === account.aiCompanyId ? (
+                    <LuLoader className="animate-spin" size={25} />
+                  ) : (
+                    <MdDeleteOutline size={25} />
+                  )}
                 </button>
-              </Link>
+              </div>
             </div>
           ))
         )}

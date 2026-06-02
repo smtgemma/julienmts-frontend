@@ -10,6 +10,15 @@ export const myAccountApi = baseApi.injectEndpoints({
       }),
       providesTags: ["MyAccount"],
     }),
+
+    // delete my account 
+    deleteAccount: builder.mutation({
+      query: (id: string) => ({
+        url: `/meeting/company/${id}`,
+        method: "DELETE",
+      }),
+    }),
+
     // get single acount details 
     singleAccountDetails: builder.query({
       query: (id: string) => ({
@@ -48,6 +57,7 @@ export const myAccountApi = baseApi.injectEndpoints({
 
 export const {
   useMyAccountListQuery,
+  useDeleteAccountMutation,
   useSingleAccountDetailsQuery,
   useConversationHistoryQuery,
   // useConversationRecordingQuery,
