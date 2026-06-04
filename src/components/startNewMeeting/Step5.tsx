@@ -3119,7 +3119,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     }, 900);
 
     // startCountdown call হওয়ার 5 second পর
-    await delay(4000);
+    await delay(3000);
     connectToMeeting();
   }
 
