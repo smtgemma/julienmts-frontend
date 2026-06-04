@@ -204,7 +204,15 @@
 
 //   return (
 //     <div className="bg-white rounded-lg w-full p-6 border border-[#D1D6DB]">
-//       <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" />
+//       {/* <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" /> */}
+//       <div className='flex justify-between items-center'>
+//         <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" />
+//           <DashboardButton
+//             text="Click for Question"
+//             onClick={handleSubmit(onSubmit)}
+//             isLoading={isLoading}
+//           />
+//       </div>
 
 //       <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -411,13 +419,13 @@
 //             Back
 //           </button>
 
-//           {!isSuccess && (
+//           {/* {!isSuccess && (
 //             <DashboardButton
 //               text="Click for Question"
 //               onClick={handleSubmit(onSubmit)}
 //               isLoading={isLoading}
 //             />
-//           )}
+//           )} */}
 
 //           {isSuccess && (
 //             <DashboardButton
@@ -449,6 +457,7 @@
 
 
 
+
 "use client"
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import {
@@ -467,8 +476,7 @@ import { toast } from 'sonner';
 import Cookies from "js-cookie";
 import { useActiveSubscriptionQuery } from '@/redux/api/subscriptionApi/subscriptionApi';
 import { setMeetingPayload } from "@/redux/features/startMeeting/startMeetingSlice";
-import { useSearchParams } from 'next/navigation';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 // Methodology core fields data
 const METHODOLOGY_DATA: Record<string, { field: string; definition: string }[]> = {
@@ -578,6 +586,11 @@ export default function MeetingPrepForm(
   });
 
   const selectedMethodology = watch("sales_methodology");
+  const meetingGoal = watch("meetingGoal");
+  const personality = watch("personality");
+  const difficulty = watch("difficulty");
+  const duration = watch("duration");
+  const questions = watch("questions");
 
   // Field array for questions
   const { fields, append, remove, replace } = useFieldArray({
@@ -617,7 +630,7 @@ export default function MeetingPrepForm(
       const response = await createMeetingId(payload).unwrap();
       if (response?.success) {
         Cookies.set("meetingId", response.data.meeting_id);
-        toast.success(response.message);
+        // toast.success(response.message);
 
         const questionsFromAPI =
           response.data.top_5_questions.map(
@@ -627,13 +640,25 @@ export default function MeetingPrepForm(
             })
           );
 
-        replace(questionsFromAPI);
+        const currentQuestions = getValues("questions")
+          .map((q) => q.value)
+          .filter(Boolean);
+        const manualQuestions = currentQuestions.slice(5);
+        const mergedQuestions = [
+          ...questionsFromAPI,
+          ...manualQuestions.map((value, index) => ({
+            id: questionsFromAPI.length + index,
+            value,
+          })),
+        ];
+
+        replace(mergedQuestions);
         setIsSuccess(true);
 
         // Save payload+questions to ref AND Redux
         const payloadWithQuestions = {
           ...payload,
-          questions: response.data.top_5_questions,
+          questions: mergedQuestions.map((q) => q.value),
         };
         savedPayloadRef.current = payloadWithQuestions;
         dispatch(setMeetingPayload(payloadWithQuestions));
@@ -648,6 +673,10 @@ export default function MeetingPrepForm(
     }
   };
 
+  useEffect(() => {
+    handleSubmit(onSubmit)();
+  }, [selectedMethodology, meetingGoal, personality, difficulty, duration, handleSubmit]);
+
   const handleBack = () => {
     handlePrev();
   };
@@ -657,11 +686,11 @@ export default function MeetingPrepForm(
       {/* <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" /> */}
       <div className='flex justify-between items-center'>
         <StepTitle title="Meeting Objective" subtitle="Define your goals and strategy" />
-          <DashboardButton
+        {/* <DashboardButton
             text="Click for Question"
             onClick={handleSubmit(onSubmit)}
             isLoading={isLoading}
-          />
+          /> */}
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -877,7 +906,7 @@ export default function MeetingPrepForm(
             />
           )} */}
 
-          {isSuccess && (
+          {/* {isSuccess && (
             <DashboardButton
               text="Next Step"
               onClick={() => {
@@ -896,6 +925,28 @@ export default function MeetingPrepForm(
                 handleNext();
               }}
               isLoading={false}
+            />
+          )} */}
+
+          {isSuccess && (
+            <DashboardButton
+              text="Next Step"
+              onClick={() => {
+                const currentQuestions = getValues("questions")
+                  .map((q) => q.value)
+                  .filter(Boolean);
+                const base = savedPayloadRef.current || allData?.payloadData || {};
+                dispatch(setMeetingPayload({
+                  ...base,
+                  meeting_goal: base.meeting_goal || meetingGoal,
+                  personality: base.personality || personality,
+                  difficulty: base.difficulty || difficulty,
+                  duration_minutes: base.duration_minutes || parseInt(duration) || 5,
+                  sales_methodology: base.sales_methodology || selectedMethodology,
+                  questions: currentQuestions,
+                }));
+                handleNext();
+              }}
             />
           )}
         </div>

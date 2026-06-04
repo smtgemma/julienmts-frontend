@@ -137,7 +137,7 @@ export default function AppSidebar() {
                     <h3 className="text-3xl text-[#6E51E0] font-semibold">
                       Dilico
                     </h3>
-                    <div className="flex items-center gap-1 rounded bg-orange-500 px-2 py-1 text-xs font-semibold text-white">
+                    <div className="flex items-center gap-1 rounded bg-primaryBgColor px-2 py-1 text-xs font-semibold text-white">
                       <Sparkles size={12} />
                       Beta
                     </div>

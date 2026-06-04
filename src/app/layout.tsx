@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${rubik.variable} antialiased relative! z-20 top-0!`}
         style={{ position: "static", top: "0" }}
       > */}
-        <div className="bg-[#FFFFFF]">
+        <div suppressHydrationWarning className="bg-[#FFFFFF]">
           <GoogleTranslateProvider>
             <ReduxProvider>
               <Toaster position="top-center" expand={true} richColors />

@@ -286,7 +286,6 @@ export default function Step3({
       }).unwrap();
 
       if (response?.success) {
-        toast.success(response.message);
         setcompanyDataShow(response?.data?.company_data);
         dispatch(setCompanyData(response?.data));
         setIsSuccess(true);

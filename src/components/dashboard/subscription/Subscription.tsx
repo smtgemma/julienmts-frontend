@@ -774,6 +774,7 @@ const SubscriptionPlan: React.FC = () => {
   };
 
   const [planId, setPlanId] = useState<string | null>(null)
+  const [planPrice, setPlanPrice] = useState<number>(0)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showCancelModal, setShowCancelModal] = useState(false)
   const pathName = usePathname()
@@ -793,12 +794,13 @@ const SubscriptionPlan: React.FC = () => {
   console.log("activeSubcripiton full:", activeSubcripiton?.data);
   console.log("activeStatus:", activeStatus, "| activePlanId:", activePlanId);
 
-  const handlePurchase = (id: string) => {
+  const handlePurchase = (id: string, price: number) => {
     if (!isLoggedIn) {
       setShowLoginModal(true)
       return;
     }
     setPlanId(id);
+    setPlanPrice(price);
   };
 
   const handleClosePayment = () => {
@@ -991,7 +993,7 @@ const SubscriptionPlan: React.FC = () => {
 
                     <div className="flex flex-col items-center gap-3 w-full">
                       <button
-                        onClick={() => handlePurchase(plan.id)}
+                        onClick={() => handlePurchase(plan.id, plan.price)}
                         disabled={isCurrentPlan}
                         className={`w-full py-2 border text-sm font-medium rounded-full flex items-center justify-center gap-1.5 transition-colors
                           ${isCurrentPlan && activeSubcripiton?.data?.status === "trialing"
@@ -1021,7 +1023,7 @@ const SubscriptionPlan: React.FC = () => {
                           </>
                         ) : (
                           <>
-                            7 days free trial
+                            {plan.price === 0 ? "Free Subscription" : "7 days free trial"}
                             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                             </svg>
@@ -1050,7 +1052,7 @@ const SubscriptionPlan: React.FC = () => {
         </div>
       </div>
       {planId && (
-        <PassPayment planId={planId} onClose={handleClosePayment} />
+        <PassPayment planId={planId} planPrice={planPrice} onClose={handleClosePayment} />
       )}
       {showLoginModal && (
         <LoginRequiredModal onClose={() => setShowLoginModal(false)} />

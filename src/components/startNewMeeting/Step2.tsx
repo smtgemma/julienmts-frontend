@@ -520,8 +520,15 @@ export default function Step2({
       }).unwrap();
 
       if (response?.success) {
-        toast.success(response?.message);
         dispatch(setParticipantsValue(response?.data?.representative_ids));
+        // Save name→gender map to cookie so Step5 can render correct avatar
+        const genderMap: Record<string, string> = {};
+        data.participants.forEach((p) => {
+          if (p.name && p.gender) {
+            genderMap[p.name.toLowerCase().trim()] = p.gender;
+          }
+        });
+        Cookies.set("participantGenderMap", JSON.stringify(genderMap), { expires: 1 });
         handleNext();
         Cookies.set("companyId", companyId ?? "");
       }
