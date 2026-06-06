@@ -17,6 +17,8 @@ export const myAccountApi = baseApi.injectEndpoints({
         url: `/meeting/company/${id}`,
         method: "DELETE",
       }),
+      // Invalidate both account list and dashboard stats (recentMeetings)
+      invalidatesTags: ["MyAccount", "Meeting"],
     }),
 
     // get single acount details 

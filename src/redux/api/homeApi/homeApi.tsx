@@ -9,6 +9,7 @@ export const homeApi = baseApi.injectEndpoints({
                 url: "/dashboard/user/stats",
                 method: "GET",
             }),
+            providesTags: ["Meeting"],
         }),
     }),
 });
