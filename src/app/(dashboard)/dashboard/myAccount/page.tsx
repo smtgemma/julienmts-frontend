@@ -203,7 +203,7 @@ function MyAccount() {
       const response = await deleteAccount(aiCompanyId).unwrap();
 
       if (response.success) {
-        toast.success(response.message || "Account deleted successfully");
+        // toast.success(response.message || "Account deleted successfully");
         // 2. Refetch the data
         refetch();
       }
