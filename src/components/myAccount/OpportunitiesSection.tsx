@@ -82,7 +82,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Target, Plus, Trash2 } from "lucide-react";
+import { Target, Plus, Trash2, Edit3 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -128,6 +128,18 @@ interface CreateOpportunityResponse {
   data: Opportunity;
 }
 
+interface OpportunitySingleResponse {
+  success: boolean;
+  message: string;
+  data: Opportunity;
+}
+
+interface UpdateOpportunityResponse {
+  success: boolean;
+  message: string;
+  data: Opportunity;
+}
+
 interface DeleteOpportunityResponse {
   success: boolean;
   message: string;
@@ -154,6 +166,8 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFetchingOpportunity, setIsFetchingOpportunity] = useState(false);
+  const [editingOpportunity, setEditingOpportunity] = useState<Opportunity | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const {
@@ -174,6 +188,43 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
     if (!accountDetailsId) return;
     fetchOpportunities();
   }, [accountDetailsId]);
+
+  const openCreateModal = () => {
+    setEditingOpportunity(null);
+    reset({ name: "", value: "", close_date: "" });
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = async (opportunityId: string) => {
+    setEditingOpportunity(null);
+    setIsModalOpen(true);
+    setIsFetchingOpportunity(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/opportunities/${opportunityId}`, {
+        credentials: "include",
+        headers: getAuthHeaders(),
+      });
+      const data: OpportunitySingleResponse = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Could not load opportunity.");
+      }
+
+      setEditingOpportunity(data.data);
+      reset({
+        name: data.data.name,
+        value: data.data.value,
+        close_date: data.data.close_date,
+      });
+    } catch (error) {
+      console.error("Load opportunity error:", error);
+      toast.error("Unable to load opportunity for editing.");
+      setIsModalOpen(false);
+    } finally {
+      setIsFetchingOpportunity(false);
+    }
+  };
 
   const fetchOpportunities = async () => {
     setIsLoading(true);
@@ -207,28 +258,50 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/opportunities`, {
-        method: "POST",
+      const isEditMode = Boolean(editingOpportunity?.id);
+      const endpoint = isEditMode
+        ? `${API_BASE_URL}/opportunities/${editingOpportunity?.id}`
+        : `${API_BASE_URL}/opportunities`;
+      const method = isEditMode ? "PUT" : "POST";
+      const payload = isEditMode
+        ? {
+            name: values.name,
+            value: values.value,
+            close_date: values.close_date,
+          }
+        : {
+            company_id: accountDetailsId,
+            name: values.name,
+            value: values.value,
+            close_date: values.close_date,
+          };
+
+      const response = await fetch(endpoint, {
+        method,
         credentials: "include",
         headers: getAuthHeaders(),
-        body: JSON.stringify({
-          company_id: accountDetailsId,
-          name: values.name,
-          value: values.value,
-          close_date: values.close_date,
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const data: CreateOpportunityResponse = await response.json();
+      const data: CreateOpportunityResponse | UpdateOpportunityResponse = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(data.message || "Failed to create opportunity.");
+        throw new Error(data.message || (isEditMode ? "Failed to update opportunity." : "Failed to create opportunity."));
       }
 
-      setOpportunities((current) => [data.data, ...current]);
+      if (isEditMode) {
+        setOpportunities((current) =>
+          current.map((item) => (item.id === data.data.id ? data.data : item))
+        );
+        toast.success(data.message || "Opportunity updated successfully.");
+      } else {
+        setOpportunities((current) => [data.data, ...current]);
+        toast.success(data.message || "Opportunity created successfully.");
+      }
+
       setIsModalOpen(false);
-      reset();
-      toast.success(data.message || "Opportunity created successfully.");
+      reset({ name: "", value: "", close_date: "" });
+      setEditingOpportunity(null);
     } catch (error) {
       console.error("Create opportunity error:", error);
       toast.error((error as Error).message || "Failed to create opportunity.");
@@ -277,7 +350,7 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
         </div>
 
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={openCreateModal}
           className="inline-flex items-center gap-2 bg-[#6E51E0] text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-[#5a42c9] transition cursor-pointer"
         >
           <Plus className="w-4 h-4" />
@@ -306,13 +379,21 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
                   <p className="text-sm text-[#6B7280] mt-1">Close by {format(new Date(opportunity.close_date), "dd MMM yyyy")}</p>
                 </div>
 
-                <button
-                  onClick={() => handleDeleteOpportunity(opportunity.id)}
-                  disabled={deletingId === opportunity.id}
-                  className="text-red-500 hover:text-red-700 transition disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => openEditModal(opportunity.id)}
+                    className="text-slate-500 hover:text-slate-900 transition cursor-pointer"
+                  >
+                    <Edit3 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteOpportunity(opportunity.id)}
+                    disabled={deletingId === opportunity.id}
+                    className="text-red-500 hover:text-red-700 transition disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               <div className="flex flex-col gap-3 text-sm text-[#4B5563]">
@@ -330,11 +411,15 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
         )}
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onClose={() => { setIsModalOpen(false); setEditingOpportunity(null); }}>
         <div className="max-w-xl mx-auto">
           <div className="mb-4 border-b border-[#E5E7EB] pb-4">
-            <h3 className="text-xl font-semibold text-[#111827]">New Opportunity</h3>
-            <p className="text-sm text-[#6B7280] mt-1">Add opportunity details and save to the pipeline.</p>
+            <h3 className="text-xl font-semibold text-[#111827]">
+              {editingOpportunity ? "Edit Opportunity" : "New Opportunity"}
+            </h3>
+            <p className="text-sm text-[#6B7280] mt-1">
+              {editingOpportunity ? "Update opportunity details." : "Add opportunity details and save to the pipeline."}
+            </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -352,8 +437,10 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
             <div className="space-y-1">
               <label className="text-sm font-medium text-[#374151]">Value</label>
               <input
-                type="number"                inputMode="numeric"
-                pattern="[0-9]*"                {...register("value")}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                {...register("value")}
                 className="w-full rounded-lg border border-[#D1D5DB] px-4 py-3 text-sm text-[#111827] outline-none focus:border-[#6E51E0] focus:ring-2 focus:ring-[#6E51E01A]"
                 placeholder="1000"
               />
@@ -383,7 +470,7 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
                 disabled={isSubmitting}
                 className="cursor-pointer w-full sm:w-auto rounded-lg bg-[#6E51E0] px-4 py-3 text-sm font-medium text-white hover:bg-[#5a42c9] transition disabled:opacity-60"
               >
-                {isSubmitting ? "Saving..." : "Create Opportunity"}
+                {isSubmitting ? "Saving..." : editingOpportunity ? "Update Opportunity" : "Create Opportunity"}
               </button>
             </div>
           </form>
