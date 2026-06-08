@@ -51,6 +51,15 @@ export const startMettingApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // save methodology for a meeting
+    saveMeetingMethodology: builder.mutation({
+      query: (body) => ({
+        url: `/methodology`,
+        method: "POST",
+        body,
+      }),
+    }),
+
   }),
 });
 
@@ -60,4 +69,5 @@ export const {
   useMeetingCompanyRepresentitiveMutation,
   useCreateMeetingIdMutation,
   useUpdateMeetingMutation,
+  useSaveMeetingMethodologyMutation,
 } = startMettingApi;

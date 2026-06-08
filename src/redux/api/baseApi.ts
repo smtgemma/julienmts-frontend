@@ -248,7 +248,8 @@ const logout = () => {
  * Base Query
  */
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://api-julientmts.aiteamtwo.com/api/v1",
+  // baseUrl: "https://api-julientmts.aiteamtwo.com/api/v1",
+  baseUrl: process.env.NEXT_PUBLIC_API_URL || "https://api-julientmts.aiteamtwo.com/api/v1",
   credentials: "include",
 
   prepareHeaders: (headers) => {

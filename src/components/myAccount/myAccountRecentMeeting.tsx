@@ -109,7 +109,7 @@ import Link from 'next/link';
 import OpportunitiesSection from './OpportunitiesSection';
 import { format } from "date-fns";
 
-export default function RecentMeetings({ singleData }: { singleData: any }) {
+export default function RecentMeetings({ singleData, accountDetailsId }: { singleData: any; accountDetailsId: any }) {
     const meetings = singleData?.data?.meetings || [];
     const opportunitiesData = singleData?.data?.ai_insights?.opportunities || [];
 
@@ -207,7 +207,8 @@ export default function RecentMeetings({ singleData }: { singleData: any }) {
             </div>
 
             {/* Opportunities Section */}
-            <OpportunitiesSection opportunitiesData={opportunitiesData} />
+            {/* <OpportunitiesSection opportunitiesData={opportunitiesData} /> */}
+            <OpportunitiesSection accountDetailsId={accountDetailsId} />
         </div>
     );
 }

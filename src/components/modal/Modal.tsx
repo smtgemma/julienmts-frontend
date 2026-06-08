@@ -61,9 +61,13 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                         {/* Modal Content */}
                         <div className="bg-white h-full md:h-auto md:rounded-xl shadow-xl z-30 overflow-hidden relative">
                             {/* Close Button */}
-                            <div className="absolute z-40 top-2 left-2 cursor-pointer">
-                                <LuX onClick={onClose} className="" />
-                            </div>
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                className="absolute z-40 top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50"
+                            >
+                                <LuX className="h-4 w-4" />
+                            </button>
 
                             {/* Modal Body */}
                             <div className="p-4 flex flex-col h-full md:h-auto relative">
