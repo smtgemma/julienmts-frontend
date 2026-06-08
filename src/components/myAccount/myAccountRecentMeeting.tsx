@@ -9,7 +9,7 @@
 //     const meetings = singleData?.data?.meetings || []
 
 //     const opportunitiesData = singleData?.data?.ai_insights?.opportunities || []
-    
+
 //     const getScoreColor = (score: number) => {
 //         if (score >= 80) return 'text-[#6E51E0] bg-[#6E51E01A]';
 //         if (score >= 70) return 'text-[#6E51E0] bg-[#6E51E01A]';
@@ -174,7 +174,7 @@ export default function RecentMeetings({ singleData, accountDetailsId }: { singl
                                 </div>
                                 <div className="flex items-center gap-1.5">
                                     <Clock className="w-4 h-4" />
-                                    <span>{meeting?.analytics?.total_duration}</span>
+                                    <span>{Math.round(meeting?.analytics?.total_duration || 0)}</span>
                                 </div>
                             </div>
 
