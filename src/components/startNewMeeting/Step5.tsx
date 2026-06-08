@@ -3137,8 +3137,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const response = await fetch(
         // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
-        // `http://206.162.244.175:8012/meetings/api/meeting/${meetingId}/start`,
-        `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
+        `https://8d73-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/start`,
+        // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
@@ -3154,8 +3154,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const ws = new WebSocket(
         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        // `http://206.162.244.175:8012/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `https://8d73-137-59-180-177.ngrok-free.app/api/conversation/ws/live-conversation/${meetingId}`
+        // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
 
@@ -3496,7 +3496,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     const meetingId = Cookies.get("meetingId")?.trim() || "";
     try {
       const response = await fetch(
-        `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
+        `https://8d73-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/end`,
+        // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
         { method: "POST" }
       );
       if (response) {
