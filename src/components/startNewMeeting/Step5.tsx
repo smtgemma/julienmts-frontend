@@ -1550,6 +1550,8 @@
 
 
 
+
+
 "use client";
 
 import { Play, User } from "lucide-react";
@@ -1563,6 +1565,7 @@ import { useUpdateMeetingMutation } from "@/redux/api/startMettingApi/startMetti
 import { useRouter } from "next/navigation";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import Image from "next/image";
+import MethodologyAnalysis from '@/components/shared/MethodologyAnalysis';
 
 
 type Rep = {
@@ -1664,6 +1667,28 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
   })();
 
   const [updateMeeting] = useUpdateMeetingMutation()
+  const meetingId = Cookies.get("meetingId")?.trim() || "";
+  const sessionId = Cookies.get("sessionId")?.trim() || "";
+
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_URL2 || 'https://api-julientmts.aiteamtwo.com/api/v1';
+
+  async function callMethodologyAnalysis(meetingId: string, sessionId: string) {
+    if (!meetingId || !sessionId) return;
+
+    try {
+      await fetch(
+        `${API_BASE}/conversation/${meetingId}/methodology-analysis?session_id=${sessionId}`,
+        {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (err) {
+      console.error('Methodology analysis call failed', err);
+    }
+  }
 
   // ─── State ─────────────────────────────────────────────
   const [isConnected, setIsConnected] = useState(false);
@@ -2069,7 +2094,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const response = await fetch(
         // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
-        `https://8d73-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/start`,
+        // `https://862f-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/start`,
+        `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/start`,
         // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
@@ -2086,7 +2112,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const ws = new WebSocket(
         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        `https://8d73-137-59-180-177.ngrok-free.app/api/conversation/ws/live-conversation/${meetingId}`
+        `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
@@ -2426,14 +2452,23 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
     // ── API calls in background (don't block UI) ──
     const meetingId = Cookies.get("meetingId")?.trim() || "";
+    const sessionId = Cookies.get("sessionId")?.trim() || "";
+    try {
+      const res = await callMethodologyAnalysis(meetingId, sessionId);
+      console.log(res, "=================methodology analysis response=================testing");
+    } catch {
+      // silent — we still want meeting end cleanup to proceed
+    }
+
     try {
       const response = await fetch(
-        `https://8d73-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/end`,
+        `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/end`,
         // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
         { method: "POST" }
       );
       if (response) {
-        await updateMeeting({ meetingId, playload: { status: "completed" } }).unwrap();
+        const res = await updateMeeting({ meetingId, playload: { status: "completed" } }).unwrap();
+        console.log(res, "=================meeting end response=================");
       }
     } catch {
       // silent — UI already cleaned up
@@ -2965,6 +3000,9 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
                     </ol>
                   </div>
                 )}
+
+                <MethodologyAnalysis meetingId={meetingId} sessionId={sessionId} />
+                {/* <MethodologyAnalysis meetingId="23779b1d-0b74-4325-8527-3437f8c879ee" sessionId="d2020210-7d2e-46fe-836a-0f61aef43834" /> */}
               </div>
 
               {/* ── RIGHT: Voice Conversation + Transcript ── */}

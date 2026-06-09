@@ -630,6 +630,7 @@ export default function MeetingPrepForm(
       const response = await createMeetingId(payload).unwrap();
       if (response?.success) {
         Cookies.set("meetingId", response.data.meeting_id);
+        Cookies.set("sessionId", response.data.session_id);
         // toast.success(response.message);
 
         const questionsFromAPI =
