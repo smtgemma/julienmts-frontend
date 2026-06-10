@@ -2096,7 +2096,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       const ws = new WebSocket(
         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
-        `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        `https://ai-julientmts.aiteamtwo.com/api/conversation/ws/live-conversation/${meetingId}`
         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
 
