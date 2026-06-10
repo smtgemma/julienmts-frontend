@@ -166,9 +166,17 @@ export default function RecentMeetings({ singleData, accountDetailsId }: { singl
                             <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
                                 <div className="flex items-center gap-1.5">
                                     <Calendar className="w-4 h-4" />
+                                    {/* <span>
+                                        {meeting?.created_at
+                                            ? format(new Date(meeting.created_at).toLocaleString(), "dd MMM yyyy, hh:mm a")
+                                            : ""}
+                                    </span> */}
                                     <span>
                                         {meeting?.created_at
-                                            ? format(new Date(meeting.created_at), "dd MMM yyyy, hh:mm a")
+                                            ? format(
+                                                new Date(meeting.created_at + "Z"),
+                                                "dd MMM yyyy, hh:mm a"
+                                            )
                                             : ""}
                                     </span>
                                 </div>

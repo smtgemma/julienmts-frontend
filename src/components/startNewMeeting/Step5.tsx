@@ -2458,7 +2458,7 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     setRepSpeaking({});
     setTimeRemaining(0);
     setMeetingDuration(0);
-    toast.success("✅ Meeting ended successfully");
+    // toast.success("✅ Meeting ended successfully");
   }
 
   // ─── Meeting Timer (auto-end) ─────────────────────────

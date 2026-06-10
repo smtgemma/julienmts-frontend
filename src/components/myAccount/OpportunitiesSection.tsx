@@ -90,6 +90,8 @@ import { Modal } from "@/components/modal/Modal";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
+import { LuLoader } from "react-icons/lu";
+import { MdDeleteOutline } from "react-icons/md";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api-julientmts.aiteamtwo.com/api/v1";
 
@@ -219,7 +221,7 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
       });
     } catch (error) {
       console.error("Load opportunity error:", error);
-      toast.error("Unable to load opportunity for editing.");
+      // toast.error("Unable to load opportunity for editing.");
       setIsModalOpen(false);
     } finally {
       setIsFetchingOpportunity(false);
@@ -243,7 +245,7 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
       setOpportunities(data.data?.opportunities || []);
     } catch (error) {
       console.error("Opportunities fetch error:", error);
-      toast.error("Unable to load opportunities.");
+      // toast.error("Unable to load opportunities.");
     } finally {
       setIsLoading(false);
     }
@@ -265,16 +267,16 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
       const method = isEditMode ? "PUT" : "POST";
       const payload = isEditMode
         ? {
-            name: values.name,
-            value: values.value,
-            close_date: values.close_date,
-          }
+          name: values.name,
+          value: values.value,
+          close_date: values.close_date,
+        }
         : {
-            company_id: accountDetailsId,
-            name: values.name,
-            value: values.value,
-            close_date: values.close_date,
-          };
+          company_id: accountDetailsId,
+          name: values.name,
+          value: values.value,
+          close_date: values.close_date,
+        };
 
       const response = await fetch(endpoint, {
         method,
@@ -293,10 +295,10 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
         setOpportunities((current) =>
           current.map((item) => (item.id === data.data.id ? data.data : item))
         );
-        toast.success(data.message || "Opportunity updated successfully.");
+        // toast.success(data.message || "Opportunity updated successfully.");
       } else {
         setOpportunities((current) => [data.data, ...current]);
-        toast.success(data.message || "Opportunity created successfully.");
+        // toast.success(data.message || "Opportunity created successfully.");
       }
 
       setIsModalOpen(false);
@@ -327,7 +329,7 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
       }
 
       setOpportunities((current) => current.filter((item) => item.id !== opportunityId));
-      toast.success(data.message || "Opportunity deleted successfully.");
+      // toast.success(data.message || "Opportunity deleted successfully.");
     } catch (error) {
       console.error("Delete opportunity error:", error);
       toast.error((error as Error).message || "Unable to delete opportunity.");
@@ -386,12 +388,23 @@ export default function OpportunitiesSection({ accountDetailsId }: { accountDeta
                   >
                     <Edit3 className="w-5 h-5" />
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleDeleteOpportunity(opportunity.id)}
                     disabled={deletingId === opportunity.id}
                     className="text-red-500 hover:text-red-700 transition disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
                   >
                     <Trash2 className="w-5 h-5" />
+                  </button> */}
+                  <button
+                    onClick={() => handleDeleteOpportunity(opportunity.id)}
+                    disabled={deletingId === opportunity.id}
+                    className="flex-shrink-0 text-red-500 p-2 rounded-full hover:bg-red-100 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {deletingId === opportunity.id ? (
+                      <LuLoader className="animate-spin" size={25} />
+                    ) : (
+                      <MdDeleteOutline size={25} />
+                    )}
                   </button>
                 </div>
               </div>
