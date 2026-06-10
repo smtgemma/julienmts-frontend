@@ -2078,8 +2078,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
       const response = await fetch(
         // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
         // `https://862f-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/start`,
-        `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/start`,
-        // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
+        // `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/start`,
+        `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
         { method: "POST" }
       );
 
@@ -2095,8 +2095,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
       const ws = new WebSocket(
         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
-        `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
-        // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+        // `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
+        `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
       );
 
@@ -2441,8 +2441,8 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/end`,
-        // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
+        // `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/end`,
+        `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
         { method: "POST" }
       );
       if (response) {
