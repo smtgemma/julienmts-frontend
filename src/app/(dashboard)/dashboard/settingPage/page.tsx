@@ -55,7 +55,7 @@ export default function SettingPage() {
 
       const response = await updateProfile(formData).unwrap();
       if (response) {
-        toast.success(response?.message);
+        // toast.success(response?.message);
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Something went wrong");
