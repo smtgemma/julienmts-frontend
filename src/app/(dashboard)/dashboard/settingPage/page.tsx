@@ -132,7 +132,7 @@ export default function SettingPage() {
 
             <button
               type="submit"
-              className="bg-[#6E51E0] text-white px-4 py-2 rounded font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-[#6E51E0] text-white px-4 py-2 rounded font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               disabled={isLoading}
             >
               {isLoading && (
