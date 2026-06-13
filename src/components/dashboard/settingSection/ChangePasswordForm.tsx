@@ -19,6 +19,7 @@ export default function ChangePasswordForm() {
         register,
         handleSubmit,
         reset,
+        setError,
         formState: { errors },
     } = useForm<FormValues>();
 
@@ -34,9 +35,24 @@ export default function ChangePasswordForm() {
             const response = await changePassword(payLoad).unwrap();
             if (response) {
                 toast.success(response?.message);
+                reset();
             }
         } catch (error: any) {
-            toast.error(error?.data?.message || "Something went wrong");
+            // Prefer structured backend validation errors when available
+            const backendErrors = error?.data?.errorMessages;
+            if (Array.isArray(backendErrors)) {
+                backendErrors.forEach((err: any) => {
+                    // err.path may be like 'newPassword' or ['newPassword']
+                    const field = Array.isArray(err.path) ? err.path[0] : err.path;
+                    if (field) {
+                        setError(field as keyof FormValues, { type: 'server', message: err.message });
+                    } else {
+                        toast.error(err.message);
+                    }
+                });
+            } else {
+                toast.error(error?.data?.message || "Something went wrong");
+            }
         }
     };
 
@@ -60,7 +76,7 @@ export default function ChangePasswordForm() {
         } rounded-lg focus-within:border-[#D1D6DB] transition-colors`;
 
     return (
-        <div className="p-4 border border-[#D1D6DB] rounded-lg bg-white shadow-sm hover:shadow-md transition">
+        <div className="p-4 border border-[#D1D6DB] rounded-lg bg-white shadow-sm hover:shadow-md transition mb-12">
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div>
                     {/* Label */}
@@ -100,9 +116,14 @@ export default function ChangePasswordForm() {
                                     placeholder="••••••••"
                                     className="flex-1 bg-transparent text-sm placeholder-gray-500 outline-none"
                                     {...register("newPassword", {
-                                        required: "New password is required",
-                                        minLength: { value: 6, message: "Minimum 6 characters" },
-                                    })}
+                                            required: "New password is required",
+                                            minLength: { value: 8, message: "Minimum 8 characters" },
+                                            validate: (value: string) => {
+                                                if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter";
+                                                if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter";
+                                                return true;
+                                            },
+                                        })}
                                 />
                                 <button
                                     type="button"
