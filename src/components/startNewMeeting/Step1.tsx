@@ -159,12 +159,12 @@ const Step1 = (
             return;
         }
 
-        const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-./?%&=]*)?$/;
+        // const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-./?%&=]*)?$/;
 
-        if (!urlPattern.test(formData.productUrl)) {
-            toast.error("Please enter a valid product URL");
-            return;
-        }
+        // if (!urlPattern.test(formData.productUrl)) {
+        //     toast.error("Please enter a valid product URL");
+        //     return;
+        // }
 
         try {
 
