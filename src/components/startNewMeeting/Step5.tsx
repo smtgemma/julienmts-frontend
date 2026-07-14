@@ -12,6 +12,7 @@
 // import { useRouter } from "next/navigation";
 // import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 // import Image from "next/image";
+// import MethodologyAnalysis from '@/components/shared/MethodologyAnalysis';
 
 
 // type Rep = {
@@ -88,6 +89,8 @@
 
 // export default function LiveConversation({ handlePrev }: { handlePrev: () => void }) {
 
+//   const [showMeetingUi, setShowMeetingUi] = useState(false);
+
 //   const router = useRouter();
 
 //   // get all data form redux 
@@ -111,6 +114,11 @@
 //   })();
 
 //   const [updateMeeting] = useUpdateMeetingMutation()
+//   const meetingId = Cookies.get("meetingId")?.trim() || "";
+//   const sessionId = Cookies.get("sessionId")?.trim() || "";
+//   const [methodologyRefreshKey, setMethodologyRefreshKey] = useState(0);
+
+
 
 //   // ─── State ─────────────────────────────────────────────
 //   const [isConnected, setIsConnected] = useState(false);
@@ -516,8 +524,9 @@
 
 //       const response = await fetch(
 //         // `https://ai-julientmts.aiteamtwo.com/meetings/api/meeting/${meetingId}/start`,
-//         `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/start`,
-//         // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
+//         // `https://862f-137-59-180-177.ngrok-free.app/api/meeting/${meetingId}/start`,
+//         // `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/start`,
+//         `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/start`,
 //         { method: "POST" }
 //       );
 
@@ -533,8 +542,8 @@
 
 //       const ws = new WebSocket(
 //         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
-//         `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
-//         // `https://ai-julientmts.aiteamtwo.com/conversations/api/conversation/ws/live-conversation/${meetingId}`
+//         // `${process.env.NEXT_PUBLIC_API_URL2}/api/conversation/ws/live-conversation/${meetingId}`
+//         `https://ai-julientmts.aiteamtwo.com/api/conversation/ws/live-conversation/${meetingId}`
 //         // `ws://localhost:8000/conversations/api/conversation/ws/realtime/${meetingId}`
 //       );
 
@@ -873,14 +882,19 @@
 
 //     // ── API calls in background (don't block UI) ──
 //     const meetingId = Cookies.get("meetingId")?.trim() || "";
+//     const sessionId = Cookies.get("sessionId")?.trim() || "";
+//     console.log(meetingId, sessionId, "=================meeting/session id in disconnect function========================");
+
+
 //     try {
 //       const response = await fetch(
-//         `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/end`,
-//         // `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
+//         // `${process.env.NEXT_PUBLIC_API_URL2}/api/meeting/${meetingId}/end`,
+//         `https://ai-julientmts.aiteamtwo.com/api/meeting/${meetingId}/end`,
 //         { method: "POST" }
 //       );
 //       if (response) {
-//         await updateMeeting({ meetingId, playload: { status: "completed" } }).unwrap();
+//         const res = await updateMeeting({ meetingId, playload: { status: "completed" } }).unwrap();
+//         console.log(res, "=================meeting end response=================");
 //       }
 //     } catch {
 //       // silent — UI already cleaned up
@@ -891,7 +905,7 @@
 //     setRepSpeaking({});
 //     setTimeRemaining(0);
 //     setMeetingDuration(0);
-//     toast.success("✅ Meeting ended successfully");
+//     // toast.success("✅ Meeting ended successfully");
 //   }
 
 //   // ─── Meeting Timer (auto-end) ─────────────────────────
@@ -1037,7 +1051,7 @@
 //           </div>
 //         )}
 //         {/* Setup — Pre-meeting screen */}
-//         {!isConnected && (
+//         {!showMeetingUi && (
 //           <div>
 //             {/* Play Icon */}
 //             <div className="flex justify-center mb-6">
@@ -1087,7 +1101,10 @@
 //                   Back
 //                 </button>
 //                 <button
-//                   onClick={startCountdown}
+//                   onClick={() => {
+//                     startCountdown();
+//                     setShowMeetingUi(true);
+//                   }}
 //                   className="px-6 py-2 bg-[#6E51E0] text-white rounded-md cursor-pointer"
 //                 >
 //                   Start Meeting
@@ -1101,7 +1118,7 @@
 //         {/* Content */}
 //         <div className="p-8 space-y-6">
 //           {/* Status */}
-//           {isConnected && (
+//           {showMeetingUi && (
 //             <div className={`p-4 rounded-lg border-l-4 ${statusColors[status.type]} flex items-center gap-3 font-medium`}>
 //               <div className={`w-3 h-3 rounded-full ${status.type === "disconnected" ? "bg-red-600" : "bg-green-600"} animate-pulse`}></div>
 //               {status.text}
@@ -1109,7 +1126,7 @@
 //           )}
 
 //           {/* AI Reps with lip-sync avatars */}
-//           {isConnected && reps.length > 0 && (
+//           {showMeetingUi && reps.length > 0 && (
 //             <div>
 //               <div className="flex items-center gap-2">
 //                 <FaUsersGear size={20} className="text-[#6E51E0] -mt-4" />
@@ -1366,7 +1383,7 @@
 
 //           {/* Methodology & Questions Reference Panel */}
 //           {/* ── Two-column layout ── */}
-//           {isConnected && (
+//           {showMeetingUi && (
 //             <div className="flex flex-col lg:flex-row gap-6 items-start">
 
 //               {/* ── LEFT: Core Fields + Discovery Questions ── */}
@@ -1409,6 +1426,14 @@
 //                     </ol>
 //                   </div>
 //                 )}
+
+//                 {
+//                   !isConnected && (
+//                      <MethodologyAnalysis meetingId={meetingId} sessionId={sessionId} />    
+//                     // < MethodologyAnalysis meetingId="23779b1d-0b74-4325-8527-3437f8c879ee" sessionId="d2020210-7d2e-46fe-836a-0f61aef43834" />
+//                     // <MethodologyAnalysis meetingId="da7c8b4a-20b3-4d95-ba0d-926e0e38f008" sessionId="7db999ee-1f09-4a28-ac06-d8f4873e524b" />
+//                   )
+//                 }
 //               </div>
 
 //               {/* ── RIGHT: Voice Conversation + Transcript ── */}
@@ -1461,12 +1486,32 @@
 //                         <span className="text-xs text-orange-500 font-medium">{silenceCountdown}</span>
 //                       )}
 //                     </div>
-//                     <button
-//                       className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer w-full"
-//                       onClick={disconnect}
-//                     >
-//                       End Conversation
-//                     </button>
+//                     {
+//                       isConnected ? (
+//                         <button
+//                           className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer w-full"
+//                           onClick={disconnect}
+//                         >
+//                           End Conversation
+//                         </button>
+//                       ) : (
+//                         <button
+//                           className="bg-primaryBgColor text-white px-4 py-2 rounded-lg cursor-pointer w-full"
+//                           onClick={() => setShowMeetingUi(false)}
+//                         >
+//                           Start Again
+//                         </button>
+//                         // <button
+//                         //   onClick={() => {
+//                         //     startCountdown();
+//                         //     setShowMeetingUi(true);
+//                         //   }}
+//                         //   className="px-6 py-2 bg-[#6E51E0] text-white rounded-md cursor-pointer"
+//                         // >
+//                         //   Start Meeting
+//                         // </button>
+//                       )
+//                     }
 //                   </div>
 //                 </div>
 
@@ -1546,7 +1591,6 @@
 //     </div>
 //   );
 // }
-
 
 
 
@@ -2046,12 +2090,14 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     let i = 0;
 
     setCountdown(steps[i]);
+    speakCountdownStep(steps[i]);
 
     const timer = setInterval(() => {
       i++;
 
       if (i < steps.length) {
         setCountdown(steps[i]);
+        speakCountdownStep(steps[i]);
       } else {
         clearInterval(timer);
         setCountdown(null);
@@ -2061,6 +2107,26 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     // startCountdown call হওয়ার 5 second পর
     await delay(3000);
     connectToMeeting();
+  }
+
+  function speakCountdownStep(step: number | "GO!") {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const wordMap: Record<string, string> = {
+      "5": "five",
+      "4": "four",
+      "3": "three",
+      "2": "two",
+      "1": "one",
+      "GO!": "go",
+    };
+    const word = wordMap[String(step)];
+    if (!word) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.rate = 0.95;
+    utterance.pitch = 1.1;
+    utterance.volume = 1;
+    window.speechSynthesis.speak(utterance);
   }
 
   async function connectToMeeting() {
@@ -3144,6 +3210,11 @@ export default function LiveConversation({ handlePrev }: { handlePrev: () => voi
     </div>
   );
 }
+
+
+
+
+
 
 
 
