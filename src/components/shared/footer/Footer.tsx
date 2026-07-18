@@ -77,13 +77,13 @@ export default function Footer() {
             </p>
 
             <div className="flex items-center gap-4 py-6">
-              <a href="#" className="p-2 border rounded-full">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 border rounded-full">
                 <FaTwitter />
               </a>
-              <a href="#" className="p-2 border rounded-full">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 border rounded-full">
                 <FaFacebookF />
               </a>
-              <a href="#" className="p-2 border rounded-full">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 border rounded-full">
                 <FaInstagram />
               </a>
             </div>
