@@ -23,18 +23,18 @@ function InfoCounter() {
         </div>
         <div className="p-6 text-center">
           <div className="md:text-3xl text-xl font-bold text-[#2D2D2D] mb-4">
-            95%
-          </div>
-          <div className="text-sm md:text-lg lg:text-xl text-[#636F85]">
-            Meeting Success Rate 
-          </div>
-        </div>
-        <div className="p-6 text-center">
-          <div className="md:text-3xl text-xl font-bold text-[#2D2D2D] mb-4">
             10 min
           </div>
           <div className="text-sm md:text-lg lg:text-xl text-[#636F85]">
             Average Prep Time
+          </div>
+        </div>
+        <div className="p-6 text-center">
+          <div className="md:text-3xl text-xl font-bold text-[#2D2D2D] mb-4">
+            95%
+          </div>
+          <div className="text-sm md:text-lg lg:text-xl text-[#636F85]">
+            Meeting Success Rate
           </div>
         </div>
       </div>
