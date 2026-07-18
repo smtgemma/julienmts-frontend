@@ -11,7 +11,7 @@ function About() {
   return (
     <div className="relative">
       <section>
-        <HeaderBanner title="About Our Company" subTitle="At Phora we believe the best sales conversations don’t start in the meeting -
+        <HeaderBanner title="About Our Company" subTitle="At DILICO we believe the best sales conversations don’t start in the meeting -
  they start with better preparation." />
 
         {/* Problem Statement */}
@@ -46,8 +46,8 @@ function About() {
 
         <AboutSection />
 
-        <StatsSection />
-        <TestimonialSection />
+        {/* <StatsSection />
+        <TestimonialSection /> */}
         <NextMeeting />
           {/* <MarqueeSection /> */}
       </section>

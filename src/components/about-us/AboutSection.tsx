@@ -1,70 +1,3 @@
-// "use client";
-
-// import Image, { StaticImageData } from "next/image";
-// import React from "react";
-// import GradientButton from "@/components/ui/GradientButton";
-// import Container from "@/lib/Container";
-
-// interface AboutSectionProps {
-//   title: string;
-//   subtitle: string;
-//   description: string;
-//   image: StaticImageData;
-//   buttonText?: string;
-//   reverse?: boolean;
-//   showButton?: boolean;
-// }
-
-// const AboutSection: React.FC<AboutSectionProps> = ({
-//   title,
-//   subtitle,
-//   description,
-//   image,
-//   buttonText = "GET STARTED",
-//   reverse = false,
-//   showButton = false || true,
-// }) => {
-//   return (
-//     <div className=" w-full py-4 md:py-8 xl:py-12 z-10 px-3 lg:px-0">
-//       <Container
-//         className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"
-//           } items-center gap-8 xl:gap-32`}
-//       >
-//         <div className="w-full md:w-1/2">
-//           <Image
-//             src={image}
-//             alt={title}
-//             width={600}
-//             height={400}
-//             className="w-full h-auto object-cover"
-//           />
-//         </div>
-
-//         <div className="w-full md:w-1/2 text-center xl:text-left">
-//           <h6 className="text-[var(--Brand-Color-Primary,#6E51E0)] font-rubik text-sm sm:text-[16px] font-semibold leading-normal md:text-left text-center mb-2 sm:mb-3">
-//             {subtitle}
-//           </h6>
-//           <h5 className="text-[var(--Font-Colors-Tittle,#2D2D2D)] font-rubik text-2xl sm:text-[40px] font-medium leading-snug md:text-left text-center sm:leading-normal mb-2">
-//             {title}
-//           </h5>
-//           <p className="text-[var(--Font-Colors-Body,#636F85)] font-rubik text-sm sm:text-[16px] font-normal leading-6 md:text-left text-center sm:leading-[30px] mb-6">
-//             {description}
-//           </p>
-//           {
-//             showButton && (
-//               <GradientButton className="mx-auto xl:mx-0">
-//                 Get Started
-//               </GradientButton>
-//             )
-//           }
-//         </div>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// export default AboutSection;
-
 
 
 "use client";
@@ -86,14 +19,14 @@ export default function AboutSection() {
           <div className="w-full md:w-1/2 overflow-hidden rounded-2xl">
             <Image
               src={relationship}
-              alt="Why we built Phora"
+              alt="Why we built DILICO"
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
 
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h6 className="text-[#6E51E0] font-rubik text-sm sm:text-base font-semibold mb-3">
-              Why We Built Phora
+              Why We Built DILICO
             </h6>
 
             <h2 className="text-[#2D2D2D] text-[16px] mb-4">
@@ -103,7 +36,7 @@ export default function AboutSection() {
             </h2>
 
             <div className="space-y-3 text-[#2D2D2D] text-sm sm:text-base flex flex-col">
-              <p className="text-[16px] font-bold">Phora was built to solve three major gaps:</p>
+              <p className="text-[16px] font-bold">DILICO was built to solve three major gaps:</p>
               <span className="text-[#2D2D2D] text-[16px]">1. Too much time spent researching accounts manually</span>
               <span className="text-[#2D2D2D] text-[16px]">2. Generic role-plays that don’t reflect real buyer conversations</span>
               <span className="text-[#2D2D2D] text-[16px]">3. Feedback that comes too late to make a difference</span>
@@ -165,7 +98,7 @@ export default function AboutSection() {
               <span>. companies build consistent, repeatable sales excellence</span>
               <span>. AI helps humans communicate better - not less</span>
             </div>
-            <p className="mt-3">Phora is built to make that vision real.</p>
+            <p className="mt-3">DILICO is built to make that vision real.</p>
           </div>
         </section>
 
@@ -175,7 +108,7 @@ export default function AboutSection() {
             What We Do
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
-            Phora equips sellers with:
+            DILICO equips sellers with:
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -228,7 +161,7 @@ export default function AboutSection() {
             Our customers operate in SaaS, tech, professional services, cybersecurity, marketing, AI, and many more industries.
           </p>
           <p className="mt-3 text-[16px] text-[#636F85]">
-            Phora currently supports <span className="font-bold text-[#2D2D2D]">English, French, Spanish, and Italian,</span> with more languages coming soon.
+            DILICO currently supports <span className="font-bold text-[#2D2D2D]">English, French, Spanish, and Italian,</span> with more languages coming soon.
           </p>
         </section>
 
