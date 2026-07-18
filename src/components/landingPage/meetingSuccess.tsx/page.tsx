@@ -17,7 +17,7 @@ function MeetingSuccess() {
                 </h1>
                 <p className="text-[#636F85] text-[16px] mb-6">
                     {/* Go from zero to fully prepared in minutes with our AI-powered platform */}
-                    Instant research, realistic practice, and AI coaching so you br show up <br /> confident and in control.
+                    Instant research, realistic practice, and AI coaching so you show up <br /> confident and in control.
                 </p>
             </div>
             <div className="flex items-center justify-center px-6 pt-6">
