@@ -26,8 +26,8 @@ const page = () => {
       <MeetingSuccess/>
       <FeatureSection />
       <BussinessSection />
-      <TestimonialSection />
-      <Faq/>
+      {/* <TestimonialSection />
+      <Faq/> */}
       <NextMeeting/>
     </div>
   );
