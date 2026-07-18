@@ -19,14 +19,14 @@ export default function AboutSection() {
           <div className="w-full md:w-1/2 overflow-hidden rounded-2xl">
             <Image
               src={relationship}
-              alt="Why we built DILICO"
+              alt="Why we built Dilico"
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
 
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h6 className="text-[#6E51E0] font-rubik text-sm sm:text-base font-semibold mb-3">
-              Why We Built DILICO
+              Why We Built Dilico
             </h6>
 
             <h2 className="text-[#2D2D2D] text-[16px] mb-4">
@@ -36,7 +36,7 @@ export default function AboutSection() {
             </h2>
 
             <div className="space-y-3 text-[#2D2D2D] text-sm sm:text-base flex flex-col">
-              <p className="text-[16px] font-bold">DILICO was built to solve three major gaps:</p>
+              <p className="text-[16px] font-bold">Dilico was built to solve three major gaps:</p>
               <span className="text-[#2D2D2D] text-[16px]">1. Too much time spent researching accounts manually</span>
               <span className="text-[#2D2D2D] text-[16px]">2. Generic role-plays that don’t reflect real buyer conversations</span>
               <span className="text-[#2D2D2D] text-[16px]">3. Feedback that comes too late to make a difference</span>
@@ -98,7 +98,7 @@ export default function AboutSection() {
               <span>. companies build consistent, repeatable sales excellence</span>
               <span>. AI helps humans communicate better - not less</span>
             </div>
-            <p className="mt-3">DILICO is built to make that vision real.</p>
+            <p className="mt-3">Dilico is built to make that vision real.</p>
           </div>
         </section>
 
@@ -108,7 +108,7 @@ export default function AboutSection() {
             What We Do
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
-            DILICO equips sellers with:
+            Dilico equips sellers with:
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -161,7 +161,7 @@ export default function AboutSection() {
             Our customers operate in SaaS, tech, professional services, cybersecurity, marketing, AI, and many more industries.
           </p>
           <p className="mt-3 text-[16px] text-[#636F85]">
-            DILICO currently supports <span className="font-bold text-[#2D2D2D]">English, French, Spanish, and Italian,</span> with more languages coming soon.
+            Dilico currently supports <span className="font-bold text-[#2D2D2D]">English, French, Spanish, and Italian,</span> with more languages coming soon.
           </p>
         </section>
 
