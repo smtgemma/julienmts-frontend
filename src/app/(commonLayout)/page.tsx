@@ -19,16 +19,16 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <div>
-      <HerroSection/>
+      <HerroSection />
       <InfoCounter />
       <DashboardSection />
       {/* <MarqueeSection /> */}
-      <MeetingSuccess/>
+      <MeetingSuccess />
       <FeatureSection />
       <BussinessSection />
       {/* <TestimonialSection />
       <Faq/> */}
-      <NextMeeting/>
+      <NextMeeting />
     </div>
   );
 };
